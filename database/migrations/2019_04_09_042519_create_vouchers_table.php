@@ -13,6 +13,7 @@ class CreateVouchersTable extends Migration
      */
     public function up()
     {
+        /*TODO: set default/nullable fields */
         Schema::create('vouchers', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
