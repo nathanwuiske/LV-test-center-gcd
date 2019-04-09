@@ -67,7 +67,8 @@
         <div class="card">
                 <div class="card-header">Login error</div>
                 <div class="card-body">
-                    You tried to access the login page, but you are already logged in.
+                    <p>You tried to access the login page, but you are already logged in.</p>
+                    <a href="{{ route('home') }}" class="btn btn-success">Return to dashboard</a>
                 </div>
             </div>
         @endguest
