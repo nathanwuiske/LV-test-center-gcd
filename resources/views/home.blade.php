@@ -39,7 +39,7 @@
     <!-- Content Header-->
     <div class="content-header">
         <div class="container-fluid">
-            <h1>Hello text that stays</h1>
+              <!-- <h1>Hello text that stays</h1>-->
         </div>
     </div>
 
