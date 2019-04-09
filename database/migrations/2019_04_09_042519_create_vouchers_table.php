@@ -15,6 +15,15 @@ class CreateVouchersTable extends Migration
     {
         Schema::create('vouchers', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('name');
+            $table->longText('description');
+            $table->string('photo');
+            $table->dateTime('expiry_date');
+            $table->integer('tags_id');
+            $table->integer('categories_id');
+            $table->string('facebook_link');
+            $table->integer('popular_flag');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
