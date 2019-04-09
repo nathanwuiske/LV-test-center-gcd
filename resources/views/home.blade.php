@@ -6,7 +6,7 @@
 <div class="wrapper">
 <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
-    <router-link to="/example" class="admin-sidebar-link">
+    <router-link to="/dashboard" class="admin-sidebar-link">
       <img src="https://i.imgur.com/pi2jjiw.png" class="sidebar-image img-circle elevation-3">
       <span class="admin-sidebar-text font-weight-light">GCD Admin</span>
     </router-link>
@@ -16,14 +16,14 @@
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <li class="nav-item">
-            <router-link to="/example" class="nav-link">
+            <router-link to="/dashboard" class="nav-link">
               <i class="nav-icon fas fa-tachometer-alt"></i>
                 <p style="color: white">Dashboard</p>
             </router-link>
           </li>
 
           <li class="nav-item">
-            <router-link to="/test" class="nav-link">
+            <router-link to="/vouchers" class="nav-link">
                 <i class="nav-icon fas fa-envelope"></i>
                  <p style="color: white">Vouchers Management</p>
             </router-link>
