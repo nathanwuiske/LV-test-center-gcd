@@ -13,7 +13,8 @@ let routes = [
 ];
 
 const router = new VueRouter({
-  routes // short for `routes: routes`
+  routes, // short for `routes: routes`
+  linkActiveClass: 'active'
 })
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
