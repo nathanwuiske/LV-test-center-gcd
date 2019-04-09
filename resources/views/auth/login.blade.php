@@ -4,6 +4,7 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
+        @guest
             <div class="card">
                 <div class="card-header">{{ __('Login') }}</div>
 
@@ -61,6 +62,15 @@
                     </form>
                 </div>
             </div>
+
+        @else
+        <div class="card">
+                <div class="card-header">Login error</div>
+                <div class="card-body">
+                    You tried to access the login page, but you are already logged in.
+                </div>
+            </div>
+        @endguest
         </div>
     </div>
 </div>
