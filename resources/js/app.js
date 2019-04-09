@@ -1,10 +1,12 @@
-//Dependencies 
+//Dependacies
 require('./bootstrap');
 import VueRouter from 'vue-router'
-
 window.Vue = require('vue');
+
 Vue.use(VueRouter)
 
+
+/* TODO: seperate into different routes file */
 let routes = [
   { path: '/example', component: require('./components/ExampleComponent.vue').default },
   { path: '/test', component: require('./components/Test.vue').default }
