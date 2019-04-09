@@ -7,7 +7,7 @@
 <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <router-link to="/dashboard" class="admin-sidebar-link">
-      <img src="https://i.imgur.com/pi2jjiw.png" class="sidebar-image img-circle elevation-3">
+      <img src="{{asset('imgs/1.png')}}" class="sidebar-image img-circle elevation-3">
       <span class="admin-sidebar-text font-weight-light">GCD Admin</span>
     </router-link>
     <div class="sidebar">
