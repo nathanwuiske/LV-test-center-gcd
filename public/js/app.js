@@ -51809,9 +51809,9 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_0__["default"]({
   routes: routes,
   // short for `routes: routes`
   linkActiveClass: 'active'
-});
-Vue.component('example-component', __webpack_require__(/*! ./components/Dashboard.vue */ "./resources/js/components/Dashboard.vue")["default"]);
-Vue.component('test-component', __webpack_require__(/*! ./components/Vouchers.vue */ "./resources/js/components/Vouchers.vue")["default"]); // Create a fresh Vue application instance and attach it to the page.
+}); //Vue.component('example-component', require('./components/Dashboard.vue').default);
+//Vue.component('test-component', require('./components/Vouchers.vue').default);
+// Create a fresh Vue application instance and attach it to the page.
 
 var app = new Vue({
   el: '#app',
