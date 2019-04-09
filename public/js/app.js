@@ -51769,6 +51769,7 @@ module.exports = function(module) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm.js");
+//Dependencies 
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 

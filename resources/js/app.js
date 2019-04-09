@@ -1,7 +1,8 @@
+//Dependencies 
 require('./bootstrap');
 import VueRouter from 'vue-router'
-window.Vue = require('vue');
 
+window.Vue = require('vue');
 Vue.use(VueRouter)
 
 let routes = [
