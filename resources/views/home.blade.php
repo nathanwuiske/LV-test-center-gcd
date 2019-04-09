@@ -60,7 +60,7 @@
         Something on the right here maybe
     </div>
     <!-- Left side footer -->
-    <strong>Copyright &copy; 2019 <a href="#">Some link</a></strong> All rights reserved.
+    <strong>Copyright 2019 </strong>- Something here
 </footer>
 </div>
 </body>
