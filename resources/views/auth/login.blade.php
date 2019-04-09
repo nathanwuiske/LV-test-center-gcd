@@ -63,6 +63,7 @@
                 </div>
             </div>
         @else
+        <script>window.location = "/home";</script>
         <div class="card">
                 <div class="card-header">Login error</div>
                 <div class="card-body">
