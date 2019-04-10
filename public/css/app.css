@@ -23839,3 +23839,8 @@ a.text-dark:focus {
   color: #5cb85c;
 }
 
+.login-error-message {
+  list-style-type: none;
+  text-align: center;
+}
+

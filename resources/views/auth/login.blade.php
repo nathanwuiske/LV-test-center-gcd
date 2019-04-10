@@ -41,6 +41,7 @@
                                         <strong>{{ $errors->first('password') }}</strong>
                                     </span>
                                 @endif
+                                    
                             </div>
                         </div>
 
@@ -55,7 +56,6 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-4">
                                 <button type="submit" class="btn btn-success">
@@ -65,6 +65,13 @@
                         </div>
                     </form>
                 </div>
+                @if(count($errors))
+                    <ul class="alert alert-danger">
+                        @foreach($errors->all() as $error)
+                            <li class="login-error-message">{{$error}}</li>
+                        @endforeach
+                    </ul>
+                @endif
             </div>
         @else
         <script>window.location = "/home";</script>
