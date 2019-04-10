@@ -13,3 +13,19 @@
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
 }
+
+.email-login-icon {
+  background-image:url(../../public/imgs/user-email-icon.png); 
+  background-repeat: no-repeat; 
+  background-position: 4px 6px;
+  background-size: 20px 20px;
+  text-indent:15px;
+}
+
+.password-login-icon {
+  background-image:url(../../public/imgs/user-pass-icon.png); 
+  background-repeat: no-repeat; 
+  background-position: 4px 6px;
+  background-size: 20px 20px;
+  text-indent:15px;
+}

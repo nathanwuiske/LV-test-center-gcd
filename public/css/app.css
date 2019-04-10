@@ -23786,3 +23786,19 @@ a.text-dark:focus {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
 }
 
+.email-login-icon {
+  background-image: url(/images/user-email-icon.png?f6b09755c6b6c4472ef6c88a561608b8);
+  background-repeat: no-repeat;
+  background-position: 4px 6px;
+  background-size: 20px 20px;
+  text-indent: 15px;
+}
+
+.password-login-icon {
+  background-image: url(/images/user-pass-icon.png?c580a158798400c95e6e811f1625f970);
+  background-repeat: no-repeat;
+  background-position: 4px 6px;
+  background-size: 20px 20px;
+  text-indent: 15px;
+}
+
