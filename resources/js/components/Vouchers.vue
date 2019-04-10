@@ -23,14 +23,16 @@
                     <th>ID</th>
                     <th>Name</th>
                     <th>Description</th>
-                    <th>FB_link</th>
-                    <th>is_Popular</th>
+                    <th>Expiry Date</th>
+                    <th>Facebook Link</th>
+                    <th>Popular</th>
                     <th>Modify</th>
                   </tr>
                   <tr>
                     <td>1</td>
                     <td>Test</td>
                     <td>Some description</td>
+                    <td>06/11/2019 at 7:00pm</td>
                     <td>Some link</td>
                     <td>1</td>
                     <td>
@@ -71,9 +73,9 @@
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
-                            <h5 class="modal-title" id="Warning">
-                            <i class="fas fa-exclamation-triangle red"></i> Warning
-                            </h5>
+                        <h5 class="modal-title" id="Warning">
+                        <i class="fas fa-exclamation-triangle red"></i> Warning
+                        </h5>
                     </div>
                     <div class="modal-body">
                         <p>Are you sure you want to close? All data will be lost.</p>
@@ -99,7 +101,6 @@
                     $('#addNewVoucher').modal('hide');
                 });
         });
-        }
-        
+        } 
     }
 </script>

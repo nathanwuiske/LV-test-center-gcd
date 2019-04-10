@@ -18,16 +18,31 @@
           <li class="nav-item">
             <router-link to="/dashboard" class="nav-link">
               <i class="nav-icon fas fa-tachometer-alt"></i>
-                <p style="color: white">Dashboard</p>
+                <p class="white">Dashboard</p>
             </router-link>
           </li>
 
           <li class="nav-item">
             <router-link to="/vouchers" class="nav-link">
                 <i class="nav-icon fas fa-envelope"></i>
-                 <p style="color: white">Vouchers Management</p>
+                 <p class="white">Voucher Management</p>
             </router-link>
          </li>
+
+         <li class="nav-item">
+            <router-link to="/users" class="nav-link">
+                <i class="nav-icon fas fa-users"></i>
+                 <p class="white">User Management</p>
+            </router-link>
+         </li>
+
+         <li class="nav-item">
+            <router-link to="/issues" class="nav-link">
+                <i class="nav-icon fas fa-exclamation"></i>
+                 <p class="white">Issues</p>
+            </router-link>
+         </li>
+
         </ul>
       </nav>
     </div>

@@ -9,6 +9,7 @@ Vue.use(VueRouter)
 /* TODO: seperate into different routes file */
 let routes = [
   { path: '/dashboard', component: require('./components/Dashboard.vue').default },
+  { path: '/users', component: require('./components/Users.vue').default },
   { path: '/vouchers', component: require('./components/Vouchers.vue').default }
 ];
 
