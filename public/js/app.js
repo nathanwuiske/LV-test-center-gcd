@@ -1856,6 +1856,40 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     console.log('Component mounted.');
@@ -37007,8 +37041,25 @@ var staticRenderFns = [
           _c("div", { staticClass: "card" }, [
             _c("div", { staticClass: "card-header" }, [
               _c("h3", { staticClass: "card-title" }, [
-                _vm._v("Vouchers table")
+                _vm._v("Vouchers Management")
               ]),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-success",
+                  attrs: {
+                    "data-toggle": "modal",
+                    "data-target": "#addNewVoucher",
+                    "data-backdrop": "static",
+                    "data-keyboard": "false"
+                  }
+                },
+                [
+                  _c("i", { staticClass: "fas fa-plus pr-1" }),
+                  _vm._v("Add New Voucher\n            ")
+                ]
+              ),
               _vm._v(" "),
               _c("div", { staticClass: "card-tools" }, [
                 _c(
@@ -37054,7 +37105,9 @@ var staticRenderFns = [
                     _vm._v(" "),
                     _c("th", [_vm._v("FB_link")]),
                     _vm._v(" "),
-                    _c("th", [_vm._v("is_Popular")])
+                    _c("th", [_vm._v("is_Popular")]),
+                    _vm._v(" "),
+                    _c("th", [_vm._v("Modify")])
                   ]),
                   _vm._v(" "),
                   _c("tr", [
@@ -37066,14 +37119,106 @@ var staticRenderFns = [
                     _vm._v(" "),
                     _c("td", [_vm._v("Some link")]),
                     _vm._v(" "),
-                    _c("td", [_vm._v("1")])
+                    _c("td", [_vm._v("1")]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _c("a", { attrs: { href: "#" } }, [
+                        _vm._v("Edit\n                    "),
+                        _c("i", { staticClass: "far fa-edit" })
+                      ]),
+                      _vm._v("\n                    /\n                    "),
+                      _c("a", { attrs: { href: "#" } }, [
+                        _vm._v("Delete\n                    "),
+                        _c("i", { staticClass: "fas fa-trash" })
+                      ])
+                    ])
                   ])
                 ])
               ])
             ])
           ])
         ])
-      ])
+      ]),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass: "modal fade",
+          attrs: {
+            id: "addNewVoucher",
+            tabindex: "-1",
+            role: "dialog",
+            "aria-labelledby": "newVoucherLabel",
+            "aria-hidden": "true"
+          }
+        },
+        [
+          _c(
+            "div",
+            {
+              staticClass: "modal-dialog modal-dialog-centered",
+              attrs: { role: "document" }
+            },
+            [
+              _c("div", { staticClass: "modal-content" }, [
+                _c("div", { staticClass: "modal-header" }, [
+                  _c(
+                    "h5",
+                    {
+                      staticClass: "modal-title",
+                      attrs: { id: "newVoucherLabel" }
+                    },
+                    [_vm._v("Add new Voucher")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "close",
+                      attrs: {
+                        type: "button",
+                        "data-dismiss": "modal",
+                        "aria-label": "Close"
+                      }
+                    },
+                    [
+                      _c("span", { attrs: { "aria-hidden": "true" } }, [
+                        _vm._v("×")
+                      ])
+                    ]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "modal-body" }, [
+                  _vm._v(
+                    "\n                Some text for the modal body\n            "
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "modal-footer" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-danger",
+                      attrs: { type: "button", "data-dismiss": "modal" }
+                    },
+                    [_vm._v("Close")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-success",
+                      attrs: { type: "button" }
+                    },
+                    [_vm._v("Create")]
+                  )
+                ])
+              ])
+            ]
+          )
+        ]
+      )
     ])
   }
 ]
