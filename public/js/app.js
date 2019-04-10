@@ -37169,15 +37169,15 @@ var staticRenderFns = [
                 _c(
                   "div",
                   {
-                    staticClass: "input-group input-group-sm",
-                    staticStyle: { width: "150px" }
+                    staticClass: "input-group input-group-sm mt-5",
+                    staticStyle: { width: "170px" }
                   },
                   [
                     _c("input", {
-                      staticClass: "form-control float-right",
+                      staticClass: "form-control",
                       attrs: {
                         type: "text",
-                        name: "table_search",
+                        name: "voucher_table_search",
                         placeholder: "Search"
                       }
                     }),
@@ -37213,7 +37213,13 @@ var staticRenderFns = [
                     _vm._v(" "),
                     _c("th", [_vm._v("Popular")]),
                     _vm._v(" "),
-                    _c("th", [_vm._v("Modify")])
+                    _c("th", [_vm._v("Tags")]),
+                    _vm._v(" "),
+                    _c("th", [_vm._v("Categories")]),
+                    _vm._v(" "),
+                    _c("th", { staticStyle: { "text-align": "center" } }, [
+                      _vm._v("Modify")
+                    ])
                   ]),
                   _vm._v(" "),
                   _c("tr", [
@@ -37229,16 +37235,46 @@ var staticRenderFns = [
                     _vm._v(" "),
                     _c("td", [_vm._v("1")]),
                     _vm._v(" "),
+                    _c("td", [_vm._v("tag1, tag2")]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v("Food")]),
+                    _vm._v(" "),
                     _c("td", [
-                      _c("a", { attrs: { href: "#" } }, [
-                        _vm._v("Edit\n                    "),
-                        _c("i", { staticClass: "far fa-edit" })
-                      ]),
-                      _vm._v("\n                    /\n                    "),
-                      _c("a", { attrs: { href: "#" } }, [
-                        _vm._v("Delete\n                    "),
-                        _c("i", { staticClass: "fas fa-trash" })
-                      ])
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-warning",
+                          attrs: { type: "button" }
+                        },
+                        [
+                          _c("i", { staticClass: "far fa-edit pr-1" }),
+                          _vm._v("Edit")
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-danger",
+                          attrs: { type: "button" }
+                        },
+                        [
+                          _c("i", { staticClass: "fas fa-trash pr-1" }),
+                          _vm._v("Delete")
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-primary",
+                          attrs: { type: "button" }
+                        },
+                        [
+                          _c("i", { staticClass: "fas fa-archive pr-1 " }),
+                          _vm._v("Archive")
+                        ]
+                      )
                     ])
                   ])
                 ])

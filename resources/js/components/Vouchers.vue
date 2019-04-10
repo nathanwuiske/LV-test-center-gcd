@@ -9,8 +9,8 @@
                     <i class="fas fa-plus pr-1"></i>Add New Voucher
                 </button>
                 <div class="card-tools">
-                  <div class="input-group input-group-sm" style="width: 150px;">
-                    <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+                  <div class="input-group input-group-sm mt-5" style="width: 170px;">
+                    <input type="text" name="voucher_table_search" class="form-control" placeholder="Search">
                     <div class="input-group-append">
                       <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
                     </div>
@@ -26,7 +26,9 @@
                     <th>Expiry Date</th>
                     <th>Facebook Link</th>
                     <th>Popular</th>
-                    <th>Modify</th>
+                    <th>Tags</th>
+                    <th>Categories</th>
+                    <th style="text-align: center;">Modify</th>
                   </tr>
                   <tr>
                     <td>1</td>
@@ -35,14 +37,12 @@
                     <td>06/11/2019 at 7:00pm</td>
                     <td>Some link</td>
                     <td>1</td>
+                    <td>tag1, tag2</td>
+                    <td>Food</td>
                     <td>
-                        <a href="#">Edit
-                        <i class="far fa-edit"></i>
-                        </a>
-                        /
-                        <a href="#">Delete
-                        <i class="fas fa-trash"></i>
-                        </a>
+                      <button type="button" class="btn btn-warning"> <i class="far fa-edit pr-1"></i>Edit</button>
+                      <button type="button" class="btn btn-danger"><i class="fas fa-trash pr-1"></i>Delete</button>
+                      <button type="button" class="btn btn-primary"><i class="fas fa-archive pr-1"></i>Archive</button>
                     </td>
                   </tr>
                 </tbody></table>

@@ -60,13 +60,14 @@
   top: 0;
   margin: auto;
 }
-
+// Login header (h1)
 .heading {
   text-align: center;
   width: 100%;
   color: #5cb85c
   }
 
+// Error message when user credentials are incorrect
 .login-error-message {
   list-style-type: none;
   text-align: center;
