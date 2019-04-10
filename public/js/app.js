@@ -1887,9 +1887,35 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     console.log('Component mounted.');
+    $(document).ready(function () {
+      $('.closefirstmodal').click(function () {
+        $('#Warning').modal('show');
+      });
+      $('.confirmclosed').click(function () {
+        $('#Warning').modal('hide');
+        $('#addNewVoucher').modal('hide');
+      });
+    });
   }
 });
 
@@ -37054,7 +37080,7 @@ var staticRenderFns = [
                 },
                 [
                   _c("i", { staticClass: "fas fa-plus pr-1" }),
-                  _vm._v("Add New Voucher\n            ")
+                  _vm._v("Add New Voucher\n                ")
                 ]
               ),
               _vm._v(" "),
@@ -37120,12 +37146,14 @@ var staticRenderFns = [
                     _vm._v(" "),
                     _c("td", [
                       _c("a", { attrs: { href: "#" } }, [
-                        _vm._v("Edit\n                    "),
+                        _vm._v("Edit\n                        "),
                         _c("i", { staticClass: "far fa-edit" })
                       ]),
-                      _vm._v("\n                    /\n                    "),
+                      _vm._v(
+                        "\n                        /\n                        "
+                      ),
                       _c("a", { attrs: { href: "#" } }, [
-                        _vm._v("Delete\n                    "),
+                        _vm._v("Delete\n                        "),
                         _c("i", { staticClass: "fas fa-trash" })
                       ])
                     ])
@@ -37171,7 +37199,7 @@ var staticRenderFns = [
                 _vm._v(" "),
                 _c("div", { staticClass: "modal-body" }, [
                   _vm._v(
-                    "\n                Some text for the modal body\n            "
+                    "\n                    Some text for the modal body\n                "
                   )
                 ]),
                 _vm._v(" "),
@@ -37179,8 +37207,8 @@ var staticRenderFns = [
                   _c(
                     "button",
                     {
-                      staticClass: "btn btn-danger",
-                      attrs: { type: "button", "data-dismiss": "modal" }
+                      staticClass: "btn btn-danger closefirstmodal",
+                      attrs: { type: "button" }
                     },
                     [_vm._v("Close")]
                   ),
@@ -37197,6 +37225,56 @@ var staticRenderFns = [
               ])
             ]
           )
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass: "modal fade",
+          attrs: { id: "Warning", role: "dialog", "data-backdrop": "false" }
+        },
+        [
+          _c("div", { staticClass: "modal-dialog modal-dialog-centered" }, [
+            _c("div", { staticClass: "modal-content" }, [
+              _c("div", { staticClass: "modal-header" }, [
+                _c(
+                  "h5",
+                  { staticClass: "modal-title", attrs: { id: "Warning" } },
+                  [
+                    _c("i", { staticClass: "fas fa-exclamation-triangle red" }),
+                    _vm._v("\n                        Warning")
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-body" }, [
+                _c("p", [
+                  _vm._v(
+                    "Are you sure you want to close? All data will be lost."
+                  )
+                ]),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-danger confirmclosed",
+                    attrs: { type: "button" }
+                  },
+                  [_vm._v("Confirm Close")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-primary",
+                    attrs: { type: "button", "data-dismiss": "modal" }
+                  },
+                  [_vm._v("Cancel Close")]
+                )
+              ])
+            ])
+          ])
         ]
       )
     ])
