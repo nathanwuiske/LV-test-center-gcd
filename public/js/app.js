@@ -1903,7 +1903,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     console.log('Component mounted.');
@@ -37080,7 +37079,7 @@ var staticRenderFns = [
                 },
                 [
                   _c("i", { staticClass: "fas fa-plus pr-1" }),
-                  _vm._v("Add New Voucher\n                ")
+                  _vm._v("Add New Voucher\n            ")
                 ]
               ),
               _vm._v(" "),
@@ -37146,14 +37145,12 @@ var staticRenderFns = [
                     _vm._v(" "),
                     _c("td", [
                       _c("a", { attrs: { href: "#" } }, [
-                        _vm._v("Edit\n                        "),
+                        _vm._v("Edit\n                    "),
                         _c("i", { staticClass: "far fa-edit" })
                       ]),
-                      _vm._v(
-                        "\n                        /\n                        "
-                      ),
+                      _vm._v("\n                    /\n                    "),
                       _c("a", { attrs: { href: "#" } }, [
-                        _vm._v("Delete\n                        "),
+                        _vm._v("Delete\n                    "),
                         _c("i", { staticClass: "fas fa-trash" })
                       ])
                     ])
@@ -37199,7 +37196,7 @@ var staticRenderFns = [
                 _vm._v(" "),
                 _c("div", { staticClass: "modal-body" }, [
                   _vm._v(
-                    "\n                    Some text for the modal body\n                "
+                    "\n                Some text for the modal body\n            "
                   )
                 ]),
                 _vm._v(" "),
@@ -37243,7 +37240,7 @@ var staticRenderFns = [
                   { staticClass: "modal-title", attrs: { id: "Warning" } },
                   [
                     _c("i", { staticClass: "fas fa-exclamation-triangle red" }),
-                    _vm._v("\n                        Warning")
+                    _vm._v(" Warning\n                        ")
                   ]
                 )
               ]),

@@ -66,24 +66,23 @@
                 </div>
             </div>
         </div>
-<!-- Warning Modal for confirming close -->
-<div id="Warning" class="modal fade" role="dialog" data-backdrop="false">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-             <div class="modal-header">
-                 
-                    <h5 class="modal-title" id="Warning">
-                        <i class="fas fa-exclamation-triangle red"></i>
-                        Warning</h5>
+        <!-- Warning Modal for confirming close -->
+        <div id="Warning" class="modal fade" role="dialog" data-backdrop="false">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                            <h5 class="modal-title" id="Warning">
+                            <i class="fas fa-exclamation-triangle red"></i> Warning
+                            </h5>
+                    </div>
+                    <div class="modal-body">
+                        <p>Are you sure you want to close? All data will be lost.</p>
+                        <button type="button" class="btn btn-danger confirmclosed">Confirm Close</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel Close</button>
+                    </div>
                 </div>
-            <div class="modal-body">
-                <p>Are you sure you want to close? All data will be lost.</p>
-                <button type="button" class="btn btn-danger confirmclosed">Confirm Close</button>
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel Close</button>
             </div>
         </div>
-    </div>
-</div>
     </div>
 </template>
 <script>
