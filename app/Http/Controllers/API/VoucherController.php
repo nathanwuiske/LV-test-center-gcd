@@ -26,6 +26,15 @@ class VoucherController extends Controller
      */
     public function store(Request $request)
     {
+        // validate the voucher form before sending it off
+        $this->validate($request,[
+            //maybe have a unique:name for name to prevent duplicate vouchers? 
+            'name' => 'required|string|max:150|alpha_num', //max 150 characters, Only letters and numbers allowed
+            'description' => 'required|string|max:500'
+            //'facebook_link' => 'required|url',
+            //'expiry_date' => 'required|after:today'
+            //'photo' => 'required|image' //must be an image (jpg, png, bmp or gif)
+        ]);
 
         
         return Voucher::create([
