@@ -36,14 +36,14 @@
                     <td>{{voucher.id}}</td>
                     <td>{{voucher.name}}</td>
                     <td>{{voucher.description}}</td>
-                    <td>{{voucher.expiry_date}}</td>
+                    <td>{{voucher.expiry_date | formatDate}}</td>
                     <td>{{voucher.facebook_link}}</td>
                     <td>{{voucher.popular_flag}}</td>
                     <td></td>
                     <td></td>
                     <td>
-                      <!--<button type="button" class="btn btn-warning"> <i class="far fa-edit pr-1"></i>Edit</button>-->
-                      <!--<button type="button" class="btn btn-danger"><i class="fas fa-trash pr-1"></i>Delete</button>-->
+                      <button type="button" class="btn btn-warning"> <i class="far fa-edit pr-1"></i>Edit</button>
+                      <button type="button" class="btn btn-danger"><i class="fas fa-trash pr-1"></i>Delete</button>
                       <button type="button" class="btn btn-primary"><i class="fas fa-archive pr-1"></i>Archive</button>
                     </td>
                   </tr>
