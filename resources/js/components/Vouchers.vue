@@ -59,6 +59,7 @@
                 <div class="modal-header">
                     <h5 class="modal-title" id="newVoucherLabel">Add new Voucher</h5>
                 </div>
+                <form @submit.prevent="createVoucher">
                 <div class="modal-body">
                   <div class="form-group">
                     <label>Name</label>
@@ -75,6 +76,13 @@
                  </div>
 
                  <div class="form-group">
+                    <label>Facebook Link</label>
+                    <input v-model="voucherForm.facebook_link" type="text" name="facebook_link" placeholder="Facebook Link"
+                    class="form-control" :class="{ 'is-invalid': voucherForm.errors.has('facebook_link') }">
+                    <has-error :form="voucherForm" field="facebook_link"></has-error>
+                 </div>
+
+                 <div class="form-group">
                     <label>Expiry Date</label>
                     <input v-model="voucherForm.expiry_date" type="datetime-local" name="expiry_date"
                     class="form-control" :class="{ 'is-invalid': voucherForm.errors.has('expiry_date') }">
@@ -85,20 +93,21 @@
                     <label>Is the voucher popular?</label>
                     <i class="nav-icon fas fa-info-circle" data-toggle="tooltip" data-placement="top" 
                     title="Popular vouchers will be displayed on the home page"></i>
-                    <select name="popular" v-model="voucherForm.popular" id="popular" class="form-control" 
-                      :class="{ 'is-invalid': voucherForm.errors.has('expiry_date') }">
+                    <select name="popular_flag" v-model="voucherForm.popular_flag" id="popular_flag" class="form-control" 
+                      :class="{ 'is-invalid': voucherForm.errors.has('popular_flag') }">
                       <option value="">Please select an option</option>
                       <option value="1">Yes</option>
                       <option value="0">No</option>
                     </select>
-                    <has-error :form="voucherForm" field="expiry_date"></has-error>
+                    <has-error :form="voucherForm" field="popular_flag"></has-error>
                  </div>
 
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger closefirstmodal">Close</button>
-                    <button type="button" class="btn btn-success">Create</button>
+                    <button type="submit" class="btn btn-success">Create</button>
                 </div>
+                </form>
                 </div>
             </div>
         </div>
@@ -133,6 +142,11 @@
               facebook_link: '',
               popular: ''
             })
+          }
+        },
+        methods: {
+          createVoucher(){
+            this.voucherForm.post('api/voucher');
           }
         },
         mounted() {
