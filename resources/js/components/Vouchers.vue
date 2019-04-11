@@ -45,7 +45,8 @@
                       <button type="button" class="btn btn-primary"><i class="fas fa-archive pr-1"></i>Archive</button>
                     </td>
                   </tr>
-                </tbody></table>
+                  </tbody>
+                </table>
               </div>
             </div>
           </div>
@@ -92,10 +93,12 @@
     export default {
         mounted() {
             console.log('Component mounted.')
+            // Show a warning modal before closing the 'Create Voucher' modal  
             $(document).ready(function () {
                 $('.closefirstmodal').click(function () {
                     $('#Warning').modal('show');
                 });
+                // If the user confirms the close, hide both modals
                 $('.confirmclosed').click(function () {
                     $('#Warning').modal('hide');
                     $('#addNewVoucher').modal('hide');

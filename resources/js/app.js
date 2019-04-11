@@ -2,7 +2,6 @@
 require('./bootstrap');
 import router from './routes.js';
 
-
 //Vue.component('example-component', require('./components/Dashboard.vue').default);
 //Vue.component('test-component', require('./components/Vouchers.vue').default);
 
