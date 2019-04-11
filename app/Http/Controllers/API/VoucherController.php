@@ -26,6 +26,8 @@ class VoucherController extends Controller
      */
     public function store(Request $request)
     {
+
+        
         return Voucher::create([
             'name' => $request['name'],
             'description' => $request['description'],

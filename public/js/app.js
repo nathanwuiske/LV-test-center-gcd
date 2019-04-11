@@ -1981,6 +1981,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -1990,6 +2002,7 @@ __webpack_require__.r(__webpack_exports__);
         photo: '',
         expiry_date: '',
         facebook_link: '',
+        category: '',
         popular: ''
       })
     };
@@ -38229,6 +38242,7 @@ var render = function() {
                       { staticClass: "form-group" },
                       [
                         _c("label", [_vm._v("Name")]),
+                        _c("span", { staticClass: "red" }, [_vm._v("*")]),
                         _vm._v(" "),
                         _c("input", {
                           directives: [
@@ -38246,7 +38260,7 @@ var render = function() {
                           attrs: {
                             type: "text",
                             name: "name",
-                            placeholder: "Voucher Name"
+                            placeholder: "Enter a name for the voucher"
                           },
                           domProps: { value: _vm.voucherForm.name },
                           on: {
@@ -38275,6 +38289,7 @@ var render = function() {
                       { staticClass: "form-group" },
                       [
                         _c("label", [_vm._v("Description")]),
+                        _c("span", { staticClass: "red" }, [_vm._v("*")]),
                         _vm._v(" "),
                         _c("textarea", {
                           directives: [
@@ -38294,7 +38309,7 @@ var render = function() {
                           attrs: {
                             type: "text",
                             name: "description",
-                            placeholder: "Voucher Description"
+                            placeholder: "Enter a voucher Description"
                           },
                           domProps: { value: _vm.voucherForm.description },
                           on: {
@@ -38342,7 +38357,8 @@ var render = function() {
                           attrs: {
                             type: "text",
                             name: "facebook_link",
-                            placeholder: "Facebook Link"
+                            placeholder:
+                              "Enter a link to the voucher's facebook page (OPTIONAL)"
                           },
                           domProps: { value: _vm.voucherForm.facebook_link },
                           on: {
@@ -38374,6 +38390,7 @@ var render = function() {
                       { staticClass: "form-group" },
                       [
                         _c("label", [_vm._v("Expiry Date")]),
+                        _c("span", { staticClass: "red" }, [_vm._v("*")]),
                         _vm._v(" "),
                         _c("input", {
                           directives: [
@@ -38420,7 +38437,79 @@ var render = function() {
                       "div",
                       { staticClass: "form-group" },
                       [
-                        _c("label", [_vm._v("Is the voucher popular?")]),
+                        _c("label", [_vm._v("Category")]),
+                        _c("span", { staticClass: "red" }, [_vm._v("*")]),
+                        _vm._v(" "),
+                        _c(
+                          "select",
+                          {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.voucherForm.category,
+                                expression: "voucherForm.category"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            class: {
+                              "is-invalid": _vm.voucherForm.errors.has(
+                                "category"
+                              )
+                            },
+                            attrs: { name: "category", id: "category" },
+                            on: {
+                              change: function($event) {
+                                var $$selectedVal = Array.prototype.filter
+                                  .call($event.target.options, function(o) {
+                                    return o.selected
+                                  })
+                                  .map(function(o) {
+                                    var val = "_value" in o ? o._value : o.value
+                                    return val
+                                  })
+                                _vm.$set(
+                                  _vm.voucherForm,
+                                  "category",
+                                  $event.target.multiple
+                                    ? $$selectedVal
+                                    : $$selectedVal[0]
+                                )
+                              }
+                            }
+                          },
+                          [
+                            _c("option", { attrs: { value: "" } }, [
+                              _vm._v("Please select an option")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "food" } }, [
+                              _vm._v("Food")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "automotive" } }, [
+                              _vm._v("Automotive")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "beauty" } }, [
+                              _vm._v("Beauty")
+                            ])
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c("has-error", {
+                          attrs: { form: _vm.voucherForm, field: "category" }
+                        })
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "form-group" },
+                      [
+                        _c("label", [_vm._v("Popular voucher?")]),
+                        _c("span", { staticClass: "red" }, [_vm._v("*")]),
                         _vm._v(" "),
                         _c("i", {
                           staticClass: "nav-icon fas fa-info-circle",

@@ -62,35 +62,47 @@
                 <form @submit.prevent="createVoucher">
                 <div class="modal-body">
                   <div class="form-group">
-                    <label>Name</label>
-                    <input v-model="voucherForm.name" type="text" name="name" placeholder="Voucher Name"
+                    <label>Name</label><span class="red">&#42;</span>
+                    <input v-model="voucherForm.name" type="text" name="name" placeholder="Enter a name for the voucher"
                     class="form-control" :class="{ 'is-invalid': voucherForm.errors.has('name') }">
                     <has-error :form="voucherForm" field="name"></has-error>
                  </div>
 
                  <div class="form-group">
-                    <label>Description</label>
-                    <textarea v-model="voucherForm.description" type="text" name="description" placeholder="Voucher Description"
+                    <label>Description</label><span class="red">&#42;</span>
+                    <textarea v-model="voucherForm.description" type="text" name="description" placeholder="Enter a voucher Description"
                     class="form-control" :class="{ 'is-invalid': voucherForm.errors.has('description') }"></textarea>
                     <has-error :form="voucherForm" field="description"></has-error>
                  </div>
 
                  <div class="form-group">
                     <label>Facebook Link</label>
-                    <input v-model="voucherForm.facebook_link" type="text" name="facebook_link" placeholder="Facebook Link"
+                    <input v-model="voucherForm.facebook_link" type="text" name="facebook_link" placeholder="Enter a link to the voucher's facebook page (OPTIONAL)"
                     class="form-control" :class="{ 'is-invalid': voucherForm.errors.has('facebook_link') }">
                     <has-error :form="voucherForm" field="facebook_link"></has-error>
                  </div>
 
                  <div class="form-group">
-                    <label>Expiry Date</label>
+                    <label>Expiry Date</label><span class="red">&#42;</span>
                     <input v-model="voucherForm.expiry_date" type="datetime-local" name="expiry_date"
                     class="form-control" :class="{ 'is-invalid': voucherForm.errors.has('expiry_date') }">
                     <has-error :form="voucherForm" field="expiry_date"></has-error>
                  </div>
 
+                  <div class="form-group">
+                    <label>Category</label><span class="red">&#42;</span>
+                    <select name="category" v-model="voucherForm.category" id="category" class="form-control" 
+                      :class="{ 'is-invalid': voucherForm.errors.has('category') }">
+                      <option value="">Please select an option</option>
+                      <option value="food">Food</option>
+                      <option value="automotive">Automotive</option>
+                      <option value="beauty">Beauty</option>
+                    </select>
+                    <has-error :form="voucherForm" field="category"></has-error>
+                 </div>
+
                  <div class="form-group">
-                    <label>Is the voucher popular?</label>
+                    <label>Popular voucher?</label><span class="red">&#42;</span>
                     <i class="nav-icon fas fa-info-circle" data-toggle="tooltip" data-placement="top" 
                     title="Popular vouchers will be displayed on the home page"></i>
                     <select name="popular_flag" v-model="voucherForm.popular_flag" id="popular_flag" class="form-control" 
@@ -140,6 +152,7 @@
               photo: '',
               expiry_date: '',
               facebook_link: '',
+              category: '',
               popular: ''
             })
           }

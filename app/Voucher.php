@@ -15,15 +15,6 @@ class Voucher extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'description', 'facebook_link', 'popular_flag',
-    ];
-
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'expiry_date' => 'datetime',
+        'name', 'description', 'facebook_link', 'popular_flag', 'expiry_date'
     ];
 }
