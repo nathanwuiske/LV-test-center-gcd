@@ -52192,36 +52192,17 @@ module.exports = function(module) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm.js");
+/* harmony import */ var _routes_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./routes.js */ "./resources/js/routes.js");
 //Dependacies
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
-
-window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
-Vue.use(vue_router__WEBPACK_IMPORTED_MODULE_0__["default"]);
-/* TODO: seperate into different routes file */
-
-var routes = [{
-  path: '/dashboard',
-  component: __webpack_require__(/*! ./components/Dashboard.vue */ "./resources/js/components/Dashboard.vue")["default"]
-}, {
-  path: '/users',
-  component: __webpack_require__(/*! ./components/Users.vue */ "./resources/js/components/Users.vue")["default"]
-}, {
-  path: '/vouchers',
-  component: __webpack_require__(/*! ./components/Vouchers.vue */ "./resources/js/components/Vouchers.vue")["default"]
-}];
-var router = new vue_router__WEBPACK_IMPORTED_MODULE_0__["default"]({
-  routes: routes,
-  // short for `routes: routes`
-  linkActiveClass: 'active'
-}); //Vue.component('example-component', require('./components/Dashboard.vue').default);
+ //Vue.component('example-component', require('./components/Dashboard.vue').default);
 //Vue.component('test-component', require('./components/Vouchers.vue').default);
 // Create a fresh Vue application instance and attach it to the page.
 
 var app = new Vue({
   el: '#app',
-  router: router
+  router: _routes_js__WEBPACK_IMPORTED_MODULE_0__["default"]
 });
 
 /***/ }),
@@ -52490,6 +52471,41 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Vouchers_vue_vue_type_template_id_0c971270___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
+
+/***/ }),
+
+/***/ "./resources/js/routes.js":
+/*!********************************!*\
+  !*** ./resources/js/routes.js ***!
+  \********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_1__);
+
+
+window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
+vue__WEBPACK_IMPORTED_MODULE_1___default.a.use(vue_router__WEBPACK_IMPORTED_MODULE_0__["default"]);
+var routes = [{
+  path: '/dashboard',
+  component: __webpack_require__(/*! ./components/Dashboard.vue */ "./resources/js/components/Dashboard.vue")["default"]
+}, {
+  path: '/users',
+  component: __webpack_require__(/*! ./components/Users.vue */ "./resources/js/components/Users.vue")["default"]
+}, {
+  path: '/vouchers',
+  component: __webpack_require__(/*! ./components/Vouchers.vue */ "./resources/js/components/Vouchers.vue")["default"]
+}];
+var router = new vue_router__WEBPACK_IMPORTED_MODULE_0__["default"]({
+  routes: routes,
+  // short for `routes: routes`
+  linkActiveClass: 'active'
+});
+/* harmony default export */ __webpack_exports__["default"] = (router);
 
 /***/ }),
 
