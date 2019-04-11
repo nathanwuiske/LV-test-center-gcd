@@ -164,6 +164,7 @@
             this.voucherForm.post('api/voucher')
             .then(()=>{ 
               /* If the post was successful then hide the modal and print success message */
+              Fire.$emit('AfterVoucherCreation');
               $('#addNewVoucher').modal('hide');
               swal("Success", "Voucher has been created successfully", "success");
             }) 
@@ -178,6 +179,10 @@
         },
         mounted() {
             this.displayVouchers();
+            /* If a voucher is created, call the displayVouchers function again to refresh vouchers table*/
+            Fire.$on('AfterVoucherCreation', () => {
+              this.displayVouchers();
+            });
             /* Show a warning modal before closing the 'Create Voucher' modal  */
             $(document).ready(function () {
                 $('.closefirstmodal').click(function () {

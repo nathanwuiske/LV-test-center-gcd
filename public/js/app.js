@@ -2008,6 +2008,7 @@ __webpack_require__.r(__webpack_exports__);
     createVoucher: function createVoucher() {
       this.voucherForm.post('api/voucher').then(function () {
         /* If the post was successful then hide the modal and print success message */
+        Fire.$emit('AfterVoucherCreation');
         $('#addNewVoucher').modal('hide');
         swal("Success", "Voucher has been created successfully", "success");
       })["catch"](function () {
@@ -2026,7 +2027,14 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   mounted: function mounted() {
+    var _this2 = this;
+
     this.displayVouchers();
+    /* If a voucher is created, call the displayVouchers function again to refresh vouchers table*/
+
+    Fire.$on('AfterVoucherCreation', function () {
+      _this2.displayVouchers();
+    });
     /* Show a warning modal before closing the 'Create Voucher' modal  */
 
     $(document).ready(function () {
@@ -71272,6 +71280,9 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 /* Sweetalert */
 
 window.swal = sweetalert__WEBPACK_IMPORTED_MODULE_3___default.a;
+/* Custom Vue event */
+
+window.Fire = new Vue();
 /* Get access to vform globally */
 
 window.Form = vform__WEBPACK_IMPORTED_MODULE_1__["Form"];

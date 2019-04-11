@@ -8,7 +8,8 @@ import swal from 'sweetalert'
 /* Sweetalert */
 window.swal = swal;
 
-
+/* Custom Vue event */
+window.Fire = new Vue();
 
 /* Get access to vform globally */
 window.Form = Form;
