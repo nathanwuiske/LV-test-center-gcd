@@ -60,7 +60,38 @@
                     <h5 class="modal-title" id="newVoucherLabel">Add new Voucher</h5>
                 </div>
                 <div class="modal-body">
-                    Some text for the modal body
+                  <div class="form-group">
+                    <label>Name</label>
+                    <input v-model="voucherForm.name" type="text" name="name" placeholder="Voucher Name"
+                    class="form-control" :class="{ 'is-invalid': voucherForm.errors.has('name') }">
+                    <has-error :form="voucherForm" field="name"></has-error>
+                 </div>
+
+                 <div class="form-group">
+                    <label>Description</label>
+                    <textarea v-model="voucherForm.description" type="text" name="description" placeholder="Voucher Description"
+                    class="form-control" :class="{ 'is-invalid': voucherForm.errors.has('description') }"></textarea>
+                    <has-error :form="voucherForm" field="description"></has-error>
+                 </div>
+
+                 <div class="form-group">
+                    <label>Expiry Date</label>
+                    <input v-model="voucherForm.expiry_date" type="date" name="expiry_date"
+                    class="form-control" :class="{ 'is-invalid': voucherForm.errors.has('expiry_date') }">
+                    <has-error :form="voucherForm" field="expiry_date"></has-error>
+                 </div>
+
+                 <div class="form-group">
+                    <label>Popular</label>
+                    <select name="popular" v-model="voucherForm.popular" id="popular" class="form-control" 
+                      :class="{ 'is-invalid': voucherForm.errors.has('expiry_date') }">
+                      <option value="">Is the voucher popular?</option>
+                      <option value="1">Yes</option>
+                      <option value="0">No</option>
+                    </select>
+                    <has-error :form="voucherForm" field="expiry_date"></has-error>
+                 </div>
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger closefirstmodal">Close</button>
@@ -89,8 +120,19 @@
     </div>
 </template>
 <script>
-
     export default {
+        data(){
+          return {
+            voucherForm: new Form({
+              name : '',
+              description: '',
+              photo: '',
+              expiry_date: '',
+              facebook_link: '',
+              popular: ''
+            })
+          }
+        },
         mounted() {
             console.log('Component mounted.')
             // Show a warning modal before closing the 'Create Voucher' modal  
