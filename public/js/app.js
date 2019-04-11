@@ -1970,6 +1970,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -1995,6 +1997,10 @@ __webpack_require__.r(__webpack_exports__);
         $('#Warning').modal('hide');
         $('#addNewVoucher').modal('hide');
       });
+    }); // Enable all tooltips
+
+    $(function () {
+      $('[data-toggle="tooltip"]').tooltip();
     });
   }
 });
@@ -38300,7 +38306,7 @@ var render = function() {
                       class: {
                         "is-invalid": _vm.voucherForm.errors.has("expiry_date")
                       },
-                      attrs: { type: "date", name: "expiry_date" },
+                      attrs: { type: "datetime-local", name: "expiry_date" },
                       domProps: { value: _vm.voucherForm.expiry_date },
                       on: {
                         input: function($event) {
@@ -38327,7 +38333,17 @@ var render = function() {
                   "div",
                   { staticClass: "form-group" },
                   [
-                    _c("label", [_vm._v("Popular")]),
+                    _c("label", [_vm._v("Is the voucher popular?")]),
+                    _vm._v(" "),
+                    _c("i", {
+                      staticClass: "nav-icon fas fa-info-circle",
+                      attrs: {
+                        "data-toggle": "tooltip",
+                        "data-placement": "top",
+                        title:
+                          "Popular vouchers will be displayed on the home page"
+                      }
+                    }),
                     _vm._v(" "),
                     _c(
                       "select",
@@ -38369,7 +38385,7 @@ var render = function() {
                       },
                       [
                         _c("option", { attrs: { value: "" } }, [
-                          _vm._v("Is the voucher popular?")
+                          _vm._v("Please select an option")
                         ]),
                         _vm._v(" "),
                         _c("option", { attrs: { value: "1" } }, [
@@ -38596,7 +38612,10 @@ var staticRenderFns = [
             _c("div", { staticClass: "modal-header" }, [
               _c(
                 "h5",
-                { staticClass: "modal-title", attrs: { id: "Warning" } },
+                {
+                  staticClass: "modal-title col-12 text-center",
+                  attrs: { id: "Warning" }
+                },
                 [
                   _c("i", { staticClass: "fas fa-exclamation-triangle red" }),
                   _vm._v(" Warning\n                    ")
@@ -38604,10 +38623,8 @@ var staticRenderFns = [
               )
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "modal-body" }, [
-              _c("p", [
-                _vm._v("Are you sure you want to close? All data will be lost.")
-              ]),
+            _c("div", { staticClass: "modal-body text-center" }, [
+              _c("p", [_vm._v("Are you sure you want to close?")]),
               _vm._v(" "),
               _c(
                 "button",

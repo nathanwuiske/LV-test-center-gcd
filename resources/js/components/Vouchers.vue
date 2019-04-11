@@ -76,16 +76,18 @@
 
                  <div class="form-group">
                     <label>Expiry Date</label>
-                    <input v-model="voucherForm.expiry_date" type="date" name="expiry_date"
+                    <input v-model="voucherForm.expiry_date" type="datetime-local" name="expiry_date"
                     class="form-control" :class="{ 'is-invalid': voucherForm.errors.has('expiry_date') }">
                     <has-error :form="voucherForm" field="expiry_date"></has-error>
                  </div>
 
                  <div class="form-group">
-                    <label>Popular</label>
+                    <label>Is the voucher popular?</label>
+                    <i class="nav-icon fas fa-info-circle" data-toggle="tooltip" data-placement="top" 
+                    title="Popular vouchers will be displayed on the home page"></i>
                     <select name="popular" v-model="voucherForm.popular" id="popular" class="form-control" 
                       :class="{ 'is-invalid': voucherForm.errors.has('expiry_date') }">
-                      <option value="">Is the voucher popular?</option>
+                      <option value="">Please select an option</option>
                       <option value="1">Yes</option>
                       <option value="0">No</option>
                     </select>
@@ -105,12 +107,12 @@
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="Warning">
+                        <h5 class="modal-title col-12 text-center" id="Warning">
                         <i class="fas fa-exclamation-triangle red"></i> Warning
                         </h5>
                     </div>
-                    <div class="modal-body">
-                        <p>Are you sure you want to close? All data will be lost.</p>
+                    <div class="modal-body text-center">
+                        <p>Are you sure you want to close?</p>
                         <button type="button" class="btn btn-danger confirmclosed">Confirm Close</button>
                         <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel Close</button>
                     </div>
@@ -146,6 +148,10 @@
                     $('#addNewVoucher').modal('hide');
                 });
         });
+          // Enable all tooltips
+          $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+          })
         } 
     }
 </script>
