@@ -1993,9 +1993,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
+      vouchers: {},
       voucherForm: new Form({
         name: '',
         description: '',
@@ -2010,10 +2013,19 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     createVoucher: function createVoucher() {
       this.voucherForm.post('api/voucher');
+    },
+    displayVouchers: function displayVouchers() {
+      var _this = this;
+
+      //this.voucherForm.get('api/voucher');
+      axios.get("api/voucher").then(function (_ref) {
+        var data = _ref.data;
+        return _this.vouchers = data.data;
+      }); //store the data in the voucher object
     }
   },
   mounted: function mounted() {
-    console.log('Component mounted.'); // Show a warning modal before closing the 'Create Voucher' modal  
+    this.displayVouchers(); // Show a warning modal before closing the 'Create Voucher' modal  
 
     $(document).ready(function () {
       $('.closefirstmodal').click(function () {
@@ -38200,7 +38212,47 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container" }, [
-    _vm._m(0),
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-12" }, [
+        _c("div", { staticClass: "card" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _c("div", { staticClass: "card-body table-responsive p-0" }, [
+            _c("table", { staticClass: "table table-hover" }, [
+              _c(
+                "tbody",
+                [
+                  _vm._m(1),
+                  _vm._v(" "),
+                  _vm._l(_vm.vouchers, function(voucher) {
+                    return _c("tr", { key: voucher.id }, [
+                      _c("td", [_vm._v(_vm._s(voucher.id))]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v(_vm._s(voucher.name))]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v(_vm._s(voucher.description))]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v(_vm._s(voucher.expiry_date))]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v(_vm._s(voucher.facebook_link))]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v(_vm._s(voucher.popular_flag))]),
+                      _vm._v(" "),
+                      _c("td"),
+                      _vm._v(" "),
+                      _c("td"),
+                      _vm._v(" "),
+                      _vm._m(2, true)
+                    ])
+                  })
+                ],
+                2
+              )
+            ])
+          ])
+        ])
+      ])
+    ]),
     _vm._v(" "),
     _c(
       "div",
@@ -38223,7 +38275,7 @@ var render = function() {
           },
           [
             _c("div", { staticClass: "modal-content" }, [
-              _vm._m(1),
+              _vm._m(3),
               _vm._v(" "),
               _c(
                 "form",
@@ -38585,7 +38637,7 @@ var render = function() {
                     )
                   ]),
                   _vm._v(" "),
-                  _vm._m(2)
+                  _vm._m(4)
                 ]
               )
             ])
@@ -38594,7 +38646,7 @@ var render = function() {
       ]
     ),
     _vm._v(" "),
-    _vm._m(3)
+    _vm._m(5)
   ])
 }
 var staticRenderFns = [
@@ -38602,148 +38654,89 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-12" }, [
-        _c("div", { staticClass: "card" }, [
-          _c("div", { staticClass: "card-header" }, [
-            _c("h3", { staticClass: "card-title" }, [
-              _vm._v("Vouchers Management")
-            ]),
+    return _c("div", { staticClass: "card-header" }, [
+      _c("h3", { staticClass: "card-title" }, [_vm._v("Vouchers Management")]),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-success",
+          attrs: {
+            "data-toggle": "modal",
+            "data-target": "#addNewVoucher",
+            "data-backdrop": "static",
+            "data-keyboard": "false"
+          }
+        },
+        [
+          _c("i", { staticClass: "fas fa-plus pr-1" }),
+          _vm._v("Add New Voucher\n            ")
+        ]
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "card-tools" }, [
+        _c(
+          "div",
+          {
+            staticClass: "input-group input-group-sm mt-5",
+            staticStyle: { width: "170px" }
+          },
+          [
+            _c("input", {
+              staticClass: "form-control",
+              attrs: {
+                type: "text",
+                name: "voucher_table_search",
+                placeholder: "Search"
+              }
+            }),
             _vm._v(" "),
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-success",
-                attrs: {
-                  "data-toggle": "modal",
-                  "data-target": "#addNewVoucher",
-                  "data-backdrop": "static",
-                  "data-keyboard": "false"
-                }
-              },
-              [
-                _c("i", { staticClass: "fas fa-plus pr-1" }),
-                _vm._v("Add New Voucher\n            ")
-              ]
-            ),
-            _vm._v(" "),
-            _c("div", { staticClass: "card-tools" }, [
+            _c("div", { staticClass: "input-group-append" }, [
               _c(
-                "div",
-                {
-                  staticClass: "input-group input-group-sm mt-5",
-                  staticStyle: { width: "170px" }
-                },
-                [
-                  _c("input", {
-                    staticClass: "form-control",
-                    attrs: {
-                      type: "text",
-                      name: "voucher_table_search",
-                      placeholder: "Search"
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "input-group-append" }, [
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-default",
-                        attrs: { type: "submit" }
-                      },
-                      [_c("i", { staticClass: "fa fa-search" })]
-                    )
-                  ])
-                ]
+                "button",
+                { staticClass: "btn btn-default", attrs: { type: "submit" } },
+                [_c("i", { staticClass: "fa fa-search" })]
               )
             ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "card-body table-responsive p-0" }, [
-            _c("table", { staticClass: "table table-hover" }, [
-              _c("tbody", [
-                _c("tr", [
-                  _c("th", [_vm._v("ID")]),
-                  _vm._v(" "),
-                  _c("th", [_vm._v("Name")]),
-                  _vm._v(" "),
-                  _c("th", [_vm._v("Description")]),
-                  _vm._v(" "),
-                  _c("th", [_vm._v("Expiry Date")]),
-                  _vm._v(" "),
-                  _c("th", [_vm._v("Facebook Link")]),
-                  _vm._v(" "),
-                  _c("th", [_vm._v("Popular")]),
-                  _vm._v(" "),
-                  _c("th", [_vm._v("Tags")]),
-                  _vm._v(" "),
-                  _c("th", [_vm._v("Categories")]),
-                  _vm._v(" "),
-                  _c("th", { staticStyle: { "text-align": "center" } }, [
-                    _vm._v("Modify")
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("tr", [
-                  _c("td", [_vm._v("1")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v("Test")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v("Some description")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v("06/11/2019 at 7:00pm")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v("Some link")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v("1")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v("tag1, tag2")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v("Food")]),
-                  _vm._v(" "),
-                  _c("td", [
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-warning",
-                        attrs: { type: "button" }
-                      },
-                      [
-                        _c("i", { staticClass: "far fa-edit pr-1" }),
-                        _vm._v("Edit")
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-danger",
-                        attrs: { type: "button" }
-                      },
-                      [
-                        _c("i", { staticClass: "fas fa-trash pr-1" }),
-                        _vm._v("Delete")
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-primary",
-                        attrs: { type: "button" }
-                      },
-                      [
-                        _c("i", { staticClass: "fas fa-archive pr-1" }),
-                        _vm._v("Archive")
-                      ]
-                    )
-                  ])
-                ])
-              ])
-            ])
-          ])
-        ])
+          ]
+        )
       ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("tr", [
+      _c("th", [_vm._v("ID")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Name")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Description")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Expiry Date")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Facebook Link")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Popular")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Tags")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Categories")]),
+      _vm._v(" "),
+      _c("th", { staticClass: "text-center" }, [_vm._v("Modify")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("td", [
+      _c(
+        "button",
+        { staticClass: "btn btn-primary", attrs: { type: "button" } },
+        [_c("i", { staticClass: "fas fa-archive pr-1" }), _vm._v("Archive")]
+      )
     ])
   },
   function() {

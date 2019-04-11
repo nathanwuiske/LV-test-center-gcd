@@ -15,7 +15,8 @@ class VoucherController extends Controller
      */
     public function index()
     {
-        //
+        // display the latest 20 vouchers
+        return Voucher::latest()->paginate(20);
     }
 
     /**
@@ -32,11 +33,10 @@ class VoucherController extends Controller
             'name' => 'required|string|max:150|alpha_num', //max 150 characters, Only letters and numbers allowed
             'description' => 'required|string|max:500'
             //'facebook_link' => 'required|url',
-            //'expiry_date' => 'required|after:today'
+            //'expiry_date' => 'required|after:today' //can only set expiry date AFTER the date of voucher creation
             //'photo' => 'required|image' //must be an image (jpg, png, bmp or gif)
         ]);
 
-        
         return Voucher::create([
             'name' => $request['name'],
             'description' => $request['description'],

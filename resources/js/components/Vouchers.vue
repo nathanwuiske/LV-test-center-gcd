@@ -28,20 +28,22 @@
                     <th>Popular</th>
                     <th>Tags</th>
                     <th>Categories</th>
-                    <th style="text-align: center;">Modify</th>
+                    <th class="text-center">Modify</th>
                   </tr>
-                  <tr>
-                    <td>1</td>
-                    <td>Test</td>
-                    <td>Some description</td>
-                    <td>06/11/2019 at 7:00pm</td>
-                    <td>Some link</td>
-                    <td>1</td>
-                    <td>tag1, tag2</td>
-                    <td>Food</td>
+
+
+                  <tr v-for="voucher in vouchers" :key="voucher.id">
+                    <td>{{voucher.id}}</td>
+                    <td>{{voucher.name}}</td>
+                    <td>{{voucher.description}}</td>
+                    <td>{{voucher.expiry_date}}</td>
+                    <td>{{voucher.facebook_link}}</td>
+                    <td>{{voucher.popular_flag}}</td>
+                    <td></td>
+                    <td></td>
                     <td>
-                      <button type="button" class="btn btn-warning"> <i class="far fa-edit pr-1"></i>Edit</button>
-                      <button type="button" class="btn btn-danger"><i class="fas fa-trash pr-1"></i>Delete</button>
+                      <!--<button type="button" class="btn btn-warning"> <i class="far fa-edit pr-1"></i>Edit</button>-->
+                      <!--<button type="button" class="btn btn-danger"><i class="fas fa-trash pr-1"></i>Delete</button>-->
                       <button type="button" class="btn btn-primary"><i class="fas fa-archive pr-1"></i>Archive</button>
                     </td>
                   </tr>
@@ -145,7 +147,9 @@
 <script>
     export default {
         data(){
+          
           return {
+            vouchers: {},
             voucherForm: new Form({
               name : '',
               description: '',
@@ -160,10 +164,14 @@
         methods: {
           createVoucher(){
             this.voucherForm.post('api/voucher');
+          },
+          displayVouchers(){
+            //this.voucherForm.get('api/voucher');
+            axios.get("api/voucher").then(({data}) => (this.vouchers = data.data)); //store the data in the voucher object
           }
         },
         mounted() {
-            console.log('Component mounted.')
+            this.displayVouchers();
             // Show a warning modal before closing the 'Create Voucher' modal  
             $(document).ready(function () {
                 $('.closefirstmodal').click(function () {
