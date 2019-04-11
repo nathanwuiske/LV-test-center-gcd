@@ -37271,7 +37271,7 @@ var staticRenderFns = [
                           attrs: { type: "button" }
                         },
                         [
-                          _c("i", { staticClass: "fas fa-archive pr-1 " }),
+                          _c("i", { staticClass: "fas fa-archive pr-1" }),
                           _vm._v("Archive")
                         ]
                       )
