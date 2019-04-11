@@ -23888,3 +23888,15 @@ a.text-dark:focus {
   text-align: center;
 }
 
+.table td.truncateText {
+  max-width: 170px;
+}
+
+.table td.truncateText span {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: inline-block;
+  max-width: 100%;
+}
+

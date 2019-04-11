@@ -1798,11 +1798,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  mounted: function mounted() {
-    console.log('Component mounted.');
-  }
+  mounted: function mounted() {}
 });
 
 /***/ }),
@@ -1833,9 +1830,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  mounted: function mounted() {
-    console.log('Component mounted.');
-  }
+  mounted: function mounted() {}
 });
 
 /***/ }),
@@ -1849,7 +1844,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
 //
 //
 //
@@ -2017,26 +2011,29 @@ __webpack_require__.r(__webpack_exports__);
     displayVouchers: function displayVouchers() {
       var _this = this;
 
-      //this.voucherForm.get('api/voucher');
       axios.get("api/voucher").then(function (_ref) {
         var data = _ref.data;
         return _this.vouchers = data.data;
-      }); //store the data in the voucher object
+      });
+      /*store the data in the voucher object */
     }
   },
   mounted: function mounted() {
-    this.displayVouchers(); // Show a warning modal before closing the 'Create Voucher' modal  
+    this.displayVouchers();
+    /* Show a warning modal before closing the 'Create Voucher' modal  */
 
     $(document).ready(function () {
       $('.closefirstmodal').click(function () {
         $('#Warning').modal('show');
-      }); // If the user confirms the close, hide both modals
+      });
+      /* If the user confirms the close, hide both modals */
 
       $('.confirmclosed').click(function () {
         $('#Warning').modal('hide');
         $('#addNewVoucher').modal('hide');
       });
-    }); // Enable all tooltips
+    });
+    /* Enable all tooltips */
 
     $(function () {
       $('[data-toggle="tooltip"]').tooltip();
@@ -55736,12 +55733,6 @@ var staticRenderFns = [
             _vm._v(
               "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis faucibus. Nullam quis ante. Etiam sit amet orci eget eros faucibus tincidunt. Duis leo. Sed fringilla mauris sit amet nibh. Donec sodales sagittis magna."
             )
-          ]),
-          _vm._v(" "),
-          _c("p", [
-            _vm._v(
-              "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis faucibus. Nullam quis ante. Etiam sit amet orci eget eros faucibus tincidunt. Duis leo. Sed fringilla mauris sit amet nibh. Donec sodales sagittis magna."
-            )
           ])
         ])
       ])
@@ -55835,7 +55826,10 @@ var render = function() {
                       _vm._v(" "),
                       _c("td", [_vm._v(_vm._s(voucher.name))]),
                       _vm._v(" "),
-                      _c("td", [_vm._v(_vm._s(voucher.description))]),
+                      _c("td", { staticClass: "truncateText" }, [
+                        _c("span", [_vm._v(_vm._s(voucher.description))]),
+                        _c("a", { attrs: { href: "#" } }, [_vm._v("view more")])
+                      ]),
                       _vm._v(" "),
                       _c("td", [
                         _vm._v(
@@ -55843,7 +55837,9 @@ var render = function() {
                         )
                       ]),
                       _vm._v(" "),
-                      _c("td", [_vm._v(_vm._s(voucher.facebook_link))]),
+                      _c("td", { staticClass: "truncateText" }, [
+                        _c("span", [_vm._v(_vm._s(voucher.facebook_link))])
+                      ]),
                       _vm._v(" "),
                       _c("td", [_vm._v(_vm._s(voucher.popular_flag))]),
                       _vm._v(" "),
@@ -71260,8 +71256,8 @@ Vue.component(vform__WEBPACK_IMPORTED_MODULE_1__["AlertError"].name, vform__WEBP
 
 /* Format the dates in the vouchers table to something more readable */
 
-Vue.filter('formatDate', function (created) {
-  return moment__WEBPACK_IMPORTED_MODULE_2___default()(created).format('MMMM Do YYYY, h:mm a');
+Vue.filter('formatDate', function (expiryDate) {
+  return moment__WEBPACK_IMPORTED_MODULE_2___default()(expiryDate).format('MMMM Do YYYY, h:mm a');
 });
 /* Create a fresh Vue application instance and attach it to the page. */
 
@@ -71555,6 +71551,8 @@ __webpack_require__.r(__webpack_exports__);
 
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 vue__WEBPACK_IMPORTED_MODULE_1___default.a.use(vue_router__WEBPACK_IMPORTED_MODULE_0__["default"]);
+/* Establish application routes for nav links on the side menu */
+
 var routes = [{
   path: '/dashboard',
   component: __webpack_require__(/*! ./components/Dashboard.vue */ "./resources/js/components/Dashboard.vue")["default"]
@@ -71567,8 +71565,9 @@ var routes = [{
 }];
 var router = new vue_router__WEBPACK_IMPORTED_MODULE_0__["default"]({
   routes: routes,
-  // short for `routes: routes`
   linkActiveClass: 'active'
+  /* If the nav link is selected, highlight it */
+
 });
 /* harmony default export */ __webpack_exports__["default"] = (router);
 

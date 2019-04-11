@@ -30,14 +30,13 @@
                     <th>Categories</th>
                     <th class="text-center">Modify</th>
                   </tr>
-
-
+                  <!-- Display vouchers from database using the voucher object created -->
                   <tr v-for="voucher in vouchers" :key="voucher.id">
                     <td>{{voucher.id}}</td>
                     <td>{{voucher.name}}</td>
-                    <td>{{voucher.description}}</td>
+                    <td class="truncateText"><span>{{voucher.description}}</span><a href="#">view more</a></td>
                     <td>{{voucher.expiry_date | formatDate}}</td>
-                    <td>{{voucher.facebook_link}}</td>
+                    <td class="truncateText"><span>{{voucher.facebook_link}}</span></td>
                     <td>{{voucher.popular_flag}}</td>
                     <td></td>
                     <td></td>
@@ -58,39 +57,40 @@
         <div class="modal fade" id="addNewVoucher" tabindex="-1" role="dialog" aria-labelledby="newVoucherLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="newVoucherLabel">Add new Voucher</h5>
-                </div>
-                <form @submit.prevent="createVoucher">
-                <div class="modal-body">
+                  <div class="modal-header">
+                      <h5 class="modal-title" id="newVoucherLabel">Add new Voucher</h5>
+                  </div>
+                  <form @submit.prevent="createVoucher">
+                  <div class="modal-body">
+                <!-- Name form input -->
                   <div class="form-group">
-                    <label>Name</label><span class="red">&#42;</span>
-                    <input v-model="voucherForm.name" type="text" name="name" placeholder="Enter a name for the voucher"
-                    class="form-control" :class="{ 'is-invalid': voucherForm.errors.has('name') }">
-                    <has-error :form="voucherForm" field="name"></has-error>
-                 </div>
-
+                      <label>Name</label><span class="red">&#42;</span>
+                      <input v-model="voucherForm.name" type="text" name="name" placeholder="Enter a name for the voucher"
+                      class="form-control" :class="{ 'is-invalid': voucherForm.errors.has('name') }">
+                      <has-error :form="voucherForm" field="name"></has-error>
+                  </div>
+                <!-- Description form input -->
                  <div class="form-group">
                     <label>Description</label><span class="red">&#42;</span>
                     <textarea v-model="voucherForm.description" type="text" name="description" placeholder="Enter a voucher Description"
                     class="form-control" :class="{ 'is-invalid': voucherForm.errors.has('description') }"></textarea>
                     <has-error :form="voucherForm" field="description"></has-error>
                  </div>
-
+                <!-- Facebook Link form input -->
                  <div class="form-group">
                     <label>Facebook Link</label>
                     <input v-model="voucherForm.facebook_link" type="text" name="facebook_link" placeholder="Enter a link to the voucher's facebook page (OPTIONAL)"
                     class="form-control" :class="{ 'is-invalid': voucherForm.errors.has('facebook_link') }">
                     <has-error :form="voucherForm" field="facebook_link"></has-error>
                  </div>
-
+                <!-- Expiry Date form input --> 
                  <div class="form-group">
                     <label>Expiry Date</label><span class="red">&#42;</span>
                     <input v-model="voucherForm.expiry_date" type="datetime-local" name="expiry_date"
                     class="form-control" :class="{ 'is-invalid': voucherForm.errors.has('expiry_date') }">
                     <has-error :form="voucherForm" field="expiry_date"></has-error>
                  </div>
-
+                <!-- Catgeory form input -->
                   <div class="form-group">
                     <label>Category</label><span class="red">&#42;</span>
                     <select name="category" v-model="voucherForm.category" id="category" class="form-control" 
@@ -102,7 +102,7 @@
                     </select>
                     <has-error :form="voucherForm" field="category"></has-error>
                  </div>
-
+                <!-- Popular form input -->
                  <div class="form-group">
                     <label>Popular voucher?</label><span class="red">&#42;</span>
                     <i class="nav-icon fas fa-info-circle" data-toggle="tooltip" data-placement="top" 
@@ -115,12 +115,11 @@
                     </select>
                     <has-error :form="voucherForm" field="popular_flag"></has-error>
                  </div>
-
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger closefirstmodal">Close</button>
-                    <button type="submit" class="btn btn-success">Create</button>
-                </div>
+                  <div class="modal-footer">
+                      <button type="button" class="btn btn-danger closefirstmodal">Close</button>
+                      <button type="submit" class="btn btn-success">Create</button>
+                  </div>
                 </form>
                 </div>
             </div>
@@ -147,7 +146,6 @@
 <script>
     export default {
         data(){
-          
           return {
             vouchers: {},
             voucherForm: new Form({
@@ -166,24 +164,23 @@
             this.voucherForm.post('api/voucher');
           },
           displayVouchers(){
-            //this.voucherForm.get('api/voucher');
-            axios.get("api/voucher").then(({data}) => (this.vouchers = data.data)); //store the data in the voucher object
+            axios.get("api/voucher").then(({data}) => (this.vouchers = data.data)); /*store the data in the voucher object */
           }
         },
         mounted() {
             this.displayVouchers();
-            // Show a warning modal before closing the 'Create Voucher' modal  
+            /* Show a warning modal before closing the 'Create Voucher' modal  */
             $(document).ready(function () {
                 $('.closefirstmodal').click(function () {
                     $('#Warning').modal('show');
                 });
-                // If the user confirms the close, hide both modals
+                /* If the user confirms the close, hide both modals */
                 $('.confirmclosed').click(function () {
                     $('#Warning').modal('hide');
                     $('#addNewVoucher').modal('hide');
                 });
         });
-          // Enable all tooltips
+          /* Enable all tooltips */
           $(function () {
             $('[data-toggle="tooltip"]').tooltip()
           })

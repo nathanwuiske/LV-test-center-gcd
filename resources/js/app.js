@@ -11,8 +11,8 @@ Vue.component(AlertError.name, AlertError)
 
 /* Vue filters */
 /* Format the dates in the vouchers table to something more readable */
-Vue.filter('formatDate', function(created){
-    return moment(created).format('MMMM Do YYYY, h:mm a');
+Vue.filter('formatDate', function(expiryDate){
+    return moment(expiryDate).format('MMMM Do YYYY, h:mm a');
 });
 
 /* Create a fresh Vue application instance and attach it to the page. */

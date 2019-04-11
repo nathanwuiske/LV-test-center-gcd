@@ -4,6 +4,7 @@ import Vue from 'vue';
 window.Vue = require('vue');
 Vue.use(VueRouter)
 
+/* Establish application routes for nav links on the side menu */
 let routes = [
     { path: '/dashboard', component: require('./components/Dashboard.vue').default },
     { path: '/users', component: require('./components/Users.vue').default },
@@ -11,8 +12,8 @@ let routes = [
   ];
 
 const router = new VueRouter({
-    routes, // short for `routes: routes`
-    linkActiveClass: 'active'
+    routes, 
+    linkActiveClass: 'active' /* If the nav link is selected, highlight it */
 })
 
 export default router;
