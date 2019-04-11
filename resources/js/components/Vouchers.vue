@@ -161,7 +161,16 @@
         },
         methods: {
           createVoucher(){
-            this.voucherForm.post('api/voucher');
+            this.voucherForm.post('api/voucher')
+            .then(()=>{ 
+              /* If the post was successful then hide the modal and print success message */
+              $('#addNewVoucher').modal('hide');
+              swal("Success", "Voucher has been created successfully", "success");
+            }) 
+            .catch(()=>{
+              /* If unsuccessful, catch the error */
+              console.log("Voucher form submit error");
+            })
           },
           displayVouchers(){
             axios.get("api/voucher").then(({data}) => (this.vouchers = data.data)); /*store the data in the voucher object */
