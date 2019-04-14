@@ -31,7 +31,7 @@
                     <th class="text-center">Modify</th>
                   </tr>
                   <!-- Display vouchers from database using the voucher object created -->
-                  <tr v-for="voucher in vouchers" :key="voucher.id">
+                  <tr v-for="voucher in vouchers.data" :key="voucher.id">
                     <td>{{voucher.id}}</td>
                     <td>{{voucher.name}}</td>
                     <td class="truncateText"><span>{{voucher.description}}</span><a href="#">view more</a></td>
@@ -49,6 +49,12 @@
                   </tbody>
                 </table>
               </div>
+                <div class="card-footer">
+                  <pagination :data="vouchers" @pagination-change-page="getResults">
+                    <span slot="prev-nav">&lt; Previous</span>
+                  	<span slot="next-nav">Next &gt;</span>
+                  </pagination>
+                </div>
             </div>
           </div>
         </div>
@@ -160,6 +166,13 @@
           }
         },
         methods: {
+          /* Method to paginate the voucher data */
+          getResults(page = 1) {
+            axios.get('api/voucher?page=' + page)
+              .then(response => {
+                this.vouchers = response.data;
+              });
+          },
           createVoucher(){
             this.voucherForm.post('api/voucher')
             .then(()=>{ 
@@ -175,7 +188,7 @@
           },
           displayVouchers(){
             axios.get("api/voucher")
-            .then(({data}) => (this.vouchers = data.data)); /*store the data in the voucher object */
+            .then(({data}) => (this.vouchers = data)); /*store the data in the voucher object */
           },
           deleteVoucher(id){
             swal.fire({

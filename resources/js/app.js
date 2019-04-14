@@ -11,6 +11,9 @@ window.swal = swal;
 /* Custom Vue event */
 window.Fire = new Vue();
 
+/* Pagination for vouchers table */
+Vue.component('pagination', require('laravel-vue-pagination'));
+
 /* Get access to vform globally */
 window.Form = Form;
 Vue.component(HasError.name, HasError)
