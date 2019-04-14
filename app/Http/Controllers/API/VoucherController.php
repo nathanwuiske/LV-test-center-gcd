@@ -77,6 +77,7 @@ class VoucherController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $voucher = Voucher::findOrFail($id);
+        $voucher->delete();
     }
 }

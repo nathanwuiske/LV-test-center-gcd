@@ -3,7 +3,7 @@ require('./bootstrap');
 import router from './routes.js';
 import { Form, HasError, AlertError } from 'vform'
 import moment from 'moment'
-import swal from 'sweetalert'
+import swal from 'sweetalert2'
 
 /* Sweetalert */
 window.swal = swal;

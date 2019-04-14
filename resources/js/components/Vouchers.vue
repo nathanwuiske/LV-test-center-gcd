@@ -42,7 +42,7 @@
                     <td></td>
                     <td>
                       <button type="button" class="btn btn-warning"> <i class="far fa-edit pr-1"></i>Edit</button>
-                      <button type="button" class="btn btn-danger"><i class="fas fa-trash pr-1"></i>Delete</button>
+                      <a class="btn white btn-danger" @click="deleteVoucher(voucher.id)"><i class="fas fa-trash pr-1"></i>Delete</a>
                       <button type="button" class="btn btn-primary"><i class="fas fa-archive pr-1"></i>Archive</button>
                     </td>
                   </tr>
@@ -164,7 +164,7 @@
             this.voucherForm.post('api/voucher')
             .then(()=>{ 
               /* If the post was successful then hide the modal and print success message */
-              Fire.$emit('AfterVoucherCreation');
+              Fire.$emit('RefreshVouchers');
               $('#addNewVoucher').modal('hide');
               swal("Success", "Voucher has been created successfully", "success");
             }) 
@@ -174,13 +174,43 @@
             })
           },
           displayVouchers(){
-            axios.get("api/voucher").then(({data}) => (this.vouchers = data.data)); /*store the data in the voucher object */
-          }
-        },
+            axios.get("api/voucher")
+            .then(({data}) => (this.vouchers = data.data)); /*store the data in the voucher object */
+          },
+          deleteVoucher(id){
+            swal.fire({
+            title: 'Are you sure?',
+            text: "This voucher will be permanently deleted",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#07AD4D',
+            confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if(result.value) {
+                this.voucherForm.delete('api/voucher/'+id).then(()=> {
+                  swal.fire(
+                  'Deleted!',
+                  'Voucher has been deleted.',
+                  'success'
+                  )
+                /* After deleting, send an event to fresh the voucher table */
+                Fire.$emit('RefreshVouchers'); 
+                }
+                ).catch(()=>{
+                  swal("Failed!", "Failed to delete voucher.", "warning");
+                });
+                }
+            })
+            }
+
+        }, /* END OF METHODS */
+
+         
         mounted() {
             this.displayVouchers();
             /* If a voucher is created, call the displayVouchers function again to refresh vouchers table*/
-            Fire.$on('AfterVoucherCreation', () => {
+            Fire.$on('RefreshVouchers', () => {
               this.displayVouchers();
             });
             /* Show a warning modal before closing the 'Create Voucher' modal  */

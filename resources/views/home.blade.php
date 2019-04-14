@@ -1,8 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-
-<body class="hold-transition sidebar-mini">
+<body class="hold-transition sidebar-mini pl-0 pr-0"> <!-- Applied pl-0 and pr-0 to fix modal bug -->
 <div class="wrapper">
 <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
