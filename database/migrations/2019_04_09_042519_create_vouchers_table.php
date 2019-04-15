@@ -15,7 +15,7 @@ class CreateVouchersTable extends Migration
     {
         /*TODO: set default/nullable fields */
         Schema::create('vouchers', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->increments('id');
             $table->string('name');
             $table->longText('description');
             $table->string('photo');

@@ -31,9 +31,9 @@ class VoucherController extends Controller
         $this->validate($request,[
             //maybe have a unique:name for name to prevent duplicate vouchers? 
             'name' => 'required|string|max:150', /* max 150 characters*/
-            'description' => 'required|string|max:500',
+            'description' => 'required|string|max:500'
             //'facebook_link' => 'required|url',
-            'expiry_date' => 'required|after:today' //can only set expiry date AFTER the date of voucher creation
+            //'expiry_date' => 'required|after:today' //can only set expiry date AFTER the date of voucher creation
             //'photo' => 'required|image' //must be an image (jpg, png, bmp or gif)
         ]);
 
