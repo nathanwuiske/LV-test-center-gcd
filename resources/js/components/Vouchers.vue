@@ -96,6 +96,16 @@
                     class="form-control" :class="{ 'is-invalid': voucherForm.errors.has('expiry_date') }">
                     <has-error :form="voucherForm" field="expiry_date"></has-error>
                  </div>
+
+                  <!-- 
+                    Better formatted date picker, not yet operational
+                    <div class="form-group">
+                    <label>Expiry Date</label><span class="red">&#42;</span>
+                    <datetime v-model="voucherForm.expiry_date" type="date" name="expiry_date" input-class="form-control" :class="{ 'is-invalid': voucherForm.errors.has('expiry_date') }">
+                      <has-error :form="voucherForm" field="expiry_date"></has-error>
+                    </datetime>
+                 </div> --> 
+
                 <!-- Catgeory form input -->
                   <div class="form-group">
                     <label>Category</label><span class="red">&#42;</span>
@@ -179,11 +189,19 @@
               /* If the post was successful then hide the modal and print success message */
               Fire.$emit('RefreshVouchers');
               $('#addNewVoucher').modal('hide');
-              swal("Success", "Voucher has been created successfully", "success");
+              swal.fire(
+                  'Success!',
+                  'Voucher has been created successfully',
+                  'success'
+                  )
             }) 
             .catch(()=>{
-              /* If unsuccessful, catch the error */
-              console.log("Voucher form submit error");
+              /* If unsuccessful, catch */
+              swal.fire({
+              title: 'Error',
+              text: "Failed to create new voucher. Please check you have correctly filled the form.",
+              type: 'warning'
+              })
             })
           },
           displayVouchers(){

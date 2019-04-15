@@ -4,6 +4,11 @@ import router from './routes.js';
 import { Form, HasError, AlertError } from 'vform'
 import moment from 'moment'
 import swal from 'sweetalert2'
+import { Datetime } from 'vue-datetime';
+import 'vue-datetime/dist/vue-datetime.css'
+
+/* Datetime formatter */
+Vue.component('datetime', Datetime);
 
 /* Sweetalert */
 window.swal = swal;
