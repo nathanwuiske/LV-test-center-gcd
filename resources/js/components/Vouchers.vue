@@ -64,9 +64,11 @@
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                   <div class="modal-header">
-                      <h5 class="modal-title" id="newVoucherLabel">Add new Voucher</h5>
+                      <h5 v-show="!editmode" class="modal-title" id="newVoucherLabel">Add new Voucher</h5>
+                      <h5 v-show="editmode" class="modal-title" id="newVoucherLabel">Update Voucher</h5>
                   </div>
-                  <form @submit.prevent="createVoucher">
+                <!-- If editmode is true, call updateVoucher. If false call createVoucher -->
+                  <form @submit.prevent="editmode ? updateVoucher() : createVoucher()">
                   <div class="modal-body">
                 <!-- Name form input -->
                   <div class="form-group">
@@ -132,7 +134,8 @@
                 </div>
                   <div class="modal-footer">
                       <button type="button" class="btn btn-danger closefirstmodal">Close</button>
-                      <button type="submit" class="btn btn-success">Create</button>
+                      <button v-show="editmode" type="submit" class="btn btn-warning">Update</button>
+                      <button v-show="!editmode" type="submit" class="btn btn-success">Create</button>
                   </div>
                 </form>
                 </div>
@@ -148,7 +151,8 @@
                         </h5>
                     </div>
                     <div class="modal-body text-center">
-                        <p>Are you sure you want to close? All data will be lost.</p>
+                        <p v-show="editmode">Are you sure you want to close? Any changes made will be lost.</p>
+                        <p v-show="!editmode">Are you sure you want to close? All data will be lost.</p>
                         <button type="button" class="btn btn-danger confirmclosed">Confirm Close</button>
                         <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel Close</button>
                     </div>
@@ -161,6 +165,7 @@
     export default {
         data(){
           return {
+            editmode: false,
             vouchers: {},
             voucherForm: new Form({
               name : '',
@@ -174,6 +179,10 @@
           }
         },
         methods: {
+
+          updateVoucher(){
+            
+          },
           archiveVoucher(){
             swal.fire({
               title: 'Nothing here',
@@ -181,8 +190,9 @@
               type: 'warning'
               })
           },
-
           editVoucherModal(voucher){
+            this.editmode = true;
+            this.voucherForm.clear();
             this.voucherForm.reset();
             $("#addNewVoucher").modal({
               backdrop: 'static',
@@ -191,6 +201,8 @@
             this.voucherForm.fill(voucher);
           },
           addNewVoucherModal(){
+            this.editmode = false;
+            this.voucherForm.clear();
             this.voucherForm.reset();
             /* Show the modal and make sure it can't be closed when clicking the areas around it */
             $("#addNewVoucher").modal({

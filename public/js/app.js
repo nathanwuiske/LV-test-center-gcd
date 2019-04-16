@@ -2003,9 +2003,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
+      editmode: false,
       vouchers: {},
       voucherForm: new Form({
         name: '',
@@ -2019,6 +2024,7 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
+    updateVoucher: function updateVoucher() {},
     archiveVoucher: function archiveVoucher() {
       swal.fire({
         title: 'Nothing here',
@@ -2027,6 +2033,8 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     editVoucherModal: function editVoucherModal(voucher) {
+      this.editmode = true;
+      this.voucherForm.clear();
       this.voucherForm.reset();
       $("#addNewVoucher").modal({
         backdrop: 'static',
@@ -2035,6 +2043,8 @@ __webpack_require__.r(__webpack_exports__);
       this.voucherForm.fill(voucher);
     },
     addNewVoucherModal: function addNewVoucherModal() {
+      this.editmode = false;
+      this.voucherForm.clear();
       this.voucherForm.reset();
       /* Show the modal and make sure it can't be closed when clicking the areas around it */
 
@@ -69625,7 +69635,41 @@ var render = function() {
           },
           [
             _c("div", { staticClass: "modal-content" }, [
-              _vm._m(2),
+              _c("div", { staticClass: "modal-header" }, [
+                _c(
+                  "h5",
+                  {
+                    directives: [
+                      {
+                        name: "show",
+                        rawName: "v-show",
+                        value: !_vm.editmode,
+                        expression: "!editmode"
+                      }
+                    ],
+                    staticClass: "modal-title",
+                    attrs: { id: "newVoucherLabel" }
+                  },
+                  [_vm._v("Add new Voucher")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "h5",
+                  {
+                    directives: [
+                      {
+                        name: "show",
+                        rawName: "v-show",
+                        value: _vm.editmode,
+                        expression: "editmode"
+                      }
+                    ],
+                    staticClass: "modal-title",
+                    attrs: { id: "newVoucherLabel" }
+                  },
+                  [_vm._v("Update Voucher")]
+                )
+              ]),
               _vm._v(" "),
               _c(
                 "form",
@@ -69633,7 +69677,7 @@ var render = function() {
                   on: {
                     submit: function($event) {
                       $event.preventDefault()
-                      return _vm.createVoucher($event)
+                      _vm.editmode ? _vm.updateVoucher() : _vm.createVoucher()
                     }
                   }
                 },
@@ -69981,7 +70025,50 @@ var render = function() {
                     )
                   ]),
                   _vm._v(" "),
-                  _vm._m(3)
+                  _c("div", { staticClass: "modal-footer" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-danger closefirstmodal",
+                        attrs: { type: "button" }
+                      },
+                      [_vm._v("Close")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: _vm.editmode,
+                            expression: "editmode"
+                          }
+                        ],
+                        staticClass: "btn btn-warning",
+                        attrs: { type: "submit" }
+                      },
+                      [_vm._v("Update")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: !_vm.editmode,
+                            expression: "!editmode"
+                          }
+                        ],
+                        staticClass: "btn btn-success",
+                        attrs: { type: "submit" }
+                      },
+                      [_vm._v("Create")]
+                    )
+                  ])
                 ]
               )
             ])
@@ -69990,7 +70077,78 @@ var render = function() {
       ]
     ),
     _vm._v(" "),
-    _vm._m(4)
+    _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        attrs: { id: "Warning", role: "dialog", "data-backdrop": "false" }
+      },
+      [
+        _c("div", { staticClass: "modal-dialog modal-dialog-centered" }, [
+          _c("div", { staticClass: "modal-content" }, [
+            _vm._m(2),
+            _vm._v(" "),
+            _c("div", { staticClass: "modal-body text-center" }, [
+              _c(
+                "p",
+                {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: _vm.editmode,
+                      expression: "editmode"
+                    }
+                  ]
+                },
+                [
+                  _vm._v(
+                    "Are you sure you want to close? Any changes made will be lost."
+                  )
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "p",
+                {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: !_vm.editmode,
+                      expression: "!editmode"
+                    }
+                  ]
+                },
+                [
+                  _vm._v(
+                    "Are you sure you want to close? All data will be lost."
+                  )
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-danger confirmclosed",
+                  attrs: { type: "button" }
+                },
+                [_vm._v("Confirm Close")]
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-primary",
+                  attrs: { type: "button", "data-dismiss": "modal" }
+                },
+                [_vm._v("Cancel Close")]
+              )
+            ])
+          ])
+        ])
+      ]
+    )
   ])
 }
 var staticRenderFns = [
@@ -70059,86 +70217,16 @@ var staticRenderFns = [
     return _c("div", { staticClass: "modal-header" }, [
       _c(
         "h5",
-        { staticClass: "modal-title", attrs: { id: "newVoucherLabel" } },
-        [_vm._v("Add new Voucher")]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-footer" }, [
-      _c(
-        "button",
         {
-          staticClass: "btn btn-danger closefirstmodal",
-          attrs: { type: "button" }
+          staticClass: "modal-title col-12 text-center",
+          attrs: { id: "Warning" }
         },
-        [_vm._v("Close")]
-      ),
-      _vm._v(" "),
-      _c(
-        "button",
-        { staticClass: "btn btn-success", attrs: { type: "submit" } },
-        [_vm._v("Create")]
+        [
+          _c("i", { staticClass: "fas fa-exclamation-triangle red" }),
+          _vm._v(" Warning\n                    ")
+        ]
       )
     ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticClass: "modal fade",
-        attrs: { id: "Warning", role: "dialog", "data-backdrop": "false" }
-      },
-      [
-        _c("div", { staticClass: "modal-dialog modal-dialog-centered" }, [
-          _c("div", { staticClass: "modal-content" }, [
-            _c("div", { staticClass: "modal-header" }, [
-              _c(
-                "h5",
-                {
-                  staticClass: "modal-title col-12 text-center",
-                  attrs: { id: "Warning" }
-                },
-                [
-                  _c("i", { staticClass: "fas fa-exclamation-triangle red" }),
-                  _vm._v(" Warning\n                    ")
-                ]
-              )
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "modal-body text-center" }, [
-              _c("p", [
-                _vm._v("Are you sure you want to close? All data will be lost.")
-              ]),
-              _vm._v(" "),
-              _c(
-                "button",
-                {
-                  staticClass: "btn btn-danger confirmclosed",
-                  attrs: { type: "button" }
-                },
-                [_vm._v("Confirm Close")]
-              ),
-              _vm._v(" "),
-              _c(
-                "button",
-                {
-                  staticClass: "btn btn-primary",
-                  attrs: { type: "button", "data-dismiss": "modal" }
-                },
-                [_vm._v("Cancel Close")]
-              )
-            ])
-          ])
-        ])
-      ]
-    )
   }
 ]
 render._withStripped = true
