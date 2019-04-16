@@ -15,6 +15,9 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
+Route::get('/vouchercount', 'MetricsController@countVouchers');
+Route::get('/usercount', 'MetricsController@countUsers');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
