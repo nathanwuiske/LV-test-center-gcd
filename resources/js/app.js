@@ -32,6 +32,12 @@ Vue.component(AlertError.name, AlertError)
 Vue.filter('formatDate', function(expiryDate){
     return moment(expiryDate).format('MMMM Do YYYY, h:mm a');
 });
+/* Capitalize the first character */
+Vue.filter('capitalize', function (text) {
+    if (!text) return ''
+    text = text.toString()
+    return text.charAt(0).toUpperCase() + text.slice(1)
+});
 
 /* Create a fresh Vue application instance and attach it to the page. */
 const app = new Vue({

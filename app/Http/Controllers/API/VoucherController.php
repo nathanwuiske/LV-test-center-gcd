@@ -43,6 +43,7 @@ class VoucherController extends Controller
             'facebook_link' => $request['facebook_link'],
             'popular_flag' => $request['popular_flag'],
             'expiry_date' => $request['expiry_date'],
+            'category' => $request['category'],
         ]);
     }
 

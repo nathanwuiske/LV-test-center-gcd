@@ -34,12 +34,12 @@
                   <tr v-for="voucher in vouchers.data" :key="voucher.id">
                     <td>{{voucher.id}}</td>
                     <td>{{voucher.name}}</td>
-                    <td class="truncateText"><span>{{voucher.description}}</span><a href="#">view more</a></td>
+                    <td class="truncateText"><span>{{voucher.description}}</span><!--<a href="#">view more</a>--></td> 
                     <td>{{voucher.expiry_date | formatDate}}</td>
                     <td class="truncateText"><span>{{voucher.facebook_link}}</span></td>
                     <td>{{voucher.popular_flag}}</td>
                     <td></td>
-                    <td>{{voucher.category}}</td>
+                    <td>{{voucher.category | capitalize}}</td>
                     <td>
                       <a href="#" @click="editVoucherModal(voucher)"> <i class="far fas fa-pencil-alt"  style="color: #FFC107;"></i></a>
                       <a href="#" @click="archiveVoucher"><i class="fas fa-archive" style="color: #428bca;"></i></a>
@@ -50,7 +50,7 @@
                 </table>
               </div>
                 <div class="card-footer">
-                  <pagination :data="vouchers" @pagination-change-page="getResults">
+                  <pagination :data="vouchers" @pagination-change-page="getResults" :limit=5>
                     <span slot="prev-nav">&lt; Previous</span>
                   	<span slot="next-nav">Next &gt;</span>
                   </pagination>

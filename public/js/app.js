@@ -69515,8 +69515,7 @@ var render = function() {
                       _c("td", [_vm._v(_vm._s(voucher.name))]),
                       _vm._v(" "),
                       _c("td", { staticClass: "truncateText" }, [
-                        _c("span", [_vm._v(_vm._s(voucher.description))]),
-                        _c("a", { attrs: { href: "#" } }, [_vm._v("view more")])
+                        _c("span", [_vm._v(_vm._s(voucher.description))])
                       ]),
                       _vm._v(" "),
                       _c("td", [
@@ -69533,7 +69532,9 @@ var render = function() {
                       _vm._v(" "),
                       _c("td"),
                       _vm._v(" "),
-                      _c("td", [_vm._v(_vm._s(voucher.category))]),
+                      _c("td", [
+                        _vm._v(_vm._s(_vm._f("capitalize")(voucher.category)))
+                      ]),
                       _vm._v(" "),
                       _c("td", [
                         _c(
@@ -69603,7 +69604,7 @@ var render = function() {
               _c(
                 "pagination",
                 {
-                  attrs: { data: _vm.vouchers },
+                  attrs: { data: _vm.vouchers, limit: 5 },
                   on: { "pagination-change-page": _vm.getResults }
                 },
                 [
@@ -85501,6 +85502,13 @@ Vue.component(vform__WEBPACK_IMPORTED_MODULE_1__["AlertError"].name, vform__WEBP
 
 Vue.filter('formatDate', function (expiryDate) {
   return moment__WEBPACK_IMPORTED_MODULE_2___default()(expiryDate).format('MMMM Do YYYY, h:mm a');
+});
+/* Capitalize the first character */
+
+Vue.filter('capitalize', function (text) {
+  if (!text) return '';
+  text = text.toString();
+  return text.charAt(0).toUpperCase() + text.slice(1);
 });
 /* Create a fresh Vue application instance and attach it to the page. */
 

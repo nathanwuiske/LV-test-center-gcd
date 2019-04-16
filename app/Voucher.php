@@ -15,6 +15,6 @@ class Voucher extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'description', 'facebook_link', 'popular_flag', 'expiry_date'
+        'name', 'description', 'facebook_link', 'popular_flag', 'expiry_date', 'category'
     ];
 }
