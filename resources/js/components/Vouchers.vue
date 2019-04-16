@@ -42,8 +42,8 @@
                     <td></td>
                     <td>
                       <a href="#" @click="editVoucherModal(voucher)"> <i class="far fas fa-pencil-alt"  style="color: #FFC107;"></i></a>
-                      <a href="#" @click="deleteVoucher(voucher.id)"><i class="fas fa-trash red deleteToolTip"></i></a>
-                      <a href="#"><i class="fas fa-archive" style="color: #428bca;"></i></a>
+                      <a href="#" @click="archiveVoucher"><i class="fas fa-archive" style="color: #428bca;"></i></a>
+                      <a href="#" @click="deleteVoucher(voucher.id, voucher.name)"><i class="fas fa-trash red deleteToolTip"></i></a>
                     </td>
                   </tr>
                   </tbody>
@@ -174,6 +174,14 @@
           }
         },
         methods: {
+          archiveVoucher(){
+            swal.fire({
+              title: 'Nothing here',
+              text: "I haven't added archive voucher yet.",
+              type: 'warning'
+              })
+          },
+
           editVoucherModal(voucher){
             this.voucherForm.reset();
             $("#addNewVoucher").modal({
@@ -217,7 +225,7 @@
               swal.fire({
               title: 'Error',
               text: "Failed to create new voucher. Please check you have correctly filled the form.",
-              type: 'warning'
+              type: 'error'
               })
             })
           },
@@ -225,10 +233,10 @@
             axios.get("api/voucher")
             .then(({data}) => (this.vouchers = data)); /*store the data in the voucher object */
           },
-          deleteVoucher(id){
+          deleteVoucher(id, name){ 
             swal.fire({
             title: 'Are you sure?',
-            text: "This voucher will be permanently deleted",
+            html: 'The following voucher will be permanently deleted: <b><b><br>' + name ,
             type: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#d33',

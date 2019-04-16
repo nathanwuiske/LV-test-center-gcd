@@ -2019,6 +2019,13 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
+    archiveVoucher: function archiveVoucher() {
+      swal.fire({
+        title: 'Nothing here',
+        text: "I haven't added archive voucher yet.",
+        type: 'warning'
+      });
+    },
     editVoucherModal: function editVoucherModal(voucher) {
       this.voucherForm.reset();
       $("#addNewVoucher").modal({
@@ -2060,7 +2067,7 @@ __webpack_require__.r(__webpack_exports__);
         swal.fire({
           title: 'Error',
           text: "Failed to create new voucher. Please check you have correctly filled the form.",
-          type: 'warning'
+          type: 'error'
         });
       });
     },
@@ -2073,12 +2080,12 @@ __webpack_require__.r(__webpack_exports__);
       });
       /*store the data in the voucher object */
     },
-    deleteVoucher: function deleteVoucher(id) {
+    deleteVoucher: function deleteVoucher(id, name) {
       var _this3 = this;
 
       swal.fire({
         title: 'Are you sure?',
-        text: "This voucher will be permanently deleted",
+        html: 'The following voucher will be permanently deleted: <b><b><br>' + name,
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#d33',
@@ -69528,9 +69535,26 @@ var render = function() {
                           "a",
                           {
                             attrs: { href: "#" },
+                            on: { click: _vm.archiveVoucher }
+                          },
+                          [
+                            _c("i", {
+                              staticClass: "fas fa-archive",
+                              staticStyle: { color: "#428bca" }
+                            })
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "a",
+                          {
+                            attrs: { href: "#" },
                             on: {
                               click: function($event) {
-                                return _vm.deleteVoucher(voucher.id)
+                                return _vm.deleteVoucher(
+                                  voucher.id,
+                                  voucher.name
+                                )
                               }
                             }
                           },
@@ -69539,9 +69563,7 @@ var render = function() {
                               staticClass: "fas fa-trash red deleteToolTip"
                             })
                           ]
-                        ),
-                        _vm._v(" "),
-                        _vm._m(2, true)
+                        )
                       ])
                     ])
                   })
@@ -69603,7 +69625,7 @@ var render = function() {
           },
           [
             _c("div", { staticClass: "modal-content" }, [
-              _vm._m(3),
+              _vm._m(2),
               _vm._v(" "),
               _c(
                 "form",
@@ -69959,7 +69981,7 @@ var render = function() {
                     )
                   ]),
                   _vm._v(" "),
-                  _vm._m(4)
+                  _vm._m(3)
                 ]
               )
             ])
@@ -69968,7 +69990,7 @@ var render = function() {
       ]
     ),
     _vm._v(" "),
-    _vm._m(5)
+    _vm._m(4)
   ])
 }
 var staticRenderFns = [
@@ -70028,17 +70050,6 @@ var staticRenderFns = [
       _c("th", { staticClass: "text-center", staticStyle: { width: "8%" } }, [
         _vm._v("Modify")
       ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("a", { attrs: { href: "#" } }, [
-      _c("i", {
-        staticClass: "fas fa-archive",
-        staticStyle: { color: "#428bca" }
-      })
     ])
   },
   function() {
