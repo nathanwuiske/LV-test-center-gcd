@@ -15,15 +15,15 @@ class CreateVouchersTable extends Migration
     {
         /*TODO: set default/nullable fields */
         Schema::create('vouchers', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->string('name');
             $table->longText('description');
-            $table->string('photo');
-            $table->dateTime('expiry_date');
-            $table->integer('tags_id');
-            $table->integer('categories_id');
-            $table->string('facebook_link');
-            $table->integer('popular_flag');
+            $table->string('photo')->nullable();
+            $table->dateTime('expiry_date')->nullable();
+            $table->integer('tags_id')->nullable();
+            $table->integer('categories_id')->nullable();
+            $table->string('facebook_link')->nullable();
+            $table->integer('popular_flag')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

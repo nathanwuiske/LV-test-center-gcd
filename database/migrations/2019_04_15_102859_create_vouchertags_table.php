@@ -14,10 +14,10 @@ class CreateVouchertagsTable extends Migration
     public function up()
     {
         Schema::create('vouchertags', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('voucher_id')->unsigned();
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('voucher_id')->unsigned();
             $table->foreign('voucher_id')->references('id')->on('vouchers');
-            $table->integer('tag_id')->unsigned();
+            $table->unsignedBigInteger('tag_id')->unsigned();
             $table->foreign('tag_id')->references('id')->on('tags');
             $table->timestamps();
         });

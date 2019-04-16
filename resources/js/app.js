@@ -13,6 +13,9 @@ Vue.component('datetime', Datetime);
 /* Sweetalert */
 window.swal = swal;
 
+/* Moment date formatter */
+window.moment = require('moment');
+
 /* Custom Vue event */
 window.Fire = new Vue();
 

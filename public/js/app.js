@@ -2003,8 +2003,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2031,6 +2029,9 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     createVoucher: function createVoucher() {
+      /* New date picker
+      var transformDate = moment(this.voucherForm.expiry_date).format('YYYYMMDD');
+       this.voucherForm.expiry_date = transformDate; */
       this.voucherForm.post('api/voucher').then(function () {
         /* If the post was successful then hide the modal and print success message */
         Fire.$emit('RefreshVouchers');
@@ -2090,6 +2091,8 @@ __webpack_require__.r(__webpack_exports__);
     Fire.$on('RefreshVouchers', function () {
       _this4.displayVouchers();
     });
+    /* TODO: Code refactoring */
+
     /* Show a warning modal before closing the 'Create Voucher' modal  */
 
     $(document).ready(function () {
@@ -2103,10 +2106,15 @@ __webpack_require__.r(__webpack_exports__);
         $('#addNewVoucher').modal('hide');
       });
     });
-    /* Enable all tooltips */
+    /* Setup tooltips */
 
-    $(function () {
-      $('[data-toggle="tooltip"]').tooltip();
+    $(".voucherFormToolTip").tooltip({
+      placement: "top",
+      title: "Popular vouchers will be displayed on the home page"
+    });
+    $(".deleteToolTip").tooltip({
+      placement: "top",
+      title: "Delete"
     });
   }
 });
@@ -69467,7 +69475,7 @@ var render = function() {
                         _c(
                           "a",
                           {
-                            staticClass: "btn white btn-danger",
+                            attrs: { href: "#" },
                             on: {
                               click: function($event) {
                                 return _vm.deleteVoucher(voucher.id)
@@ -69475,8 +69483,9 @@ var render = function() {
                             }
                           },
                           [
-                            _c("i", { staticClass: "fas fa-trash pr-1" }),
-                            _vm._v("Delete")
+                            _c("i", {
+                              staticClass: "fas fa-trash red deleteToolTip"
+                            })
                           ]
                         ),
                         _vm._v(" "),
@@ -69831,13 +69840,7 @@ var render = function() {
                         _c("span", { staticClass: "red" }, [_vm._v("*")]),
                         _vm._v(" "),
                         _c("i", {
-                          staticClass: "nav-icon fas fa-info-circle",
-                          attrs: {
-                            "data-toggle": "tooltip",
-                            "data-placement": "top",
-                            title:
-                              "Popular vouchers will be displayed on the home page"
-                          }
+                          staticClass: "fas fa-info-circle voucherFormToolTip"
                         }),
                         _vm._v(" "),
                         _c(
@@ -69991,28 +69994,32 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("th", [_vm._v("Categories")]),
       _vm._v(" "),
-      _c("th", { staticClass: "text-center" }, [_vm._v("Modify")])
+      _c("th", { staticClass: "text-center", staticStyle: { width: "8%" } }, [
+        _vm._v("Modify")
+      ])
     ])
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "button",
-      { staticClass: "btn btn-warning", attrs: { type: "button" } },
-      [_c("i", { staticClass: "far fa-edit pr-1" }), _vm._v("Edit")]
-    )
+    return _c("a", { attrs: { href: "#" } }, [
+      _c("i", {
+        staticClass: "far fas fa-pencil-alt",
+        staticStyle: { color: "#FFC107" }
+      })
+    ])
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "button",
-      { staticClass: "btn btn-primary", attrs: { type: "button" } },
-      [_c("i", { staticClass: "fas fa-archive pr-1" }), _vm._v("Archive")]
-    )
+    return _c("a", { attrs: { href: "#" } }, [
+      _c("i", {
+        staticClass: "fas fa-archive",
+        staticStyle: { color: "#428bca" }
+      })
+    ])
   },
   function() {
     var _vm = this
@@ -85340,6 +85347,9 @@ Vue.component('datetime', vue_datetime__WEBPACK_IMPORTED_MODULE_4__["Datetime"])
 /* Sweetalert */
 
 window.swal = sweetalert2__WEBPACK_IMPORTED_MODULE_3___default.a;
+/* Moment date formatter */
+
+window.moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
 /* Custom Vue event */
 
 window.Fire = new Vue();

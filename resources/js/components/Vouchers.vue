@@ -28,7 +28,7 @@
                     <th>Popular</th>
                     <th>Tags</th>
                     <th>Categories</th>
-                    <th class="text-center">Modify</th>
+                    <th class="text-center" style="width: 8%">Modify</th>
                   </tr>
                   <!-- Display vouchers from database using the voucher object created -->
                   <tr v-for="voucher in vouchers.data" :key="voucher.id">
@@ -41,9 +41,9 @@
                     <td></td>
                     <td></td>
                     <td>
-                      <button type="button" class="btn btn-warning"> <i class="far fa-edit pr-1"></i>Edit</button>
-                      <a class="btn white btn-danger" @click="deleteVoucher(voucher.id)"><i class="fas fa-trash pr-1"></i>Delete</a>
-                      <button type="button" class="btn btn-primary"><i class="fas fa-archive pr-1"></i>Archive</button>
+                      <a href="#"> <i class="far fas fa-pencil-alt"  style="color: #FFC107;"></i></a>
+                      <a href="#" @click="deleteVoucher(voucher.id)"><i class="fas fa-trash red deleteToolTip"></i></a>
+                      <a href="#"><i class="fas fa-archive" style="color: #428bca;"></i></a>
                     </td>
                   </tr>
                   </tbody>
@@ -89,22 +89,20 @@
                     class="form-control" :class="{ 'is-invalid': voucherForm.errors.has('facebook_link') }">
                     <has-error :form="voucherForm" field="facebook_link"></has-error>
                  </div>
-                <!-- Expiry Date form input --> 
+                <!-- Expiry Date form input  -->
                  <div class="form-group">
                     <label>Expiry Date</label><span class="red">&#42;</span>
                     <input v-model="voucherForm.expiry_date" type="datetime-local" name="expiry_date"
                     class="form-control" :class="{ 'is-invalid': voucherForm.errors.has('expiry_date') }">
                     <has-error :form="voucherForm" field="expiry_date"></has-error>
                  </div> 
-
-                  
-                   <!--
+                <!-- 
                     <div class="form-group">
                     <label>Expiry Date</label><span class="red">&#42;</span>
                     <datetime v-model="voucherForm.expiry_date" type="date" name="expiry_date" input-class="form-control" :class="{ 'is-invalid': voucherForm.errors.has('expiry_date') }">
                       <has-error :form="voucherForm" field="expiry_date"></has-error>
                     </datetime>
-                 </div> --> 
+                 </div> -->
 
                 <!-- Catgeory form input -->
                   <div class="form-group">
@@ -121,8 +119,8 @@
                 <!-- Popular form input -->
                  <div class="form-group">
                     <label>Popular voucher?</label><span class="red">&#42;</span>
-                    <i class="nav-icon fas fa-info-circle" data-toggle="tooltip" data-placement="top" 
-                    title="Popular vouchers will be displayed on the home page"></i>
+                    <i class="fas fa-info-circle voucherFormToolTip"
+                    ></i>
                     <select name="popular_flag" v-model="voucherForm.popular_flag" id="popular_flag" class="form-control" 
                       :class="{ 'is-invalid': voucherForm.errors.has('popular_flag') }">
                       <option value="">Please select an option</option>
@@ -184,6 +182,9 @@
               });
           },
           createVoucher(){
+           /* New date picker
+           var transformDate = moment(this.voucherForm.expiry_date).format('YYYYMMDD');
+            this.voucherForm.expiry_date = transformDate; */
             this.voucherForm.post('api/voucher')
             .then(()=>{ 
               /* If the post was successful then hide the modal and print success message */
@@ -244,6 +245,7 @@
             Fire.$on('RefreshVouchers', () => {
               this.displayVouchers();
             });
+            /* TODO: Code refactoring */
             /* Show a warning modal before closing the 'Create Voucher' modal  */
             $(document).ready(function () {
                 $('.closefirstmodal').click(function () {
@@ -255,10 +257,16 @@
                     $('#addNewVoucher').modal('hide');
                 });
         });
-          /* Enable all tooltips */
-          $(function () {
-            $('[data-toggle="tooltip"]').tooltip()
-          })
+          /* Setup tooltips */
+          $(".voucherFormToolTip").tooltip({
+              placement: "top",
+              title: "Popular vouchers will be displayed on the home page"
+          });
+          $(".deleteToolTip").tooltip({
+             placement: "top",
+             title: "Delete"
+          });
+          
         } 
     }
 </script>
