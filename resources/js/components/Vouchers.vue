@@ -27,7 +27,7 @@
                     <th>Facebook Link</th>
                     <th>Popular</th>
                     <th>Tags</th>
-                    <th>Categories</th>
+                    <th>Category</th>
                     <th class="text-center" style="width: 8%">Modify</th>
                   </tr>
                   <!-- Display vouchers from database using the voucher object created -->
@@ -39,7 +39,7 @@
                     <td class="truncateText"><span>{{voucher.facebook_link}}</span></td>
                     <td>{{voucher.popular_flag}}</td>
                     <td></td>
-                    <td></td>
+                    <td>{{voucher.category}}</td>
                     <td>
                       <a href="#" @click="editVoucherModal(voucher)"> <i class="far fas fa-pencil-alt"  style="color: #FFC107;"></i></a>
                       <a href="#" @click="archiveVoucher"><i class="fas fa-archive" style="color: #428bca;"></i></a>
@@ -168,7 +168,8 @@
             editmode: false,
             vouchers: {},
             voucherForm: new Form({
-              name : '',
+              id: '',
+              name: '',
               description: '',
               photo: '',
               expiry_date: '',
@@ -181,7 +182,23 @@
         methods: {
 
           updateVoucher(){
-            
+            this.voucherForm.put('api/voucher/' + this.voucherForm.id)
+            .then(()=>{ 
+              Fire.$emit('RefreshVouchers');
+              $('#addNewVoucher').modal('hide');
+              swal.fire(
+                  'Success!',
+                  'Voucher has been successfully updated.',
+                  'success'
+                  )
+            }) 
+            .catch(()=>{
+              swal.fire({
+              title: 'Error',
+              text: "Failed to update voucher.",
+              type: 'error'
+              })
+            })
           },
           archiveVoucher(){
             swal.fire({

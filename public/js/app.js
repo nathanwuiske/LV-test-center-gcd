@@ -2013,6 +2013,7 @@ __webpack_require__.r(__webpack_exports__);
       editmode: false,
       vouchers: {},
       voucherForm: new Form({
+        id: '',
         name: '',
         description: '',
         photo: '',
@@ -2024,7 +2025,19 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    updateVoucher: function updateVoucher() {},
+    updateVoucher: function updateVoucher() {
+      this.voucherForm.put('api/voucher/' + this.voucherForm.id).then(function () {
+        Fire.$emit('RefreshVouchers');
+        $('#addNewVoucher').modal('hide');
+        swal.fire('Success!', 'Voucher has been successfully updated.', 'success');
+      })["catch"](function () {
+        swal.fire({
+          title: 'Error',
+          text: "Failed to update voucher.",
+          type: 'error'
+        });
+      });
+    },
     archiveVoucher: function archiveVoucher() {
       swal.fire({
         title: 'Nothing here',
@@ -69520,7 +69533,7 @@ var render = function() {
                       _vm._v(" "),
                       _c("td"),
                       _vm._v(" "),
-                      _c("td"),
+                      _c("td", [_vm._v(_vm._s(voucher.category))]),
                       _vm._v(" "),
                       _c("td", [
                         _c(
@@ -70203,7 +70216,7 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("th", [_vm._v("Tags")]),
       _vm._v(" "),
-      _c("th", [_vm._v("Categories")]),
+      _c("th", [_vm._v("Category")]),
       _vm._v(" "),
       _c("th", { staticClass: "text-center", staticStyle: { width: "8%" } }, [
         _vm._v("Modify")

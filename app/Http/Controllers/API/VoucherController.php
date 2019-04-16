@@ -66,7 +66,13 @@ class VoucherController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $voucher = Voucher::findOrFail($id);
+        /* Do some validation before updating the voucher */
+        $this->validate($request,[
+            'name' => 'required|string|max:150', 
+            'description' => 'required|string|max:500'
+        ]);
+        $voucher->update($request->all());
     }
 
     /**
