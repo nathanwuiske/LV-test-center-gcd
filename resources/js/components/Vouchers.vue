@@ -5,7 +5,7 @@
             <div class="card">
               <div class="card-header">
                 <h3 class="card-title">Vouchers Management</h3>
-                <button class="btn btn-success" data-toggle="modal" data-target="#addNewVoucher" data-backdrop="static" data-keyboard="false">
+                <button class="btn btn-success" @click="newModal">
                     <i class="fas fa-plus pr-1"></i>Add New Voucher
                 </button>
                 <div class="card-tools">
@@ -174,6 +174,12 @@
           }
         },
         methods: {
+          newModal(){
+            $("#addNewVoucher").modal({
+              backdrop: 'static',
+              keyboard: false
+            });
+          },
           /* Method to paginate the voucher data */
           getResults(page = 1) {
             axios.get('api/voucher?page=' + page)

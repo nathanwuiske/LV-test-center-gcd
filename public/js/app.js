@@ -2019,6 +2019,13 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
+    newModal: function newModal() {
+      $("#addNewVoucher").modal({
+        backdrop: 'static',
+        keyboard: false
+      });
+    },
+
     /* Method to paginate the voucher data */
     getResults: function getResults() {
       var _this = this;
@@ -69433,7 +69440,22 @@ var render = function() {
     _c("div", { staticClass: "row" }, [
       _c("div", { staticClass: "col-12" }, [
         _c("div", { staticClass: "card" }, [
-          _vm._m(0),
+          _c("div", { staticClass: "card-header" }, [
+            _c("h3", { staticClass: "card-title" }, [
+              _vm._v("Vouchers Management")
+            ]),
+            _vm._v(" "),
+            _c(
+              "button",
+              { staticClass: "btn btn-success", on: { click: _vm.newModal } },
+              [
+                _c("i", { staticClass: "fas fa-plus pr-1" }),
+                _vm._v("Add New Voucher\n            ")
+              ]
+            ),
+            _vm._v(" "),
+            _vm._m(0)
+          ]),
           _vm._v(" "),
           _c("div", { staticClass: "card-body table-responsive p-0" }, [
             _c("table", { staticClass: "table table-hover" }, [
@@ -69924,53 +69946,32 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-header" }, [
-      _c("h3", { staticClass: "card-title" }, [_vm._v("Vouchers Management")]),
-      _vm._v(" "),
+    return _c("div", { staticClass: "card-tools" }, [
       _c(
-        "button",
+        "div",
         {
-          staticClass: "btn btn-success",
-          attrs: {
-            "data-toggle": "modal",
-            "data-target": "#addNewVoucher",
-            "data-backdrop": "static",
-            "data-keyboard": "false"
-          }
+          staticClass: "input-group input-group-sm mt-5",
+          staticStyle: { width: "170px" }
         },
         [
-          _c("i", { staticClass: "fas fa-plus pr-1" }),
-          _vm._v("Add New Voucher\n            ")
+          _c("input", {
+            staticClass: "form-control",
+            attrs: {
+              type: "text",
+              name: "voucher_table_search",
+              placeholder: "Search"
+            }
+          }),
+          _vm._v(" "),
+          _c("div", { staticClass: "input-group-append" }, [
+            _c(
+              "button",
+              { staticClass: "btn btn-default", attrs: { type: "submit" } },
+              [_c("i", { staticClass: "fa fa-search" })]
+            )
+          ])
         ]
-      ),
-      _vm._v(" "),
-      _c("div", { staticClass: "card-tools" }, [
-        _c(
-          "div",
-          {
-            staticClass: "input-group input-group-sm mt-5",
-            staticStyle: { width: "170px" }
-          },
-          [
-            _c("input", {
-              staticClass: "form-control",
-              attrs: {
-                type: "text",
-                name: "voucher_table_search",
-                placeholder: "Search"
-              }
-            }),
-            _vm._v(" "),
-            _c("div", { staticClass: "input-group-append" }, [
-              _c(
-                "button",
-                { staticClass: "btn btn-default", attrs: { type: "submit" } },
-                [_c("i", { staticClass: "fa fa-search" })]
-              )
-            ])
-          ]
-        )
-      ])
+      )
     ])
   },
   function() {
