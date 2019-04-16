@@ -2020,7 +2020,7 @@ __webpack_require__.r(__webpack_exports__);
         expiry_date: '',
         facebook_link: '',
         category: '',
-        popular: ''
+        popular_flag: ''
       })
     };
   },
@@ -69867,10 +69867,7 @@ var render = function() {
                               "expiry_date"
                             )
                           },
-                          attrs: {
-                            type: "datetime-local",
-                            name: "expiry_date"
-                          },
+                          attrs: { type: "date", name: "expiry_date" },
                           domProps: { value: _vm.voucherForm.expiry_date },
                           on: {
                             input: function($event) {
