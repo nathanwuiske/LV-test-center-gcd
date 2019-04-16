@@ -15,8 +15,10 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
-Route::get('/vouchercount', 'MetricsController@countVouchers');
-Route::get('/usercount', 'MetricsController@countUsers');
+Route::get('/vouchercount', 'MetricsController@countTotalVouchers');
+Route::get('/usercount', 'MetricsController@countTotalUsers');
+Route::get('/latestvouchers', 'MetricsController@countTodaysVouchers');
+Route::get('/latestusers', 'MetricsController@countTodaysUsers');
 
 Auth::routes();
 

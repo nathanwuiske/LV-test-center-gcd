@@ -31,8 +31,8 @@
                         <div class="info-box mb-3">
                         <span class="info-box-icon bg-danger elevation-1"><i class="far fa-plus-square"></i></span>
                         <div class="info-box-content">
-                            <span class="info-box-text">New Vouchers this month</span>
-                            <h3>{{voucherCount}}</h3>
+                            <span class="info-box-text">New Vouchers today</span>
+                            <h3>{{latestVouchers}}</h3>
                         </div>
                         </div>
                     </div>
@@ -41,8 +41,8 @@
                         <div class="info-box mb-3">
                         <span class="info-box-icon bg-warning elevation-1"><i class="fa fa-user-plus"></i></span>
                         <div class="info-box-content">
-                            <span class="info-box-text">New Users this month</span>
-                            <h3>{{voucherCount}}</h3>
+                            <span class="info-box-text">New Users today</span>
+                            <h3>{{latestUsers}}</h3>
                         </div>
                         </div>
                     </div>
@@ -59,7 +59,9 @@
         data(){
             return {
                 voucherCount: '',
-                userCount: ''
+                userCount: '',
+                latestVouchers: '',
+                latestUsers: ''
             }
         },
         methods: {
@@ -72,11 +74,23 @@
                 axios.get('/usercount').then(response => {
                 this.userCount = response.data;
             });
-            }  
+            },
+              getLatestVoucherCount(){
+                axios.get('/latestvouchers').then(response => {
+                this.latestVouchers = response.data;
+            });
+            },
+            getLatestUserCount(){
+                axios.get('/latestusers').then(response => {
+                this.latestUsers = response.data;
+            });
+            }
         },
         mounted() {
            this.getVoucherCount();
            this.getUserCount();
+           this.getLatestVoucherCount();
+           this.getLatestUserCount();
         }
     }
 </script>

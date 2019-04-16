@@ -1840,7 +1840,9 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       voucherCount: '',
-      userCount: ''
+      userCount: '',
+      latestVouchers: '',
+      latestUsers: ''
     };
   },
   methods: {
@@ -1857,11 +1859,27 @@ __webpack_require__.r(__webpack_exports__);
       axios.get('/usercount').then(function (response) {
         _this2.userCount = response.data;
       });
+    },
+    getLatestVoucherCount: function getLatestVoucherCount() {
+      var _this3 = this;
+
+      axios.get('/latestvouchers').then(function (response) {
+        _this3.latestVouchers = response.data;
+      });
+    },
+    getLatestUserCount: function getLatestUserCount() {
+      var _this4 = this;
+
+      axios.get('/latestusers').then(function (response) {
+        _this4.latestUsers = response.data;
+      });
     }
   },
   mounted: function mounted() {
     this.getVoucherCount();
     this.getUserCount();
+    this.getLatestVoucherCount();
+    this.getLatestUserCount();
   }
 });
 
@@ -69474,10 +69492,10 @@ var render = function() {
               _vm._v(" "),
               _c("div", { staticClass: "info-box-content" }, [
                 _c("span", { staticClass: "info-box-text" }, [
-                  _vm._v("New Vouchers this month")
+                  _vm._v("New Vouchers today")
                 ]),
                 _vm._v(" "),
-                _c("h3", [_vm._v(_vm._s(_vm.voucherCount))])
+                _c("h3", [_vm._v(_vm._s(_vm.latestVouchers))])
               ])
             ])
           ]),
@@ -69488,10 +69506,10 @@ var render = function() {
               _vm._v(" "),
               _c("div", { staticClass: "info-box-content" }, [
                 _c("span", { staticClass: "info-box-text" }, [
-                  _vm._v("New Users this month")
+                  _vm._v("New Users today")
                 ]),
                 _vm._v(" "),
-                _c("h3", [_vm._v(_vm._s(_vm.voucherCount))])
+                _c("h3", [_vm._v(_vm._s(_vm.latestUsers))])
               ])
             ])
           ])
