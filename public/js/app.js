@@ -2019,7 +2019,18 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    newModal: function newModal() {
+    editVoucherModal: function editVoucherModal(voucher) {
+      this.voucherForm.reset();
+      $("#addNewVoucher").modal({
+        backdrop: 'static',
+        keyboard: false
+      });
+      this.voucherForm.fill(voucher);
+    },
+    addNewVoucherModal: function addNewVoucherModal() {
+      this.voucherForm.reset();
+      /* Show the modal and make sure it can't be closed when clicking the areas around it */
+
       $("#addNewVoucher").modal({
         backdrop: 'static',
         keyboard: false
@@ -69447,7 +69458,10 @@ var render = function() {
             _vm._v(" "),
             _c(
               "button",
-              { staticClass: "btn btn-success", on: { click: _vm.newModal } },
+              {
+                staticClass: "btn btn-success",
+                on: { click: _vm.addNewVoucherModal }
+              },
               [
                 _c("i", { staticClass: "fas fa-plus pr-1" }),
                 _vm._v("Add New Voucher\n            ")
@@ -69492,7 +69506,23 @@ var render = function() {
                       _c("td"),
                       _vm._v(" "),
                       _c("td", [
-                        _vm._m(2, true),
+                        _c(
+                          "a",
+                          {
+                            attrs: { href: "#" },
+                            on: {
+                              click: function($event) {
+                                return _vm.editVoucherModal(voucher)
+                              }
+                            }
+                          },
+                          [
+                            _c("i", {
+                              staticClass: "far fas fa-pencil-alt",
+                              staticStyle: { color: "#FFC107" }
+                            })
+                          ]
+                        ),
                         _vm._v(" "),
                         _c(
                           "a",
@@ -69511,7 +69541,7 @@ var render = function() {
                           ]
                         ),
                         _vm._v(" "),
-                        _vm._m(3, true)
+                        _vm._m(2, true)
                       ])
                     ])
                   })
@@ -69573,7 +69603,7 @@ var render = function() {
           },
           [
             _c("div", { staticClass: "modal-content" }, [
-              _vm._m(4),
+              _vm._m(3),
               _vm._v(" "),
               _c(
                 "form",
@@ -69929,7 +69959,7 @@ var render = function() {
                     )
                   ]),
                   _vm._v(" "),
-                  _vm._m(5)
+                  _vm._m(4)
                 ]
               )
             ])
@@ -69938,7 +69968,7 @@ var render = function() {
       ]
     ),
     _vm._v(" "),
-    _vm._m(6)
+    _vm._m(5)
   ])
 }
 var staticRenderFns = [
@@ -69998,17 +70028,6 @@ var staticRenderFns = [
       _c("th", { staticClass: "text-center", staticStyle: { width: "8%" } }, [
         _vm._v("Modify")
       ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("a", { attrs: { href: "#" } }, [
-      _c("i", {
-        staticClass: "far fas fa-pencil-alt",
-        staticStyle: { color: "#FFC107" }
-      })
     ])
   },
   function() {
@@ -70083,7 +70102,9 @@ var staticRenderFns = [
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "modal-body text-center" }, [
-              _c("p", [_vm._v("Are you sure you want to close?")]),
+              _c("p", [
+                _vm._v("Are you sure you want to close? All data will be lost.")
+              ]),
               _vm._v(" "),
               _c(
                 "button",

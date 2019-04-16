@@ -5,7 +5,7 @@
             <div class="card">
               <div class="card-header">
                 <h3 class="card-title">Vouchers Management</h3>
-                <button class="btn btn-success" @click="newModal">
+                <button class="btn btn-success" @click="addNewVoucherModal">
                     <i class="fas fa-plus pr-1"></i>Add New Voucher
                 </button>
                 <div class="card-tools">
@@ -41,7 +41,7 @@
                     <td></td>
                     <td></td>
                     <td>
-                      <a href="#"> <i class="far fas fa-pencil-alt"  style="color: #FFC107;"></i></a>
+                      <a href="#" @click="editVoucherModal(voucher)"> <i class="far fas fa-pencil-alt"  style="color: #FFC107;"></i></a>
                       <a href="#" @click="deleteVoucher(voucher.id)"><i class="fas fa-trash red deleteToolTip"></i></a>
                       <a href="#"><i class="fas fa-archive" style="color: #428bca;"></i></a>
                     </td>
@@ -148,7 +148,7 @@
                         </h5>
                     </div>
                     <div class="modal-body text-center">
-                        <p>Are you sure you want to close?</p>
+                        <p>Are you sure you want to close? All data will be lost.</p>
                         <button type="button" class="btn btn-danger confirmclosed">Confirm Close</button>
                         <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel Close</button>
                     </div>
@@ -174,7 +174,17 @@
           }
         },
         methods: {
-          newModal(){
+          editVoucherModal(voucher){
+            this.voucherForm.reset();
+            $("#addNewVoucher").modal({
+              backdrop: 'static',
+              keyboard: false
+            });
+            this.voucherForm.fill(voucher);
+          },
+          addNewVoucherModal(){
+            this.voucherForm.reset();
+            /* Show the modal and make sure it can't be closed when clicking the areas around it */
             $("#addNewVoucher").modal({
               backdrop: 'static',
               keyboard: false
