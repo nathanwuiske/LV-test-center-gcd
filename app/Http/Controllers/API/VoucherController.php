@@ -35,7 +35,7 @@ class VoucherController extends Controller
             'facebook_link' => 'required|url',
             'expiry_date' => 'required|after:today', //can only set expiry date AFTER the date of voucher creation
             'category' => 'required',
-            'popular_flag' => 'required'
+            'popular_flag' => 'required',
             //'photo' => 'required|image' //must be an image (jpg, png, bmp or gif)
         ]);
 
