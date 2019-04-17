@@ -70019,7 +70019,10 @@ var render = function() {
                               "expiry_date"
                             )
                           },
-                          attrs: { type: "date", name: "expiry_date" },
+                          attrs: {
+                            type: "datetime-local",
+                            name: "expiry_date"
+                          },
                           domProps: { value: _vm.voucherForm.expiry_date },
                           on: {
                             input: function($event) {
@@ -85650,7 +85653,7 @@ Vue.component(vform__WEBPACK_IMPORTED_MODULE_1__["AlertError"].name, vform__WEBP
 /* Format the dates in the vouchers table to something more readable */
 
 Vue.filter('formatDate', function (expiryDate) {
-  return moment__WEBPACK_IMPORTED_MODULE_2___default()(expiryDate).format('MMMM Do YYYY');
+  return moment__WEBPACK_IMPORTED_MODULE_2___default()(expiryDate).format('MMMM Do YYYY, h:mm:ss a');
 });
 /* Capitalize the first character */
 
