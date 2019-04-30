@@ -1837,6 +1837,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -1926,6 +1927,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
 //
 //
 //
@@ -70002,7 +70004,41 @@ var render = function() {
                       { staticClass: "form-group" },
                       [
                         _c("label", [_vm._v("Expiry Date")]),
-                        _c("span", { staticClass: "red" }, [_vm._v("*")]),
+                        _c(
+                          "span",
+                          {
+                            directives: [
+                              {
+                                name: "show",
+                                rawName: "v-show",
+                                value: !_vm.editmode,
+                                expression: "!editmode"
+                              }
+                            ],
+                            staticClass: "red"
+                          },
+                          [_vm._v("* ")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "span",
+                          {
+                            directives: [
+                              {
+                                name: "show",
+                                rawName: "v-show",
+                                value: _vm.editmode,
+                                expression: "editmode"
+                              }
+                            ],
+                            staticClass: "red"
+                          },
+                          [
+                            _vm._v(
+                              "Leave this field blank to keep original date"
+                            )
+                          ]
+                        ),
                         _vm._v(" "),
                         _c("input", {
                           directives: [

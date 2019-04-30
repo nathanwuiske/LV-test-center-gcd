@@ -9,13 +9,13 @@
                     <i class="fas fa-plus pr-1"></i>Add New Voucher
                 </button>
                 <div class="card-tools">
-                  <div class="input-group input-group-sm mt-5" style="width: 170px;">
+                   <div class="input-group input-group-sm mt-5" style="width: 170px;">
                     <input type="text" name="voucher_table_search" class="form-control" placeholder="Search">
                     <div class="input-group-append">
                       <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
                     </div>
-                  </div>
                 </div>
+              </div>
               </div>
               <div class="card-body table-responsive p-0">
                 <table class="table table-hover">
@@ -93,7 +93,8 @@
                  </div>
                 <!-- Expiry Date form input  -->
                  <div class="form-group">
-                    <label>Expiry Date</label><span class="red">&#42;</span>
+                    <label>Expiry Date</label><span v-show="!editmode" class="red">&#42; </span> 
+                    <span v-show="editmode" class="red">Leave this field blank to keep original date</span> 
                     <input v-model="voucherForm.expiry_date" type="datetime-local" name="expiry_date"
                     class="form-control" :class="{ 'is-invalid': voucherForm.errors.has('expiry_date') }">
                     <has-error :form="voucherForm" field="expiry_date"></has-error>

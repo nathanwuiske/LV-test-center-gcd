@@ -52,6 +52,7 @@
            <h3>User activity</h3>
         </div>
            <p class="text-center">Will add stuff about app usage here</p>
+           
     </div>
 </template>
 
