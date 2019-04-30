@@ -99,7 +99,7 @@
                     class="form-control" :class="{ 'is-invalid': voucherForm.errors.has('expiry_date') }">
                     <has-error :form="voucherForm" field="expiry_date"></has-error>
                  </div> 
-                <!-- 
+                <!-- Test
                     <div class="form-group">
                     <label>Expiry Date</label><span class="red">&#42;</span>
                     <datetime v-model="voucherForm.expiry_date" type="date" name="expiry_date" input-class="form-control" :class="{ 'is-invalid': voucherForm.errors.has('expiry_date') }">
