@@ -2091,6 +2091,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2109,6 +2118,22 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
+    getPhotos: function getPhotos(photo) {
+      return "imgs/vouchers/" + photo;
+    },
+    insertImage: function insertImage(event) {
+      var _this = this;
+
+      var file = event.target.files[0];
+      var reader = new FileReader();
+      /* convert to base64 */
+
+      reader.onloadend = function (file) {
+        _this.voucherForm.photo = reader.result;
+      };
+
+      reader.readAsDataURL(file);
+    },
     updateVoucher: function updateVoucher() {
       this.voucherForm.put('api/voucher/' + this.voucherForm.id).then(function () {
         Fire.$emit('RefreshVouchers');
@@ -2153,11 +2178,11 @@ __webpack_require__.r(__webpack_exports__);
 
     /* Method to paginate the voucher data */
     getResults: function getResults() {
-      var _this = this;
+      var _this2 = this;
 
       var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
       axios.get('api/voucher?page=' + page).then(function (response) {
-        _this.vouchers = response.data;
+        _this2.vouchers = response.data;
       });
     },
     createVoucher: function createVoucher() {
@@ -2179,16 +2204,16 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     displayVouchers: function displayVouchers() {
-      var _this2 = this;
+      var _this3 = this;
 
       axios.get("api/voucher").then(function (_ref) {
         var data = _ref.data;
-        return _this2.vouchers = data;
+        return _this3.vouchers = data;
       });
       /*store the data in the voucher object */
     },
     deleteVoucher: function deleteVoucher(id, name) {
-      var _this3 = this;
+      var _this4 = this;
 
       swal.fire({
         title: 'Are you sure?',
@@ -2200,7 +2225,7 @@ __webpack_require__.r(__webpack_exports__);
         confirmButtonText: 'Yes, delete it!'
       }).then(function (result) {
         if (result.value) {
-          _this3.voucherForm["delete"]('api/voucher/' + id).then(function () {
+          _this4.voucherForm["delete"]('api/voucher/' + id).then(function () {
             swal.fire('Deleted!', 'Voucher has been deleted.', 'success');
             /* After deleting, send an event to fresh the voucher table */
 
@@ -2215,13 +2240,13 @@ __webpack_require__.r(__webpack_exports__);
 
   /* END OF METHODS */
   mounted: function mounted() {
-    var _this4 = this;
+    var _this5 = this;
 
     this.displayVouchers();
     /* If a voucher is created, call the displayVouchers function again to refresh vouchers table*/
 
     Fire.$on('RefreshVouchers', function () {
-      _this4.displayVouchers();
+      _this5.displayVouchers();
     });
     /* TODO: Code refactoring */
 
@@ -69684,7 +69709,15 @@ var render = function() {
                       _vm._v(" "),
                       _c("td", [_vm._v(_vm._s(voucher.popular_flag))]),
                       _vm._v(" "),
-                      _c("td"),
+                      _c("td", [
+                        _c("img", {
+                          attrs: {
+                            src: _vm.getPhotos(voucher.photo),
+                            height: "50px",
+                            width: "50px"
+                          }
+                        })
+                      ]),
                       _vm._v(" "),
                       _c("td", [
                         _vm._v(_vm._s(_vm._f("capitalize")(voucher.category)))
@@ -70224,7 +70257,38 @@ var render = function() {
                         })
                       ],
                       1
-                    )
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group" }, [
+                      _c(
+                        "label",
+                        {
+                          staticClass: "control-label",
+                          attrs: { for: "photo" }
+                        },
+                        [_vm._v("Image")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "col-sm-12" },
+                        [
+                          _c("input", {
+                            staticClass: "form-control",
+                            class: {
+                              "is-invalid": _vm.voucherForm.errors.has("photo")
+                            },
+                            attrs: { type: "file", name: "photo" },
+                            on: { change: _vm.insertImage }
+                          }),
+                          _vm._v(" "),
+                          _c("has-error", {
+                            attrs: { form: _vm.voucherForm, field: "photo" }
+                          })
+                        ],
+                        1
+                      )
+                    ])
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "modal-footer" }, [
@@ -70403,7 +70467,7 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("th", [_vm._v("Popular")]),
       _vm._v(" "),
-      _c("th", [_vm._v("Tags")]),
+      _c("th", [_vm._v("Photo")]),
       _vm._v(" "),
       _c("th", [_vm._v("Category")]),
       _vm._v(" "),

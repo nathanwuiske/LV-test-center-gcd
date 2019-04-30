@@ -26,7 +26,7 @@
                     <th>Expiry Date</th>
                     <th>Facebook Link</th>
                     <th>Popular</th>
-                    <th>Tags</th>
+                    <th>Photo</th>
                     <th>Category</th>
                     <th class="text-center" style="width: 8%">Modify</th>
                   </tr>
@@ -38,7 +38,7 @@
                     <td>{{voucher.expiry_date | formatDate}}</td>
                     <td class="truncateText"><span>{{voucher.facebook_link}}</span></td>
                     <td>{{voucher.popular_flag}}</td>
-                    <td></td>
+                    <td><img :src="getPhotos(voucher.photo)" height="50px" width="50px"></td>
                     <td>{{voucher.category | capitalize}}</td>
                     <td>
                       <a href="#" @click="editVoucherModal(voucher)"> <i class="far fas fa-pencil-alt"  style="color: #FFC107;"></i></a>
@@ -99,7 +99,7 @@
                     class="form-control" :class="{ 'is-invalid': voucherForm.errors.has('expiry_date') }">
                     <has-error :form="voucherForm" field="expiry_date"></has-error>
                  </div> 
-                <!-- Test
+                <!-- 
                     <div class="form-group">
                     <label>Expiry Date</label><span class="red">&#42;</span>
                     <datetime v-model="voucherForm.expiry_date" type="date" name="expiry_date" input-class="form-control" :class="{ 'is-invalid': voucherForm.errors.has('expiry_date') }">
@@ -132,7 +132,16 @@
                     </select>
                     <has-error :form="voucherForm" field="popular_flag"></has-error>
                  </div>
+                 <!-- Voucher image input -->
+                  <div class="form-group">
+                    <label for="photo" class="control-label">Image</label>
+                    <div class="col-sm-12">
+                      <input type="file" @change="insertImage" name="photo" class="form-control" :class="{ 'is-invalid': voucherForm.errors.has('photo') }">
+                      <has-error :form="voucherForm" field="photo"></has-error>
+                    </div>
+                  </div>
                 </div>
+                 <!-- Footer -->
                   <div class="modal-footer">
                       <button type="button" class="btn btn-danger closefirstmodal">Close</button>
                       <button v-show="editmode" type="submit" class="btn btn-warning">Update</button>
@@ -181,7 +190,19 @@
           }
         },
         methods: {
+          getPhotos(photo){
+            return "imgs/vouchers/" + photo;
+          },
+          insertImage(event){
+            let file = event.target.files[0];
+            let reader = new FileReader();
 
+            /* convert to base64 */
+            reader.onloadend = (file) => {
+              this.voucherForm.photo = reader.result;
+            }
+            reader.readAsDataURL(file);
+          },
           updateVoucher(){
             this.voucherForm.put('api/voucher/' + this.voucherForm.id)
             .then(()=>{ 
