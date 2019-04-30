@@ -33,11 +33,11 @@ class VoucherController extends Controller
             //maybe have a unique:name for name to prevent duplicate vouchers? 
             'name' => 'required|string|max:150', /* max 150 characters*/
             'description' => 'required|string|max:500',
-            'facebook_link' => 'nullable|url'
+            'facebook_link' => 'nullable|url',
             //'expiry_date' => 'required|after:yesterday|before:2030-01-01', //can only set expiry date AFTER the date of voucher creation
             //'category' => 'required',
             //'popular_flag' => 'required'
-            //'photo' => 'required|image' //must be an image (jpg, png, bmp or gif)
+            'photo' => 'required' //must be an image (jpg, png, bmp or gif)
         ]);
 
         if($request->photo){
@@ -89,6 +89,17 @@ class VoucherController extends Controller
             'category' => 'required',
             'popular_flag' => 'required'
         ]);
+        $currentPhoto = $voucher->photo;   
+        if($request->photo != $currentPhoto) {
+            $name = time().'.' . explode('/', explode(':', substr($request->photo, 0, strpos($request->photo, ';')))[1])[1];
+            \Image::make($request->photo)->save(public_path('imgs/vouchers/').$name); 
+            $request->merge(['photo' => $name]);
+
+            $getCurrentPhoto = public_path('imgs/vouchers/'.$currentPhoto);
+            if(file_exists($getCurrentPhoto)){
+                @unlink($getCurrentPhoto); /* Delete the previous photo that is being updated */
+            }
+        }
         $voucher->update($request->all());
     }
 

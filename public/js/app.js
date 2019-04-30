@@ -2100,6 +2100,21 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2118,8 +2133,9 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    getPhotos: function getPhotos(photo) {
-      return "imgs/vouchers/" + photo;
+    getPhoto: function getPhoto(photo) {
+      $('#imagepreview').attr('src', "imgs/vouchers/" + photo);
+      $('#showPhoto').modal('show');
     },
     insertImage: function insertImage(event) {
       var _this = this;
@@ -2195,7 +2211,7 @@ __webpack_require__.r(__webpack_exports__);
         $('#addNewVoucher').modal('hide');
         swal.fire('Success!', 'Voucher has been created successfully', 'success');
       })["catch"](function () {
-        /* If unsuccessful, catch */
+        /* If unsuccessful */
         swal.fire({
           title: 'Error',
           text: "Failed to create new voucher. Please check you have correctly filled the form.",
@@ -69710,13 +69726,18 @@ var render = function() {
                       _c("td", [_vm._v(_vm._s(voucher.popular_flag))]),
                       _vm._v(" "),
                       _c("td", [
-                        _c("img", {
-                          attrs: {
-                            src: _vm.getPhotos(voucher.photo),
-                            height: "50px",
-                            width: "50px"
-                          }
-                        })
+                        _c(
+                          "a",
+                          {
+                            attrs: { href: "#" },
+                            on: {
+                              click: function($event) {
+                                return _vm.getPhoto(voucher.photo)
+                              }
+                            }
+                          },
+                          [_vm._v("Show")]
+                        )
                       ]),
                       _vm._v(" "),
                       _c("td", [
@@ -70414,7 +70435,9 @@ var render = function() {
           ])
         ])
       ]
-    )
+    ),
+    _vm._v(" "),
+    _vm._m(3)
   ])
 }
 var staticRenderFns = [
@@ -70493,6 +70516,52 @@ var staticRenderFns = [
         ]
       )
     ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        attrs: {
+          id: "showPhoto",
+          tabindex: "-1",
+          role: "dialog",
+          "aria-labelledby": "showPhotoLabel",
+          "aria-hidden": "true"
+        }
+      },
+      [
+        _c(
+          "div",
+          { staticClass: "modal-dialog", attrs: { role: "document" } },
+          [
+            _c("div", { staticClass: "modal-content" }, [
+              _c("div", { staticClass: "modal-body" }, [
+                _c("img", {
+                  staticClass: "imagepreview",
+                  staticStyle: { width: "100%" },
+                  attrs: { src: "", id: "imagepreview" }
+                })
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-footer" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-primary",
+                    attrs: { type: "button", "data-dismiss": "modal" }
+                  },
+                  [_vm._v("Close")]
+                )
+              ])
+            ])
+          ]
+        )
+      ]
+    )
   }
 ]
 render._withStripped = true

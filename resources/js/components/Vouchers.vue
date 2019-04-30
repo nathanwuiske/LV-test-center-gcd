@@ -38,7 +38,7 @@
                     <td>{{voucher.expiry_date | formatDate}}</td>
                     <td class="truncateText"><span>{{voucher.facebook_link}}</span></td>
                     <td>{{voucher.popular_flag}}</td>
-                    <td><img :src="getPhotos(voucher.photo)" height="50px" width="50px"></td>
+                    <td><a href="#" @click="getPhoto(voucher.photo)">Show</a></td>
                     <td>{{voucher.category | capitalize}}</td>
                     <td>
                       <a href="#" @click="editVoucherModal(voucher)"> <i class="far fas fa-pencil-alt"  style="color: #FFC107;"></i></a>
@@ -169,6 +169,21 @@
                 </div>
             </div>
         </div>
+
+        <!-- Photo Modal -->
+        <div class="modal fade" id="showPhoto" tabindex="-1" role="dialog" aria-labelledby="showPhotoLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-body">
+                <img src="" id="imagepreview" class="imagepreview" style="width: 100%;" >
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
     </div>
 </template>
 <script>
@@ -190,8 +205,9 @@
           }
         },
         methods: {
-          getPhotos(photo){
-            return "imgs/vouchers/" + photo;
+          getPhoto(photo){
+            $('#imagepreview').attr('src', "imgs/vouchers/"+photo); 
+            $('#showPhoto').modal('show');
           },
           insertImage(event){
             let file = event.target.files[0];
@@ -272,7 +288,7 @@
                   )
             }) 
             .catch(()=>{
-              /* If unsuccessful, catch */
+              /* If unsuccessful */
               swal.fire({
               title: 'Error',
               text: "Failed to create new voucher. Please check you have correctly filled the form.",
