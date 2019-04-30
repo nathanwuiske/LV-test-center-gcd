@@ -69,12 +69,7 @@
 
 <!-- Footer Main -->
 <footer class="main-footer">
-    <!-- Right side footer -->
-    <div class="float-right d-none d-sm-inline">
-        Something on the right here maybe
-    </div>
-    <!-- Left side footer -->
-    <strong>Copyright 2019 </strong>- Something here
+    <strong>Copyright 2019 </strong>
 </footer>
 </div>
 </body>

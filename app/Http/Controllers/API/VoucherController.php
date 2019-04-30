@@ -33,7 +33,7 @@ class VoucherController extends Controller
             'name' => 'required|string|max:150', /* max 150 characters*/
             'description' => 'required|string|max:500',
             'facebook_link' => 'nullable|url',
-            'expiry_date' => 'required|after:today_or_equal', //can only set expiry date AFTER the date of voucher creation
+            'expiry_date' => 'required|after:yesterday|before:2030-01-01', //can only set expiry date AFTER the date of voucher creation
             'category' => 'required',
             'popular_flag' => 'required',
             //'photo' => 'required|image' //must be an image (jpg, png, bmp or gif)
