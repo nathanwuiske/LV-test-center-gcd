@@ -239,6 +239,7 @@
             })
           },
           archiveVoucher(){
+            
             swal.fire({
               title: 'Nothing here',
               text: "I haven't added archive voucher yet.",

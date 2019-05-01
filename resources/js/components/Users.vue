@@ -6,7 +6,7 @@
                     <div class="card-header">Users Component</div>
 
                     <div class="card-body">
-                        Testing the user componenet
+                        To be added.
                     </div>
                 </div>
             </div>
