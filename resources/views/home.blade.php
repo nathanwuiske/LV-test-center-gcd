@@ -37,13 +37,13 @@
                  </router-link>
               </li>
               <li class="nav-item">
-                <router-link to="/test2" class="nav-link">
+                <router-link to="/categories" class="nav-link">
                   <i class="nav-icon fas fa-ellipsis-v"></i>
                   <p class="white">Categories</p>
                  </router-link>
               </li>
               <li class="nav-item">
-                <router-link to="/test3" class="nav-link">
+                <router-link to="/tags" class="nav-link">
                   <i class="nav-icon fas fa-tags"></i>
                   <p class="white">Tags</p>
                  </router-link>
