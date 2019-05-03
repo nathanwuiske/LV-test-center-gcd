@@ -16,6 +16,15 @@
 
 <script>
     export default {
+        data(){
+          return {
+            categoryForm: new Form({
+              id: '',
+              name: ''
+            })
+          }
+        },
+
         mounted() {
         }
     }
