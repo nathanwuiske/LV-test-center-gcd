@@ -21,13 +21,36 @@
             </router-link>
           </li>
 
-          <li class="nav-item">
-            <router-link to="/vouchers" class="nav-link">
-                <i class="nav-icon fas fa-envelope"></i>
-                 <p class="white">Voucher Management</p>
-            </router-link>
-         </li>
-
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-envelope"></i>
+              <p class="white">
+                Voucher Management
+                <i class="right fa fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview" style="display: none;">
+              <li class="nav-item">
+                <router-link to="/vouchers" class="nav-link">
+                  <i class="nav-icon fas fa-list"></i>
+                  <p class="white">Vouchers</p>
+                 </router-link>
+              </li>
+              <li class="nav-item">
+                <router-link to="/test2" class="nav-link">
+                  <i class="nav-icon fas fa-ellipsis-v"></i>
+                  <p class="white">Categories</p>
+                 </router-link>
+              </li>
+              <li class="nav-item">
+                <router-link to="/test3" class="nav-link">
+                  <i class="nav-icon fas fa-tags"></i>
+                  <p class="white">Tags</p>
+                 </router-link>
+              </li>
+            </ul>
+          </li>
+  
          <li class="nav-item">
             <router-link to="/users" class="nav-link">
                 <i class="nav-icon fas fa-users"></i>

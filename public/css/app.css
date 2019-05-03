@@ -3721,7 +3721,7 @@ input[type="button"].btn-block {
 .nav-tabs .nav-link.active,
 .nav-tabs .nav-item.show .nav-link {
   color: #495057;
-  background-color: #ffffff;
+  background-color: #007bff;
   border-color: #dee2e6 #dee2e6 #ffffff;
 }
 
@@ -9097,8 +9097,8 @@ body,
 }
 
 .sidebar-dark-primary .nav-treeview > .nav-item > .nav-link.active, .sidebar-dark-primary .nav-treeview > .nav-item > .nav-link.active:hover {
-  color: #343a40;
-  background-color: rgba(255, 255, 255, 0.9);
+  color: #ffffff;
+  background-color: #007bff;
 }
 
 .sidebar-light-primary {
