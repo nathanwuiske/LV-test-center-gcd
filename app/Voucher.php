@@ -11,6 +11,10 @@ class Voucher extends Model
     use Notifiable;
    // use SoftDeletes;
 
+   public function gettags()
+   {
+        return $this->belongsToMany('App\Tag', 'vouchertags');
+   }
     /**
      * The attributes that are mass assignable.
      *

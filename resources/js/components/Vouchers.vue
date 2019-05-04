@@ -9,7 +9,7 @@
                     <i class="fas fa-plus pr-1"></i>Add New Voucher
                 </button>
                 <div class="card-tools">
-                   <div class="input-group input-group-sm mt-5" style="width: 170px;">
+                  <div class="input-group input-group-sm mt-5" style="width: 170px;">
                     <input type="text" name="voucher_table_search" class="form-control" placeholder="Search">
                     <div class="input-group-append">
                       <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
@@ -26,18 +26,23 @@
                     <th>Expiry Date</th>
                     <th>Facebook Link</th>
                     <th>Popular</th>
+                    <th>Tags</th>
                     <th>Photo</th>
                     <th>Category</th>
                     <th class="text-center" style="width: 8%">Modify</th>
                   </tr>
                   <!-- Display vouchers from database using the voucher object created -->
                   <tr v-for="voucher in vouchers.data" :key="voucher.id">
+
                     <td>{{voucher.id}}</td>
                     <td>{{voucher.name}}</td>
                     <td class="truncateText"><span>{{voucher.description}}</span><!--<a href="#">view more</a>--></td> 
                     <td>{{voucher.expiry_date | formatDate}}</td>
                     <td class="truncateText"><span>{{voucher.facebook_link}}</span></td>
                     <td>{{voucher.popular_flag}}</td>
+                    <div v-for="tag in voucher.gettags" :key="tag.id">
+                    <td>{{tag.tag_title}}</td>
+                    </div>
                     <td><a href="#" @click="getPhoto(voucher.photo)">Show</a></td>
                     <td>{{voucher.category | capitalize}}</td>
                     <td>
@@ -183,7 +188,6 @@
             </div>
           </div>
         </div>
-
     </div>
 </template>
 <script>

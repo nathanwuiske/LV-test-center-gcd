@@ -16,7 +16,7 @@ class VoucherController extends Controller
     public function index()
     {
         /* display the latest 10 vouchers */
-        return Voucher::latest()->paginate(10);
+        return Voucher::with('gettags')->latest()->paginate(10);
     }
 
     /**

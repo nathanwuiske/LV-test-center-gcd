@@ -2185,6 +2185,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -69862,100 +69866,111 @@ var render = function() {
                   _vm._m(1),
                   _vm._v(" "),
                   _vm._l(_vm.vouchers.data, function(voucher) {
-                    return _c("tr", { key: voucher.id }, [
-                      _c("td", [_vm._v(_vm._s(voucher.id))]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v(_vm._s(voucher.name))]),
-                      _vm._v(" "),
-                      _c("td", { staticClass: "truncateText" }, [
-                        _c("span", [_vm._v(_vm._s(voucher.description))])
-                      ]),
-                      _vm._v(" "),
-                      _c("td", [
-                        _vm._v(
-                          _vm._s(_vm._f("formatDate")(voucher.expiry_date))
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("td", { staticClass: "truncateText" }, [
-                        _c("span", [_vm._v(_vm._s(voucher.facebook_link))])
-                      ]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v(_vm._s(voucher.popular_flag))]),
-                      _vm._v(" "),
-                      _c("td", [
-                        _c(
-                          "a",
-                          {
-                            attrs: { href: "#" },
-                            on: {
-                              click: function($event) {
-                                return _vm.getPhoto(voucher.photo)
-                              }
-                            }
-                          },
-                          [_vm._v("Show")]
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("td", [
-                        _vm._v(_vm._s(_vm._f("capitalize")(voucher.category)))
-                      ]),
-                      _vm._v(" "),
-                      _c("td", [
-                        _c(
-                          "a",
-                          {
-                            attrs: { href: "#" },
-                            on: {
-                              click: function($event) {
-                                return _vm.editVoucherModal(voucher)
-                              }
-                            }
-                          },
-                          [
-                            _c("i", {
-                              staticClass: "far fas fa-pencil-alt",
-                              staticStyle: { color: "#FFC107" }
-                            })
-                          ]
-                        ),
+                    return _c(
+                      "tr",
+                      { key: voucher.id },
+                      [
+                        _c("td", [_vm._v(_vm._s(voucher.id))]),
                         _vm._v(" "),
-                        _c(
-                          "a",
-                          {
-                            attrs: { href: "#" },
-                            on: { click: _vm.archiveVoucher }
-                          },
-                          [
-                            _c("i", {
-                              staticClass: "fas fa-archive",
-                              staticStyle: { color: "#428bca" }
-                            })
-                          ]
-                        ),
+                        _c("td", [_vm._v(_vm._s(voucher.name))]),
                         _vm._v(" "),
-                        _c(
-                          "a",
-                          {
-                            attrs: { href: "#" },
-                            on: {
-                              click: function($event) {
-                                return _vm.deleteVoucher(
-                                  voucher.id,
-                                  voucher.name
-                                )
+                        _c("td", { staticClass: "truncateText" }, [
+                          _c("span", [_vm._v(_vm._s(voucher.description))])
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _vm._v(
+                            _vm._s(_vm._f("formatDate")(voucher.expiry_date))
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("td", { staticClass: "truncateText" }, [
+                          _c("span", [_vm._v(_vm._s(voucher.facebook_link))])
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(voucher.popular_flag))]),
+                        _vm._v(" "),
+                        _vm._l(voucher.gettags, function(tag) {
+                          return _c("div", { key: tag.id }, [
+                            _c("td", [_vm._v(_vm._s(tag.tag_title))])
+                          ])
+                        }),
+                        _vm._v(" "),
+                        _c("td", [
+                          _c(
+                            "a",
+                            {
+                              attrs: { href: "#" },
+                              on: {
+                                click: function($event) {
+                                  return _vm.getPhoto(voucher.photo)
+                                }
                               }
-                            }
-                          },
-                          [
-                            _c("i", {
-                              staticClass: "fas fa-trash red deleteToolTip"
-                            })
-                          ]
-                        )
-                      ])
-                    ])
+                            },
+                            [_vm._v("Show")]
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _vm._v(_vm._s(_vm._f("capitalize")(voucher.category)))
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _c(
+                            "a",
+                            {
+                              attrs: { href: "#" },
+                              on: {
+                                click: function($event) {
+                                  return _vm.editVoucherModal(voucher)
+                                }
+                              }
+                            },
+                            [
+                              _c("i", {
+                                staticClass: "far fas fa-pencil-alt",
+                                staticStyle: { color: "#FFC107" }
+                              })
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "a",
+                            {
+                              attrs: { href: "#" },
+                              on: { click: _vm.archiveVoucher }
+                            },
+                            [
+                              _c("i", {
+                                staticClass: "fas fa-archive",
+                                staticStyle: { color: "#428bca" }
+                              })
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "a",
+                            {
+                              attrs: { href: "#" },
+                              on: {
+                                click: function($event) {
+                                  return _vm.deleteVoucher(
+                                    voucher.id,
+                                    voucher.name
+                                  )
+                                }
+                              }
+                            },
+                            [
+                              _c("i", {
+                                staticClass: "fas fa-trash red deleteToolTip"
+                              })
+                            ]
+                          )
+                        ])
+                      ],
+                      2
+                    )
                   })
                 ],
                 2
@@ -70647,6 +70662,8 @@ var staticRenderFns = [
       _c("th", [_vm._v("Facebook Link")]),
       _vm._v(" "),
       _c("th", [_vm._v("Popular")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Tags")]),
       _vm._v(" "),
       _c("th", [_vm._v("Photo")]),
       _vm._v(" "),
