@@ -2202,7 +2202,8 @@ __webpack_require__.r(__webpack_exports__);
         expiry_date: '',
         facebook_link: '',
         category: '',
-        popular_flag: ''
+        popular_flag: '',
+        is_archive: ''
       })
     };
   },
@@ -2237,11 +2238,30 @@ __webpack_require__.r(__webpack_exports__);
         });
       });
     },
-    archiveVoucher: function archiveVoucher() {
+    archiveVoucher: function archiveVoucher(id, name) {
+      var _this2 = this;
+
       swal.fire({
-        title: 'Nothing here',
-        text: "I haven't added archive voucher yet.",
-        type: 'warning'
+        title: 'Are you sure?',
+        html: 'The following voucher will be archived: <b><b><br>' + name,
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#428BCA',
+        cancelButtonColor: '#07AD4D',
+        confirmButtonText: 'Yes, archive it!'
+      }).then(function (result) {
+        if (result.value) {
+          _this2.voucherForm.is_archive = "yes";
+
+          _this2.voucherForm["delete"]('api/voucher/' + id).then(function () {
+            swal.fire('Archived!', 'Voucher has been archived.', 'success');
+            /* After archiving, send an event to fresh the voucher table */
+
+            Fire.$emit('RefreshVouchers');
+          })["catch"](function () {
+            swal("Failed!", "Failed to archive voucher.", "warning");
+          });
+        }
       });
     },
     editVoucherModal: function editVoucherModal(voucher) {
@@ -2268,11 +2288,11 @@ __webpack_require__.r(__webpack_exports__);
 
     /* Method to paginate the voucher data */
     getResults: function getResults() {
-      var _this2 = this;
+      var _this3 = this;
 
       var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
       axios.get('api/voucher?page=' + page).then(function (response) {
-        _this2.vouchers = response.data;
+        _this3.vouchers = response.data;
       });
     },
     createVoucher: function createVoucher() {
@@ -2294,16 +2314,16 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     displayVouchers: function displayVouchers() {
-      var _this3 = this;
+      var _this4 = this;
 
       axios.get("api/voucher").then(function (_ref) {
         var data = _ref.data;
-        return _this3.vouchers = data;
+        return _this4.vouchers = data;
       });
       /*store the data in the voucher object */
     },
     deleteVoucher: function deleteVoucher(id, name) {
-      var _this4 = this;
+      var _this5 = this;
 
       swal.fire({
         title: 'Are you sure?',
@@ -2315,7 +2335,9 @@ __webpack_require__.r(__webpack_exports__);
         confirmButtonText: 'Yes, delete it!'
       }).then(function (result) {
         if (result.value) {
-          _this4.voucherForm["delete"]('api/voucher/' + id).then(function () {
+          _this5.voucherForm.is_archive = "no";
+
+          _this5.voucherForm["delete"]('api/voucher/' + id).then(function () {
             swal.fire('Deleted!', 'Voucher has been deleted.', 'success');
             /* After deleting, send an event to fresh the voucher table */
 
@@ -2330,13 +2352,13 @@ __webpack_require__.r(__webpack_exports__);
 
   /* END OF METHODS */
   mounted: function mounted() {
-    var _this5 = this;
+    var _this6 = this;
 
     this.displayVouchers();
     /* If a voucher is created, call the displayVouchers function again to refresh vouchers table*/
 
     Fire.$on('RefreshVouchers', function () {
-      _this5.displayVouchers();
+      _this6.displayVouchers();
     });
     /* TODO: Code refactoring */
 
@@ -69938,7 +69960,14 @@ var render = function() {
                             "a",
                             {
                               attrs: { href: "#" },
-                              on: { click: _vm.archiveVoucher }
+                              on: {
+                                click: function($event) {
+                                  return _vm.archiveVoucher(
+                                    voucher.id,
+                                    voucher.name
+                                  )
+                                }
+                              }
                             },
                             [
                               _c("i", {

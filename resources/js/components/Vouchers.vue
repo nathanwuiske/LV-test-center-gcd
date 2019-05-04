@@ -47,7 +47,7 @@
                     <td>{{voucher.category | capitalize}}</td>
                     <td>
                       <a href="#" @click="editVoucherModal(voucher)"> <i class="far fas fa-pencil-alt"  style="color: #FFC107;"></i></a>
-                      <a href="#" @click="archiveVoucher"><i class="fas fa-archive" style="color: #428bca;"></i></a>
+                      <a href="#" @click="archiveVoucher(voucher.id, voucher.name)"><i class="fas fa-archive" style="color: #428bca;"></i></a>
                       <a href="#" @click="deleteVoucher(voucher.id, voucher.name)"><i class="fas fa-trash red deleteToolTip"></i></a>
                     </td>
                   </tr>
@@ -204,7 +204,8 @@
               expiry_date: '',
               facebook_link: '',
               category: '',
-              popular_flag: ''
+              popular_flag: '',
+              is_archive: ''
             })
           }
         },
@@ -242,14 +243,33 @@
               })
             })
           },
-          archiveVoucher(){
-            
+          archiveVoucher(id, name){ 
             swal.fire({
-              title: 'Nothing here',
-              text: "I haven't added archive voucher yet.",
-              type: 'warning'
-              })
-          },
+            title: 'Are you sure?',
+            html: 'The following voucher will be archived: <b><b><br>' + name ,
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#428BCA',
+            cancelButtonColor: '#07AD4D',
+            confirmButtonText: 'Yes, archive it!'
+            }).then((result) => {
+                if(result.value) {
+                this.voucherForm.is_archive = "yes";
+                this.voucherForm.delete('api/voucher/'+id).then(()=> {
+                  swal.fire(
+                  'Archived!',
+                  'Voucher has been archived.',
+                  'success'
+                  )
+                /* After archiving, send an event to fresh the voucher table */
+                Fire.$emit('RefreshVouchers'); 
+                }
+                ).catch(()=>{
+                  swal("Failed!", "Failed to archive voucher.", "warning");
+                });
+                }
+            })
+        },
           editVoucherModal(voucher){
             this.editmode = true;
             this.voucherForm.clear();
@@ -316,6 +336,7 @@
             confirmButtonText: 'Yes, delete it!'
             }).then((result) => {
                 if(result.value) {
+                this.voucherForm.is_archive = "no";
                 this.voucherForm.delete('api/voucher/'+id).then(()=> {
                   swal.fire(
                   'Deleted!',
@@ -330,7 +351,7 @@
                 });
                 }
             })
-            }
+        }
 
         }, /* END OF METHODS */
 

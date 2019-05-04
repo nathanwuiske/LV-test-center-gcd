@@ -5,6 +5,8 @@ namespace App\Http\Controllers\API;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Voucher;
+use Illuminate\Database\Eloquent\SoftDeletes;
+
 
 class VoucherController extends Controller
 {
@@ -109,9 +111,16 @@ class VoucherController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id, Request $request)
     {
-        $voucher = Voucher::findOrFail($id);
-        $voucher->delete();
+        if($request->is_archive == "yes"){
+            $voucher = Voucher::findOrFail($id);
+            $voucher->delete();
+         
+        }
+        else if ($request->is_archive == "no"){
+            $voucher = Voucher::findOrFail($id);
+            $voucher->forceDelete();
+        }
     }
 }
