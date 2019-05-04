@@ -117,7 +117,7 @@
                     <label>Category</label><span class="red">&#42;</span>
                     <select name="category" v-model="voucherForm.category" id="category" class="form-control" 
                       :class="{ 'is-invalid': voucherForm.errors.has('category') }">
-                      <option value="">Please select an option</option>
+                      <option value="" disabled selected>Please select an option</option>
                       <option value="food">Food</option>
                       <option value="automotive">Automotive</option>
                       <option value="beauty">Beauty</option>
@@ -127,16 +127,21 @@
                 <!-- Popular form input -->
                  <div class="form-group">
                     <label>Popular voucher?</label><span class="red">&#42;</span>
-                    <i class="fas fa-info-circle voucherFormToolTip"
-                    ></i>
+                    <i class="fas fa-info-circle voucherFormToolTip"></i>
                     <select name="popular_flag" v-model="voucherForm.popular_flag" id="popular_flag" class="form-control" 
                       :class="{ 'is-invalid': voucherForm.errors.has('popular_flag') }">
-                      <option value="">Please select an option</option>
+                      <option value="" disabled selected>Please select an option</option>
                       <option value="1">Yes</option>
                       <option value="0">No</option>
                     </select>
                     <has-error :form="voucherForm" field="popular_flag"></has-error>
                  </div>
+
+                  <select class="mdb-select md-form form-control" multiple>
+                      <option value="" disabled selected>Select tags</option>
+                      <option v-for="tag in tags" :key="tag.id" v-bind:value="tag.tag_title">{{tag.tag_title}}</option>
+                  </select>
+
                  <!-- Voucher image input -->
                   <div class="form-group">
                     <label for="photo" class="control-label">Image</label>
@@ -196,6 +201,7 @@
           return {
             editmode: false,
             vouchers: {},
+            tags: {},
             voucherForm: new Form({
               id: '',
               name: '',
@@ -251,7 +257,7 @@
             showCancelButton: true,
             confirmButtonColor: '#428BCA',
             cancelButtonColor: '#07AD4D',
-            confirmButtonText: 'Yes, archive it!'
+            confirmButtonText: 'Archive'
             }).then((result) => {
                 if(result.value) {
                 this.voucherForm.is_archive = "yes";
@@ -325,6 +331,10 @@
             axios.get("api/voucher")
             .then(({data}) => (this.vouchers = data)); /*store the data in the voucher object */
           },
+          getTags(){
+            axios.get("api/tag")
+            .then(({data}) => (this.tags = data)); 
+          },
           deleteVoucher(id, name){ 
             swal.fire({
             title: 'Are you sure?',
@@ -333,7 +343,7 @@
             showCancelButton: true,
             confirmButtonColor: '#d33',
             cancelButtonColor: '#07AD4D',
-            confirmButtonText: 'Yes, delete it!'
+            confirmButtonText: 'Delete'
             }).then((result) => {
                 if(result.value) {
                 this.voucherForm.is_archive = "no";
@@ -358,6 +368,7 @@
          
         mounted() {
             this.displayVouchers();
+            this.getTags();
             /* If a voucher is created, call the displayVouchers function again to refresh vouchers table*/
             Fire.$on('RefreshVouchers', () => {
               this.displayVouchers();

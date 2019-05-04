@@ -2189,11 +2189,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       editmode: false,
       vouchers: {},
+      tags: {},
       voucherForm: new Form({
         id: '',
         name: '',
@@ -2248,7 +2254,7 @@ __webpack_require__.r(__webpack_exports__);
         showCancelButton: true,
         confirmButtonColor: '#428BCA',
         cancelButtonColor: '#07AD4D',
-        confirmButtonText: 'Yes, archive it!'
+        confirmButtonText: 'Archive'
       }).then(function (result) {
         if (result.value) {
           _this2.voucherForm.is_archive = "yes";
@@ -2322,8 +2328,16 @@ __webpack_require__.r(__webpack_exports__);
       });
       /*store the data in the voucher object */
     },
-    deleteVoucher: function deleteVoucher(id, name) {
+    getTags: function getTags() {
       var _this5 = this;
+
+      axios.get("api/tag").then(function (_ref2) {
+        var data = _ref2.data;
+        return _this5.tags = data;
+      });
+    },
+    deleteVoucher: function deleteVoucher(id, name) {
+      var _this6 = this;
 
       swal.fire({
         title: 'Are you sure?',
@@ -2332,12 +2346,12 @@ __webpack_require__.r(__webpack_exports__);
         showCancelButton: true,
         confirmButtonColor: '#d33',
         cancelButtonColor: '#07AD4D',
-        confirmButtonText: 'Yes, delete it!'
+        confirmButtonText: 'Delete'
       }).then(function (result) {
         if (result.value) {
-          _this5.voucherForm.is_archive = "no";
+          _this6.voucherForm.is_archive = "no";
 
-          _this5.voucherForm["delete"]('api/voucher/' + id).then(function () {
+          _this6.voucherForm["delete"]('api/voucher/' + id).then(function () {
             swal.fire('Deleted!', 'Voucher has been deleted.', 'success');
             /* After deleting, send an event to fresh the voucher table */
 
@@ -2352,13 +2366,14 @@ __webpack_require__.r(__webpack_exports__);
 
   /* END OF METHODS */
   mounted: function mounted() {
-    var _this6 = this;
+    var _this7 = this;
 
     this.displayVouchers();
+    this.getTags();
     /* If a voucher is created, call the displayVouchers function again to refresh vouchers table*/
 
     Fire.$on('RefreshVouchers', function () {
-      _this6.displayVouchers();
+      _this7.displayVouchers();
     });
     /* TODO: Code refactoring */
 
@@ -70383,9 +70398,13 @@ var render = function() {
                             }
                           },
                           [
-                            _c("option", { attrs: { value: "" } }, [
-                              _vm._v("Please select an option")
-                            ]),
+                            _c(
+                              "option",
+                              {
+                                attrs: { value: "", disabled: "", selected: "" }
+                              },
+                              [_vm._v("Please select an option")]
+                            ),
                             _vm._v(" "),
                             _c("option", { attrs: { value: "food" } }, [
                               _vm._v("Food")
@@ -70458,9 +70477,13 @@ var render = function() {
                             }
                           },
                           [
-                            _c("option", { attrs: { value: "" } }, [
-                              _vm._v("Please select an option")
-                            ]),
+                            _c(
+                              "option",
+                              {
+                                attrs: { value: "", disabled: "", selected: "" }
+                              },
+                              [_vm._v("Please select an option")]
+                            ),
                             _vm._v(" "),
                             _c("option", { attrs: { value: "1" } }, [
                               _vm._v("Yes")
@@ -70480,6 +70503,30 @@ var render = function() {
                         })
                       ],
                       1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "select",
+                      {
+                        staticClass: "mdb-select md-form form-control",
+                        attrs: { multiple: "" }
+                      },
+                      [
+                        _c(
+                          "option",
+                          { attrs: { value: "", disabled: "", selected: "" } },
+                          [_vm._v("Select tags")]
+                        ),
+                        _vm._v(" "),
+                        _vm._l(_vm.tags, function(tag) {
+                          return _c(
+                            "option",
+                            { key: tag.id, domProps: { value: tag.tag_title } },
+                            [_vm._v(_vm._s(tag.tag_title))]
+                          )
+                        })
+                      ],
+                      2
                     ),
                     _vm._v(" "),
                     _c("div", { staticClass: "form-group" }, [

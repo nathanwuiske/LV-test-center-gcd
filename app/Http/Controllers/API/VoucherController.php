@@ -115,12 +115,12 @@ class VoucherController extends Controller
     {
         if($request->is_archive == "yes"){
             $voucher = Voucher::findOrFail($id);
-            $voucher->delete();
+            $voucher->delete(); //soft delete (archive)
          
         }
         else if ($request->is_archive == "no"){
             $voucher = Voucher::findOrFail($id);
-            $voucher->forceDelete();
+            $voucher->forceDelete(); // permanent delete
         }
     }
 }
