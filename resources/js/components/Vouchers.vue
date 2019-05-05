@@ -40,9 +40,12 @@
                     <td>{{voucher.expiry_date | formatDate}}</td>
                     <td class="truncateText"><span>{{voucher.facebook_link}}</span></td>
                     <td>{{voucher.popular_flag}}</td>
+                    <!-- Display tags -->
+                    <td v-if="voucher.gettags.length == 0">-</td>
                     <div v-for="tag in voucher.gettags" :key="tag.id">
                     <td>{{tag.tag_title}}</td>
                     </div>
+                     <!-- End of Display tags -->
                     <td><a href="#" @click="getPhoto(voucher.photo)">Show</a></td>
                     <td>{{voucher.category | capitalize}}</td>
                     <td>
@@ -137,11 +140,6 @@
                     <has-error :form="voucherForm" field="popular_flag"></has-error>
                  </div>
 
-                  <select class="mdb-select md-form form-control" multiple>
-                      <option value="" disabled selected>Select tags</option>
-                      <option v-for="tag in tags" :key="tag.id" v-bind:value="tag.tag_title">{{tag.tag_title}}</option>
-                  </select>
-
                  <!-- Voucher image input -->
                   <div class="form-group">
                     <label for="photo" class="control-label">Image</label>
@@ -161,6 +159,7 @@
                 </div>
             </div>
         </div>
+        
         <!-- Warning Modal for confirming close -->
         <div id="Warning" class="modal fade" role="dialog" data-backdrop="false">
             <div class="modal-dialog modal-dialog-centered">
@@ -193,6 +192,7 @@
             </div>
           </div>
         </div>
+
     </div>
 </template>
 <script>
@@ -201,7 +201,6 @@
           return {
             editmode: false,
             vouchers: {},
-            tags: {},
             voucherForm: new Form({
               id: '',
               name: '',
@@ -331,10 +330,6 @@
             axios.get("api/voucher")
             .then(({data}) => (this.vouchers = data)); /*store the data in the voucher object */
           },
-          getTags(){
-            axios.get("api/tag")
-            .then(({data}) => (this.tags = data)); 
-          },
           deleteVoucher(id, name){ 
             swal.fire({
             title: 'Are you sure?',
@@ -368,7 +363,6 @@
          
         mounted() {
             this.displayVouchers();
-            this.getTags();
             /* If a voucher is created, call the displayVouchers function again to refresh vouchers table*/
             Fire.$on('RefreshVouchers', () => {
               this.displayVouchers();

@@ -21,3 +21,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::apiResource('voucher', 'API\VoucherController');
 
 Route::apiResource('tag', 'API\TagController');
+Route::apiResource('vouchertag', 'API\VoucherTagController');

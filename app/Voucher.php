@@ -13,7 +13,7 @@ class Voucher extends Model
 
    public function gettags()
    {
-        return $this->belongsToMany('App\Tag', 'vouchertags');
+        return $this->belongsToMany('App\Tag', 'voucher_tags');
    }
     /**
      * The attributes that are mass assignable.
