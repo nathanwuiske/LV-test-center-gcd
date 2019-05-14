@@ -17,7 +17,7 @@ class VoucherTagController extends Controller
     public function store(Request $request)
     {
         return Vouchertag::create([
-            'tag_id' => $request['tag_title'],
+            'tag_id' => $request['tag_id'],
             'voucher_id' => $request['voucher_id'],
         ]);
     }
@@ -34,6 +34,7 @@ class VoucherTagController extends Controller
 
     public function destroy($id, Request $request)
     {
-   
+        $requestData = $request->all();
+        Vouchertag::where('tag_id',  $requestData['tag_id'])->where('voucher_id',  $requestData['id'])->delete();
     }
 }

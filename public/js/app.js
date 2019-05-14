@@ -1951,8 +1951,334 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  mounted: function mounted() {}
+  data: function data() {
+    return {
+      tags: {},
+      tagForm: new Form({
+        id: '',
+        voucher_id: '',
+        tag_id: '',
+        tag_title: '',
+        gettags: []
+      }),
+      vouchers: {}
+    };
+  },
+  computed: {
+    sortedTags: function sortedTags() {
+      return _.sortBy(this.tags, [function (tag) {
+        return tag.tag_title.toLowerCase();
+      }], 'tag_id');
+    },
+    voucherTags: function voucherTags() {
+      return _.sortBy(this.tagForm.gettags, [function (tag) {
+        return tag.tag_title.toLowerCase();
+      }], 'tag_id');
+    }
+  },
+  methods: {
+    updateTag: function updateTag() {
+      this.tagForm.put('api/tag/' + this.tagForm.id).then(function () {
+        Fire.$emit('RefreshVouchersAndTags');
+        $('#editTagModal').modal('hide');
+        swal.fire('Success!', 'Tag has been successfully updated.', 'success');
+      })["catch"](function () {
+        swal.fire({
+          title: 'Error',
+          text: "Failed to update tag.",
+          type: 'error'
+        });
+      });
+    },
+    editTag: function editTag(tag) {
+      this.tagForm.clear();
+      this.tagForm.reset();
+      $('#editTagModal').modal('show');
+      this.tagForm.fill(tag);
+    },
+    deleteTagTitle: function deleteTagTitle(tagID, tagName) {
+      var _this = this;
+
+      swal.fire({
+        title: 'Warning',
+        html: 'Deleting the tag <b><b>' + tagName + ' </b></b>will also permanently remove it from all vouchers',
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#07AD4D',
+        confirmButtonText: 'Delete'
+      }).then(function (result) {
+        if (result.value) {
+          _this.tagForm["delete"]('api/tag/' + tagID).then(function () {
+            swal.fire('Deleted!', 'Tag has been deleted.', 'success');
+            Fire.$emit('RefreshVouchersAndTags');
+          })["catch"](function () {
+            swal("Failed!", "Failed to delete tag.", "warning");
+          });
+        }
+      });
+    },
+    addTag: function addTag() {
+      this.tagForm.post('api/tag').then(function () {
+        Fire.$emit('RefreshVouchersAndTags');
+        $('#addNewTagModal').modal('hide');
+        swal.fire('Success!', 'Tag has been created successfully', 'success');
+      })["catch"](function () {
+        swal.fire({
+          title: 'Error',
+          text: "Failed to create new tag.",
+          type: 'error'
+        });
+      });
+    },
+    addNewTagModal: function addNewTagModal() {
+      $('#addNewTagModal').modal('show');
+    },
+
+    /* Deleting tags */
+    submitDeleteTag: function submitDeleteTag() {
+      var id = 0;
+      this.tagForm["delete"]('api/vouchertag/' + id).then(function () {
+        Fire.$emit('RefreshVouchersAndTags');
+        $('#deleteTagModal').modal('hide');
+        swal.fire('Success!', 'Tag has been successfully removed.', 'success');
+      })["catch"](function () {
+        swal.fire({
+          title: 'Error',
+          text: "Failed to delete tag.",
+          type: 'error'
+        });
+      });
+    },
+    deleteTag: function deleteTag(voucher) {
+      this.tagForm.clear();
+      this.tagForm.reset();
+      $('#deleteTagModal').modal('show');
+      this.tagForm.fill(voucher);
+    },
+
+    /* Adding new tags */
+    tagmodal: function tagmodal(voucherid) {
+      this.tagForm.clear();
+      this.tagForm.reset();
+      $('#addNewTag').modal('show');
+      this.tagForm.voucher_id = voucherid;
+    },
+    assignTag: function assignTag() {
+      this.tagForm.post('api/vouchertag').then(function () {
+        Fire.$emit('RefreshVouchersAndTags');
+        $('#addNewTag').modal('hide');
+        swal.fire('Success!', 'Tag has been successfully added.', 'success');
+      })["catch"](function () {
+        swal.fire({
+          title: 'Error',
+          text: "Failed to add tag.",
+          type: 'error'
+        });
+      });
+    },
+
+    /* Getting tag data */
+    getTags: function getTags() {
+      var _this2 = this;
+
+      axios.get('api/tag').then(function (_ref) {
+        var data = _ref.data;
+        return _this2.tags = data;
+      });
+    },
+
+    /* Getting voucher data */
+    getVouch: function getVouch() {
+      var _this3 = this;
+
+      axios.get('api/voucher').then(function (_ref2) {
+        var data = _ref2.data;
+        return _this3.vouchers = data;
+      });
+    }
+  },
+  mounted: function mounted() {
+    var _this4 = this;
+
+    Fire.$on('RefreshVouchersAndTags', function () {
+      _this4.getVouch();
+
+      _this4.getTags();
+    });
+    this.getVouch();
+    this.getTags();
+  }
 });
 
 /***/ }),
@@ -1997,10 +2323,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
 //
 //
 //
@@ -2301,9 +2623,6 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     createVoucher: function createVoucher() {
-      /* New date picker
-      var transformDate = moment(this.voucherForm.expiry_date).format('YYYYMMDD');
-       this.voucherForm.expiry_date = transformDate; */
       this.voucherForm.post('api/voucher').then(function () {
         /* If the post was successful then hide the modal and print success message */
         Fire.$emit('RefreshVouchers');
@@ -2365,8 +2684,6 @@ __webpack_require__.r(__webpack_exports__);
     Fire.$on('RefreshVouchers', function () {
       _this6.displayVouchers();
     });
-    /* TODO: Code refactoring */
-
     /* Show a warning modal before closing the 'Create Voucher' modal  */
 
     $(document).ready(function () {
@@ -70005,27 +70322,757 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { staticClass: "container" }, [
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-12" }, [
+        _c("div", { staticClass: "card" }, [
+          _c("div", { staticClass: "card-header" }, [
+            _c("h3", { staticClass: "card-title" }, [_vm._v("Tags")]),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-success",
+                on: { click: _vm.addNewTagModal }
+              },
+              [
+                _c("i", { staticClass: "fas fa-plus pr-1" }),
+                _vm._v("Add New Tag\n               ")
+              ]
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "card-body table-responsive p-0" }, [
+            _c("table", { staticClass: "table table-hover" }, [
+              _c(
+                "tbody",
+                [
+                  _vm._m(0),
+                  _vm._v(" "),
+                  _vm._l(_vm.tags, function(tag) {
+                    return _c("tr", { key: tag.id }, [
+                      _c("td", [_vm._v(_vm._s(tag.id))]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v(_vm._s(tag.tag_title))]),
+                      _vm._v(" "),
+                      _c("td", [
+                        _c(
+                          "a",
+                          {
+                            attrs: { href: "#" },
+                            on: {
+                              click: function($event) {
+                                return _vm.editTag(tag)
+                              }
+                            }
+                          },
+                          [
+                            _c("i", {
+                              staticClass: "far fas fa-pencil-alt",
+                              staticStyle: { color: "#FFC107" }
+                            })
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "a",
+                          {
+                            attrs: { href: "#" },
+                            on: {
+                              click: function($event) {
+                                return _vm.deleteTagTitle(tag.id, tag.tag_title)
+                              }
+                            }
+                          },
+                          [_c("i", { staticClass: "fas fa-trash red" })]
+                        )
+                      ])
+                    ])
+                  })
+                ],
+                2
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "card-footer" })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "card" }, [
+          _vm._m(1),
+          _vm._v(" "),
+          _c("div", { staticClass: "card-body table-responsive p-0" }, [
+            _c("table", { staticClass: "table table-hover" }, [
+              _c(
+                "tbody",
+                [
+                  _vm._m(2),
+                  _vm._v(" "),
+                  _vm._l(_vm.vouchers.data, function(voucher) {
+                    return _c(
+                      "tr",
+                      { key: voucher.id },
+                      [
+                        _c("td", [_vm._v(_vm._s(voucher.id))]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(voucher.name))]),
+                        _vm._v(" "),
+                        voucher.gettags.length == 0
+                          ? _c("td", [_vm._v("-")])
+                          : _vm._e(),
+                        _vm._v(" "),
+                        _vm._l(voucher.gettags, function(tag) {
+                          return _c("div", { key: tag.id }, [
+                            _c("td", [_vm._v(_vm._s(tag.tag_title))])
+                          ])
+                        }),
+                        _vm._v(" "),
+                        _c("td", [
+                          _c(
+                            "a",
+                            {
+                              attrs: { href: "#" },
+                              on: {
+                                click: function($event) {
+                                  return _vm.tagmodal(voucher.id)
+                                }
+                              }
+                            },
+                            [_c("i", { staticClass: "fas fa-plus green" })]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "a",
+                            {
+                              attrs: { href: "#" },
+                              on: {
+                                click: function($event) {
+                                  return _vm.deleteTag(voucher)
+                                }
+                              }
+                            },
+                            [_c("i", { staticClass: "fas fa-trash red" })]
+                          )
+                        ])
+                      ],
+                      2
+                    )
+                  })
+                ],
+                2
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "card-footer" }),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "modal fade",
+              attrs: {
+                id: "editTagModal",
+                tabindex: "-1",
+                role: "dialog",
+                "aria-labelledby": "editTagModalLabel",
+                "aria-hidden": "true"
+              }
+            },
+            [
+              _c(
+                "div",
+                {
+                  staticClass: "modal-dialog modal-dialog-centered",
+                  attrs: { role: "document" }
+                },
+                [
+                  _c("div", { staticClass: "modal-content" }, [
+                    _vm._m(3),
+                    _vm._v(" "),
+                    _c(
+                      "form",
+                      {
+                        on: {
+                          submit: function($event) {
+                            $event.preventDefault()
+                            return _vm.updateTag()
+                          }
+                        }
+                      },
+                      [
+                        _c("div", { staticClass: "modal-body" }, [
+                          _c(
+                            "div",
+                            { staticClass: "form-group" },
+                            [
+                              _c("label", [_vm._v("Name")]),
+                              _c("span", { staticClass: "red" }, [_vm._v("*")]),
+                              _vm._v(" "),
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.tagForm.tag_title,
+                                    expression: "tagForm.tag_title"
+                                  }
+                                ],
+                                staticClass: "form-control",
+                                class: {
+                                  "is-invalid": _vm.tagForm.errors.has(
+                                    "tag_title"
+                                  )
+                                },
+                                attrs: {
+                                  type: "text",
+                                  name: "tag_title",
+                                  placeholder: "Enter a name for the tag"
+                                },
+                                domProps: { value: _vm.tagForm.tag_title },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.tagForm,
+                                      "tag_title",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c("has-error", {
+                                attrs: { form: _vm.tagForm, field: "tag_title" }
+                              })
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c("p", [
+                            _vm._v(
+                              "Any vouchers that have this tag will also have their names updated"
+                            )
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _vm._m(4)
+                      ]
+                    )
+                  ])
+                ]
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "modal fade",
+              attrs: {
+                id: "addNewTagModal",
+                tabindex: "-1",
+                role: "dialog",
+                "aria-labelledby": "addNewTagModalLabel",
+                "aria-hidden": "true"
+              }
+            },
+            [
+              _c(
+                "div",
+                {
+                  staticClass: "modal-dialog modal-dialog-centered",
+                  attrs: { role: "document" }
+                },
+                [
+                  _c("div", { staticClass: "modal-content" }, [
+                    _vm._m(5),
+                    _vm._v(" "),
+                    _c(
+                      "form",
+                      {
+                        on: {
+                          submit: function($event) {
+                            $event.preventDefault()
+                            return _vm.addTag()
+                          }
+                        }
+                      },
+                      [
+                        _c("div", { staticClass: "modal-body" }, [
+                          _c(
+                            "div",
+                            { staticClass: "form-group" },
+                            [
+                              _c("label", [_vm._v("Name")]),
+                              _c("span", { staticClass: "red" }, [_vm._v("*")]),
+                              _vm._v(" "),
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.tagForm.tag_title,
+                                    expression: "tagForm.tag_title"
+                                  }
+                                ],
+                                staticClass: "form-control",
+                                class: {
+                                  "is-invalid": _vm.tagForm.errors.has(
+                                    "tag_title"
+                                  )
+                                },
+                                attrs: {
+                                  type: "text",
+                                  name: "tag_title",
+                                  placeholder: "Enter a name for the tag"
+                                },
+                                domProps: { value: _vm.tagForm.tag_title },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.tagForm,
+                                      "tag_title",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c("has-error", {
+                                attrs: { form: _vm.tagForm, field: "tag_title" }
+                              })
+                            ],
+                            1
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _vm._m(6)
+                      ]
+                    )
+                  ])
+                ]
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "modal fade",
+              attrs: {
+                id: "addNewTag",
+                tabindex: "-1",
+                role: "dialog",
+                "aria-labelledby": "addNewTagLabel",
+                "aria-hidden": "true"
+              }
+            },
+            [
+              _c(
+                "div",
+                {
+                  staticClass: "modal-dialog modal-dialog-centered",
+                  attrs: { role: "document" }
+                },
+                [
+                  _c("div", { staticClass: "modal-content" }, [
+                    _vm._m(7),
+                    _vm._v(" "),
+                    _c(
+                      "form",
+                      {
+                        on: {
+                          submit: function($event) {
+                            $event.preventDefault()
+                            return _vm.assignTag()
+                          }
+                        }
+                      },
+                      [
+                        _c("div", { staticClass: "modal-body" }, [
+                          _c(
+                            "div",
+                            { staticClass: "form-group" },
+                            [
+                              _c(
+                                "select",
+                                {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.tagForm.tag_id,
+                                      expression: "tagForm.tag_id"
+                                    }
+                                  ],
+                                  staticClass: "form-control",
+                                  class: {
+                                    "is-invalid": _vm.tagForm.errors.has(
+                                      "tag_title"
+                                    )
+                                  },
+                                  attrs: { name: "tags", id: "tag_title" },
+                                  on: {
+                                    change: function($event) {
+                                      var $$selectedVal = Array.prototype.filter
+                                        .call($event.target.options, function(
+                                          o
+                                        ) {
+                                          return o.selected
+                                        })
+                                        .map(function(o) {
+                                          var val =
+                                            "_value" in o ? o._value : o.value
+                                          return val
+                                        })
+                                      _vm.$set(
+                                        _vm.tagForm,
+                                        "tag_id",
+                                        $event.target.multiple
+                                          ? $$selectedVal
+                                          : $$selectedVal[0]
+                                      )
+                                    }
+                                  }
+                                },
+                                [
+                                  _c(
+                                    "option",
+                                    {
+                                      attrs: {
+                                        value: "",
+                                        disabled: "",
+                                        selected: ""
+                                      }
+                                    },
+                                    [_vm._v("Select tags")]
+                                  ),
+                                  _vm._v(" "),
+                                  _vm._l(_vm.sortedTags, function(tag) {
+                                    return _c(
+                                      "option",
+                                      {
+                                        key: tag.id,
+                                        domProps: { value: tag.id }
+                                      },
+                                      [_vm._v(_vm._s(tag.tag_title))]
+                                    )
+                                  })
+                                ],
+                                2
+                              ),
+                              _vm._v(" "),
+                              _c("has-error", {
+                                attrs: { form: _vm.tagForm, field: "tag_title" }
+                              })
+                            ],
+                            1
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _vm._m(8)
+                      ]
+                    )
+                  ])
+                ]
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "modal fade",
+              attrs: {
+                id: "deleteTagModal",
+                tabindex: "-1",
+                role: "dialog",
+                "aria-labelledby": "deleteTagLabel",
+                "aria-hidden": "true"
+              }
+            },
+            [
+              _c(
+                "div",
+                {
+                  staticClass: "modal-dialog modal-dialog-centered",
+                  attrs: { role: "document" }
+                },
+                [
+                  _c("div", { staticClass: "modal-content" }, [
+                    _vm._m(9),
+                    _vm._v(" "),
+                    _c(
+                      "form",
+                      {
+                        on: {
+                          submit: function($event) {
+                            $event.preventDefault()
+                            return _vm.submitDeleteTag()
+                          }
+                        }
+                      },
+                      [
+                        _c("div", { staticClass: "modal-body" }, [
+                          _c(
+                            "div",
+                            { staticClass: "form-group" },
+                            [
+                              _c(
+                                "select",
+                                {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.tagForm.tag_id,
+                                      expression: "tagForm.tag_id"
+                                    }
+                                  ],
+                                  staticClass: "form-control",
+                                  class: {
+                                    "is-invalid": _vm.tagForm.errors.has(
+                                      "tag_title"
+                                    )
+                                  },
+                                  attrs: { name: "tags", id: "tag_title" },
+                                  on: {
+                                    change: function($event) {
+                                      var $$selectedVal = Array.prototype.filter
+                                        .call($event.target.options, function(
+                                          o
+                                        ) {
+                                          return o.selected
+                                        })
+                                        .map(function(o) {
+                                          var val =
+                                            "_value" in o ? o._value : o.value
+                                          return val
+                                        })
+                                      _vm.$set(
+                                        _vm.tagForm,
+                                        "tag_id",
+                                        $event.target.multiple
+                                          ? $$selectedVal
+                                          : $$selectedVal[0]
+                                      )
+                                    }
+                                  }
+                                },
+                                [
+                                  _c(
+                                    "option",
+                                    {
+                                      attrs: {
+                                        value: "",
+                                        disabled: "",
+                                        selected: ""
+                                      }
+                                    },
+                                    [_vm._v("Select tag")]
+                                  ),
+                                  _vm._v(" "),
+                                  _vm._l(_vm.voucherTags, function(tag) {
+                                    return _c(
+                                      "option",
+                                      {
+                                        key: tag.id,
+                                        domProps: { value: tag.id }
+                                      },
+                                      [
+                                        _vm._v(
+                                          "\n                                    " +
+                                            _vm._s(tag.tag_title) +
+                                            "\n                                 "
+                                        )
+                                      ]
+                                    )
+                                  })
+                                ],
+                                2
+                              ),
+                              _vm._v(" "),
+                              _c("has-error", {
+                                attrs: { form: _vm.tagForm, field: "tag_title" }
+                              })
+                            ],
+                            1
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _vm._m(10)
+                      ]
+                    )
+                  ])
+                ]
+              )
+            ]
+          )
+        ])
+      ])
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container" }, [
-      _c("div", { staticClass: "row justify-content-center" }, [
-        _c("div", { staticClass: "col-md-8" }, [
-          _c("div", { staticClass: "card" }, [
-            _c("div", { staticClass: "card-header" }, [
-              _vm._v("Tags Component")
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "card-body" }, [
-              _vm._v("\n                    To be added.\n                ")
-            ])
-          ])
-        ])
+    return _c("tr", [
+      _c("th", [_vm._v("ID")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Tag Name")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Modify")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card-header" }, [
+      _c("h3", { staticClass: "card-title" }, [
+        _vm._v("Assign tags to vouchers")
       ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("tr", [
+      _c("th", [_vm._v("ID")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Voucher Name")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Tag Name(s)")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Add/Remove tags")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c("h5", { staticClass: "modal-title" }, [
+        _vm._v("Update an existing tag")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-footer" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-danger",
+          attrs: { type: "button", "data-dismiss": "modal" }
+        },
+        [_vm._v("Close")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        { staticClass: "btn btn-warning", attrs: { type: "submit" } },
+        [_vm._v("Update")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c("h5", { staticClass: "modal-title" }, [_vm._v("Add new tag")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-footer" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-danger",
+          attrs: { type: "button", "data-dismiss": "modal" }
+        },
+        [_vm._v("Close")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        { staticClass: "btn btn-success", attrs: { type: "submit" } },
+        [_vm._v("Create")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c("h5", { staticClass: "modal-title" }, [_vm._v("Assign a new tag")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-footer" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-danger",
+          attrs: { type: "button", "data-dismiss": "modal" }
+        },
+        [_vm._v("Close")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        { staticClass: "btn btn-success", attrs: { type: "submit" } },
+        [_vm._v("Create")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c("h5", { staticClass: "modal-title" }, [
+        _vm._v("Remove an existing tag")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-footer" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-danger",
+          attrs: { type: "button", "data-dismiss": "modal" }
+        },
+        [_vm._v("Close")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        { staticClass: "btn btn-success", attrs: { type: "submit" } },
+        [_vm._v("Delete")]
+      )
     ])
   }
 ]
@@ -70112,7 +71159,7 @@ var render = function() {
               },
               [
                 _c("i", { staticClass: "fas fa-plus pr-1" }),
-                _vm._v("Add New Voucher\n            ")
+                _vm._v("Add New Voucher\n               ")
               ]
             ),
             _vm._v(" "),
@@ -70233,11 +71280,7 @@ var render = function() {
                                 }
                               }
                             },
-                            [
-                              _c("i", {
-                                staticClass: "fas fa-trash red deleteToolTip"
-                              })
-                            ]
+                            [_c("i", { staticClass: "fas fa-trash red" })]
                           )
                         ])
                       ],
@@ -70949,7 +71992,7 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("th", [_vm._v("Category")]),
       _vm._v(" "),
-      _c("th", { staticClass: "text-center", staticStyle: { width: "8%" } }, [
+      _c("th", { staticClass: "text-center", staticStyle: { width: "10%" } }, [
         _vm._v("Modify")
       ])
     ])
@@ -70967,7 +72010,7 @@ var staticRenderFns = [
         },
         [
           _c("i", { staticClass: "fas fa-exclamation-triangle red" }),
-          _vm._v(" Warning\n                    ")
+          _vm._v(" Warning\n               ")
         ]
       )
     ])
