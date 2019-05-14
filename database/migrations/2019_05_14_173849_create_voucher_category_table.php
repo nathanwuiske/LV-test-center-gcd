@@ -15,6 +15,10 @@ class CreateVoucherCategoryTable extends Migration
     {
         Schema::create('voucher_category', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('voucher_id')->unsigned();
+            $table->foreign('voucher_id')->references('id')->on('vouchers')->onDelete('cascade');
+            $table->unsignedBigInteger('category_id')->unsigned();
+            $table->foreign('category_id')->references('id')->on('category')->onDelete('cascade');
             $table->timestamps();
         });
     }
