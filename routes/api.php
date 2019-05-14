@@ -22,3 +22,6 @@ Route::apiResource('voucher', 'API\VoucherController');
 
 Route::apiResource('tag', 'API\TagController');
 Route::apiResource('vouchertag', 'API\VoucherTagController');
+
+Route::apiResource('category', 'API\CategoryController');
+Route::apiResource('vouchercategory', 'API\VoucherCategoryController');

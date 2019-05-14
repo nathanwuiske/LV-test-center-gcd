@@ -1796,16 +1796,359 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
+      categories: {},
+      vouchers: {},
       categoryForm: new Form({
         id: '',
-        name: ''
+        voucher_id: '',
+        category_id: '',
+        name: '',
+        get_categories: []
       })
     };
   },
-  mounted: function mounted() {}
+  computed: {
+    sortedCategories: function sortedCategories() {
+      return _.sortBy(this.categories.data, [function (category) {
+        return category.name.toLowerCase();
+      }], 'category_id');
+    },
+    voucherCategories: function voucherCategories() {
+      return _.sortBy(this.categoryForm.get_categories, [function (category) {
+        return category.name.toLowerCase();
+      }], 'category_id');
+    }
+  },
+  methods: {
+    getCategoryResults: function getCategoryResults() {
+      var _this = this;
+
+      var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+      axios.get('api/category?page=' + page).then(function (response) {
+        _this.categories = response.data;
+      });
+    },
+    getVoucherResults: function getVoucherResults() {
+      var _this2 = this;
+
+      var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+      axios.get('api/voucher?page=' + page).then(function (response) {
+        _this2.vouchers = response.data;
+      });
+    },
+    updateCategory: function updateCategory() {
+      this.categoryForm.put('api/category/' + this.categoryForm.id).then(function () {
+        Fire.$emit('RefreshVouchersAndCategories');
+        $('#editCategoryModal').modal('hide');
+        swal.fire('Success!', 'Category has been successfully updated.', 'success');
+      })["catch"](function () {
+        swal.fire({
+          title: 'Error',
+          text: "Failed to update category.",
+          type: 'error'
+        });
+      });
+    },
+    editCategory: function editCategory(category) {
+      this.categoryForm.clear();
+      this.categoryForm.reset();
+      $('#editCategoryModal').modal('show');
+      this.categoryForm.fill(category);
+    },
+    deleteCategoryTitle: function deleteCategoryTitle(categoryID, categoryName) {
+      var _this3 = this;
+
+      swal.fire({
+        title: 'Warning',
+        html: 'Deleting the category <b><b>' + categoryName + ' </b></b>will also permanently remove it from all vouchers',
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#07AD4D',
+        confirmButtonText: 'Delete'
+      }).then(function (result) {
+        if (result.value) {
+          _this3.categoryForm["delete"]('api/category/' + categoryID).then(function () {
+            swal.fire('Deleted!', 'Category has been deleted.', 'success');
+            Fire.$emit('RefreshVouchersAndCategories');
+          })["catch"](function () {
+            swal("Failed!", "Failed to delete category.", "warning");
+          });
+        }
+      });
+    },
+    addCategory: function addCategory() {
+      this.categoryForm.post('api/category').then(function () {
+        Fire.$emit('RefreshVouchersAndCategories');
+        $('#addNewCategoryModal').modal('hide');
+        swal.fire('Success!', 'Category has been created successfully', 'success');
+      })["catch"](function () {
+        swal.fire({
+          title: 'Error',
+          text: "Failed to create new category.",
+          type: 'error'
+        });
+      });
+    },
+    addNewCategoryModal: function addNewCategoryModal() {
+      $('#addNewCategoryModal').modal('show');
+    },
+
+    /* Deleting categories */
+    submitDeleteCategory: function submitDeleteCategory() {
+      var id = 0;
+      this.categoryForm["delete"]('api/vouchercategory/' + id).then(function () {
+        Fire.$emit('RefreshVouchersAndCategories');
+        $('#deleteCategoryModal').modal('hide');
+        swal.fire('Success!', 'Category has been successfully removed.', 'success');
+      })["catch"](function () {
+        swal.fire({
+          title: 'Error',
+          text: "Failed to delete category.",
+          type: 'error'
+        });
+      });
+    },
+    deleteCategory: function deleteCategory(voucher) {
+      this.categoryForm.clear();
+      this.categoryForm.reset();
+      $('#deleteCategoryModal').modal('show');
+      this.categoryForm.fill(voucher);
+    },
+
+    /* Adding new categories */
+    categorymodal: function categorymodal(voucherid) {
+      this.categoryForm.clear();
+      this.categoryForm.reset();
+      $('#addNewCategory').modal('show');
+      this.categoryForm.voucher_id = voucherid;
+    },
+    assignCategory: function assignCategory() {
+      this.categoryForm.post('api/vouchercategory').then(function () {
+        Fire.$emit('RefreshVouchersAndCategories');
+        $('#addNewCategory').modal('hide');
+        swal.fire('Success!', 'Category has been successfully added.', 'success');
+      })["catch"](function () {
+        swal.fire({
+          title: 'Error',
+          text: "Failed to add category.",
+          type: 'error'
+        });
+      });
+    },
+
+    /* Getting category data */
+    getCategory: function getCategory() {
+      var _this4 = this;
+
+      axios.get('api/category').then(function (_ref) {
+        var data = _ref.data;
+        return _this4.categories = data;
+      });
+    },
+
+    /* Getting voucher data */
+    getVouch: function getVouch() {
+      var _this5 = this;
+
+      axios.get('api/voucher').then(function (_ref2) {
+        var data = _ref2.data;
+        return _this5.vouchers = data;
+      });
+    }
+  },
+  mounted: function mounted() {
+    var _this6 = this;
+
+    Fire.$on('RefreshVouchersAndCategories', function () {
+      _this6.getVouch();
+
+      _this6.getCategory();
+    });
+    this.getVouch();
+    this.getCategory();
+  }
 });
 
 /***/ }),
@@ -70173,27 +70516,821 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { staticClass: "container" }, [
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-12" }, [
+        _c("div", { staticClass: "card" }, [
+          _c("div", { staticClass: "card-header" }, [
+            _c("h3", { staticClass: "card-title" }, [_vm._v("Categories")]),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-success",
+                on: { click: _vm.addNewCategoryModal }
+              },
+              [
+                _c("i", { staticClass: "fas fa-plus pr-1" }),
+                _vm._v("Add New Category\n               ")
+              ]
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "card-body table-responsive p-0" }, [
+            _c("table", { staticClass: "table table-hover" }, [
+              _c(
+                "tbody",
+                [
+                  _vm._m(0),
+                  _vm._v(" "),
+                  _vm._l(_vm.categories.data, function(category) {
+                    return _c("tr", { key: category.id }, [
+                      _c("td", [_vm._v(_vm._s(category.id))]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v(_vm._s(category.name))]),
+                      _vm._v(" "),
+                      _c("td", [
+                        _c(
+                          "a",
+                          {
+                            attrs: { href: "#" },
+                            on: {
+                              click: function($event) {
+                                return _vm.editCategory(category)
+                              }
+                            }
+                          },
+                          [
+                            _c("i", {
+                              staticClass: "far fas fa-pencil-alt",
+                              staticStyle: { color: "#FFC107" }
+                            })
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "a",
+                          {
+                            attrs: { href: "#" },
+                            on: {
+                              click: function($event) {
+                                return _vm.deleteCategoryTitle(
+                                  category.id,
+                                  category.name
+                                )
+                              }
+                            }
+                          },
+                          [_c("i", { staticClass: "fas fa-trash red" })]
+                        )
+                      ])
+                    ])
+                  })
+                ],
+                2
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "card-footer" },
+            [
+              _c(
+                "pagination",
+                {
+                  attrs: { data: _vm.categories, limit: 5 },
+                  on: { "pagination-change-page": _vm.getCategoryResults }
+                },
+                [
+                  _c(
+                    "span",
+                    { attrs: { slot: "prev-nav" }, slot: "prev-nav" },
+                    [_vm._v("< Previous")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "span",
+                    { attrs: { slot: "next-nav" }, slot: "next-nav" },
+                    [_vm._v("Next >")]
+                  )
+                ]
+              )
+            ],
+            1
+          )
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "card" }, [
+          _vm._m(1),
+          _vm._v(" "),
+          _c("div", { staticClass: "card-body table-responsive p-0" }, [
+            _c("table", { staticClass: "table table-hover" }, [
+              _c(
+                "tbody",
+                [
+                  _vm._m(2),
+                  _vm._v(" "),
+                  _vm._l(_vm.vouchers.data, function(voucher) {
+                    return _c(
+                      "tr",
+                      { key: voucher.id },
+                      [
+                        _c("td", [_vm._v(_vm._s(voucher.id))]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(voucher.name))]),
+                        _vm._v(" "),
+                        voucher.get_categories.length == 0
+                          ? _c("td", [_vm._v("-")])
+                          : _vm._e(),
+                        _vm._v(" "),
+                        _vm._l(voucher.get_categories, function(category) {
+                          return _c("div", { key: category.id }, [
+                            _c("td", [_vm._v(_vm._s(category.name))])
+                          ])
+                        }),
+                        _vm._v(" "),
+                        _c("td", [
+                          _c(
+                            "a",
+                            {
+                              attrs: { href: "#" },
+                              on: {
+                                click: function($event) {
+                                  return _vm.categorymodal(voucher.id)
+                                }
+                              }
+                            },
+                            [_c("i", { staticClass: "fas fa-plus green" })]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "a",
+                            {
+                              attrs: { href: "#" },
+                              on: {
+                                click: function($event) {
+                                  return _vm.deleteCategory(voucher)
+                                }
+                              }
+                            },
+                            [_c("i", { staticClass: "fas fa-trash red" })]
+                          )
+                        ])
+                      ],
+                      2
+                    )
+                  })
+                ],
+                2
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "card-footer" },
+            [
+              _c(
+                "pagination",
+                {
+                  attrs: { data: _vm.vouchers, limit: 5 },
+                  on: { "pagination-change-page": _vm.getVoucherResults }
+                },
+                [
+                  _c(
+                    "span",
+                    { attrs: { slot: "prev-nav" }, slot: "prev-nav" },
+                    [_vm._v("< Previous")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "span",
+                    { attrs: { slot: "next-nav" }, slot: "next-nav" },
+                    [_vm._v("Next >")]
+                  )
+                ]
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "modal fade",
+              attrs: {
+                id: "editCategoryModal",
+                tabindex: "-1",
+                role: "dialog",
+                "aria-labelledby": "editCategoryModalLabel",
+                "aria-hidden": "true"
+              }
+            },
+            [
+              _c(
+                "div",
+                {
+                  staticClass: "modal-dialog modal-dialog-centered",
+                  attrs: { role: "document" }
+                },
+                [
+                  _c("div", { staticClass: "modal-content" }, [
+                    _vm._m(3),
+                    _vm._v(" "),
+                    _c(
+                      "form",
+                      {
+                        on: {
+                          submit: function($event) {
+                            $event.preventDefault()
+                            return _vm.updateCategory()
+                          }
+                        }
+                      },
+                      [
+                        _c("div", { staticClass: "modal-body" }, [
+                          _c(
+                            "div",
+                            { staticClass: "form-group" },
+                            [
+                              _c("label", [_vm._v("Name")]),
+                              _c("span", { staticClass: "red" }, [_vm._v("*")]),
+                              _vm._v(" "),
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.categoryForm.name,
+                                    expression: "categoryForm.name"
+                                  }
+                                ],
+                                staticClass: "form-control",
+                                class: {
+                                  "is-invalid": _vm.categoryForm.errors.has(
+                                    "name"
+                                  )
+                                },
+                                attrs: {
+                                  type: "text",
+                                  name: "name",
+                                  placeholder: "Enter a name for the category"
+                                },
+                                domProps: { value: _vm.categoryForm.name },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.categoryForm,
+                                      "name",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c("has-error", {
+                                attrs: { form: _vm.categoryForm, field: "name" }
+                              })
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c("p", [
+                            _vm._v(
+                              "Any vouchers that have this category will also have their names updated"
+                            )
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _vm._m(4)
+                      ]
+                    )
+                  ])
+                ]
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "modal fade",
+              attrs: {
+                id: "addNewCategoryModal",
+                tabindex: "-1",
+                role: "dialog",
+                "aria-labelledby": "addNewCategoryModalLabel",
+                "aria-hidden": "true"
+              }
+            },
+            [
+              _c(
+                "div",
+                {
+                  staticClass: "modal-dialog modal-dialog-centered",
+                  attrs: { role: "document" }
+                },
+                [
+                  _c("div", { staticClass: "modal-content" }, [
+                    _vm._m(5),
+                    _vm._v(" "),
+                    _c(
+                      "form",
+                      {
+                        on: {
+                          submit: function($event) {
+                            $event.preventDefault()
+                            return _vm.addCategory()
+                          }
+                        }
+                      },
+                      [
+                        _c("div", { staticClass: "modal-body" }, [
+                          _c(
+                            "div",
+                            { staticClass: "form-group" },
+                            [
+                              _c("label", [_vm._v("Name")]),
+                              _c("span", { staticClass: "red" }, [_vm._v("*")]),
+                              _vm._v(" "),
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.categoryForm.name,
+                                    expression: "categoryForm.name"
+                                  }
+                                ],
+                                staticClass: "form-control",
+                                class: {
+                                  "is-invalid": _vm.categoryForm.errors.has(
+                                    "name"
+                                  )
+                                },
+                                attrs: {
+                                  type: "text",
+                                  name: "name",
+                                  placeholder: "Enter a name for the category"
+                                },
+                                domProps: { value: _vm.categoryForm.name },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.categoryForm,
+                                      "name",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c("has-error", {
+                                attrs: { form: _vm.categoryForm, field: "name" }
+                              })
+                            ],
+                            1
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _vm._m(6)
+                      ]
+                    )
+                  ])
+                ]
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "modal fade",
+              attrs: {
+                id: "addNewCategory",
+                tabindex: "-1",
+                role: "dialog",
+                "aria-labelledby": "addNewCategoryLabel",
+                "aria-hidden": "true"
+              }
+            },
+            [
+              _c(
+                "div",
+                {
+                  staticClass: "modal-dialog modal-dialog-centered",
+                  attrs: { role: "document" }
+                },
+                [
+                  _c("div", { staticClass: "modal-content" }, [
+                    _vm._m(7),
+                    _vm._v(" "),
+                    _c(
+                      "form",
+                      {
+                        on: {
+                          submit: function($event) {
+                            $event.preventDefault()
+                            return _vm.assignCategory()
+                          }
+                        }
+                      },
+                      [
+                        _c("div", { staticClass: "modal-body" }, [
+                          _c(
+                            "div",
+                            { staticClass: "form-group" },
+                            [
+                              _c(
+                                "select",
+                                {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.categoryForm.category_id,
+                                      expression: "categoryForm.category_id"
+                                    }
+                                  ],
+                                  staticClass: "form-control",
+                                  class: {
+                                    "is-invalid": _vm.categoryForm.errors.has(
+                                      "name"
+                                    )
+                                  },
+                                  attrs: { name: "name", id: "name" },
+                                  on: {
+                                    change: function($event) {
+                                      var $$selectedVal = Array.prototype.filter
+                                        .call($event.target.options, function(
+                                          o
+                                        ) {
+                                          return o.selected
+                                        })
+                                        .map(function(o) {
+                                          var val =
+                                            "_value" in o ? o._value : o.value
+                                          return val
+                                        })
+                                      _vm.$set(
+                                        _vm.categoryForm,
+                                        "category_id",
+                                        $event.target.multiple
+                                          ? $$selectedVal
+                                          : $$selectedVal[0]
+                                      )
+                                    }
+                                  }
+                                },
+                                [
+                                  _c(
+                                    "option",
+                                    {
+                                      attrs: {
+                                        value: "",
+                                        disabled: "",
+                                        selected: ""
+                                      }
+                                    },
+                                    [_vm._v("Select categories")]
+                                  ),
+                                  _vm._v(" "),
+                                  _vm._l(_vm.sortedCategories, function(
+                                    category
+                                  ) {
+                                    return _c(
+                                      "option",
+                                      {
+                                        key: category.id,
+                                        domProps: { value: category.id }
+                                      },
+                                      [_vm._v(_vm._s(category.name))]
+                                    )
+                                  })
+                                ],
+                                2
+                              ),
+                              _vm._v(" "),
+                              _c("has-error", {
+                                attrs: { form: _vm.categoryForm, field: "name" }
+                              })
+                            ],
+                            1
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _vm._m(8)
+                      ]
+                    )
+                  ])
+                ]
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "modal fade",
+              attrs: {
+                id: "deleteCategoryModal",
+                tabindex: "-1",
+                role: "dialog",
+                "aria-labelledby": "deleteCategoryLabel",
+                "aria-hidden": "true"
+              }
+            },
+            [
+              _c(
+                "div",
+                {
+                  staticClass: "modal-dialog modal-dialog-centered",
+                  attrs: { role: "document" }
+                },
+                [
+                  _c("div", { staticClass: "modal-content" }, [
+                    _vm._m(9),
+                    _vm._v(" "),
+                    _c(
+                      "form",
+                      {
+                        on: {
+                          submit: function($event) {
+                            $event.preventDefault()
+                            return _vm.submitDeleteCategory()
+                          }
+                        }
+                      },
+                      [
+                        _c("div", { staticClass: "modal-body" }, [
+                          _c(
+                            "div",
+                            { staticClass: "form-group" },
+                            [
+                              _c(
+                                "select",
+                                {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.categoryForm.category_id,
+                                      expression: "categoryForm.category_id"
+                                    }
+                                  ],
+                                  staticClass: "form-control",
+                                  class: {
+                                    "is-invalid": _vm.categoryForm.errors.has(
+                                      "name"
+                                    )
+                                  },
+                                  attrs: {
+                                    name: "categories",
+                                    id: "categories_name"
+                                  },
+                                  on: {
+                                    change: function($event) {
+                                      var $$selectedVal = Array.prototype.filter
+                                        .call($event.target.options, function(
+                                          o
+                                        ) {
+                                          return o.selected
+                                        })
+                                        .map(function(o) {
+                                          var val =
+                                            "_value" in o ? o._value : o.value
+                                          return val
+                                        })
+                                      _vm.$set(
+                                        _vm.categoryForm,
+                                        "category_id",
+                                        $event.target.multiple
+                                          ? $$selectedVal
+                                          : $$selectedVal[0]
+                                      )
+                                    }
+                                  }
+                                },
+                                [
+                                  _c(
+                                    "option",
+                                    {
+                                      attrs: {
+                                        value: "",
+                                        disabled: "",
+                                        selected: ""
+                                      }
+                                    },
+                                    [_vm._v("Select category")]
+                                  ),
+                                  _vm._v(" "),
+                                  _vm._l(_vm.voucherCategories, function(
+                                    category
+                                  ) {
+                                    return _c(
+                                      "option",
+                                      {
+                                        key: category.id,
+                                        domProps: { value: category.id }
+                                      },
+                                      [
+                                        _vm._v(
+                                          "\n                                    " +
+                                            _vm._s(category.name) +
+                                            "\n                                 "
+                                        )
+                                      ]
+                                    )
+                                  })
+                                ],
+                                2
+                              ),
+                              _vm._v(" "),
+                              _c("has-error", {
+                                attrs: { form: _vm.categoryForm, field: "name" }
+                              })
+                            ],
+                            1
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _vm._m(10)
+                      ]
+                    )
+                  ])
+                ]
+              )
+            ]
+          )
+        ])
+      ])
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container" }, [
-      _c("div", { staticClass: "row justify-content-center" }, [
-        _c("div", { staticClass: "col-md-8" }, [
-          _c("div", { staticClass: "card" }, [
-            _c("div", { staticClass: "card-header" }, [
-              _vm._v("Category Component")
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "card-body" }, [
-              _vm._v("\n                    To be added.\n                ")
-            ])
-          ])
-        ])
+    return _c("tr", [
+      _c("th", [_vm._v("ID")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Category Name")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Modify")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card-header" }, [
+      _c("h3", { staticClass: "card-title" }, [
+        _vm._v("Assign categories to vouchers")
       ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("tr", [
+      _c("th", [_vm._v("ID")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Voucher Name")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Category Name(s)")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Add/Remove categories")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c("h5", { staticClass: "modal-title" }, [
+        _vm._v("Update an existing category")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-footer" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-danger",
+          attrs: { type: "button", "data-dismiss": "modal" }
+        },
+        [_vm._v("Close")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        { staticClass: "btn btn-warning", attrs: { type: "submit" } },
+        [_vm._v("Update")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c("h5", { staticClass: "modal-title" }, [_vm._v("Add new category")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-footer" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-danger",
+          attrs: { type: "button", "data-dismiss": "modal" }
+        },
+        [_vm._v("Close")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        { staticClass: "btn btn-success", attrs: { type: "submit" } },
+        [_vm._v("Create")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c("h5", { staticClass: "modal-title" }, [
+        _vm._v("Assign a new category")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-footer" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-danger",
+          attrs: { type: "button", "data-dismiss": "modal" }
+        },
+        [_vm._v("Close")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        { staticClass: "btn btn-success", attrs: { type: "submit" } },
+        [_vm._v("Create")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c("h5", { staticClass: "modal-title" }, [
+        _vm._v("Remove an existing category")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-footer" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-danger",
+          attrs: { type: "button", "data-dismiss": "modal" }
+        },
+        [_vm._v("Close")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        { staticClass: "btn btn-success", attrs: { type: "submit" } },
+        [_vm._v("Delete")]
+      )
     ])
   }
 ]
