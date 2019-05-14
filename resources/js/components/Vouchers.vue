@@ -49,7 +49,12 @@
                            </div>
                            <!-- End of Display tags -->
                            <td><a href="#" @click="getPhoto(voucher.photo)">Show</a></td>
-                           <td>{{voucher.category | capitalize}}</td>
+                           <!-- Display categories -->
+                           <td v-if="voucher.get_categories.length == 0">-</td>
+                           <div v-for="category in voucher.get_categories" :key="category.id">
+                              <td>{{category.name}}</td>
+                           </div>
+                           <!-- End of Display tags -->
                            <td>
                               <a href="#" @click="editVoucherModal(voucher)"> <i class="far fas fa-pencil-alt"  style="color: #FFC107;"></i></a>
                               <a href="#" @click="archiveVoucher(voucher.id, voucher.name)"><i class="fas fa-archive" style="color: #428bca;"></i></a>
@@ -107,25 +112,6 @@
                         <input v-model="voucherForm.expiry_date" type="datetime-local" name="expiry_date"
                            class="form-control" :class="{ 'is-invalid': voucherForm.errors.has('expiry_date') }">
                         <has-error :form="voucherForm" field="expiry_date"></has-error>
-                     </div>
-                     <!-- 
-                        <div class="form-group">
-                        <label>Expiry Date</label><span class="red">&#42;</span>
-                        <datetime v-model="voucherForm.expiry_date" type="date" name="expiry_date" input-class="form-control" :class="{ 'is-invalid': voucherForm.errors.has('expiry_date') }">
-                          <has-error :form="voucherForm" field="expiry_date"></has-error>
-                        </datetime>
-                        </div> -->
-                     <!-- Catgeory form input -->
-                     <div class="form-group">
-                        <label>Category</label><span class="red">&#42;</span>
-                        <select name="category" v-model="voucherForm.category" id="category" class="form-control" 
-                           :class="{ 'is-invalid': voucherForm.errors.has('category') }">
-                           <option value="" disabled selected>Please select an option</option>
-                           <option value="food">Food</option>
-                           <option value="automotive">Automotive</option>
-                           <option value="beauty">Beauty</option>
-                        </select>
-                        <has-error :form="voucherForm" field="category"></has-error>
                      </div>
                      <!-- Popular form input -->
                      <div class="form-group">

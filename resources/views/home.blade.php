@@ -21,9 +21,15 @@
                      </router-link>
                   </li>
                   <li class="nav-item">
-                     <router-link to="/issues" class="nav-link">
+                        <router-link to="/messages" class="nav-link">
+                           <i class="nav-icon fas fa-comment-alt"></i>
+                           <p class="white">App Messages</p>
+                        </router-link>
+                     </li>
+                  <li class="nav-item">
+                     <router-link to="/reports" class="nav-link">
                         <i class="nav-icon fas fa-exclamation"></i>
-                        <p class="white">Issues</p>
+                        <p class="white">User Reports</p>
                      </router-link>
                   </li>
                   <li class="nav-header" style="color: white">Voucher Management</li>
@@ -40,15 +46,15 @@
                      </router-link>
                   </li>
                   <li class="nav-item">
-                     <router-link to="/locations" class="nav-link">
-                        <i class="nav-icon fas fa-map-marker-alt"></i>
-                        <p class="white">Locations</p>
-                     </router-link>
-                  </li>
-                  <li class="nav-item">
                      <router-link to="/tags" class="nav-link">
                         <i class="nav-icon fas fa-tags"></i>
                         <p class="white">Tags</p>
+                     </router-link>
+                  </li>
+                  <li class="nav-item">
+                     <router-link to="/locations" class="nav-link">
+                        <i class="nav-icon fas fa-map-marker-alt"></i>
+                        <p class="white">Locations</p>
                      </router-link>
                   </li>
                   <li class="nav-item">

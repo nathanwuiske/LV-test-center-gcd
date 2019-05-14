@@ -18,6 +18,7 @@ class VoucherController extends Controller
     public function index()
     {
         /* display the latest 10 vouchers */
+        $onlySoftDeleted = Voucher::onlyTrashed()->get();
         return Voucher::with('gettags')->with('getCategories')->latest()->paginate(10);
     }
 
@@ -37,7 +38,6 @@ class VoucherController extends Controller
             'description' => 'required|string|max:500',
             'facebook_link' => 'nullable|url'
             //'expiry_date' => 'required|after:yesterday|before:2030-01-01', //can only set expiry date AFTER the date of voucher creation
-            //'category' => 'required',
             //'popular_flag' => 'required'
             //'photo' => 'required' //must be an image (jpg, png, bmp or gif)
         ]);
@@ -88,7 +88,6 @@ class VoucherController extends Controller
             'description' => 'required|string|max:500',
             'facebook_link' => 'nullable|url',
             'expiry_date' => 'required|after:yesterday|before:2030-01-01', 
-            'category' => 'required',
             'popular_flag' => 'required'
         ]);
         $currentPhoto = $voucher->photo;   
