@@ -19,7 +19,7 @@ window.moment = require('moment');
 /* Custom Vue event */
 window.Fire = new Vue();
 
-/* Pagination for vouchers table */
+/* Pagination  */
 Vue.component('pagination', require('laravel-vue-pagination'));
 
 /* Get access to vform globally */

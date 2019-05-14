@@ -2120,6 +2120,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2136,7 +2145,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   computed: {
     sortedTags: function sortedTags() {
-      return _.sortBy(this.tags, [function (tag) {
+      return _.sortBy(this.tags.data, [function (tag) {
         return tag.tag_title.toLowerCase();
       }], 'tag_id');
     },
@@ -2147,6 +2156,22 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   methods: {
+    getTagResults: function getTagResults() {
+      var _this = this;
+
+      var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+      axios.get('api/tag?page=' + page).then(function (response) {
+        _this.tags = response.data;
+      });
+    },
+    getVoucherResults: function getVoucherResults() {
+      var _this2 = this;
+
+      var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+      axios.get('api/voucher?page=' + page).then(function (response) {
+        _this2.vouchers = response.data;
+      });
+    },
     updateTag: function updateTag() {
       this.tagForm.put('api/tag/' + this.tagForm.id).then(function () {
         Fire.$emit('RefreshVouchersAndTags');
@@ -2167,7 +2192,7 @@ __webpack_require__.r(__webpack_exports__);
       this.tagForm.fill(tag);
     },
     deleteTagTitle: function deleteTagTitle(tagID, tagName) {
-      var _this = this;
+      var _this3 = this;
 
       swal.fire({
         title: 'Warning',
@@ -2179,7 +2204,7 @@ __webpack_require__.r(__webpack_exports__);
         confirmButtonText: 'Delete'
       }).then(function (result) {
         if (result.value) {
-          _this.tagForm["delete"]('api/tag/' + tagID).then(function () {
+          _this3.tagForm["delete"]('api/tag/' + tagID).then(function () {
             swal.fire('Deleted!', 'Tag has been deleted.', 'success');
             Fire.$emit('RefreshVouchersAndTags');
           })["catch"](function () {
@@ -2250,31 +2275,31 @@ __webpack_require__.r(__webpack_exports__);
 
     /* Getting tag data */
     getTags: function getTags() {
-      var _this2 = this;
+      var _this4 = this;
 
       axios.get('api/tag').then(function (_ref) {
         var data = _ref.data;
-        return _this2.tags = data;
+        return _this4.tags = data;
       });
     },
 
     /* Getting voucher data */
     getVouch: function getVouch() {
-      var _this3 = this;
+      var _this5 = this;
 
       axios.get('api/voucher').then(function (_ref2) {
         var data = _ref2.data;
-        return _this3.vouchers = data;
+        return _this5.vouchers = data;
       });
     }
   },
   mounted: function mounted() {
-    var _this4 = this;
+    var _this6 = this;
 
     Fire.$on('RefreshVouchersAndTags', function () {
-      _this4.getVouch();
+      _this6.getVouch();
 
-      _this4.getTags();
+      _this6.getTags();
     });
     this.getVouch();
     this.getTags();
@@ -70349,7 +70374,7 @@ var render = function() {
                 [
                   _vm._m(0),
                   _vm._v(" "),
-                  _vm._l(_vm.tags, function(tag) {
+                  _vm._l(_vm.tags.data, function(tag) {
                     return _c("tr", { key: tag.id }, [
                       _c("td", [_vm._v(_vm._s(tag.id))]),
                       _vm._v(" "),
@@ -70395,7 +70420,33 @@ var render = function() {
             ])
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "card-footer" })
+          _c(
+            "div",
+            { staticClass: "card-footer" },
+            [
+              _c(
+                "pagination",
+                {
+                  attrs: { data: _vm.tags, limit: 5 },
+                  on: { "pagination-change-page": _vm.getTagResults }
+                },
+                [
+                  _c(
+                    "span",
+                    { attrs: { slot: "prev-nav" }, slot: "prev-nav" },
+                    [_vm._v("< Previous")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "span",
+                    { attrs: { slot: "next-nav" }, slot: "next-nav" },
+                    [_vm._v("Next >")]
+                  )
+                ]
+              )
+            ],
+            1
+          )
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "card" }, [
@@ -70464,7 +70515,33 @@ var render = function() {
             ])
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "card-footer" }),
+          _c(
+            "div",
+            { staticClass: "card-footer" },
+            [
+              _c(
+                "pagination",
+                {
+                  attrs: { data: _vm.vouchers, limit: 5 },
+                  on: { "pagination-change-page": _vm.getVoucherResults }
+                },
+                [
+                  _c(
+                    "span",
+                    { attrs: { slot: "prev-nav" }, slot: "prev-nav" },
+                    [_vm._v("< Previous")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "span",
+                    { attrs: { slot: "next-nav" }, slot: "next-nav" },
+                    [_vm._v("Next >")]
+                  )
+                ]
+              )
+            ],
+            1
+          ),
           _vm._v(" "),
           _c(
             "div",
@@ -87310,7 +87387,7 @@ window.moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.
 /* Custom Vue event */
 
 window.Fire = new Vue();
-/* Pagination for vouchers table */
+/* Pagination  */
 
 Vue.component('pagination', __webpack_require__(/*! laravel-vue-pagination */ "./node_modules/laravel-vue-pagination/dist/laravel-vue-pagination.common.js"));
 /* Get access to vform globally */

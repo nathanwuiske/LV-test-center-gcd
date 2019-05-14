@@ -11,7 +11,7 @@ class TagController extends Controller
 
     public function index()
     {
-        return Tag::get();
+        return Tag::latest()->paginate(5);
     }
 
     public function store(Request $request)

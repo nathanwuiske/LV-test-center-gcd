@@ -319,10 +319,7 @@
                     })
             },
             displayVouchers() {
-                axios.get("api/voucher")
-                    .then(({
-                        data
-                    }) => (this.vouchers = data)); /*store the data in the voucher object */
+                axios.get("api/voucher").then(({data}) => (this.vouchers = data)); /*store the data in the voucher object */
             },
             deleteVoucher(id, name) {
                 swal.fire({

@@ -17,7 +17,7 @@
                            <th>Tag Name</th>
                            <th>Modify</th>
                         </tr>
-                        <tr v-for="tag in tags" :key="tag.id">
+                        <tr v-for="tag in tags.data" :key="tag.id">
                            <td>{{tag.id}}</td>
                            <td>{{tag.tag_title}}</td>
                            <td>
@@ -29,6 +29,10 @@
                   </table>
                </div>
                <div class="card-footer">
+                  <pagination :data="tags" @pagination-change-page="getTagResults" :limit=5>
+                     <span slot="prev-nav">&lt; Previous</span>
+                     <span slot="next-nav">Next &gt;</span>
+                  </pagination>
                </div>
             </div>
             <div class="card">
@@ -59,7 +63,12 @@
                      </tbody>
                   </table>
                </div>
+               
                <div class="card-footer">
+                  <pagination :data="vouchers" @pagination-change-page="getVoucherResults" :limit=5>
+                     <span slot="prev-nav">&lt; Previous</span>
+                     <span slot="next-nav">Next &gt;</span>
+                  </pagination>
                </div>
 
                  <!-- Modal for editing new tags -->
@@ -200,13 +209,25 @@
 		},
 		computed: {
 			sortedTags() {
-				return _.sortBy(this.tags, [tag => tag.tag_title.toLowerCase()], 'tag_id');
+				return _.sortBy(this.tags.data, [tag => tag.tag_title.toLowerCase()], 'tag_id');
 			},
 			voucherTags() {
 				return _.sortBy(this.tagForm.gettags, [tag => tag.tag_title.toLowerCase()], 'tag_id');
 			}
 		},
 		methods: {
+         getTagResults(page = 1) {
+                axios.get('api/tag?page=' + page)
+                    .then(response => {
+                        this.tags = response.data;
+                    });
+            },
+         getVoucherResults(page = 1) {
+                axios.get('api/voucher?page=' + page)
+                    .then(response => {
+                        this.vouchers = response.data;
+                    });
+            },
          updateTag(){
             this.tagForm.put('api/tag/' + this.tagForm.id)
                     .then(() => {
