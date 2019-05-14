@@ -25,3 +25,5 @@ Route::apiResource('vouchertag', 'API\VoucherTagController');
 
 Route::apiResource('category', 'API\CategoryController');
 Route::apiResource('vouchercategory', 'API\VoucherCategoryController');
+
+Route::apiResource('archived', 'API\ArchivedController');

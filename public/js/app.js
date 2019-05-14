@@ -1796,8 +1796,114 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  mounted: function mounted() {}
+  data: function data() {
+    return {
+      archived: {},
+      archiveForm: new Form({
+        id: ''
+      })
+    };
+  },
+  methods: {
+    getPhoto: function getPhoto(photo) {
+      $('#imagepreview').attr('src', "imgs/vouchers/" + photo);
+      $('#showPhoto').modal('show');
+    },
+    getResults: function getResults() {
+      var _this = this;
+
+      var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+      axios.get('api/archived?page=' + page).then(function (response) {
+        _this.archived = response.data;
+      });
+    },
+    getArchived: function getArchived() {
+      var _this2 = this;
+
+      axios.get('api/archived').then(function (_ref) {
+        var data = _ref.data;
+        return _this2.archived = data;
+      });
+    },
+    restoreVoucher: function restoreVoucher(id, name) {
+      var _this3 = this;
+
+      swal.fire({
+        title: 'Voucher Restore',
+        html: 'The following voucher will be restored: <b><b><br>' + name,
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3490DE',
+        cancelButtonColor: '#07AD4D',
+        confirmButtonText: 'Restore'
+      }).then(function (result) {
+        if (result.value) {
+          _this3.archiveForm["delete"]('api/archived/' + id).then(function () {
+            swal.fire('Restored!', 'Voucher has been restored.', 'success');
+            Fire.$emit('RefreshVouchers');
+          })["catch"](function () {
+            swal("Failed!", "Failed to restore voucher.", "warning");
+          });
+        }
+      });
+    }
+  },
+  mounted: function mounted() {
+    var _this4 = this;
+
+    Fire.$on('RefreshVouchers', function () {
+      _this4.getArchived();
+    });
+    this.getArchived();
+  }
 });
 
 /***/ }),
@@ -70657,28 +70763,194 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { staticClass: "container" }, [
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-12" }, [
+        _c("div", { staticClass: "card" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _c("div", { staticClass: "card-body table-responsive p-0" }, [
+            _c("table", { staticClass: "table table-hover" }, [
+              _c(
+                "tbody",
+                [
+                  _vm._m(1),
+                  _vm._v(" "),
+                  _vm._l(_vm.archived.data, function(archive) {
+                    return _c("tr", { key: archive.id }, [
+                      _c("td", [_vm._v(_vm._s(archive.id))]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v(_vm._s(archive.name))]),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "truncateText" }, [
+                        _c("span", [_vm._v(_vm._s(archive.description))])
+                      ]),
+                      _vm._v(" "),
+                      _c("td", [
+                        _vm._v(
+                          _vm._s(_vm._f("formatDate")(archive.expiry_date))
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "truncateText" }, [
+                        _c("span", [_vm._v(_vm._s(archive.facebook_link))])
+                      ]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v(_vm._s(archive.popular_flag))]),
+                      _vm._v(" "),
+                      _c("td", [
+                        _c(
+                          "a",
+                          {
+                            attrs: { href: "#" },
+                            on: {
+                              click: function($event) {
+                                return _vm.getPhoto(archive.photo)
+                              }
+                            }
+                          },
+                          [_vm._v("Show")]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("td", [
+                        _c(
+                          "a",
+                          {
+                            attrs: { href: "#" },
+                            on: {
+                              click: function($event) {
+                                return _vm.restoreVoucher(
+                                  archive.id,
+                                  archive.name
+                                )
+                              }
+                            }
+                          },
+                          [_c("i", { staticClass: "fas fa-trash-restore" })]
+                        )
+                      ])
+                    ])
+                  })
+                ],
+                2
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "card-footer" },
+            [
+              _c(
+                "pagination",
+                {
+                  attrs: { data: _vm.archived, limit: 5 },
+                  on: { "pagination-change-page": _vm.getResults }
+                },
+                [
+                  _c(
+                    "span",
+                    { attrs: { slot: "prev-nav" }, slot: "prev-nav" },
+                    [_vm._v("< Previous")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "span",
+                    { attrs: { slot: "next-nav" }, slot: "next-nav" },
+                    [_vm._v("Next >")]
+                  )
+                ]
+              )
+            ],
+            1
+          )
+        ]),
+        _vm._v(" "),
+        _vm._m(2)
+      ])
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container" }, [
-      _c("div", { staticClass: "row justify-content-center" }, [
-        _c("div", { staticClass: "col-md-8" }, [
-          _c("div", { staticClass: "card" }, [
-            _c("div", { staticClass: "card-header" }, [
-              _vm._v("Archived Component")
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "card-body" }, [
-              _vm._v("\n                    To be added.\n                ")
-            ])
-          ])
-        ])
-      ])
+    return _c("div", { staticClass: "card-header" }, [
+      _c("h3", { staticClass: "card-title" }, [_vm._v("Archived Vouchers")])
     ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("tr", [
+      _c("th", [_vm._v("ID")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Name")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Description")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Expiry Date")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Facebook Link")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Popular")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Photo")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Restore")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        attrs: {
+          id: "showPhoto",
+          tabindex: "-1",
+          role: "dialog",
+          "aria-labelledby": "showPhotoLabel",
+          "aria-hidden": "true"
+        }
+      },
+      [
+        _c(
+          "div",
+          {
+            staticClass: "modal-dialog modal-dialog-centered",
+            attrs: { role: "document" }
+          },
+          [
+            _c("div", { staticClass: "modal-content" }, [
+              _c("div", { staticClass: "modal-body" }, [
+                _c("img", {
+                  staticClass: "imagepreview",
+                  staticStyle: { width: "100%" },
+                  attrs: { src: "", id: "imagepreview" }
+                })
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-footer" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-primary",
+                    attrs: { type: "button", "data-dismiss": "modal" }
+                  },
+                  [_vm._v("Close")]
+                )
+              ])
+            ])
+          ]
+        )
+      ]
+    )
   }
 ]
 render._withStripped = true
