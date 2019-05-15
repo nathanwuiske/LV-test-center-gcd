@@ -20,7 +20,7 @@ class CreateVouchersTable extends Migration
             $table->longText('description');
             $table->string('photo')->nullable();
             $table->dateTime('expiry_date')->nullable();
-           // $table->string('category')->nullable();
+            $table->integer('timeout')->default(15);
             $table->string('facebook_link')->nullable();
             $table->integer('popular_flag')->nullable();
             $table->softDeletes();
