@@ -32,6 +32,7 @@ class AuthController extends Controller
             )->toDateTimeString()
         ]);
     }
+
     public function register(Request $request)
     {
         $request->validate([
@@ -50,6 +51,7 @@ class AuthController extends Controller
             'message' => 'Successfully created user!'
         ], 201);
     }
+    
     public function logout(Request $request)
     {
         $request->user()->token()->revoke();
