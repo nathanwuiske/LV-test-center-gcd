@@ -28,13 +28,12 @@ Route::apiResource('vouchercategory', 'API\VoucherCategoryController');
 
 Route::apiResource('archived', 'API\ArchivedController');
 
-
-
 Route::group([
     'prefix' => 'auth'
 ], function () {
     Route::post('login', 'Auth\AuthController@login')->name('login');
     Route::post('register', 'Auth\AuthController@register');
+    Route::post('forgot', 'Auth\ForgotPassController@sendEmail');
     Route::group([
       'middleware' => 'auth:api'
     ], function() {
