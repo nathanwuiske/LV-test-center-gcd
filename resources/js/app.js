@@ -1,4 +1,4 @@
-/* Dependacies */
+/* Dependencies */
 require('./bootstrap');
 import router from './routes.js';
 import { Form, HasError, AlertError } from 'vform'
@@ -6,6 +6,14 @@ import moment from 'moment'
 import swal from 'sweetalert2'
 import { Datetime } from 'vue-datetime';
 import 'vue-datetime/dist/vue-datetime.css'
+import VueProgressBar from 'vue-progressbar'
+
+/* Vue progress bar */
+Vue.use(VueProgressBar, {
+    color: 'rgb(143, 255, 199)',
+    failedColor: 'red',
+    height: '5px'
+  })
 
 /* Datetime formatter */
 Vue.component('datetime', Datetime);
@@ -44,6 +52,3 @@ const app = new Vue({
     el: '#app',
     router
 });
-
-
-//Vue.component('test-component', require('./components/Vouchers.vue').default);

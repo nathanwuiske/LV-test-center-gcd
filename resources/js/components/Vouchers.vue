@@ -284,8 +284,10 @@
                     });
             },
             createVoucher() {
+                this.$Progress.start();
                 this.voucherForm.post('api/voucher')
                     .then(() => {
+                        
                         /* If the post was successful then hide the modal and print success message */
                         Fire.$emit('RefreshVouchers');
                         $('#addNewVoucher').modal('hide');
@@ -294,6 +296,7 @@
                             'Voucher has been created successfully',
                             'success'
                         )
+                        this.$Progress.finish();
                     })
                     .catch(() => {
                         /* If unsuccessful */
@@ -302,6 +305,7 @@
                             text: "Failed to create new voucher. Please check you have correctly filled the form.",
                             type: 'error'
                         })
+                         this.$Progress.fail();
                     })
             },
             displayVouchers() {
@@ -319,16 +323,19 @@
                 }).then((result) => {
                     if (result.value) {
                         this.voucherForm.is_archive = "no";
+                        this.$Progress.start();
                         this.voucherForm.delete('api/voucher/' + id).then(() => {
                             swal.fire(
                                 'Deleted!',
                                 'Voucher has been deleted.',
                                 'success'
                             )
+                            this.$Progress.finish();
                             /* After deleting, send an event to fresh the voucher table */
                             Fire.$emit('RefreshVouchers');
                         }).catch(() => {
                             swal("Failed!", "Failed to delete voucher.", "warning");
+                            this.$Progress.fail();
                         });
                     }
                 })

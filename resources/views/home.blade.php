@@ -92,7 +92,10 @@
          <!-- Main content -->
          <div class="content">
             <div class="container-fluid">
+               <!-- set router view -->
                <router-view></router-view>
+               <!-- set progressbar -->
+               <vue-progress-bar></vue-progress-bar>
             </div>
          </div>
       </div>
