@@ -119,6 +119,11 @@ class VoucherController extends Controller
         }
         else if ($request->is_archive == "no"){
             $voucher = Voucher::findOrFail($id);
+            $currentPhoto = $voucher->photo;
+            $getCurrentPhoto = public_path('imgs/vouchers/'.$currentPhoto);
+            if(file_exists($getCurrentPhoto)){
+                @unlink($getCurrentPhoto); /* Delete the photo */
+            }
             $voucher->forceDelete(); // permanent delete
         }
     }
