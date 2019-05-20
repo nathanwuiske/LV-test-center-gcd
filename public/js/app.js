@@ -2136,12 +2136,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2382,12 +2376,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2570,12 +2558,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -3280,7 +3262,6 @@ __webpack_require__.r(__webpack_exports__);
 
         _this4.$Progress.finish();
       })["catch"](function () {
-        /* If unsuccessful */
         swal.fire({
           title: 'Error',
           text: "Failed to create new voucher. Please check you have correctly filled the form.",

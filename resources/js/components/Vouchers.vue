@@ -178,200 +178,201 @@
    </div>
 </template>
 <script>
-    export default {
-        data() {
-            return {
-                editmode: false,
-                vouchers: {},
-                voucherForm: new Form({
-                    id: '',
-                    name: '',
-                    description: '',
-                    image: '',
-                    expiry_date: '',
-                    facebook_link: '',
-                    category: '',
-                    popular_flag: '',
-                    is_archive: ''
-                })
-            }
-        },
-        methods: {
-            getImage(image) {
-                $('#imagepreview').attr('src', "imgs/vouchers/" + image);
-                $('#showImage').modal('show');
-            },
-            insertImage(event) {
-                let file = event.target.files[0];
-                let reader = new FileReader();
+	export default {
+		data() {
+			return {
+				editmode: false,
+				vouchers: {},
+				voucherForm: new Form({
+					id: '',
+					name: '',
+					description: '',
+					image: '',
+					expiry_date: '',
+					facebook_link: '',
+					category: '',
+					popular_flag: '',
+					is_archive: ''
+				})
+			}
+		},
+		methods: {
+			getImage(image) {
+				$('#imagepreview').attr('src', "imgs/vouchers/" + image);
+				$('#showImage').modal('show');
+			},
+			insertImage(event) {
+				let file = event.target.files[0];
+				let reader = new FileReader();
 
-                /* convert to base64 */
-                reader.onloadend = (file) => {
-                    this.voucherForm.image = reader.result;
-                }
-                reader.readAsDataURL(file);
-            },
-            updateVoucher() {
-                this.voucherForm.put('api/voucher/' + this.voucherForm.id)
-                    .then(() => {
-                        Fire.$emit('RefreshVouchers');
-                        $('#addNewVoucher').modal('hide');
-                        swal.fire(
-                            'Success!',
-                            'Voucher has been successfully updated.',
-                            'success'
-                        )
-                    })
-                    .catch(() => {
-                        swal.fire({
-                            title: 'Error',
-                            text: "Failed to update voucher.",
-                            type: 'error'
-                        })
-                    })
-            },
-            archiveVoucher(id, name) {
-                swal.fire({
-                    title: 'Are you sure?',
-                    html: 'The following voucher will be archived: <b><b><br>' + name,
-                    type: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#428BCA',
-                    cancelButtonColor: '#07AD4D',
-                    confirmButtonText: 'Archive'
-                }).then((result) => {
-                    if (result.value) {
-                        this.voucherForm.is_archive = "yes";
-                        this.voucherForm.delete('api/voucher/' + id).then(() => {
-                            swal.fire(
-                                'Archived!',
-                                'Voucher has been archived.',
-                                'success'
-                            )
-                            /* After archiving, send an event to fresh the voucher table */
-                            Fire.$emit('RefreshVouchers');
-                        }).catch(() => {
-                            swal("Failed!", "Failed to archive voucher.", "warning");
-                        });
-                    }
-                })
-            },
-            editVoucherModal(voucher) {
-                this.editmode = true;
-                this.voucherForm.clear();
-                this.voucherForm.reset();
-                $("#addNewVoucher").modal({
-                    backdrop: 'static',
-                    keyboard: false
-                });
-                this.voucherForm.fill(voucher);
-            },
-            addNewVoucherModal() {
-                this.editmode = false;
-                this.voucherForm.clear();
-                this.voucherForm.reset();
-                /* Show the modal and make sure it can't be closed when clicking the areas around it */
-                $("#addNewVoucher").modal({
-                    backdrop: 'static',
-                    keyboard: false
-                });
-            },
-            /* Method to paginate the voucher data */
-            getResults(page = 1) {
-                axios.get('api/voucher?page=' + page)
-                    .then(response => {
-                        this.vouchers = response.data;
-                    });
-            },
-            createVoucher() {
-                this.$Progress.start();
-                this.voucherForm.post('api/voucher')
-                    .then(() => {
-                        
-                        /* If the post was successful then hide the modal and print success message */
-                        Fire.$emit('RefreshVouchers');
-                        $('#addNewVoucher').modal('hide');
-                        swal.fire(
-                            'Success!',
-                            'Voucher has been created successfully',
-                            'success'
-                        )
-                        this.$Progress.finish();
-                    })
-                    .catch(() => {
-                        /* If unsuccessful */
-                        swal.fire({
-                            title: 'Error',
-                            text: "Failed to create new voucher. Please check you have correctly filled the form.",
-                            type: 'error'
-                        })
-                         this.$Progress.fail();
-                    })
-            },
-            displayVouchers() {
-                axios.get("api/voucher").then(({data}) => (this.vouchers = data)); /*store the data in the voucher object */
-            },
-            deleteVoucher(id, name) {
-                swal.fire({
-                    title: 'Are you sure?',
-                    html: 'The following voucher will be permanently deleted: <b><b><br>' + name,
-                    type: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#d33',
-                    cancelButtonColor: '#07AD4D',
-                    confirmButtonText: 'Delete'
-                }).then((result) => {
-                    if (result.value) {
-                        this.voucherForm.is_archive = "no";
-                        this.$Progress.start();
-                        this.voucherForm.delete('api/voucher/' + id).then(() => {
-                            swal.fire(
-                                'Deleted!',
-                                'Voucher has been deleted.',
-                                'success'
-                            )
-                            this.$Progress.finish();
-                            /* After deleting, send an event to fresh the voucher table */
-                            Fire.$emit('RefreshVouchers');
-                        }).catch(() => {
-                            swal("Failed!", "Failed to delete voucher.", "warning");
-                            this.$Progress.fail();
-                        });
-                    }
-                })
-            }
+				/* convert to base64 */
+				reader.onloadend = (file) => {
+					this.voucherForm.image = reader.result;
+				}
+				reader.readAsDataURL(file);
+			},
+			updateVoucher() {
+				this.voucherForm.put('api/voucher/' + this.voucherForm.id)
+					.then(() => {
+						Fire.$emit('RefreshVouchers');
+						$('#addNewVoucher').modal('hide');
+						swal.fire(
+							'Success!',
+							'Voucher has been successfully updated.',
+							'success'
+						)
+					})
+					.catch(() => {
+						swal.fire({
+							title: 'Error',
+							text: "Failed to update voucher.",
+							type: 'error'
+						})
+					})
+			},
+			archiveVoucher(id, name) {
+				swal.fire({
+					title: 'Are you sure?',
+					html: 'The following voucher will be archived: <b><b><br>' + name,
+					type: 'warning',
+					showCancelButton: true,
+					confirmButtonColor: '#428BCA',
+					cancelButtonColor: '#07AD4D',
+					confirmButtonText: 'Archive'
+				}).then((result) => {
+					if (result.value) {
+						this.voucherForm.is_archive = "yes";
+						this.voucherForm.delete('api/voucher/' + id).then(() => {
+							swal.fire(
+								'Archived!',
+								'Voucher has been archived.',
+								'success'
+							)
+							/* After archiving, send an event to fresh the voucher table */
+							Fire.$emit('RefreshVouchers');
+						}).catch(() => {
+							swal("Failed!", "Failed to archive voucher.", "warning");
+						});
+					}
+				})
+			},
+			editVoucherModal(voucher) {
+				this.editmode = true;
+				this.voucherForm.clear();
+				this.voucherForm.reset();
+				$("#addNewVoucher").modal({
+					backdrop: 'static',
+					keyboard: false
+				});
+				this.voucherForm.fill(voucher);
+			},
+			addNewVoucherModal() {
+				this.editmode = false;
+				this.voucherForm.clear();
+				this.voucherForm.reset();
+				/* Show the modal and make sure it can't be closed when clicking the areas around it */
+				$("#addNewVoucher").modal({
+					backdrop: 'static',
+					keyboard: false
+				});
+			},
+			/* Method to paginate the voucher data */
+			getResults(page = 1) {
+				axios.get('api/voucher?page=' + page)
+					.then(response => {
+						this.vouchers = response.data;
+					});
+			},
+			createVoucher() {
+				this.$Progress.start();
+				this.voucherForm.post('api/voucher')
+					.then(() => {
 
-        },
-        /* END OF METHODS */
+						/* If the post was successful then hide the modal and print success message */
+						Fire.$emit('RefreshVouchers');
+						$('#addNewVoucher').modal('hide');
+						swal.fire(
+							'Success!',
+							'Voucher has been created successfully',
+							'success'
+						)
+						this.$Progress.finish();
+					})
+					.catch(() => {
+						swal.fire({
+							title: 'Error',
+							text: "Failed to create new voucher. Please check you have correctly filled the form.",
+							type: 'error'
+						})
+						this.$Progress.fail();
+					})
+			},
+			displayVouchers() {
+				axios.get("api/voucher").then(({
+					data
+				}) => (this.vouchers = data)); /*store the data in the voucher object */
+			},
+			deleteVoucher(id, name) {
+				swal.fire({
+					title: 'Are you sure?',
+					html: 'The following voucher will be permanently deleted: <b><b><br>' + name,
+					type: 'warning',
+					showCancelButton: true,
+					confirmButtonColor: '#d33',
+					cancelButtonColor: '#07AD4D',
+					confirmButtonText: 'Delete'
+				}).then((result) => {
+					if (result.value) {
+						this.voucherForm.is_archive = "no";
+						this.$Progress.start();
+						this.voucherForm.delete('api/voucher/' + id).then(() => {
+							swal.fire(
+								'Deleted!',
+								'Voucher has been deleted.',
+								'success'
+							)
+							this.$Progress.finish();
+							/* After deleting, send an event to fresh the voucher table */
+							Fire.$emit('RefreshVouchers');
+						}).catch(() => {
+							swal("Failed!", "Failed to delete voucher.", "warning");
+							this.$Progress.fail();
+						});
+					}
+				})
+			}
+
+		},
+		/* END OF METHODS */
 
 
-        mounted() {
-            this.displayVouchers();
-            /* If a voucher is created, call the displayVouchers function again to refresh vouchers table*/
-            Fire.$on('RefreshVouchers', () => {
-                this.displayVouchers();
-            });
-            /* Show a warning modal before closing the 'Create Voucher' modal  */
-            $(document).ready(function() {
-                $('.closefirstmodal').click(function() {
-                    $('#Warning').modal('show');
-                });
-                /* If the user confirms the close, hide both modals */
-                $('.confirmclosed').click(function() {
-                    $('#Warning').modal('hide');
-                    $('#addNewVoucher').modal('hide');
-                });
-            });
-            /* Setup tooltips */
-            $(".voucherFormToolTip").tooltip({
-                placement: "top",
-                title: "Popular vouchers will be displayed on the home page"
-            });
-            $(".deleteToolTip").tooltip({
-                placement: "top",
-                title: "Delete"
-            });
+		mounted() {
+			this.displayVouchers();
+			/* If a voucher is created, call the displayVouchers function again to refresh vouchers table*/
+			Fire.$on('RefreshVouchers', () => {
+				this.displayVouchers();
+			});
+			/* Show a warning modal before closing the 'Create Voucher' modal  */
+			$(document).ready(function () {
+				$('.closefirstmodal').click(function () {
+					$('#Warning').modal('show');
+				});
+				/* If the user confirms the close, hide both modals */
+				$('.confirmclosed').click(function () {
+					$('#Warning').modal('hide');
+					$('#addNewVoucher').modal('hide');
+				});
+			});
+			/* Setup tooltips */
+			$(".voucherFormToolTip").tooltip({
+				placement: "top",
+				title: "Popular vouchers will be displayed on the home page"
+			});
+			$(".deleteToolTip").tooltip({
+				placement: "top",
+				title: "Delete"
+			});
 
-        }
-    } 
-   </script>
+		}
+	} 
+</script>

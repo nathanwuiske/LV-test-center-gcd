@@ -11,20 +11,16 @@ class Voucher extends Model
     use Notifiable;
     use SoftDeletes;
 
-   public function gettags()
-   {
+    public function gettags()
+    {
         return $this->belongsToMany('App\Tag', 'voucher_tags');
-   }
+    }
    
-   public function getCategories()
-   {
+    public function getCategories()
+    {
         return $this->belongsToMany('App\Category', 'voucher_categories');
-   }
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
+    }
+
     protected $fillable = [
         'name', 'description', 'facebook_link', 'popular_flag', 'expiry_date', 'image'
     ];

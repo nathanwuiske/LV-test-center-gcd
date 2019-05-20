@@ -10,26 +10,14 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class VoucherController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         /* display the latest 10 vouchers */
         return Voucher::with('gettags')->with('getCategories')->latest()->paginate(10);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        
         /* validate the voucher form */
         $this->validate($request,[
             //maybe have a unique:name for name to prevent duplicate vouchers? 
@@ -58,30 +46,15 @@ class VoucherController extends Controller
         ]);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
-        //
+        
     }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-
     
     public function update(Request $request, $id)
     {
         $voucher = Voucher::findOrFail($id);
-        /* Do some validation before updating the voucher */
+        /* validation before updating the voucher */
         $this->validate($request,[
             'name' => 'required|string|max:150', 
             'description' => 'required|string|max:500',
@@ -103,12 +76,6 @@ class VoucherController extends Controller
         $voucher->update($request->all());
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id, Request $request)
     {
         if($request->is_archive == "yes"){

@@ -55,7 +55,7 @@
                            <div v-for="category in voucher.get_categories" :key="category.id">
                               <td>{{category.name}}</td>
                            </div>
-                           <td> <!--UP TO HERE -->
+                           <td>
                               <a href="#" @click="categorymodal(voucher.id)"><i class="fas fa-plus green"></i></a>
                               <a href="#" @click="deleteCategory(voucher)"><i class="fas fa-trash red"></i></a>
                            </td>
@@ -63,15 +63,13 @@
                      </tbody>
                   </table>
                </div>
-               
                <div class="card-footer">
                   <pagination :data="vouchers" @pagination-change-page="getVoucherResults" :limit=5>
                      <span slot="prev-nav">&lt; Previous</span>
                      <span slot="next-nav">Next &gt;</span>
                   </pagination>
                </div>
-
-                 <!-- Modal for editing categories -->
+               <!-- Modal for editing categories -->
                <div class="modal fade" id="editCategoryModal" tabindex="-1" role="dialog" aria-labelledby="editCategoryModalLabel" aria-hidden="true">
                   <div class="modal-dialog modal-dialog-centered" role="document">
                      <div class="modal-content">
@@ -80,7 +78,7 @@
                         </div>
                         <form @submit.prevent="updateCategory()">
                            <div class="modal-body">
-                             <!-- Category name form input -->
+                              <!-- Category name form input -->
                               <div class="form-group">
                                  <label>Name</label><span class="red">&#42;</span>
                                  <input v-model="categoryForm.name" type="text" name="name" placeholder="Enter a name for the category"
@@ -98,8 +96,7 @@
                      </div>
                   </div>
                </div>
-
-                <!-- Modal for adding new categories -->
+               <!-- Modal for adding new categories -->
                <div class="modal fade" id="addNewCategoryModal" tabindex="-1" role="dialog" aria-labelledby="addNewCategoryModalLabel" aria-hidden="true">
                   <div class="modal-dialog modal-dialog-centered" role="document">
                      <div class="modal-content">
@@ -108,7 +105,7 @@
                         </div>
                         <form @submit.prevent="addCategory()">
                            <div class="modal-body">
-                             <!-- Category name form input -->
+                              <!-- Category name form input -->
                               <div class="form-group">
                                  <label>Name</label><span class="red">&#42;</span>
                                  <input v-model="categoryForm.name" type="text" name="name" placeholder="Enter a name for the category"
@@ -125,8 +122,6 @@
                      </div>
                   </div>
                </div>
-
-
                <!-- Modal for assigning new categories -->
                <div class="modal fade" id="addNewCategory" tabindex="-1" role="dialog" aria-labelledby="addNewCategoryLabel" aria-hidden="true">
                   <div class="modal-dialog modal-dialog-centered" role="document">
@@ -155,8 +150,7 @@
                      </div>
                   </div>
                </div>
-    
-                <!-- Modal for deleteing new categories -->
+               <!-- Modal for deleteing new categories -->
                <div class="modal fade" id="deleteCategoryModal" tabindex="-1" role="dialog" aria-labelledby="deleteCategoryLabel" aria-hidden="true">
                   <div class="modal-dialog modal-dialog-centered" role="document">
                      <div class="modal-content">
@@ -196,12 +190,12 @@
 	export default {
 		data() {
 			return {
-                categories: {},
-                vouchers: {},
+				categories: {},
+				vouchers: {},
 				categoryForm: new Form({
 					id: '',
 					voucher_id: '',
-                    category_id: '',
+					category_id: '',
 					name: '',
 					get_categories: []
 				}),
@@ -216,92 +210,92 @@
 			}
 		},
 		methods: {
-         getCategoryResults(page = 1) {
-                axios.get('api/category?page=' + page)
-                    .then(response => {
-                        this.categories = response.data;
-                    });
-            },
-         getVoucherResults(page = 1) {
-                axios.get('api/voucher?page=' + page)
-                    .then(response => {
-                        this.vouchers = response.data;
-                    });
-            },
-         updateCategory(){
-            this.categoryForm.put('api/category/' + this.categoryForm.id)
-                    .then(() => {
-                        Fire.$emit('RefreshVouchersAndCategories');
-                        $('#editCategoryModal').modal('hide');
-                        swal.fire(
-                            'Success!',
-                            'Category has been successfully updated.',
-                            'success'
-                        )
-                    })
-                    .catch(() => {
-                        swal.fire({
-                            title: 'Error',
-                            text: "Failed to update category.",
-                            type: 'error'
-                        })
-                    })
-         },
-         editCategory(category){
-            this.categoryForm.clear();
-            this.categoryForm.reset();
-             $('#editCategoryModal').modal('show');
-            this.categoryForm.fill(category);
-         },
-         deleteCategoryTitle(categoryID, categoryName){
-              swal.fire({
-                    title: 'Warning',
-                    html: 'Deleting the category <b><b>' + categoryName + ' </b></b>will also permanently remove it from all vouchers' ,
-                    type: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#d33',
-                    cancelButtonColor: '#07AD4D',
-                    confirmButtonText: 'Delete'
-                }).then((result) => {
-                    if (result.value) {
-                        this.categoryForm.delete('api/category/' + categoryID).then(() => {
-                            swal.fire(
-                                'Deleted!',
-                                'Category has been deleted.',
-                                'success'
-                            )
-                            Fire.$emit('RefreshVouchersAndCategories');
-                        }).catch(() => {
-                            swal("Failed!", "Failed to delete category.", "warning");
-                        });
-                    }
-                })
-         },
-         addCategory(){
-            this.categoryForm.post('api/category')
-                    .then(() => {
-                        Fire.$emit('RefreshVouchersAndCategories');
-                        $('#addNewCategoryModal').modal('hide');
-                        swal.fire(
-                            'Success!',
-                            'Category has been created successfully',
-                            'success'
-                        )
-                    })
-                    .catch(() => {
-                        swal.fire({
-                            title: 'Error',
-                            text: "Failed to create new category.",
-                            type: 'error'
-                        })
-                    })
-         },
-         addNewCategoryModal(){
-            $('#addNewCategoryModal').modal('show');
-         },
-         /* Deleting categories */
+			getCategoryResults(page = 1) {
+				axios.get('api/category?page=' + page)
+					.then(response => {
+						this.categories = response.data;
+					});
+			},
+			getVoucherResults(page = 1) {
+				axios.get('api/voucher?page=' + page)
+					.then(response => {
+						this.vouchers = response.data;
+					});
+			},
+			updateCategory() {
+				this.categoryForm.put('api/category/' + this.categoryForm.id)
+					.then(() => {
+						Fire.$emit('RefreshVouchersAndCategories');
+						$('#editCategoryModal').modal('hide');
+						swal.fire(
+							'Success!',
+							'Category has been successfully updated.',
+							'success'
+						)
+					})
+					.catch(() => {
+						swal.fire({
+							title: 'Error',
+							text: "Failed to update category.",
+							type: 'error'
+						})
+					})
+			},
+			editCategory(category) {
+				this.categoryForm.clear();
+				this.categoryForm.reset();
+				$('#editCategoryModal').modal('show');
+				this.categoryForm.fill(category);
+			},
+			deleteCategoryTitle(categoryID, categoryName) {
+				swal.fire({
+					title: 'Warning',
+					html: 'Deleting the category <b><b>' + categoryName + ' </b></b>will also permanently remove it from all vouchers',
+					type: 'warning',
+					showCancelButton: true,
+					confirmButtonColor: '#d33',
+					cancelButtonColor: '#07AD4D',
+					confirmButtonText: 'Delete'
+				}).then((result) => {
+					if (result.value) {
+						this.categoryForm.delete('api/category/' + categoryID).then(() => {
+							swal.fire(
+								'Deleted!',
+								'Category has been deleted.',
+								'success'
+							)
+							Fire.$emit('RefreshVouchersAndCategories');
+						}).catch(() => {
+							swal("Failed!", "Failed to delete category.", "warning");
+						});
+					}
+				})
+			},
+			addCategory() {
+				this.categoryForm.post('api/category')
+					.then(() => {
+						Fire.$emit('RefreshVouchersAndCategories');
+						$('#addNewCategoryModal').modal('hide');
+						swal.fire(
+							'Success!',
+							'Category has been created successfully',
+							'success'
+						)
+					})
+					.catch(() => {
+						swal.fire({
+							title: 'Error',
+							text: "Failed to create new category.",
+							type: 'error'
+						})
+					})
+			},
+			addNewCategoryModal() {
+				$('#addNewCategoryModal').modal('show');
+			},
+			/* Deleting categories */
 			submitDeleteCategory() {
-				let id = 0; 
+				let id = 0;
 				this.categoryForm.delete('api/vouchercategory/' + id).then(() => {
 						Fire.$emit('RefreshVouchersAndCategories');
 						$('#deleteCategoryModal').modal('hide');
@@ -320,15 +314,15 @@
 					})
 			},
 			deleteCategory(voucher) {
-                this.categoryForm.clear();
-                this.categoryForm.reset();
+				this.categoryForm.clear();
+				this.categoryForm.reset();
 				$('#deleteCategoryModal').modal('show');
 				this.categoryForm.fill(voucher);
 			},
 			/* Adding new categories */
 			categorymodal(voucherid) {
-                this.categoryForm.clear();
-                this.categoryForm.reset();
+				this.categoryForm.clear();
+				this.categoryForm.reset();
 				$('#addNewCategory').modal('show');
 				this.categoryForm.voucher_id = voucherid;
 			},
@@ -349,23 +343,27 @@
 							type: 'error'
 						})
 					})
-         },
-         /* Getting category data */
-            getCategory() {
-				axios.get('api/category').then(({data}) => (this.categories = data));
+			},
+			/* Getting category data */
+			getCategory() {
+				axios.get('api/category').then(({
+					data
+				}) => (this.categories = data));
 			},
 			/* Getting voucher data */
 			getVouch() {
-				axios.get('api/voucher').then(({data}) => (this.vouchers = data));
-         }
+				axios.get('api/voucher').then(({
+					data
+				}) => (this.vouchers = data));
+			}
 		},
 		mounted() {
 			Fire.$on('RefreshVouchersAndCategories', () => {
-                this.getVouch();
-                this.getCategory();
+				this.getVouch();
+				this.getCategory();
 			});
 			this.getVouch();
 			this.getCategory();
 		}
 	} 
-	</script>
+</script>

@@ -63,15 +63,13 @@
                      </tbody>
                   </table>
                </div>
-               
                <div class="card-footer">
                   <pagination :data="vouchers" @pagination-change-page="getVoucherResults" :limit=5>
                      <span slot="prev-nav">&lt; Previous</span>
                      <span slot="next-nav">Next &gt;</span>
                   </pagination>
                </div>
-
-                 <!-- Modal for editing new tags -->
+               <!-- Modal for editing new tags -->
                <div class="modal fade" id="editTagModal" tabindex="-1" role="dialog" aria-labelledby="editTagModalLabel" aria-hidden="true">
                   <div class="modal-dialog modal-dialog-centered" role="document">
                      <div class="modal-content">
@@ -80,7 +78,7 @@
                         </div>
                         <form @submit.prevent="updateTag()">
                            <div class="modal-body">
-                             <!-- Tag name form input -->
+                              <!-- Tag name form input -->
                               <div class="form-group">
                                  <label>Name</label><span class="red">&#42;</span>
                                  <input v-model="tagForm.tag_title" type="text" name="tag_title" placeholder="Enter a name for the tag"
@@ -98,8 +96,7 @@
                      </div>
                   </div>
                </div>
-
-                <!-- Modal for adding new tags -->
+               <!-- Modal for adding new tags -->
                <div class="modal fade" id="addNewTagModal" tabindex="-1" role="dialog" aria-labelledby="addNewTagModalLabel" aria-hidden="true">
                   <div class="modal-dialog modal-dialog-centered" role="document">
                      <div class="modal-content">
@@ -108,7 +105,7 @@
                         </div>
                         <form @submit.prevent="addTag()">
                            <div class="modal-body">
-                             <!-- Tag name form input -->
+                              <!-- Tag name form input -->
                               <div class="form-group">
                                  <label>Name</label><span class="red">&#42;</span>
                                  <input v-model="tagForm.tag_title" type="text" name="tag_title" placeholder="Enter a name for the tag"
@@ -125,8 +122,6 @@
                      </div>
                   </div>
                </div>
-
-
                <!-- Modal for assigning new tags -->
                <div class="modal fade" id="addNewTag" tabindex="-1" role="dialog" aria-labelledby="addNewTagLabel" aria-hidden="true">
                   <div class="modal-dialog modal-dialog-centered" role="document">
@@ -155,8 +150,7 @@
                      </div>
                   </div>
                </div>
-
-                <!-- Modal for deleteing new tags -->
+               <!-- Modal for deleteing new tags -->
                <div class="modal fade" id="deleteTagModal" tabindex="-1" role="dialog" aria-labelledby="deleteTagLabel" aria-hidden="true">
                   <div class="modal-dialog modal-dialog-centered" role="document">
                      <div class="modal-content">
@@ -200,7 +194,7 @@
 				tagForm: new Form({
 					id: '',
 					voucher_id: '',
-               tag_id: '',
+					tag_id: '',
 					tag_title: '',
 					gettags: []
 				}),
@@ -216,92 +210,92 @@
 			}
 		},
 		methods: {
-         getTagResults(page = 1) {
-                axios.get('api/tag?page=' + page)
-                    .then(response => {
-                        this.tags = response.data;
-                    });
-            },
-         getVoucherResults(page = 1) {
-                axios.get('api/voucher?page=' + page)
-                    .then(response => {
-                        this.vouchers = response.data;
-                    });
-            },
-         updateTag(){
-            this.tagForm.put('api/tag/' + this.tagForm.id)
-                    .then(() => {
-                        Fire.$emit('RefreshVouchersAndTags');
-                        $('#editTagModal').modal('hide');
-                        swal.fire(
-                            'Success!',
-                            'Tag has been successfully updated.',
-                            'success'
-                        )
-                    })
-                    .catch(() => {
-                        swal.fire({
-                            title: 'Error',
-                            text: "Failed to update tag.",
-                            type: 'error'
-                        })
-                    })
-         },
-         editTag(tag){
-            this.tagForm.clear();
-            this.tagForm.reset();
-             $('#editTagModal').modal('show');
-            this.tagForm.fill(tag);
-         },
-         deleteTagTitle(tagID, tagName){
-              swal.fire({
-                    title: 'Warning',
-                    html: 'Deleting the tag <b><b>' + tagName + ' </b></b>will also permanently remove it from all vouchers' ,
-                    type: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#d33',
-                    cancelButtonColor: '#07AD4D',
-                    confirmButtonText: 'Delete'
-                }).then((result) => {
-                    if (result.value) {
-                        this.tagForm.delete('api/tag/' + tagID).then(() => {
-                            swal.fire(
-                                'Deleted!',
-                                'Tag has been deleted.',
-                                'success'
-                            )
-                            Fire.$emit('RefreshVouchersAndTags');
-                        }).catch(() => {
-                            swal("Failed!", "Failed to delete tag.", "warning");
-                        });
-                    }
-                })
-         },
-         addTag(){
-            this.tagForm.post('api/tag')
-                    .then(() => {
-                        Fire.$emit('RefreshVouchersAndTags');
-                        $('#addNewTagModal').modal('hide');
-                        swal.fire(
-                            'Success!',
-                            'Tag has been created successfully',
-                            'success'
-                        )
-                    })
-                    .catch(() => {
-                        swal.fire({
-                            title: 'Error',
-                            text: "Failed to create new tag.",
-                            type: 'error'
-                        })
-                    })
-         },
-         addNewTagModal(){
-            $('#addNewTagModal').modal('show');
-         },
-         /* Deleting tags */
+			getTagResults(page = 1) {
+				axios.get('api/tag?page=' + page)
+					.then(response => {
+						this.tags = response.data;
+					});
+			},
+			getVoucherResults(page = 1) {
+				axios.get('api/voucher?page=' + page)
+					.then(response => {
+						this.vouchers = response.data;
+					});
+			},
+			updateTag() {
+				this.tagForm.put('api/tag/' + this.tagForm.id)
+					.then(() => {
+						Fire.$emit('RefreshVouchersAndTags');
+						$('#editTagModal').modal('hide');
+						swal.fire(
+							'Success!',
+							'Tag has been successfully updated.',
+							'success'
+						)
+					})
+					.catch(() => {
+						swal.fire({
+							title: 'Error',
+							text: "Failed to update tag.",
+							type: 'error'
+						})
+					})
+			},
+			editTag(tag) {
+				this.tagForm.clear();
+				this.tagForm.reset();
+				$('#editTagModal').modal('show');
+				this.tagForm.fill(tag);
+			},
+			deleteTagTitle(tagID, tagName) {
+				swal.fire({
+					title: 'Warning',
+					html: 'Deleting the tag <b><b>' + tagName + ' </b></b>will also permanently remove it from all vouchers',
+					type: 'warning',
+					showCancelButton: true,
+					confirmButtonColor: '#d33',
+					cancelButtonColor: '#07AD4D',
+					confirmButtonText: 'Delete'
+				}).then((result) => {
+					if (result.value) {
+						this.tagForm.delete('api/tag/' + tagID).then(() => {
+							swal.fire(
+								'Deleted!',
+								'Tag has been deleted.',
+								'success'
+							)
+							Fire.$emit('RefreshVouchersAndTags');
+						}).catch(() => {
+							swal("Failed!", "Failed to delete tag.", "warning");
+						});
+					}
+				})
+			},
+			addTag() {
+				this.tagForm.post('api/tag')
+					.then(() => {
+						Fire.$emit('RefreshVouchersAndTags');
+						$('#addNewTagModal').modal('hide');
+						swal.fire(
+							'Success!',
+							'Tag has been created successfully',
+							'success'
+						)
+					})
+					.catch(() => {
+						swal.fire({
+							title: 'Error',
+							text: "Failed to create new tag.",
+							type: 'error'
+						})
+					})
+			},
+			addNewTagModal() {
+				$('#addNewTagModal').modal('show');
+			},
+			/* Deleting tags */
 			submitDeleteTag() {
-				let id = 0; 
+				let id = 0;
 				this.tagForm.delete('api/vouchertag/' + id).then(() => {
 						Fire.$emit('RefreshVouchersAndTags');
 						$('#deleteTagModal').modal('hide');
@@ -320,15 +314,15 @@
 					})
 			},
 			deleteTag(voucher) {
-            this.tagForm.clear();
-            this.tagForm.reset();
+				this.tagForm.clear();
+				this.tagForm.reset();
 				$('#deleteTagModal').modal('show');
 				this.tagForm.fill(voucher);
 			},
 			/* Adding new tags */
 			tagmodal(voucherid) {
-            this.tagForm.clear();
-            this.tagForm.reset();
+				this.tagForm.clear();
+				this.tagForm.reset();
 				$('#addNewTag').modal('show');
 				this.tagForm.voucher_id = voucherid;
 			},
@@ -349,23 +343,27 @@
 							type: 'error'
 						})
 					})
-         },
-         /* Getting tag data */
-         getTags() {
-				axios.get('api/tag').then(({data}) => (this.tags = data));
+			},
+			/* Getting tag data */
+			getTags() {
+				axios.get('api/tag').then(({
+					data
+				}) => (this.tags = data));
 			},
 			/* Getting voucher data */
 			getVouch() {
-				axios.get('api/voucher').then(({data}) => (this.vouchers = data));
-         }
+				axios.get('api/voucher').then(({
+					data
+				}) => (this.vouchers = data));
+			}
 		},
 		mounted() {
 			Fire.$on('RefreshVouchersAndTags', () => {
-            this.getVouch();
-            this.getTags();
+				this.getVouch();
+				this.getTags();
 			});
 			this.getVouch();
 			this.getTags();
 		}
 	} 
-	</script>
+</script>

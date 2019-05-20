@@ -62,60 +62,62 @@
 </template>
 
 <script>
-    export default {
-        data(){
-            return {
-                archived: {},
-                 archiveForm: new Form({
-                     id: ''
-                 })
-            }
-        },
-        methods: {
-            getImage(image) {
-                $('#imagepreview').attr('src', "imgs/vouchers/" + image);
-                $('#showImage').modal('show');
-            },
-             getResults(page = 1) {
-                axios.get('api/archived?page=' + page)
-                    .then(response => {
-                        this.archived = response.data;
-                    });
-            },
-             getArchived() {
-			    axios.get('api/archived').then(({data}) => (this.archived = data));
-            },
-             restoreVoucher(id, name) {
-                swal.fire({
-                    title: 'Voucher Restore',
-                    html: 'The following voucher will be restored: <b><b><br>' + name,
-                    type: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3490DE',
-                    cancelButtonColor: '#07AD4D',
-                    confirmButtonText: 'Restore'
-                }).then((result) => {
-                    if (result.value) {
-                        this.archiveForm.delete('api/archived/' + id).then(() => {
-                            swal.fire(
-                                'Restored!',
-                                'Voucher has been restored.',
-                                'success'
-                            )
-                            Fire.$emit('RefreshVouchers');
-                        }).catch(() => {
-                            swal("Failed!", "Failed to restore voucher.", "warning");
-                        });
-                    }
-                })
-            }
-        },
-        
-        mounted() {
-            Fire.$on('RefreshVouchers', () => {
-                this.getArchived();
-            });
-            this.getArchived();
-        }
-    }
+	export default {
+		data() {
+			return {
+				archived: {},
+				archiveForm: new Form({
+					id: ''
+				})
+			}
+		},
+		methods: {
+			getImage(image) {
+				$('#imagepreview').attr('src', "imgs/vouchers/" + image);
+				$('#showImage').modal('show');
+			},
+			getResults(page = 1) {
+				axios.get('api/archived?page=' + page)
+					.then(response => {
+						this.archived = response.data;
+					});
+			},
+			getArchived() {
+				axios.get('api/archived').then(({
+					data
+				}) => (this.archived = data));
+			},
+			restoreVoucher(id, name) {
+				swal.fire({
+					title: 'Voucher Restore',
+					html: 'The following voucher will be restored: <b><b><br>' + name,
+					type: 'warning',
+					showCancelButton: true,
+					confirmButtonColor: '#3490DE',
+					cancelButtonColor: '#07AD4D',
+					confirmButtonText: 'Restore'
+				}).then((result) => {
+					if (result.value) {
+						this.archiveForm.delete('api/archived/' + id).then(() => {
+							swal.fire(
+								'Restored!',
+								'Voucher has been restored.',
+								'success'
+							)
+							Fire.$emit('RefreshVouchers');
+						}).catch(() => {
+							swal("Failed!", "Failed to restore voucher.", "warning");
+						});
+					}
+				})
+			}
+		},
+
+		mounted() {
+			Fire.$on('RefreshVouchers', () => {
+				this.getArchived();
+			});
+			this.getArchived();
+		}
+	} 
 </script>

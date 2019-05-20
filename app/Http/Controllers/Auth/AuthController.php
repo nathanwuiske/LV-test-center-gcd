@@ -27,9 +27,7 @@ class AuthController extends Controller
         return response()->json([
             'access_token' => $tokenResult->accessToken,
             'token_type' => 'Bearer',
-            'expires_at' => Carbon::parse(
-                $tokenResult->token->expires_at
-            )->toDateTimeString()
+            'expires_at' => Carbon::parse($tokenResult->token->expires_at)->toDateTimeString()
         ]);
     }
 
@@ -52,6 +50,7 @@ class AuthController extends Controller
         ], 201);
     }
     
+    /* Log the user out by revoking their token */
     public function logout(Request $request)
     {
         $request->user()->token()->revoke();
@@ -60,11 +59,7 @@ class AuthController extends Controller
         ]);
     }
   
-    /**
-     * Get the authenticated User
-     *
-     * @return [json] user object
-     */
+    /* Get the authenticated User - returns user object*/
     public function user(Request $request)
     {
         return response()->json($request->user());
