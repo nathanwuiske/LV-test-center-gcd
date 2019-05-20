@@ -18,7 +18,6 @@ class VoucherController extends Controller
     public function index()
     {
         /* display the latest 10 vouchers */
-        $onlySoftDeleted = Voucher::onlyTrashed()->get();
         return Voucher::with('gettags')->with('getCategories')->latest()->paginate(10);
     }
 
