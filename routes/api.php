@@ -25,6 +25,8 @@ Route::apiResource('category', 'API\CategoryController');
 Route::apiResource('vouchercategory', 'API\VoucherCategoryController');
 Route::apiResource('archived', 'API\ArchivedController');
 
+Route::apiResource('redeem', 'API\RedeemController');
+
 Route::group([
     'prefix' => 'auth'
 ], function () {

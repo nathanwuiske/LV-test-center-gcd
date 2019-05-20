@@ -13,6 +13,11 @@ class User extends Authenticatable
 {
     use HasApiTokens, Notifiable;
 
+    public function redeems(){
+   
+        return $this->hasMany('App\Redeem', 'user_id');
+    }
+
     /**
      * The attributes that are mass assignable.
      *
