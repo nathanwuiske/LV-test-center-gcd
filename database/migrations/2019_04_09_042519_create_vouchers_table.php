@@ -18,7 +18,7 @@ class CreateVouchersTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->longText('description');
-            $table->string('photo')->nullable();
+            $table->string('image')->nullable();
             $table->dateTime('expiry_date')->nullable();
             $table->integer('timeout')->default(15);
             $table->string('facebook_link')->nullable();

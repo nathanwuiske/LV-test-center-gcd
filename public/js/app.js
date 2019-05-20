@@ -1853,9 +1853,9 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    getPhoto: function getPhoto(photo) {
-      $('#imagepreview').attr('src', "imgs/vouchers/" + photo);
-      $('#showPhoto').modal('show');
+    getImage: function getImage(image) {
+      $('#imagepreview').attr('src', "imgs/vouchers/" + image);
+      $('#showImage').modal('show');
     },
     getResults: function getResults() {
       var _this = this;
@@ -3171,7 +3171,7 @@ __webpack_require__.r(__webpack_exports__);
         id: '',
         name: '',
         description: '',
-        photo: '',
+        image: '',
         expiry_date: '',
         facebook_link: '',
         category: '',
@@ -3181,9 +3181,9 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    getPhoto: function getPhoto(photo) {
-      $('#imagepreview').attr('src', "imgs/vouchers/" + photo);
-      $('#showPhoto').modal('show');
+    getImage: function getImage(image) {
+      $('#imagepreview').attr('src', "imgs/vouchers/" + image);
+      $('#showImage').modal('show');
     },
     insertImage: function insertImage(event) {
       var _this = this;
@@ -3193,7 +3193,7 @@ __webpack_require__.r(__webpack_exports__);
       /* convert to base64 */
 
       reader.onloadend = function (file) {
-        _this.voucherForm.photo = reader.result;
+        _this.voucherForm.image = reader.result;
       };
 
       reader.readAsDataURL(file);
@@ -71037,7 +71037,7 @@ var render = function() {
                             attrs: { href: "#" },
                             on: {
                               click: function($event) {
-                                return _vm.getPhoto(archive.photo)
+                                return _vm.getImage(archive.image)
                               }
                             }
                           },
@@ -71130,7 +71130,7 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("th", [_vm._v("Popular")]),
       _vm._v(" "),
-      _c("th", [_vm._v("Photo")]),
+      _c("th", [_vm._v("Image")]),
       _vm._v(" "),
       _c("th", [_vm._v("Restore")])
     ])
@@ -71144,10 +71144,10 @@ var staticRenderFns = [
       {
         staticClass: "modal fade",
         attrs: {
-          id: "showPhoto",
+          id: "showImage",
           tabindex: "-1",
           role: "dialog",
-          "aria-labelledby": "showPhotoLabel",
+          "aria-labelledby": "showImageLabel",
           "aria-hidden": "true"
         }
       },
@@ -73346,7 +73346,7 @@ var render = function() {
                               attrs: { href: "#" },
                               on: {
                                 click: function($event) {
-                                  return _vm.getPhoto(voucher.photo)
+                                  return _vm.getImage(voucher.image)
                                 }
                               }
                             },
@@ -73843,7 +73843,7 @@ var render = function() {
                         "label",
                         {
                           staticClass: "control-label",
-                          attrs: { for: "photo" }
+                          attrs: { for: "image" }
                         },
                         [_vm._v("Image")]
                       ),
@@ -73855,14 +73855,14 @@ var render = function() {
                           _c("input", {
                             staticClass: "form-control",
                             class: {
-                              "is-invalid": _vm.voucherForm.errors.has("photo")
+                              "is-invalid": _vm.voucherForm.errors.has("image")
                             },
-                            attrs: { type: "file", name: "photo" },
+                            attrs: { type: "file", name: "image" },
                             on: { change: _vm.insertImage }
                           }),
                           _vm._v(" "),
                           _c("has-error", {
-                            attrs: { form: _vm.voucherForm, field: "photo" }
+                            attrs: { form: _vm.voucherForm, field: "image" }
                           })
                         ],
                         1
@@ -74050,7 +74050,7 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("th", [_vm._v("Tags")]),
       _vm._v(" "),
-      _c("th", [_vm._v("Photo")]),
+      _c("th", [_vm._v("Image")]),
       _vm._v(" "),
       _c("th", [_vm._v("Category")]),
       _vm._v(" "),
@@ -74086,10 +74086,10 @@ var staticRenderFns = [
       {
         staticClass: "modal fade",
         attrs: {
-          id: "showPhoto",
+          id: "showImage",
           tabindex: "-1",
           role: "dialog",
-          "aria-labelledby": "showPhotoLabel",
+          "aria-labelledby": "showImageLabel",
           "aria-hidden": "true"
         }
       },

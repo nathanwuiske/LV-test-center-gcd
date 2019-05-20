@@ -23,7 +23,7 @@
                   <li class="nav-item">
                         <router-link to="/messages" class="nav-link">
                            <i class="nav-icon fas fa-comment-alt"></i>
-                           <p class="white">App Messages</p>
+                           <p class="white">App Notifications</p>
                         </router-link>
                      </li>
                   <li class="nav-item">

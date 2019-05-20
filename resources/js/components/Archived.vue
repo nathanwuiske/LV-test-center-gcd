@@ -16,7 +16,7 @@
                            <th>Expiry Date</th>
                            <th>Facebook Link</th>
                            <th>Popular</th>
-                           <th>Photo</th>
+                           <th>Image</th>
                            <th>Restore</th>
                         </tr>
                         <tr v-for="archive in archived.data" :key="archive.id">
@@ -28,7 +28,7 @@
                            <td>{{archive.expiry_date | formatDate}}</td>
                            <td class="truncateText"><span>{{archive.facebook_link}}</span></td>
                            <td>{{archive.popular_flag}}</td>
-                           <td><a href="#" @click="getPhoto(archive.photo)">Show</a></td>
+                           <td><a href="#" @click="getImage(archive.image)">Show</a></td>
                            <td>
                               <a href="#" @click="restoreVoucher(archive.id, archive.name)"> <i class="fas fa-trash-restore"></i></a>
                            </td>
@@ -43,8 +43,8 @@
                   </pagination>
                </div>
             </div>
-            <!-- Photo Modal -->
-            <div class="modal fade" id="showPhoto" tabindex="-1" role="dialog" aria-labelledby="showPhotoLabel" aria-hidden="true">
+            <!-- image Modal -->
+            <div class="modal fade" id="showImage" tabindex="-1" role="dialog" aria-labelledby="showImageLabel" aria-hidden="true">
                <div class="modal-dialog modal-dialog-centered" role="document">
                   <div class="modal-content">
                      <div class="modal-body">
@@ -72,9 +72,9 @@
             }
         },
         methods: {
-            getPhoto(photo) {
-                $('#imagepreview').attr('src', "imgs/vouchers/" + photo);
-                $('#showPhoto').modal('show');
+            getImage(image) {
+                $('#imagepreview').attr('src', "imgs/vouchers/" + image);
+                $('#showImage').modal('show');
             },
              getResults(page = 1) {
                 axios.get('api/archived?page=' + page)

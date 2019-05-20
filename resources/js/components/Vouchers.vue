@@ -28,7 +28,7 @@
                            <th>Facebook Link</th>
                            <th>Popular</th>
                            <th>Tags</th>
-                           <th>Photo</th>
+                           <th>Image</th>
                            <th>Category</th>
                            <th class="text-center" style="width: 10%">Modify</th>
                         </tr>
@@ -48,7 +48,7 @@
                               <td>{{tag.tag_title}}</td>
                            </div>
                            <!-- End of Display tags -->
-                           <td><a href="#" @click="getPhoto(voucher.photo)">Show</a></td>
+                           <td><a href="#" @click="getImage(voucher.image)">Show</a></td>
                            <!-- Display categories -->
                            <td v-if="voucher.get_categories.length == 0">-</td>
                            <div v-for="category in voucher.get_categories" :key="category.id">
@@ -127,10 +127,10 @@
                      </div>
                      <!-- Voucher image input -->
                      <div class="form-group">
-                        <label for="photo" class="control-label">Image</label>
+                        <label for="image" class="control-label">Image</label>
                         <div class="col-sm-12">
-                           <input type="file" @change="insertImage" name="photo" class="form-control" :class="{ 'is-invalid': voucherForm.errors.has('photo') }">
-                           <has-error :form="voucherForm" field="photo"></has-error>
+                           <input type="file" @change="insertImage" name="image" class="form-control" :class="{ 'is-invalid': voucherForm.errors.has('image') }">
+                           <has-error :form="voucherForm" field="image"></has-error>
                         </div>
                      </div>
                   </div>
@@ -162,8 +162,8 @@
             </div>
          </div>
       </div>
-      <!-- Photo Modal -->
-      <div class="modal fade" id="showPhoto" tabindex="-1" role="dialog" aria-labelledby="showPhotoLabel" aria-hidden="true">
+      <!-- Image Modal -->
+      <div class="modal fade" id="showImage" tabindex="-1" role="dialog" aria-labelledby="showImageLabel" aria-hidden="true">
          <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                <div class="modal-body">
@@ -187,7 +187,7 @@
                     id: '',
                     name: '',
                     description: '',
-                    photo: '',
+                    image: '',
                     expiry_date: '',
                     facebook_link: '',
                     category: '',
@@ -197,9 +197,9 @@
             }
         },
         methods: {
-            getPhoto(photo) {
-                $('#imagepreview').attr('src', "imgs/vouchers/" + photo);
-                $('#showPhoto').modal('show');
+            getImage(image) {
+                $('#imagepreview').attr('src', "imgs/vouchers/" + image);
+                $('#showImage').modal('show');
             },
             insertImage(event) {
                 let file = event.target.files[0];
@@ -207,7 +207,7 @@
 
                 /* convert to base64 */
                 reader.onloadend = (file) => {
-                    this.voucherForm.photo = reader.result;
+                    this.voucherForm.image = reader.result;
                 }
                 reader.readAsDataURL(file);
             },
