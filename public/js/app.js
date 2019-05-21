@@ -2136,6 +2136,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2163,6 +2171,12 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   methods: {
+    searchTerm: function searchTerm() {
+      if (this.timeout) clearTimeout(this.timeout);
+      this.timeout = setTimeout(function () {
+        Fire.$emit('searching');
+      }, 500);
+    },
     getCategoryResults: function getCategoryResults() {
       var _this = this;
 
@@ -2234,6 +2248,8 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     addNewCategoryModal: function addNewCategoryModal() {
+      this.categoryForm.clear();
+      this.categoryForm.reset();
       $('#addNewCategoryModal').modal('show');
     },
 
@@ -2303,6 +2319,14 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     var _this6 = this;
 
+    Fire.$on('searching', function () {
+      var query = _this6.search;
+      axios.get('api/findVoucher?q=' + query).then(function (data) {
+        _this6.vouchers = data.data;
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    });
     Fire.$on('RefreshVouchersAndCategories', function () {
       _this6.getVouch();
 
@@ -2844,6 +2868,8 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     addNewTagModal: function addNewTagModal() {
+      this.tagForm.clear();
+      this.tagForm.reset();
       $('#addNewTagModal').modal('show');
     },
 
@@ -3347,7 +3373,9 @@ __webpack_require__.r(__webpack_exports__);
       var query = _this7.search;
       axios.get('api/findVoucher?q=' + query).then(function (data) {
         _this7.vouchers = data.data;
-      })["catch"](function () {});
+      })["catch"](function (error) {
+        console.log(error);
+      });
     });
     this.displayVouchers();
     /* If a voucher is created, call the displayVouchers function again to refresh vouchers table*/
@@ -71368,14 +71396,72 @@ var render = function() {
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "card" }, [
-          _vm._m(1),
+          _c("div", { staticClass: "card-header" }, [
+            _c("h3", { staticClass: "card-title" }, [
+              _vm._v("Assign categories to vouchers")
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "card-tools" }, [
+              _c(
+                "div",
+                {
+                  staticClass: "input-group input-group-sm mt-3",
+                  staticStyle: { width: "170px" }
+                },
+                [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.search,
+                        expression: "search"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: {
+                      type: "text",
+                      name: "voucher_table_search",
+                      placeholder: "Search"
+                    },
+                    domProps: { value: _vm.search },
+                    on: {
+                      keyup: _vm.searchTerm,
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.search = $event.target.value
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "input-group-append" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-default",
+                        on: {
+                          click: function($event) {
+                            $event.preventDefault()
+                            return _vm.searchTerm($event)
+                          }
+                        }
+                      },
+                      [_c("i", { staticClass: "fa fa-search" })]
+                    )
+                  ])
+                ]
+              )
+            ])
+          ]),
           _vm._v(" "),
           _c("div", { staticClass: "card-body table-responsive p-0" }, [
             _c("table", { staticClass: "table table-hover" }, [
               _c(
                 "tbody",
                 [
-                  _vm._m(2),
+                  _vm._m(1),
                   _vm._v(" "),
                   _vm._l(_vm.vouchers.data, function(voucher) {
                     return _c(
@@ -71482,7 +71568,7 @@ var render = function() {
                 },
                 [
                   _c("div", { staticClass: "modal-content" }, [
-                    _vm._m(3),
+                    _vm._m(2),
                     _vm._v(" "),
                     _c(
                       "form",
@@ -71552,7 +71638,7 @@ var render = function() {
                           ])
                         ]),
                         _vm._v(" "),
-                        _vm._m(4)
+                        _vm._m(3)
                       ]
                     )
                   ])
@@ -71582,7 +71668,7 @@ var render = function() {
                 },
                 [
                   _c("div", { staticClass: "modal-content" }, [
-                    _vm._m(5),
+                    _vm._m(4),
                     _vm._v(" "),
                     _c(
                       "form",
@@ -71646,7 +71732,7 @@ var render = function() {
                           )
                         ]),
                         _vm._v(" "),
-                        _vm._m(6)
+                        _vm._m(5)
                       ]
                     )
                   ])
@@ -71676,7 +71762,7 @@ var render = function() {
                 },
                 [
                   _c("div", { staticClass: "modal-content" }, [
-                    _vm._m(7),
+                    _vm._m(6),
                     _vm._v(" "),
                     _c(
                       "form",
@@ -71772,7 +71858,7 @@ var render = function() {
                           )
                         ]),
                         _vm._v(" "),
-                        _vm._m(8)
+                        _vm._m(7)
                       ]
                     )
                   ])
@@ -71802,7 +71888,7 @@ var render = function() {
                 },
                 [
                   _c("div", { staticClass: "modal-content" }, [
-                    _vm._m(9),
+                    _vm._m(8),
                     _vm._v(" "),
                     _c(
                       "form",
@@ -71907,7 +71993,7 @@ var render = function() {
                           )
                         ]),
                         _vm._v(" "),
-                        _vm._m(10)
+                        _vm._m(9)
                       ]
                     )
                   ])
@@ -71931,16 +72017,6 @@ var staticRenderFns = [
       _c("th", [_vm._v("Category Name")]),
       _vm._v(" "),
       _c("th", [_vm._v("Modify")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-header" }, [
-      _c("h3", { staticClass: "card-title" }, [
-        _vm._v("Assign categories to vouchers")
-      ])
     ])
   },
   function() {

@@ -377,10 +377,10 @@
 				let query = this.search;
 				axios.get('api/findVoucher?q=' + query)
 				.then((data) => {
-						this.vouchers = data.data;
+					this.vouchers = data.data;
 				})
-				.catch(() => {
-
+				.catch(error => {
+					console.log(error);
 				})
 			});
 			this.displayVouchers();

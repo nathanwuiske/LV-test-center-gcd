@@ -291,6 +291,8 @@
 					})
 			},
 			addNewTagModal() {
+            this.tagForm.clear();
+				this.tagForm.reset();
 				$('#addNewTagModal').modal('show');
 			},
 			/* Deleting tags */
