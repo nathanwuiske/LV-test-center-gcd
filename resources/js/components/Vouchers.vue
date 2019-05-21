@@ -10,9 +10,9 @@
                   </button>
                   <div class="card-tools">
                      <div class="input-group input-group-sm mt-5" style="width: 170px;">
-                        <input type="text" name="voucher_table_search" class="form-control" placeholder="Search">
+                        <input type="text" name="voucher_table_search" v-model="search" @keyup="handleScroll" class="form-control" placeholder="Search">
                         <div class="input-group-append">
-                           <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                           <button class="btn btn-default" @click.prevent="handleScroll"><i class="fa fa-search"></i></button>
                         </div>
                      </div>
                   </div>
@@ -181,6 +181,7 @@
 	export default {
 		data() {
 			return {
+				search: '',
 				editmode: false,
 				vouchers: {},
 				voucherForm: new Form({
@@ -197,6 +198,12 @@
 			}
 		},
 		methods: {
+			handleScroll: function() {
+				if (this.timeout) clearTimeout(this.timeout); 
+				this.timeout = setTimeout(() => {
+					Fire.$emit('searching');
+				}, 500);
+			},
 			getImage(image) {
 				$('#imagepreview').attr('src', "imgs/vouchers/" + image);
 				$('#showImage').modal('show');
@@ -352,12 +359,23 @@
 					}
 				})
 			}
+			 
 
 		},
 		/* END OF METHODS */
 
 
 		mounted() {
+			Fire.$on('searching', () => {
+				let query = this.search;
+				axios.get('api/findVoucher?q=' + query)
+				.then((data) => {
+						this.vouchers = data.data;
+				})
+				.catch(() => {
+
+				})
+			});
 			this.displayVouchers();
 			/* If a voucher is created, call the displayVouchers function again to refresh vouchers table*/
 			Fire.$on('RefreshVouchers', () => {

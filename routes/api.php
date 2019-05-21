@@ -21,6 +21,8 @@ Route::get('usercount', 'MetricsController@countTotalUsers');
 Route::get('latestvouchers', 'MetricsController@countTodaysVouchers');
 Route::get('latestusers', 'MetricsController@countTodaysUsers');
 
+Route::get('findVoucher', 'API\VoucherController@search');
+
 Route::group([
     'prefix' => 'auth'
 ], function () {

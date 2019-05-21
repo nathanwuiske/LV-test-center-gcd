@@ -93,4 +93,16 @@ class VoucherController extends Controller
             $voucher->forceDelete(); // permanent delete
         }
     }
+
+    public function search() {
+        if ($search = \Request::get('q')) {
+            $vouchers = Voucher::where(function($query) use ($search) {
+                $query->where('name','LIKE',"%$search%")->orWhere('description','LIKE',"%$search%");
+            })->with('gettags')->with('getCategories')->latest()->paginate(10);
+        } 
+        else {
+            $vouchers = Voucher::with('gettags')->with('getCategories')->latest()->paginate(10);
+        }
+        return $vouchers;
+    }
 }
