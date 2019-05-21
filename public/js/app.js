@@ -3172,13 +3172,23 @@ __webpack_require__.r(__webpack_exports__);
 
       var file = event.target.files[0];
       var reader = new FileReader();
-      /* convert to base64 */
+      /* if the file size is less than 2MB, continue */
 
-      reader.onloadend = function (file) {
-        _this.voucherForm.image = reader.result;
-      };
+      if (file['size'] < 2097152) {
+        /* convert to base64 */
+        reader.onloadend = function (file) {
+          _this.voucherForm.image = reader.result;
+        };
 
-      reader.readAsDataURL(file);
+        reader.readAsDataURL(file);
+      } else {
+        $("#imageUpload").val('');
+        swal.fire({
+          title: 'Error',
+          text: "File cannot be larger than 2MB.",
+          type: 'error'
+        });
+      }
     },
     updateVoucher: function updateVoucher() {
       this.voucherForm.put('api/voucher/' + this.voucherForm.id).then(function () {
@@ -73838,7 +73848,11 @@ var render = function() {
                             class: {
                               "is-invalid": _vm.voucherForm.errors.has("image")
                             },
-                            attrs: { type: "file", name: "image" },
+                            attrs: {
+                              type: "file",
+                              name: "image",
+                              id: "imageUpload"
+                            },
                             on: { change: _vm.insertImage }
                           }),
                           _vm._v(" "),

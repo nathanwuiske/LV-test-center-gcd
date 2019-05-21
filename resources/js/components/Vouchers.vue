@@ -129,7 +129,7 @@
                      <div class="form-group">
                         <label for="image" class="control-label">Image</label>
                         <div class="col-sm-12">
-                           <input type="file" @change="insertImage" name="image" class="form-control" :class="{ 'is-invalid': voucherForm.errors.has('image') }">
+                           <input type="file" @change="insertImage" name="image" id="imageUpload" class="form-control" :class="{ 'is-invalid': voucherForm.errors.has('image') }">
                            <has-error :form="voucherForm" field="image"></has-error>
                         </div>
                      </div>
@@ -205,11 +205,22 @@
 				let file = event.target.files[0];
 				let reader = new FileReader();
 
-				/* convert to base64 */
-				reader.onloadend = (file) => {
-					this.voucherForm.image = reader.result;
+				/* if the file size is less than 2MB, continue */
+				if(file['size'] < 2097152){ 
+					/* convert to base64 */
+					reader.onloadend = (file) => {
+						this.voucherForm.image = reader.result;
+					}
+					reader.readAsDataURL(file);
 				}
-				reader.readAsDataURL(file);
+				else {
+					$("#imageUpload").val('');
+					swal.fire({
+						title: 'Error',
+						text: "File cannot be larger than 2MB.",
+						type: 'error'
+					})
+				}
 			},
 			updateVoucher() {
 				this.voucherForm.put('api/voucher/' + this.voucherForm.id)

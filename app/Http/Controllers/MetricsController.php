@@ -10,14 +10,14 @@ class MetricsController extends Controller
 {
     public function countTotalVouchers()
     {
-        $counter = DB::table('vouchers')->count();
-        return $counter;
+        $voucherCount = DB::table('vouchers')->count();
+        return $voucherCount;
     }
 
     public function countTotalUsers()
     {
-        $counter = DB::table('users')->count();
-        return $counter;
+        $userCount = DB::table('users')->count();
+        return $userCount;
     }
 
     public function countTodaysVouchers()
