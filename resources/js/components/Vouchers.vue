@@ -10,9 +10,9 @@
                   </button>
                   <div class="card-tools">
                      <div class="input-group input-group-sm mt-5" style="width: 170px;">
-                        <input type="text" name="voucher_table_search" v-model="search" @keyup="handleScroll" class="form-control" placeholder="Search">
+                        <input type="text" name="voucher_table_search" v-model="search" @keyup="searchTerm" class="form-control" placeholder="Search">
                         <div class="input-group-append">
-                           <button class="btn btn-default" @click.prevent="handleScroll"><i class="fa fa-search"></i></button>
+                           <button class="btn btn-default" @click.prevent="searchTerm"><i class="fa fa-search"></i></button>
                         </div>
                      </div>
                   </div>
@@ -198,7 +198,7 @@
 			}
 		},
 		methods: {
-			handleScroll: function() {
+			searchTerm: function() {
 				if (this.timeout) clearTimeout(this.timeout); 
 				this.timeout = setTimeout(() => {
 					Fire.$emit('searching');
@@ -328,7 +328,14 @@
 			displayVouchers() {
 				axios.get("api/voucher").then(({
 					data
-				}) => (this.vouchers = data)); /*store the data in the voucher object */
+				}) => (this.vouchers = data)) /*store the data in the voucher object */
+				.catch(error => {
+							swal.fire({
+							title: 'Error',
+							text: error,
+							type: 'error'
+						})
+				})
 			},
 			deleteVoucher(id, name) {
 				swal.fire({

@@ -3164,7 +3164,7 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    handleScroll: function handleScroll() {
+    searchTerm: function searchTerm() {
       if (this.timeout) clearTimeout(this.timeout);
       this.timeout = setTimeout(function () {
         Fire.$emit('searching');
@@ -3294,8 +3294,15 @@ __webpack_require__.r(__webpack_exports__);
       axios.get("api/voucher").then(function (_ref) {
         var data = _ref.data;
         return _this5.vouchers = data;
-      });
+      })
       /*store the data in the voucher object */
+      ["catch"](function (error) {
+        swal.fire({
+          title: 'Error',
+          text: error,
+          type: 'error'
+        });
+      });
     },
     deleteVoucher: function deleteVoucher(id, name) {
       var _this6 = this;
@@ -73323,7 +73330,7 @@ var render = function() {
                     },
                     domProps: { value: _vm.search },
                     on: {
-                      keyup: _vm.handleScroll,
+                      keyup: _vm.searchTerm,
                       input: function($event) {
                         if ($event.target.composing) {
                           return
@@ -73341,7 +73348,7 @@ var render = function() {
                         on: {
                           click: function($event) {
                             $event.preventDefault()
-                            return _vm.handleScroll($event)
+                            return _vm.searchTerm($event)
                           }
                         }
                       },
