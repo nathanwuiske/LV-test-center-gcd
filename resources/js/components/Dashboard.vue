@@ -62,22 +62,22 @@
         },
         methods: {
             getVoucherCount(){
-                axios.get('/vouchercount').then(response => {
+                axios.get('api/vouchercount').then(response => {
                 this.voucherCount = response.data;
             });
             },
               getUserCount(){
-                axios.get('/usercount').then(response => {
+                axios.get('api/usercount').then(response => {
                 this.userCount = response.data;
             });
             },
               getLatestVoucherCount(){
-                axios.get('/latestvouchers').then(response => {
+                axios.get('api/latestvouchers').then(response => {
                 this.latestVouchers = response.data;
             });
             },
             getLatestUserCount(){
-                axios.get('/latestusers').then(response => {
+                axios.get('api/latestusers').then(response => {
                 this.latestUsers = response.data;
             });
             }

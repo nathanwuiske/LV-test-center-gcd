@@ -2389,28 +2389,28 @@ __webpack_require__.r(__webpack_exports__);
     getVoucherCount: function getVoucherCount() {
       var _this = this;
 
-      axios.get('/vouchercount').then(function (response) {
+      axios.get('api/vouchercount').then(function (response) {
         _this.voucherCount = response.data;
       });
     },
     getUserCount: function getUserCount() {
       var _this2 = this;
 
-      axios.get('/usercount').then(function (response) {
+      axios.get('api/usercount').then(function (response) {
         _this2.userCount = response.data;
       });
     },
     getLatestVoucherCount: function getLatestVoucherCount() {
       var _this3 = this;
 
-      axios.get('/latestvouchers').then(function (response) {
+      axios.get('api/latestvouchers').then(function (response) {
         _this3.latestVouchers = response.data;
       });
     },
     getLatestUserCount: function getLatestUserCount() {
       var _this4 = this;
 
-      axios.get('/latestusers').then(function (response) {
+      axios.get('api/latestusers').then(function (response) {
         _this4.latestUsers = response.data;
       });
     }
