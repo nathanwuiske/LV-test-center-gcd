@@ -198,6 +198,7 @@
 	export default {
 		data() {
 			return {
+            search: '',
 				categories: {},
 				vouchers: {},
 				categoryForm: new Form({
