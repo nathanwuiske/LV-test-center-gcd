@@ -25,7 +25,7 @@
                            <th>Name</th>
                            <th>Description</th>
                            <th>Expiry Date</th>
-                           <th>Facebook Link</th>
+                           <th>Website Link</th>
                            <th>Popular</th>
                            <th>Tags</th>
                            <th>Image</th>
@@ -40,7 +40,7 @@
                               <span>{{voucher.description}}</span><!--<a href="#">view more</a>-->
                            </td>
                            <td>{{voucher.expiry_date | formatDate}}</td>
-                           <td class="truncateText"><span>{{voucher.facebook_link}}</span></td>
+                           <td class="truncateText"><span>{{voucher.website_link}}</span></td>
                            <td>{{voucher.popular_flag}}</td>
                            <!-- Display tags -->
                            <td v-if="voucher.gettags.length == 0">-</td>
@@ -98,12 +98,12 @@
                            class="form-control" :class="{ 'is-invalid': voucherForm.errors.has('description') }"></textarea>
                         <has-error :form="voucherForm" field="description"></has-error>
                      </div>
-                     <!-- Facebook Link form input -->
+                     <!-- Website Link form input -->
                      <div class="form-group">
-                        <label>Facebook Link</label>
-                        <input v-model="voucherForm.facebook_link" type="text" name="facebook_link" placeholder="Enter a link to the voucher's facebook page (OPTIONAL)"
-                           class="form-control" :class="{ 'is-invalid': voucherForm.errors.has('facebook_link') }">
-                        <has-error :form="voucherForm" field="facebook_link"></has-error>
+                        <label>Website Link</label>
+                        <input v-model="voucherForm.website_link" type="text" name="website_link" placeholder="Enter a link to the voucher's website (OPTIONAL)"
+                           class="form-control" :class="{ 'is-invalid': voucherForm.errors.has('website_link') }">
+                        <has-error :form="voucherForm" field="website_link"></has-error>
                      </div>
                      <!-- Expiry Date form input  -->
                      <div class="form-group">
@@ -190,7 +190,7 @@
 					description: '',
 					image: '',
 					expiry_date: '',
-					facebook_link: '',
+					website_link: '',
 					category: '',
 					popular_flag: '',
 					is_archive: ''
@@ -266,7 +266,7 @@
 								'Voucher has been archived.',
 								'success'
 							)
-							/* After archiving, send an event to fresh the voucher table */
+							/* After archiving, send an event to refresh the voucher table */
 							Fire.$emit('RefreshVouchers');
 						}).catch(() => {
 							swal("Failed!", "Failed to archive voucher.", "warning");
@@ -377,6 +377,7 @@
 				let query = this.search;
 				axios.get('api/findVoucher?q=' + query)
 				.then((data) => {
+					
 					this.vouchers = data.data;
 				})
 				.catch(error => {

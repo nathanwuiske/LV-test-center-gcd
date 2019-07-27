@@ -14,6 +14,11 @@ class TagController extends Controller
         return Tag::latest()->paginate(5);
     }
 
+    public function tagall()
+    {
+        return Tag::latest()->get();
+    }
+
     public function store(Request $request)
     {
         $this->validate($request,[

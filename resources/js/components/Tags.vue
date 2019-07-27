@@ -190,7 +190,8 @@
 	export default {
 		data() {
 			return {
-				tags: {},
+            tags: {},
+            tagsall: {},
 				tagForm: new Form({
 					id: '',
 					voucher_id: '',
@@ -203,7 +204,7 @@
 		},
 		computed: {
 			sortedTags() {
-				return _.sortBy(this.tags.data, [tag => tag.tag_title.toLowerCase()], 'tag_id');
+				return _.sortBy(this.tagsall, [tag => tag.tag_title.toLowerCase()], 'tag_id');
 			},
 			voucherTags() {
 				return _.sortBy(this.tagForm.gettags, [tag => tag.tag_title.toLowerCase()], 'tag_id');
@@ -351,6 +352,11 @@
 				axios.get('api/tag').then(({
 					data
 				}) => (this.tags = data));
+         },
+         getAllTags() {
+				axios.get('api/tagall').then(({
+					data
+				}) => (this.tagsall = data));
 			},
 			/* Getting voucher data */
 			getVouch() {
@@ -363,7 +369,8 @@
 			Fire.$on('RefreshVouchersAndTags', () => {
 				this.getVouch();
 				this.getTags();
-			});
+         });
+         this.getAllTags();
 			this.getVouch();
 			this.getTags();
 		}

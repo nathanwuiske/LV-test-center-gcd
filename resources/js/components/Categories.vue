@@ -199,7 +199,8 @@
 		data() {
 			return {
             search: '',
-				categories: {},
+            categories: {},
+            allCategories: {},
 				vouchers: {},
 				categoryForm: new Form({
 					id: '',
@@ -212,7 +213,7 @@
 		},
 		computed: {
 			sortedCategories() {
-				return _.sortBy(this.categories.data, [category => category.name.toLowerCase()], 'category_id');
+				return _.sortBy(this.allCategories, [category => category.name.toLowerCase()], 'category_id');
 			},
 			voucherCategories() {
 				return _.sortBy(this.categoryForm.get_categories, [category => category.name.toLowerCase()], 'category_id');
@@ -366,6 +367,11 @@
 				axios.get('api/category').then(({
 					data
 				}) => (this.categories = data));
+         },
+         getAllCategory() {
+				axios.get('api/categoryall').then(({
+					data
+				}) => (this.allCategories = data));
 			},
 			/* Getting voucher data */
 			getVouch() {
@@ -389,7 +395,8 @@
 			Fire.$on('RefreshVouchersAndCategories', () => {
 				this.getVouch();
 				this.getCategory();
-			});
+         });
+         this.getAllCategory();
 			this.getVouch();
 			this.getCategory();
 		}

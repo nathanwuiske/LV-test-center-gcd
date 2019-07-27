@@ -12,9 +12,19 @@ class User extends Authenticatable
 {
     use HasApiTokens, Notifiable;
 
+    /* Use a custom Mail sender instead of the default version */
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new Notifications\MailResetPasswordNotification($token));
+    }
+    
     public function redeems(){
    
         return $this->hasMany('App\Redeem', 'user_id');
+    }
+    public function getfavourites()
+    {
+        return $this->belongsToMany('App\Voucher', 'user_favourites');
     }
 
     protected $fillable = [

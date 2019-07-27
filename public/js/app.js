@@ -2149,6 +2149,7 @@ __webpack_require__.r(__webpack_exports__);
     return {
       search: '',
       categories: {},
+      allCategories: {},
       vouchers: {},
       categoryForm: new Form({
         id: '',
@@ -2161,7 +2162,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   computed: {
     sortedCategories: function sortedCategories() {
-      return _.sortBy(this.categories.data, [function (category) {
+      return _.sortBy(this.allCategories, [function (category) {
         return category.name.toLowerCase();
       }], 'category_id');
     },
@@ -2306,33 +2307,42 @@ __webpack_require__.r(__webpack_exports__);
         return _this4.categories = data;
       });
     },
+    getAllCategory: function getAllCategory() {
+      var _this5 = this;
+
+      axios.get('api/categoryall').then(function (_ref2) {
+        var data = _ref2.data;
+        return _this5.allCategories = data;
+      });
+    },
 
     /* Getting voucher data */
     getVouch: function getVouch() {
-      var _this5 = this;
+      var _this6 = this;
 
-      axios.get('api/voucher').then(function (_ref2) {
-        var data = _ref2.data;
-        return _this5.vouchers = data;
+      axios.get('api/voucher').then(function (_ref3) {
+        var data = _ref3.data;
+        return _this6.vouchers = data;
       });
     }
   },
   mounted: function mounted() {
-    var _this6 = this;
+    var _this7 = this;
 
     Fire.$on('searching', function () {
-      var query = _this6.search;
+      var query = _this7.search;
       axios.get('api/findVoucher?q=' + query).then(function (data) {
-        _this6.vouchers = data.data;
+        _this7.vouchers = data.data;
       })["catch"](function (error) {
         console.log(error);
       });
     });
     Fire.$on('RefreshVouchersAndCategories', function () {
-      _this6.getVouch();
+      _this7.getVouch();
 
-      _this6.getCategory();
+      _this7.getCategory();
     });
+    this.getAllCategory();
     this.getVouch();
     this.getCategory();
   }
@@ -2775,6 +2785,7 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       tags: {},
+      tagsall: {},
       tagForm: new Form({
         id: '',
         voucher_id: '',
@@ -2787,7 +2798,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   computed: {
     sortedTags: function sortedTags() {
-      return _.sortBy(this.tags.data, [function (tag) {
+      return _.sortBy(this.tagsall, [function (tag) {
         return tag.tag_title.toLowerCase();
       }], 'tag_id');
     },
@@ -2926,25 +2937,34 @@ __webpack_require__.r(__webpack_exports__);
         return _this4.tags = data;
       });
     },
+    getAllTags: function getAllTags() {
+      var _this5 = this;
+
+      axios.get('api/tagall').then(function (_ref2) {
+        var data = _ref2.data;
+        return _this5.tagsall = data;
+      });
+    },
 
     /* Getting voucher data */
     getVouch: function getVouch() {
-      var _this5 = this;
+      var _this6 = this;
 
-      axios.get('api/voucher').then(function (_ref2) {
-        var data = _ref2.data;
-        return _this5.vouchers = data;
+      axios.get('api/voucher').then(function (_ref3) {
+        var data = _ref3.data;
+        return _this6.vouchers = data;
       });
     }
   },
   mounted: function mounted() {
-    var _this6 = this;
+    var _this7 = this;
 
     Fire.$on('RefreshVouchersAndTags', function () {
-      _this6.getVouch();
+      _this7.getVouch();
 
-      _this6.getTags();
+      _this7.getTags();
     });
+    this.getAllTags();
     this.getVouch();
     this.getTags();
   }
@@ -3183,7 +3203,7 @@ __webpack_require__.r(__webpack_exports__);
         description: '',
         image: '',
         expiry_date: '',
-        facebook_link: '',
+        website_link: '',
         category: '',
         popular_flag: '',
         is_archive: ''
@@ -3254,7 +3274,7 @@ __webpack_require__.r(__webpack_exports__);
 
           _this2.voucherForm["delete"]('api/voucher/' + id).then(function () {
             swal.fire('Archived!', 'Voucher has been archived.', 'success');
-            /* After archiving, send an event to fresh the voucher table */
+            /* After archiving, send an event to refresh the voucher table */
 
             Fire.$emit('RefreshVouchers');
           })["catch"](function () {
@@ -71065,7 +71085,7 @@ var render = function() {
                       ]),
                       _vm._v(" "),
                       _c("td", { staticClass: "truncateText" }, [
-                        _c("span", [_vm._v(_vm._s(archive.facebook_link))])
+                        _c("span", [_vm._v(_vm._s(archive.website_link))])
                       ]),
                       _vm._v(" "),
                       _c("td", [_vm._v(_vm._s(archive.popular_flag))]),
@@ -71166,7 +71186,7 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("th", [_vm._v("Expiry Date")]),
       _vm._v(" "),
-      _c("th", [_vm._v("Facebook Link")]),
+      _c("th", [_vm._v("Website Link")]),
       _vm._v(" "),
       _c("th", [_vm._v("Popular")]),
       _vm._v(" "),
@@ -73464,7 +73484,7 @@ var render = function() {
                         ]),
                         _vm._v(" "),
                         _c("td", { staticClass: "truncateText" }, [
-                          _c("span", [_vm._v(_vm._s(voucher.facebook_link))])
+                          _c("span", [_vm._v(_vm._s(voucher.website_link))])
                         ]),
                         _vm._v(" "),
                         _c("td", [_vm._v(_vm._s(voucher.popular_flag))]),
@@ -73770,30 +73790,30 @@ var render = function() {
                       "div",
                       { staticClass: "form-group" },
                       [
-                        _c("label", [_vm._v("Facebook Link")]),
+                        _c("label", [_vm._v("Website Link")]),
                         _vm._v(" "),
                         _c("input", {
                           directives: [
                             {
                               name: "model",
                               rawName: "v-model",
-                              value: _vm.voucherForm.facebook_link,
-                              expression: "voucherForm.facebook_link"
+                              value: _vm.voucherForm.website_link,
+                              expression: "voucherForm.website_link"
                             }
                           ],
                           staticClass: "form-control",
                           class: {
                             "is-invalid": _vm.voucherForm.errors.has(
-                              "facebook_link"
+                              "website_link"
                             )
                           },
                           attrs: {
                             type: "text",
-                            name: "facebook_link",
+                            name: "website_link",
                             placeholder:
-                              "Enter a link to the voucher's facebook page (OPTIONAL)"
+                              "Enter a link to the voucher's website (OPTIONAL)"
                           },
-                          domProps: { value: _vm.voucherForm.facebook_link },
+                          domProps: { value: _vm.voucherForm.website_link },
                           on: {
                             input: function($event) {
                               if ($event.target.composing) {
@@ -73801,7 +73821,7 @@ var render = function() {
                               }
                               _vm.$set(
                                 _vm.voucherForm,
-                                "facebook_link",
+                                "website_link",
                                 $event.target.value
                               )
                             }
@@ -73811,7 +73831,7 @@ var render = function() {
                         _c("has-error", {
                           attrs: {
                             form: _vm.voucherForm,
-                            field: "facebook_link"
+                            field: "website_link"
                           }
                         })
                       ],
@@ -74156,7 +74176,7 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("th", [_vm._v("Expiry Date")]),
       _vm._v(" "),
-      _c("th", [_vm._v("Facebook Link")]),
+      _c("th", [_vm._v("Website Link")]),
       _vm._v(" "),
       _c("th", [_vm._v("Popular")]),
       _vm._v(" "),
@@ -90414,13 +90434,13 @@ __webpack_require__.r(__webpack_exports__);
 
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 vue__WEBPACK_IMPORTED_MODULE_1___default.a.use(vue_router__WEBPACK_IMPORTED_MODULE_0__["default"]);
-/* Establish application routes for nav links on the side menu */
+/* Establish application routes for nav links on admin side menu */
 
 var routes = [{
   path: '/dashboard',
   component: __webpack_require__(/*! ./components/Dashboard.vue */ "./resources/js/components/Dashboard.vue")["default"]
 }, {
-  path: '/home',
+  path: '/adminhome',
   component: __webpack_require__(/*! ./components/Dashboard.vue */ "./resources/js/components/Dashboard.vue")["default"]
 }, {
   path: '/users',
@@ -90454,11 +90474,10 @@ var routes = [{
   component: __webpack_require__(/*! ./components/NotFound.vue */ "./resources/js/components/NotFound.vue")["default"]
 }];
 var router = new vue_router__WEBPACK_IMPORTED_MODULE_0__["default"]({
+  mode: 'hash',
+  // mode: 'history'
   routes: routes,
-  mode: 'history',
   linkActiveClass: 'active'
-  /* If the nav link is selected, highlight it */
-
 });
 /* harmony default export */ __webpack_exports__["default"] = (router);
 

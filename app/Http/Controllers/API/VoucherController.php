@@ -23,7 +23,7 @@ class VoucherController extends Controller
             //maybe have a unique:name for name to prevent duplicate vouchers? 
             'name' => 'required|string|max:150', /* max 150 characters*/
             'description' => 'required|string|max:500',
-            'facebook_link' => 'nullable|url'
+            'website_link' => 'nullable|url'
             //'expiry_date' => 'required|after:yesterday|before:2030-01-01', //can only set expiry date AFTER the date of voucher creation
             //'popular_flag' => 'required'
             //'image' => 'required' //must be an image (jpg, png, bmp or gif)
@@ -38,7 +38,7 @@ class VoucherController extends Controller
         return Voucher::create([
             'name' => $request['name'],
             'description' => $request['description'],
-            'facebook_link' => $request['facebook_link'],
+            'website_link' => $request['website_link'],
             'popular_flag' => $request['popular_flag'],
             'expiry_date' => $request['expiry_date'],
             'category' => $request['category'],
@@ -57,9 +57,9 @@ class VoucherController extends Controller
         /* validation before updating the voucher */
         $this->validate($request,[
             'name' => 'required|string|max:150', 
-            'description' => 'required|string|max:500',
-            'facebook_link' => 'nullable|url',
-            'expiry_date' => 'required|after:yesterday|before:2030-01-01', 
+            'description' => 'required|string',
+            'website_link' => 'nullable|url',
+           // 'expiry_date' => 'required|after:yesterday|before:2030-01-01', 
             'popular_flag' => 'required'
         ]);
         $currentImage = $voucher->image;   

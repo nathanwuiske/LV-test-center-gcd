@@ -4,10 +4,10 @@ import Vue from 'vue';
 window.Vue = require('vue');
 Vue.use(VueRouter)
 
-/* Establish application routes for nav links on the side menu */
+/* Establish application routes for nav links on admin side menu */
 let routes = [
     { path: '/dashboard', component: require('./components/Dashboard.vue').default },
-    { path: '/home', component: require('./components/Dashboard.vue').default },
+    { path: '/adminhome', component: require('./components/Dashboard.vue').default },
     { path: '/users', component: require('./components/Users.vue').default },
     { path: '/vouchers', component: require('./components/Vouchers.vue').default },
     { path: '/categories', component: require('./components/Categories.vue').default },
@@ -21,9 +21,9 @@ let routes = [
   ];
 
 const router = new VueRouter({
+    mode: 'hash', // mode: 'history'
     routes, 
-    mode: 'history',
-    linkActiveClass: 'active' /* If the nav link is selected, highlight it */
+    linkActiveClass: 'active'
 })
 
 export default router;

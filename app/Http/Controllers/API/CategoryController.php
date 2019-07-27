@@ -13,6 +13,10 @@ class CategoryController extends Controller
     {
         return Category::latest()->paginate(5);
     }
+    public function categoryall()
+    {
+        return Category::latest()->get();
+    }
 
     public function store(Request $request)
     {

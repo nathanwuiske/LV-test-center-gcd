@@ -33,8 +33,11 @@
                 </button>
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                      <a class="nav-link"data-widget="pushmenu" href="#"><i class="fas fa-arrows-alt-h"></i></a>
+                      <a class="nav-link"data-widget="pushmenu" href="#"><i class="fas fa-arrows-alt-h"></i> Expand/Collapse Menu </a>
                     </li>
+                    <li class="nav-item">
+                    <a href="{{route('home')}}" class="nav-link"><i class="fas fa-home"></i> Return to Home page </a>
+                      </li>
                 </ul>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Right Side Of Navbar -->

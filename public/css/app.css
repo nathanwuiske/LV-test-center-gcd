@@ -1,6 +1,7 @@
 @import url(https://fonts.googleapis.com/css?family=Nunito);/*!
  *   AdminLTE v3.0.0-alpha
-
+ *   Author: Abdullah Almsaeed
+ *	 Website: AdminLTE.io <http://adminlte.io>
  *   License: Open source - MIT <http://opensource.org/licenses/MIT>
  */
 /*!
@@ -3721,7 +3722,7 @@ input[type="button"].btn-block {
 .nav-tabs .nav-link.active,
 .nav-tabs .nav-item.show .nav-link {
   color: #495057;
-  background-color: #007bff;
+  background-color: #ffffff;
   border-color: #dee2e6 #dee2e6 #ffffff;
 }
 
@@ -8850,7 +8851,7 @@ body,
   color: #343a40;
 }
 
-.admin-sidebar-link {
+.brand-link {
   padding: 0.8125rem 0.5rem;
   font-size: 1.25rem;
   display: block;
@@ -8858,22 +8859,22 @@ body,
   white-space: nowrap;
 }
 
-.admin-sidebar-link:hover {
+.brand-link:hover {
   color: #ffffff;
   text-decoration: none;
 }
 
-[class*="sidebar-dark"] .admin-sidebar-link {
+[class*="sidebar-dark"] .brand-link {
   color: rgba(255, 255, 255, 0.8);
   border-bottom: 1px solid #4b545c;
 }
 
-[class*="sidebar-light"] .admin-sidebar-link {
+[class*="sidebar-light"] .brand-link {
   color: rgba(0, 0, 0, 0.8);
   border-bottom: 1px solid #dee2e6;
 }
 
-.sidebar-image {
+.brand-image {
   float: left;
   line-height: .8;
   max-height: 34px;
@@ -9027,7 +9028,6 @@ body,
   }
 }
 
-
 .sidebar-dark-primary {
   background-color: #07AD4D;
 }
@@ -9097,8 +9097,8 @@ body,
 }
 
 .sidebar-dark-primary .nav-treeview > .nav-item > .nav-link.active, .sidebar-dark-primary .nav-treeview > .nav-item > .nav-link.active:hover {
-  color: #ffffff;
-  background-color: #007bff;
+  color: #343a40;
+  background-color: rgba(255, 255, 255, 0.9);
 }
 
 .sidebar-light-primary {
@@ -10238,7 +10238,7 @@ body,
     margin-left: 0;
     display: inline-block;
   }
-  .sidebar-mini.sidebar-collapse .main-sidebar:hover .sidebar-image  {
+  .sidebar-mini.sidebar-collapse .main-sidebar:hover .brand-image {
     margin-right: .5rem;
   }
   .sidebar-mini.sidebar-collapse .main-sidebar:hover .sidebar-form,
@@ -10280,14 +10280,14 @@ body,
 }
 
 .sidebar .nav-link p,
-.main-sidebar .admin-sidebar-text,
+.main-sidebar .brand-text,
 .sidebar .user-panel .info {
   transition: margin-left 0.3s linear, opacity 0.5s ease;
 }
 
 @media screen and (prefers-reduced-motion: reduce) {
   .sidebar .nav-link p,
-  .main-sidebar .admin-sidebar-text,
+  .main-sidebar .brand-text,
   .sidebar .user-panel .info {
     transition: none;
   }

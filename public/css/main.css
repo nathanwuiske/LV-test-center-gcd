@@ -1,0 +1,844 @@
+
+
+
+/* =================================== */
+/*	Account Page
+/* =================================== */
+
+/* Responsive Text Area for all devices */
+textarea {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  width: 100%;
+  }
+  /* Well */
+  @media (max-width: 768px){
+  .row .col-xs-12.col-sm-4
+  {
+  padding-top:10px;
+  }
+  }
+  .padding-top-sm{
+  padding-top:10px;
+  }
+  .padding-top-md{
+  padding-top:20px;
+  }
+  /* Border */
+  .border-bottom-sm {
+  border-bottom: 1px solid dimgrey;
+  }
+  /* Form */
+  form > a{
+  padding-right:80px;
+  }
+  form a {
+  font-size:20px;
+  }
+  form a:hover {
+  text-decoration: none;
+  }
+  /* Border */
+  .border-bottom-sm {
+  border-bottom: 1px solid dimgrey;
+  }
+  /* Icon */
+
+
+
+
+/* =================================== */
+/*	Login Page
+/* =================================== */
+
+.mb650 {
+  margin-bottom: 650px;
+}
+
+.mb350 {
+  margin-bottom: 350px;
+}
+
+
+.mb250 {
+  margin-bottom: 250px;
+}
+
+.mb150 {
+  margin-bottom: 150px;
+}
+
+.log-form {
+  width: 40%;
+  min-width: 320px;
+  max-width: 475px;
+  background: #fff;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.25);
+}
+@media (max-width: 40em) {
+  .log-form {
+    width: 95%;
+    position: relative;
+    margin: 2.5% auto 0 auto;
+    left: 0%;
+    -webkit-transform: translate(0%, 0%);
+    -moz-transform: translate(0%, 0%);
+    -o-transform: translate(0%, 0%);
+    -ms-transform: translate(0%, 0%);
+    transform: translate(0%, 0%);
+  }
+}
+.log-form form {
+  display: block;
+  width: 100%;
+  padding: 2em;
+}
+.log-form h2 {
+  color: #fff;
+  font-size: 1.35em;
+  display: block;
+  background: #4272D7;
+  width: 100%;
+  text-transform: uppercase;
+  padding: 0.75em 1em 0.75em 1.5em;
+  box-shadow: inset 0px 1px 1px rgba(255, 255, 255, 0.05);
+  margin: 0;
+  font-weight: 200;
+}
+.log-form input {
+  display: block;
+  margin: auto auto;
+  width: 100%;
+  margin-bottom: 2em;
+  padding: 0.5em 0;
+  border: none;
+  border-bottom: 1px solid #eaeaea;
+  padding-bottom: 1.25em;
+  padding-left: 15px;
+  color: #757575;
+}
+.log-form input:focus {
+  outline: none;
+}
+.log-form .btn {
+  display: inline-block;
+  background-color: #4272D7;
+
+  padding: 0.5em 2em;
+  color: white;
+  margin-right: 0.5em;
+  box-shadow: inset 0px 1px 0px rgba(255, 255, 255, 0.2);
+}
+.log-form .btn:hover {
+  background-color: #2D62D3;
+}
+
+.log-form .btn:focus {
+  outline: none;
+}
+.log-form .forgot {
+  color: black;
+  line-height: 0.5em;
+  position: relative;
+  top: 2.5em;
+  text-decoration: none;
+  font-size: 11px;
+  margin: 0;
+  padding: 0;
+  float: right;
+}
+.log-form .forgot:hover {
+  color: #07AD4D;
+}
+
+
+/* =================================== */
+/* 
+/* =================================== */
+
+
+
+
+/* =================================== */
+/*	Slider home page
+/* =================================== */
+
+/* =================================== */
+/*	Home Page (home.blade.php)
+/* =================================== */
+
+.content-background-white {
+  background-color:#fff; 
+  border-bottom: 1px #787878 solid
+}
+
+.content-background-grey {
+  border-bottom: 1px #787878 solid
+}
+
+/* view all header */
+.view-all {
+  float:right; 
+  color:#4272D7; 
+  font-size:18px;
+}
+
+/* START modal Content */
+
+.modal-header {
+  background-color:#07AD4D;
+}
+.modal-header h5 {
+  color: white; 
+  font-size: 15px;
+}
+.modal-header button {
+  opacity: 0.9; 
+  color: white; 
+  position:absolute;
+  right: 2%;
+  top: 2%;
+}
+
+/* text overflow in modal */
+.modal-body{
+  max-height: calc(100vh - 150px);
+  overflow-y: auto;
+  background-color: #F2F2F2;
+  }
+
+.modal-body p {
+  word-wrap: break-word;
+}
+
+.modal-body a {
+  color: #07AD4D;
+}
+
+.modal-body button {
+  width: 100%; 
+  height: 100%; 
+  background-color: #07AD4D;
+  color:white;
+}
+.modal-footer{
+  background-color: #F2F2F2
+}
+/* END modal Content */
+
+/* Voucher styling */
+.voucher-style {
+  background-color: white; 
+  border: 1px solid #CCCCCC; 
+  text-align: center;
+}
+.voucher-name {
+  color:#07AD4D; font-size: 20px; margin-bottom: 10px;margin-top: 10px;
+}
+
+.voucher-view-btn {
+  background-color:#07AD4D;  
+  width: 50%; 
+  height: 100%; 
+  margin-right: 10px;
+}
+
+
+/* Home headers */
+.home-header-pop {
+  font-size: 25px; 
+  position:relative; 
+  left: 28px; 
+  color:#07AD4D; 
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+/* favourite hover over */
+.fav-hover:hover .fa-heart {
+      color:#ad1707;
+      transition: transform 0.8s;
+      transform:  scale(1.5);
+}
+
+
+
+
+/* Colour the pagination links green */
+.pagination > li > a,
+.pagination > li > span {
+    color: #07AD4D; 
+}
+
+
+
+/* Voucher modal scrollbar */
+.img-center { 
+  display: block; 
+  margin-left: auto; 
+  margin-right: auto; 
+}
+
+
+/* Vouchers */
+.hoverOver img {
+	-webkit-transform: scale(1);
+	transform: scale(1);
+	-webkit-transition: .3s ease-in-out;
+	transition: .3s ease-in-out;
+}
+.hoverOver:hover img {
+	-webkit-transform: scale(1.01);
+	transform: scale(1.01);
+}
+
+.alignVoucherCards {
+
+  margin-right: 15px; 
+  padding: 5px;
+}
+
+.errorReturn {
+  color: black;
+}
+
+
+/* End Vouchers */
+
+/* Search bar */
+.search {
+  width: 100%;
+  position: relative;
+  display: flex;
+  }
+  .searchTerm {
+  width: 100%;
+  border: 3px solid #08AD4E;
+  border-right: none;
+  padding: 5px;
+  height: 36px;
+  border-radius: 5px 0 0 5px;
+  outline: none;
+  color: #B0A8AA;
+  }
+  .searchTerm:focus{
+  color: black;
+  }
+
+/* End Search bar */
+
+/* =================================== */
+/*	Main Blade Page (main.blade.php)
+/* =================================== */
+
+#mainLogo {
+  font-family: "Ubuntu";
+  padding-top: 10px; 
+  font-size: 30px;
+}
+
+
+/* =================================== */
+/*	Basic Style 
+/* =================================== */
+
+body {
+    background-color: #F4F6F9;
+    font-family: "Ubuntu";
+    line-height: 21px;
+	  font-size: 13px;
+    color: #6a737b;
+}
+
+ ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+ p {
+    margin: 0;
+}
+
+a {
+    color: #fff;
+	
+    -webkit-transition: all .3s ease-in 0s;
+       -moz-transition: all .3s ease-in 0s;
+        -ms-transition: all .3s ease-in 0s;
+         -o-transition: all .3s ease-in 0s;
+            transition: all .3s ease-in 0s;
+}
+
+a, a:focus, a:hover {
+    text-decoration: none;
+    outline: 0;
+}
+
+a:focus, a:hover {
+    color: #6CB670;
+}
+
+h1, h2, h3, h5, h6 {
+	font-weight: normal;
+	margin: 0;
+}
+
+.clear:before,
+.clear:after {
+    content: " ";
+    display: table;
+}
+ 
+.clear:after {
+   clear: both;
+}
+ 
+.clear {
+   *zoom: 1;
+}
+
+span.color {
+	color: #0feb9e;
+}
+
+body > section,
+.footer {
+	padding: 30px 0;
+}
+
+
+
+
+
+.sec-title h2 {
+  color: white;
+  font-size: 14px;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+.advert {
+  color: white;
+  font-size: 28px;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.devider {
+  margin-top: 30px;
+}
+
+.devider i {
+  color: #cccccc;
+}
+
+.devider:before,
+.devider:after {
+  content: "______________________";
+  color: #e6e8ea;
+  position: relative;
+  bottom: 6px;
+}
+
+.devider:before {
+  right: 10px;
+}
+
+.devider:after {
+  left: 10px;
+}
+
+.mb50 {
+	margin-bottom: 50px;
+}
+
+
+/*=========================================
+	Header
+==========================================*/
+
+#navigation {
+  background-color: rgba(7, 173, 77, 1);
+  border-bottom: 1px solid #797979;
+  margin: 0;
+  
+    -webkit-transition: background-color 800ms linear;
+       -moz-transition: background-color 800ms linear;
+	    -ms-transition: background-color 800ms linear;
+         -o-transition: background-color 800ms linear;
+			transition: background-color 800ms linear;
+}
+
+.navbar-toggle i {
+	color: #fff;
+}
+
+.navbar-brand {
+  padding: 0;
+}
+
+.navbar-nav li a {
+	border-top: 1px solid transparent;
+}
+
+/* Navigation hover over */
+
+.navbar-nav li a:focus,
+.navbar-nav li a:hover {
+	background-color: #07ba53; 
+	color: white;
+}
+
+
+
+/*---drop down menu---*/
+
+.nav ul {
+  list-style: none; 
+  padding: 0;
+  margin: 0;
+  background: #07AD4D;
+}
+.nav ul li {
+  display: block;
+  position: relative;
+  float: left;
+  background: #07AD4D;
+}
+/* This hides the dropdowns */
+.nav li ul {
+  display: none;
+}
+.nav ul li a {
+  display: block;
+  padding: 1em;
+  text-decoration: none;
+  white-space: nowrap;
+  color: #fff;
+}
+.nav ul li a:hover {
+  background: #2c3e50;
+}
+/* Display the dropdown */
+.nav li:hover > ul {
+  display: block; 
+  position: absolute;
+}
+/* Remove float from dropdown lists */
+.nav li:hover li {
+    float: none;
+}
+
+.nav li:hover li a:hover {
+  background: #07ba53;
+}
+/* Displays second level dropdowns to the right of the first level dropdown */
+.nav ul ul ul {
+  left: 100%;
+  top: 0; 
+}
+
+
+/* Simple clearfix */
+
+.nav ul:before,
+.nav ul:after {
+    content: " "; /* 1 */
+    display: table; /* 2 */
+}
+
+.nav ul:after {
+    clear: both;
+}
+
+
+/*=========================================
+	Slider
+==========================================*/
+
+#slider {
+	padding: 0;
+}
+
+
+
+/*=========================================
+	Features
+==========================================*/
+
+.features {
+  background-color: #f4f7f9;
+}
+
+.service-icon {
+  border: 1px solid #07AD4D;
+  border-radius: 50%;
+  color: #07AD4D;
+  float: left;
+  padding: 10px 13px;
+}
+
+.service-desc {
+  margin-left: 70px;
+  position: relative;
+  top: 5px;
+}
+
+.service-desc h3 {
+  color: #062033;
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 25px;
+}
+
+
+
+
+/*=========================================
+	Our Works
+==========================================*/
+
+
+
+/*=========================================
+	Our Team Member
+==========================================*/
+
+
+/*=========================================
+	Advertise Page (advertise.blade.php)
+==========================================*/
+
+/* ---Pricing--- */
+.pt40 {
+  padding-top: 40px;
+}
+
+.greyli {
+  background-color: #c4c4c4;
+}
+
+.columns {
+  float: left;
+  width: 50%;
+  padding: 8px;
+  }
+  /* Style the list */
+  .price {
+  list-style-type: none;
+  border: 1px solid #eee;
+  margin: 0;
+  padding: 0;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+  }
+  /* Add shadows on hover */
+  .price:hover {
+  box-shadow: 0 8px 12px 0 rgba(0,0,0,0.2)
+  }
+  /* Pricing header */
+  .price .header {
+  background-color: #4CAF50;
+  color: white;
+  font-size: 25px;
+  }
+  /* List items */
+  .price li {
+  border-bottom: 1px solid #eee;
+  padding: 20px;
+  text-align: center;
+  font-size: 15px;
+  word-wrap: break-word;
+  }
+  /* Grey list item */
+  .price .grey {
+  background-color: #eee;
+  font-size: 20px;
+  }
+  /* The "Sign Up" button */
+  .button {
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 10px 25px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 18px;
+  }
+
+  @media only screen and (max-width: 600px) {
+  .columns {
+  width: 100%;
+  }
+  }
+
+/* ---Service items--- */
+
+.wordwrap {
+  word-wrap: break-word; 
+  width: 200px;
+}
+
+.mb10 {
+  margin-bottom: 10px;
+}
+
+.mb20 {
+  margin-bottom: 20px;
+}
+
+.fontSize17 {
+  font-size: 17px;
+}
+
+#advertiseFacts {
+	background-image: url(../imgs/coast.png);
+	background-color: rgba(6,32,51,.8);
+	background-attachment: fixed !important;
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	padding: 0;
+}
+
+.advertiseFacts .devider:before,
+.advertiseFacts .devider:after {
+	color: #737C85;
+}
+
+.advertiseFacts .devider i {
+	color: #fff;
+}
+
+.parallax-overlay {
+	background-color: rgba(6,32,51,.8);
+	padding: 70px 0;
+}
+
+.fact-item {
+  color: #fff;
+}
+
+.fact-item i {
+  border: 1px solid #737C85;
+  border-radius: 50%;
+  color: #fff;
+  display: inline-block;
+  height: 120px;
+  margin: 0 0 35px;
+  padding: 40px 0 0;
+  width: 120px;
+}
+
+.fact-item strong {
+  display: block;
+  font-size: 60px;
+  font-weight: 600;
+  line-height: 60px;
+}
+
+.fact-item p {
+  font-size: 18px;
+  line-height: 24px;
+  margin-top: 15px;
+}
+
+
+
+
+/*=========================================
+	Contact Us
+==========================================*/
+
+.contact {
+	padding-bottom: 0;
+}
+
+label.error {
+  color: #c0392b;
+  font-weight: normal;
+  text-transform: capitalize;
+}
+
+
+/*=========================================
+Privacy Policy
+==========================================*/
+
+.grey-underline {
+  border-bottom: 1px solid dimgrey;
+}
+
+.privacy h3 {
+  line-height:40px;
+  font-weight: bold;
+}
+.privacy p {
+  font-size: 16px;
+}
+.privacy li {
+  font-size: 16px;
+}
+
+/*=========================================
+Terms and conditions
+==========================================*/
+.terms h3 {
+  line-height:40px;
+  font-weight: bold;
+}
+.terms p {
+  font-size: 16px;
+}
+.terms li {
+  font-size: 16px;
+  line-height:30px;
+}
+
+/*=========================================
+	Contact Us
+==========================================*/
+
+
+.footer {
+  background-color: #07AD4D;
+  color: #fff;
+}
+
+.footer a:hover {
+  color: #062033;
+}
+
+.footer h6 {
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 24px;
+  margin-bottom: 30px;
+}
+
+.footer-single {
+  line-height: 24px;
+}
+
+
+.footer-single li {
+  line-height: 32px;
+}
+
+.footer-single p i {
+  margin: 0 10px;
+}
+
+.copyright {
+  color: #fff;
+  margin-top: 100px;
+}

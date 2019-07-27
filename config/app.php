@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'GCD-admin'),
+    'name' => env('APP_NAME', 'Gold Coast Discounts'),
 
     /*
     |--------------------------------------------------------------------------

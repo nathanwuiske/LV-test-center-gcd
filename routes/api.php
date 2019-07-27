@@ -8,11 +8,17 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 // Register resourceful routes with post, get, patch and delete requests
 Route::apiResource('voucher', 'API\VoucherController');
+//new user endpoint was created - where is the default one?
+Route::apiResource('users', 'API\UserController');
 Route::apiResource('tag', 'API\TagController');
 Route::apiResource('vouchertag', 'API\VoucherTagController');
 Route::apiResource('category', 'API\CategoryController');
 Route::apiResource('vouchercategory', 'API\VoucherCategoryController');
 Route::apiResource('archived', 'API\ArchivedController');
+
+/* Get all the tags and categories in a single endpoint */
+Route::get('categoryall', 'API\CategoryController@categoryall');
+Route::get('tagall', 'API\TagController@tagall');
 
 Route::apiResource('redeem', 'API\RedeemController');
 
@@ -34,5 +40,6 @@ Route::group([
     ], function() {
         Route::get('logout', 'Auth\AuthController@logout');
         Route::get('user', 'Auth\AuthController@user');
+        
     });
 });

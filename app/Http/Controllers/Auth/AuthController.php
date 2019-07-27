@@ -63,6 +63,7 @@ class AuthController extends Controller
     /* Get the authenticated User - returns user object*/
     public function user(Request $request)
     {
+        // ::with('getfavourites')->findOrFail(1)
         return response()->json($request->user());
     }
 }

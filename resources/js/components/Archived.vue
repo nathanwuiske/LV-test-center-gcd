@@ -14,7 +14,7 @@
                            <th>Name</th>
                            <th>Description</th>
                            <th>Expiry Date</th>
-                           <th>Facebook Link</th>
+                           <th>Website Link</th>
                            <th>Popular</th>
                            <th>Image</th>
                            <th>Restore</th>
@@ -26,7 +26,7 @@
                               <span>{{archive.description}}</span>
                            </td>
                            <td>{{archive.expiry_date | formatDate}}</td>
-                           <td class="truncateText"><span>{{archive.facebook_link}}</span></td>
+                           <td class="truncateText"><span>{{archive.website_link}}</span></td>
                            <td>{{archive.popular_flag}}</td>
                            <td><a href="#" @click="getImage(archive.image)">Show</a></td>
                            <td>
