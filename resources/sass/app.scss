@@ -26,40 +26,6 @@
   font-size: 16px;
 }
 
-.email ~ .input-icon {
-  background-image: url("../../public/imgs/user-email-icon.png");
-  background-repeat: no-repeat;
-  background-size: 100%;
-  background-position: center center;
-  width: 22px;
-  height: 18px;
-  position: absolute;
-  left: 8px;
-  bottom: 0;
-  top: 0;
-  margin: auto;
-}
-
-.pass {
-  padding-left: 35px;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  font-size: 16px;
-}
-
-.pass ~ .input-icon-pass {
-  background-image: url("../../public/imgs/user-pass-icon.png");
-  background-repeat: no-repeat;
-  background-size: 100%;
-  background-position: center center;
-  width: 22px;
-  height: 20px;
-  position: absolute;
-  left: 8px;
-  bottom: 0;
-  top: 0;
-  margin: auto;
-}
 // Login header (h1)
 .heading {
   text-align: center;

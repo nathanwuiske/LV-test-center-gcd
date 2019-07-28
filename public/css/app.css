@@ -23842,41 +23842,6 @@ a.text-dark:focus {
   font-size: 16px;
 }
 
-.email ~ .input-icon {
-  background-image: url(/images/user-email-icon.png?f6b09755c6b6c4472ef6c88a561608b8);
-  background-repeat: no-repeat;
-  background-size: 100%;
-  background-position: center center;
-  width: 22px;
-  height: 18px;
-  position: absolute;
-  left: 8px;
-  bottom: 0;
-  top: 0;
-  margin: auto;
-}
-
-.pass {
-  padding-left: 35px;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  font-size: 16px;
-}
-
-.pass ~ .input-icon-pass {
-  background-image: url(/images/user-pass-icon.png?c580a158798400c95e6e811f1625f970);
-  background-repeat: no-repeat;
-  background-size: 100%;
-  background-position: center center;
-  width: 22px;
-  height: 20px;
-  position: absolute;
-  left: 8px;
-  bottom: 0;
-  top: 0;
-  margin: auto;
-}
-
 .heading {
   text-align: center;
   width: 100%;
