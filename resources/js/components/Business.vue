@@ -124,101 +124,100 @@
 </template>
 
 <script>
-	export default {
-		data() {
-			return {
-				businesses: {},
-				businessForm: new Form({
+    export default {
+        data() {
+            return {
+                businesses: {},
+                businessForm: new Form({
                     id: '',
                     name: '',
                     image: ''
-				})
-			}
-		},
-		methods: {
-			getResults(page = 1) {
-				axios.get('api/business?page=' + page)
-					.then(response => {
-						this.businesses = response.data;
-					});
-			},
-			getBusinesses() {
-				axios.get('api/business').then(({
-					data
-				}) => (this.businesses = data));
+                })
+            }
+        },
+        methods: {
+            getResults(page = 1) {
+                axios.get('api/business?page=' + page)
+                    .then(response => {
+                        this.businesses = response.data;
+                    });
+            },
+            getBusinesses() {
+                axios.get('api/business').then(({
+                    data
+                }) => (this.businesses = data));
             },
             addNewBusinessModal() {
-				this.businessForm.clear();
-				this.businessForm.reset();
-				$("#addNewBusiness").modal({
-					backdrop: 'static',
-					keyboard: false
-				});
+                this.businessForm.clear();
+                this.businessForm.reset();
+                $("#addNewBusiness").modal({
+                    backdrop: 'static',
+                    keyboard: false
+                });
             },
             createBusiness() {
-            this.businessForm.post('api/business')
-                .then(() => {
-                    Fire.$emit('RefreshBusinesses');
-                    $('#addNewBusiness').modal('hide');
-                    swal.fire(
-                        'Success!',
-                        'Business has been created successfully',
-                        'success'
-                    )
-                })
-                .catch(() => {
-                    swal.fire({
-                        title: 'Error',
-                        text: "Failed to create new business.",
-                        type: 'error'
+                this.businessForm.post('api/business')
+                    .then(() => {
+                        Fire.$emit('RefreshBusinesses');
+                        $('#addNewBusiness').modal('hide');
+                        swal.fire(
+                            'Success!',
+                            'Business has been created successfully',
+                            'success'
+                        )
                     })
-                })
+                    .catch(() => {
+                        swal.fire({
+                            title: 'Error',
+                            text: "Failed to create new business.",
+                            type: 'error'
+                        })
+                    })
             },
             insertImage(event) {
-				let file = event.target.files[0];
-				let reader = new FileReader();
-				if(file['size'] < 2097152){ 
-					reader.onloadend = (file) => {
-						this.businessForm.image = reader.result;
-					}
-					reader.readAsDataURL(file);
-				}
-				else {
-					$("#imageUpload").val('');
-					swal.fire({
-						title: 'Error',
-						text: "File cannot be larger than 2MB.",
-						type: 'error'
-					})
-				}
+                let file = event.target.files[0];
+                let reader = new FileReader();
+                if (file['size'] < 2097152) {
+                    reader.onloadend = (file) => {
+                        this.businessForm.image = reader.result;
+                    }
+                    reader.readAsDataURL(file);
+                } else {
+                    $("#imageUpload").val('');
+                    swal.fire({
+                        title: 'Error',
+                        text: "File cannot be larger than 2MB.",
+                        type: 'error'
+                    })
+                }
             },
             getImage(image) {
-				$('#imagepreview').attr('src', "imgs/businesses/" + image);
-				$('#showImage').modal('show');
+                $('#imagepreview').attr('src', "imgs/businesses/" + image);
+                $('#showImage').modal('show');
             },
             deleteBusiness(id, name) {
-				swal.fire({
-					title: 'Are you sure?',
-					html: 'The following business will be permanently deleted: <b><b><br>' + name,
-					type: 'warning',
-					showCancelButton: true,
-					confirmButtonColor: '#d33',
-					cancelButtonColor: '#07AD4D',
-					confirmButtonText: 'Delete'
-				}).then((result) => {
-					if (result.value) {
-						this.businessForm.delete('api/business/' + id).then(() => {
-							swal.fire(
-								'Deleted!',
-								'Business has been deleted.',
-								'success'
-							)
-							Fire.$emit('RefreshBusinesses');
-						}).catch(() => {
-							swal("Failed!", "Failed to delete business.", "warning");
-						});
-					}
-				})
+                swal.fire({
+                    title: 'Are you sure?',
+                    html: 'The following business will be permanently deleted: <b><b><br>' + name,
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#07AD4D',
+                    confirmButtonText: 'Delete'
+                }).then((result) => {
+                    if (result.value) {
+                        this.businessForm.delete('api/business/' + id).then(() => {
+                            swal.fire(
+                                'Deleted!',
+                                'Business has been deleted.',
+                                'success'
+                            )
+                            Fire.$emit('RefreshBusinesses');
+                        }).catch(() => {
+                            swal("Failed!", "Failed to delete business.", "warning");
+                        });
+                    }
+                })
             },
             editBusinessModal(business) {
                 this.businessForm.clear();
@@ -227,32 +226,32 @@
                 this.businessForm.fill(business);
             },
             updateBusiness() {
-				this.businessForm.put('api/business/' + this.businessForm.id)
-					.then(() => {
-						Fire.$emit('RefreshBusinesses');
-						$('#editBusinessModal').modal('hide');
-						swal.fire(
-							'Success!',
-							'Business has been successfully updated.',
-							'success'
-						)
-					})
-					.catch(() => {
-						swal.fire({
-							title: 'Error',
-							text: "Failed to update business.",
-							type: 'error'
-						})
-					})
-			},
-        /* End of methods */
-        },
-       
-		mounted() {
-			Fire.$on('RefreshBusinesses', () => {
-				this.getBusinesses();
-			});
-			this.getBusinesses();
-		}
-	} 
+                this.businessForm.put('api/business/' + this.businessForm.id)
+                    .then(() => {
+                        Fire.$emit('RefreshBusinesses');
+                        $('#editBusinessModal').modal('hide');
+                        swal.fire(
+                            'Success!',
+                            'Business has been successfully updated.',
+                            'success'
+                        )
+                    })
+                    .catch(() => {
+                        swal.fire({
+                            title: 'Error',
+                            text: "Failed to update business.",
+                            type: 'error'
+                        })
+                    })
+            },
+            /* End of methods */
+        }, 
+
+        mounted() {
+            Fire.$on('RefreshBusinesses', () => {
+                this.getBusinesses();
+            });
+            this.getBusinesses();
+        }
+    } 
 </script>
