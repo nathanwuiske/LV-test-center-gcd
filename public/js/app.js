@@ -1933,8 +1933,238 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  mounted: function mounted() {}
+  data: function data() {
+    return {
+      businesses: {},
+      businessForm: new Form({
+        id: '',
+        name: '',
+        image: ''
+      })
+    };
+  },
+  methods: {
+    getResults: function getResults() {
+      var _this = this;
+
+      var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+      axios.get('api/business?page=' + page).then(function (response) {
+        _this.businesses = response.data;
+      });
+    },
+    getBusinesses: function getBusinesses() {
+      var _this2 = this;
+
+      axios.get('api/business').then(function (_ref) {
+        var data = _ref.data;
+        return _this2.businesses = data;
+      });
+    },
+    addNewBusinessModal: function addNewBusinessModal() {
+      this.businessForm.clear();
+      this.businessForm.reset();
+      $("#addNewBusiness").modal({
+        backdrop: 'static',
+        keyboard: false
+      });
+    },
+    createBusiness: function createBusiness() {
+      this.businessForm.post('api/business').then(function () {
+        Fire.$emit('RefreshBusinesses');
+        $('#addNewBusiness').modal('hide');
+        swal.fire('Success!', 'Business has been created successfully', 'success');
+      })["catch"](function () {
+        swal.fire({
+          title: 'Error',
+          text: "Failed to create new business.",
+          type: 'error'
+        });
+      });
+    },
+    insertImage: function insertImage(event) {
+      var _this3 = this;
+
+      var file = event.target.files[0];
+      var reader = new FileReader();
+
+      if (file['size'] < 2097152) {
+        reader.onloadend = function (file) {
+          _this3.businessForm.image = reader.result;
+        };
+
+        reader.readAsDataURL(file);
+      } else {
+        $("#imageUpload").val('');
+        swal.fire({
+          title: 'Error',
+          text: "File cannot be larger than 2MB.",
+          type: 'error'
+        });
+      }
+    },
+    getImage: function getImage(image) {
+      $('#imagepreview').attr('src', "imgs/businesses/" + image);
+      $('#showImage').modal('show');
+    },
+    deleteBusiness: function deleteBusiness(id, name) {
+      var _this4 = this;
+
+      swal.fire({
+        title: 'Are you sure?',
+        html: 'The following business will be permanently deleted: <b><b><br>' + name,
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#07AD4D',
+        confirmButtonText: 'Delete'
+      }).then(function (result) {
+        if (result.value) {
+          _this4.businessForm["delete"]('api/business/' + id).then(function () {
+            swal.fire('Deleted!', 'Business has been deleted.', 'success');
+            Fire.$emit('RefreshBusinesses');
+          })["catch"](function () {
+            swal("Failed!", "Failed to delete business.", "warning");
+          });
+        }
+      });
+    },
+    editBusinessModal: function editBusinessModal(business) {
+      this.businessForm.clear();
+      this.businessForm.reset();
+      $('#editBusinessModal').modal('show');
+      this.businessForm.fill(business);
+    },
+    updateBusiness: function updateBusiness() {
+      this.businessForm.put('api/business/' + this.businessForm.id).then(function () {
+        Fire.$emit('RefreshBusinesses');
+        $('#editBusinessModal').modal('hide');
+        swal.fire('Success!', 'Business has been successfully updated.', 'success');
+      })["catch"](function () {
+        swal.fire({
+          title: 'Error',
+          text: "Failed to update business.",
+          type: 'error'
+        });
+      });
+    }
+  },
+  mounted: function mounted() {
+    var _this5 = this;
+
+    Fire.$on('RefreshBusinesses', function () {
+      _this5.getBusinesses();
+    });
+    this.getBusinesses();
+  }
 });
 
 /***/ }),
@@ -71266,28 +71496,521 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { staticClass: "container" }, [
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-12" }, [
+        _c("div", { staticClass: "card" }, [
+          _c("div", { staticClass: "card-header" }, [
+            _c("h3", { staticClass: "card-title" }, [_vm._v("Businesses")]),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-success",
+                on: { click: _vm.addNewBusinessModal }
+              },
+              [
+                _c("i", { staticClass: "fas fa-plus pr-1" }),
+                _vm._v("Add New Business\n               ")
+              ]
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "card-body table-responsive p-0" }, [
+            _c("table", { staticClass: "table table-hover" }, [
+              _c(
+                "tbody",
+                [
+                  _vm._m(0),
+                  _vm._v(" "),
+                  _vm._l(_vm.businesses.data, function(business) {
+                    return _c("tr", { key: business.created_at }, [
+                      _c("td", [_vm._v(_vm._s(business.id))]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v(_vm._s(business.name))]),
+                      _vm._v(" "),
+                      _c("td", [
+                        _c(
+                          "a",
+                          {
+                            attrs: { href: "#" },
+                            on: {
+                              click: function($event) {
+                                return _vm.getImage(business.image)
+                              }
+                            }
+                          },
+                          [_vm._v("Show")]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("td", [
+                        _c(
+                          "a",
+                          {
+                            attrs: { href: "#" },
+                            on: {
+                              click: function($event) {
+                                return _vm.editBusinessModal(business)
+                              }
+                            }
+                          },
+                          [
+                            _c("i", {
+                              staticClass: "far fas fa-pencil-alt",
+                              staticStyle: { color: "#FFC107" }
+                            })
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "a",
+                          {
+                            attrs: { href: "#" },
+                            on: {
+                              click: function($event) {
+                                return _vm.deleteBusiness(
+                                  business.id,
+                                  business.name
+                                )
+                              }
+                            }
+                          },
+                          [_c("i", { staticClass: "fas fa-trash red" })]
+                        )
+                      ])
+                    ])
+                  })
+                ],
+                2
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "card-footer" },
+            [
+              _c(
+                "pagination",
+                {
+                  attrs: { data: _vm.businesses, limit: 5 },
+                  on: { "pagination-change-page": _vm.getResults }
+                },
+                [
+                  _c(
+                    "span",
+                    { attrs: { slot: "prev-nav" }, slot: "prev-nav" },
+                    [_vm._v("< Previous")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "span",
+                    { attrs: { slot: "next-nav" }, slot: "next-nav" },
+                    [_vm._v("Next >")]
+                  )
+                ]
+              )
+            ],
+            1
+          )
+        ]),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass: "modal fade",
+            attrs: {
+              id: "addNewBusiness",
+              tabindex: "-1",
+              role: "dialog",
+              "aria-hidden": "true"
+            }
+          },
+          [
+            _c(
+              "div",
+              {
+                staticClass: "modal-dialog modal-dialog-centered",
+                attrs: { role: "document" }
+              },
+              [
+                _c("div", { staticClass: "modal-content" }, [
+                  _vm._m(1),
+                  _vm._v(" "),
+                  _c(
+                    "form",
+                    {
+                      on: {
+                        submit: function($event) {
+                          $event.preventDefault()
+                          return _vm.createBusiness()
+                        }
+                      }
+                    },
+                    [
+                      _c("div", { staticClass: "modal-body" }, [
+                        _c(
+                          "div",
+                          { staticClass: "form-group" },
+                          [
+                            _c("label", [_vm._v("Name")]),
+                            _c("span", { staticClass: "red" }, [_vm._v("*")]),
+                            _vm._v(" "),
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.businessForm.name,
+                                  expression: "businessForm.name"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              class: {
+                                "is-invalid": _vm.businessForm.errors.has(
+                                  "name"
+                                )
+                              },
+                              attrs: {
+                                type: "text",
+                                name: "name",
+                                placeholder: "Enter business name"
+                              },
+                              domProps: { value: _vm.businessForm.name },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    _vm.businessForm,
+                                    "name",
+                                    $event.target.value
+                                  )
+                                }
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("has-error", {
+                              attrs: { form: _vm.businessForm, field: "name" }
+                            })
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "form-group" }, [
+                          _c(
+                            "label",
+                            {
+                              staticClass: "control-label",
+                              attrs: { for: "image" }
+                            },
+                            [_vm._v("Image")]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            { staticClass: "col-sm-12" },
+                            [
+                              _c("input", {
+                                staticClass: "form-control",
+                                class: {
+                                  "is-invalid": _vm.businessForm.errors.has(
+                                    "image"
+                                  )
+                                },
+                                attrs: {
+                                  type: "file",
+                                  name: "image",
+                                  id: "imageUpload"
+                                },
+                                on: { change: _vm.insertImage }
+                              }),
+                              _vm._v(" "),
+                              _c("has-error", {
+                                attrs: {
+                                  form: _vm.businessForm,
+                                  field: "image"
+                                }
+                              })
+                            ],
+                            1
+                          )
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _vm._m(2)
+                    ]
+                  )
+                ])
+              ]
+            )
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass: "modal fade",
+            attrs: {
+              id: "editBusinessModal",
+              tabindex: "-1",
+              role: "dialog",
+              "aria-labelledby": "editTagModalLabel",
+              "aria-hidden": "true"
+            }
+          },
+          [
+            _c(
+              "div",
+              {
+                staticClass: "modal-dialog modal-dialog-centered",
+                attrs: { role: "document" }
+              },
+              [
+                _c("div", { staticClass: "modal-content" }, [
+                  _vm._m(3),
+                  _vm._v(" "),
+                  _c(
+                    "form",
+                    {
+                      on: {
+                        submit: function($event) {
+                          $event.preventDefault()
+                          return _vm.updateBusiness()
+                        }
+                      }
+                    },
+                    [
+                      _c("div", { staticClass: "modal-body" }, [
+                        _c(
+                          "div",
+                          { staticClass: "form-group" },
+                          [
+                            _c("label", [_vm._v("Name")]),
+                            _c("span", { staticClass: "red" }, [_vm._v("*")]),
+                            _vm._v(" "),
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.businessForm.name,
+                                  expression: "businessForm.name"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              class: {
+                                "is-invalid": _vm.businessForm.errors.has(
+                                  "name"
+                                )
+                              },
+                              attrs: {
+                                type: "text",
+                                name: "name",
+                                placeholder: "Enter a name for the business"
+                              },
+                              domProps: { value: _vm.businessForm.name },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    _vm.businessForm,
+                                    "name",
+                                    $event.target.value
+                                  )
+                                }
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("has-error", {
+                              attrs: { form: _vm.businessForm, field: "name" }
+                            })
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "form-group" }, [
+                          _c(
+                            "label",
+                            {
+                              staticClass: "control-label",
+                              attrs: { for: "image" }
+                            },
+                            [_vm._v("Image (OPTIONAL)")]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            { staticClass: "col-sm-12" },
+                            [
+                              _c("input", {
+                                staticClass: "form-control",
+                                class: {
+                                  "is-invalid": _vm.businessForm.errors.has(
+                                    "image"
+                                  )
+                                },
+                                attrs: {
+                                  type: "file",
+                                  name: "image",
+                                  id: "imageUpload"
+                                },
+                                on: { change: _vm.insertImage }
+                              }),
+                              _vm._v(" "),
+                              _c("has-error", {
+                                attrs: {
+                                  form: _vm.businessForm,
+                                  field: "image"
+                                }
+                              })
+                            ],
+                            1
+                          )
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _vm._m(4)
+                    ]
+                  )
+                ])
+              ]
+            )
+          ]
+        ),
+        _vm._v(" "),
+        _vm._m(5)
+      ])
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container" }, [
-      _c("div", { staticClass: "row justify-content-center" }, [
-        _c("div", { staticClass: "col-md-8" }, [
-          _c("div", { staticClass: "card" }, [
-            _c("div", { staticClass: "card-header" }, [
-              _vm._v("Business Component")
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "card-body" }, [
-              _vm._v("\n                    To be added.\n                ")
-            ])
-          ])
-        ])
+    return _c("tr", [
+      _c("th", [_vm._v("ID")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Name")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Image")]),
+      _vm._v(" "),
+      _c("th", { staticStyle: { width: "25%" } }, [_vm._v("Modify")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c("h5", { staticClass: "modal-title" }, [_vm._v("Add new Voucher")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-footer" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-danger",
+          attrs: { type: "button", "data-dismiss": "modal" }
+        },
+        [_vm._v("Close")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        { staticClass: "btn btn-success", attrs: { type: "submit" } },
+        [_vm._v("Create")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c("h5", { staticClass: "modal-title" }, [
+        _vm._v("Update an existing business")
       ])
     ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-footer" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-danger",
+          attrs: { type: "button", "data-dismiss": "modal" }
+        },
+        [_vm._v("Close")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        { staticClass: "btn btn-warning", attrs: { type: "submit" } },
+        [_vm._v("Update")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        attrs: {
+          id: "showImage",
+          tabindex: "-1",
+          role: "dialog",
+          "aria-labelledby": "showImageLabel",
+          "aria-hidden": "true"
+        }
+      },
+      [
+        _c(
+          "div",
+          {
+            staticClass: "modal-dialog modal-dialog-centered",
+            attrs: { role: "document" }
+          },
+          [
+            _c("div", { staticClass: "modal-content" }, [
+              _c("div", { staticClass: "modal-body" }, [
+                _c("img", {
+                  staticClass: "imagepreview",
+                  staticStyle: { width: "100%" },
+                  attrs: { src: "", id: "imagepreview" }
+                })
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-footer" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-primary",
+                    attrs: { type: "button", "data-dismiss": "modal" }
+                  },
+                  [_vm._v("Close")]
+                )
+              ])
+            ])
+          ]
+        )
+      ]
+    )
   }
 ]
 render._withStripped = true

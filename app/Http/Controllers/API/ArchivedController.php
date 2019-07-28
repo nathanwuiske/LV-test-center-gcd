@@ -8,7 +8,6 @@ use App\Voucher;
 
 class ArchivedController extends Controller
 {
-
     public function index()
     {
         return Voucher::onlyTrashed()->paginate(10);

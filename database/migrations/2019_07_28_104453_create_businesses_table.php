@@ -16,6 +16,7 @@ class CreateBusinessesTable extends Migration
         Schema::create('businesses', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }
