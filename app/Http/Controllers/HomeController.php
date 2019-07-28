@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Voucher;
 use App\Category;
 use App\User;
+use App\Business;
 use Illuminate\Support\Facades\DB;
 use Auth;
 use App\Userfavourite;
@@ -23,8 +24,9 @@ class HomeController extends Controller
       $categories = Category::orderBy('id')->get();
       $popular = Voucher::where('popular_flag', '1')->limit(20)->get();
       $latest = Voucher::latest()->limit(20)->get();
+      $businesses = Business::latest()->limit(20)->get();
       
-      return view('home')->with('vouchers', $vouchers)->with('categories', $categories)->with('popular', $popular)->with('latest', $latest);
+      return view('home')->with('vouchers', $vouchers)->with('categories', $categories)->with('popular', $popular)->with('latest', $latest)->with('businesses', $businesses);
     }
     public function addfavourite(Request $request)
     {
@@ -83,8 +85,7 @@ class HomeController extends Controller
 
 
     public function filter(Request $request){
-      
-
+    
       $categories = Category::orderBy('id')->get();
       $vouchers = Voucher::whereHas('getCategories', function($q) use ($request) {
         $selectValue = $request->get('slct');
