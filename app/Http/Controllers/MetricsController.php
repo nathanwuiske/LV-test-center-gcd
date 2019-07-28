@@ -8,27 +8,12 @@ use Carbon\Carbon;
 
 class MetricsController extends Controller
 {
-    public function countTotalVouchers()
+    public function metrics()
     {
-        $voucherCount = DB::table('vouchers')->count();
-        return $voucherCount;
-    }
-
-    public function countTotalUsers()
-    {
-        $userCount = DB::table('users')->count();
-        return $userCount;
-    }
-
-    public function countTodaysVouchers()
-    {
-        $countToday = DB::table('vouchers')->where('created_at', '>=', Carbon::today())->count();
-        return $countToday;
-    }
-
-    public function countTodaysUsers()
-    {
-        $countToday = DB::table('users')->where('created_at', '>=', Carbon::today())->count();
-        return $countToday;
+        $metrics['countVouchersUsers'] = $voucherCount = DB::table('vouchers')->count();
+        $metrics['countTotalUsers'] = $userCount = DB::table('users')->count();
+        $metrics['countUsersToday'] = DB::table('users')->where('created_at', '>=', Carbon::today())->count();
+        $metrics['countVouchersToday'] = DB::table('vouchers')->where('created_at', '>=', Carbon::today())->count();
+        return $metrics;
     }
 }

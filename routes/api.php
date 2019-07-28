@@ -23,10 +23,8 @@ Route::get('tagall', 'API\TagController@tagall');
 
 Route::apiResource('redeem', 'API\RedeemController');
 
-Route::get('vouchercount', 'MetricsController@countTotalVouchers');
-Route::get('usercount', 'MetricsController@countTotalUsers');
-Route::get('latestvouchers', 'MetricsController@countTodaysVouchers');
-Route::get('latestusers', 'MetricsController@countTodaysUsers');
+Route::get('metrics', 'MetricsController@metrics');
+
 
 Route::get('findVoucher', 'API\VoucherController@search');
 

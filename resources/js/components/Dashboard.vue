@@ -9,7 +9,7 @@
                      <span class="info-box-icon bg-success elevation-1"><i class="fas fa-columns"></i></span>
                      <div class="info-box-content">
                         <span class="info-box-text">Total Vouchers</span>
-                        <h3>{{voucherCount}}</h3>
+                        <h3>{{metric_data['countVouchersUsers']}}</h3>
                      </div>
                   </div>
                </div>
@@ -18,7 +18,7 @@
                      <span class="info-box-icon bg-primary elevation-1"><i class="fa fa-users"></i></span>
                      <div class="info-box-content">
                         <span class="info-box-text">Total Users</span>
-                        <h3>{{userCount}}</h3>
+                        <h3>{{metric_data['countTotalUsers']}}</h3>
                      </div>
                   </div>
                </div>
@@ -29,7 +29,7 @@
                      <span class="info-box-icon bg-danger elevation-1"><i class="far fa-plus-square"></i></span>
                      <div class="info-box-content">
                         <span class="info-box-text">New Vouchers today</span>
-                        <h3>{{latestVouchers}}</h3>
+                        <h3>{{metric_data['countVouchersToday']}}</h3>
                      </div>
                   </div>
                </div>
@@ -38,7 +38,7 @@
                      <span class="info-box-icon bg-warning elevation-1"><i class="fa fa-user-plus"></i></span>
                      <div class="info-box-content">
                         <span class="info-box-text">New Users today</span>
-                        <h3>{{latestUsers}}</h3>
+                        <h3>{{metric_data['countUsersToday']}}</h3>
                      </div>
                   </div>
                </div>
@@ -54,39 +54,18 @@
     export default {
         data(){
             return {
-                voucherCount: '',
-                userCount: '',
-                latestVouchers: '',
-                latestUsers: ''
+                metric_data: ''
             }
         },
         methods: {
-            getVoucherCount(){
-                axios.get('api/vouchercount').then(response => {
-                this.voucherCount = response.data;
-            });
-            },
-              getUserCount(){
-                axios.get('api/usercount').then(response => {
-                this.userCount = response.data;
-            });
-            },
-              getLatestVoucherCount(){
-                axios.get('api/latestvouchers').then(response => {
-                this.latestVouchers = response.data;
-            });
-            },
-            getLatestUserCount(){
-                axios.get('api/latestusers').then(response => {
-                this.latestUsers = response.data;
+             getMetrics(){
+                axios.get('api/metrics').then(response => {
+                this.metric_data = response.data;
             });
             }
         },
         mounted() {
-           this.getVoucherCount();
-           this.getUserCount();
-           this.getLatestVoucherCount();
-           this.getLatestUserCount();
+           this.getMetrics();
         }
     }
 </script>

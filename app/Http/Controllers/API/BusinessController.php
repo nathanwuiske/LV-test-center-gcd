@@ -11,7 +11,7 @@ class BusinessController extends Controller
 
     public function index()
     {
-        return Business::latest()->paginate(5);
+        return Business::latest()->paginate(15);
     }
 
     public function store(Request $request)

@@ -2645,47 +2645,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      voucherCount: '',
-      userCount: '',
-      latestVouchers: '',
-      latestUsers: ''
+      metric_data: ''
     };
   },
   methods: {
-    getVoucherCount: function getVoucherCount() {
+    getMetrics: function getMetrics() {
       var _this = this;
 
-      axios.get('api/vouchercount').then(function (response) {
-        _this.voucherCount = response.data;
-      });
-    },
-    getUserCount: function getUserCount() {
-      var _this2 = this;
-
-      axios.get('api/usercount').then(function (response) {
-        _this2.userCount = response.data;
-      });
-    },
-    getLatestVoucherCount: function getLatestVoucherCount() {
-      var _this3 = this;
-
-      axios.get('api/latestvouchers').then(function (response) {
-        _this3.latestVouchers = response.data;
-      });
-    },
-    getLatestUserCount: function getLatestUserCount() {
-      var _this4 = this;
-
-      axios.get('api/latestusers').then(function (response) {
-        _this4.latestUsers = response.data;
+      axios.get('api/metrics').then(function (response) {
+        _this.metric_data = response.data;
       });
     }
   },
   mounted: function mounted() {
-    this.getVoucherCount();
-    this.getUserCount();
-    this.getLatestVoucherCount();
-    this.getLatestUserCount();
+    this.getMetrics();
   }
 });
 
@@ -72937,7 +72910,9 @@ var render = function() {
                   _vm._v("Total Vouchers")
                 ]),
                 _vm._v(" "),
-                _c("h3", [_vm._v(_vm._s(_vm.voucherCount))])
+                _c("h3", [
+                  _vm._v(_vm._s(_vm.metric_data["countVouchersUsers"]))
+                ])
               ])
             ])
           ]),
@@ -72951,7 +72926,7 @@ var render = function() {
                   _vm._v("Total Users")
                 ]),
                 _vm._v(" "),
-                _c("h3", [_vm._v(_vm._s(_vm.userCount))])
+                _c("h3", [_vm._v(_vm._s(_vm.metric_data["countTotalUsers"]))])
               ])
             ])
           ]),
@@ -72967,7 +72942,9 @@ var render = function() {
                   _vm._v("New Vouchers today")
                 ]),
                 _vm._v(" "),
-                _c("h3", [_vm._v(_vm._s(_vm.latestVouchers))])
+                _c("h3", [
+                  _vm._v(_vm._s(_vm.metric_data["countVouchersToday"]))
+                ])
               ])
             ])
           ]),
@@ -72981,7 +72958,7 @@ var render = function() {
                   _vm._v("New Users today")
                 ]),
                 _vm._v(" "),
-                _c("h3", [_vm._v(_vm._s(_vm.latestUsers))])
+                _c("h3", [_vm._v(_vm._s(_vm.metric_data["countUsersToday"]))])
               ])
             ])
           ])
