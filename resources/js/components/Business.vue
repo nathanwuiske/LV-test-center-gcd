@@ -37,11 +37,12 @@
                   </pagination>
                </div>
             </div>
+             <!-- Modal for adding new businesses -->
             <div class="modal fade" id="addNewBusiness" tabindex="-1" role="dialog" aria-hidden="true">
                <div class="modal-dialog modal-dialog-centered" role="document">
                   <div class="modal-content">
                      <div class="modal-header">
-                        <h5 class="modal-title">Add new Voucher</h5>
+                        <h5 class="modal-title">Add new Business</h5>
                      </div>
                      <form @submit.prevent="createBusiness()">
                         <div class="modal-body">
@@ -52,7 +53,7 @@
                                  class="form-control" :class="{ 'is-invalid': businessForm.errors.has('name') }">
                               <has-error :form="businessForm" field="name"></has-error>
                            </div>
-                           <!-- Voucher image input-->
+                           <!-- business image input-->
                            <div class="form-group">
                               <label for="image" class="control-label">Image</label>
                               <div class="col-sm-12">
@@ -70,7 +71,7 @@
                   </div>
                </div>
             </div>
-            <!-- Modal for editing new tags -->
+            <!-- Modal for editing businesses -->
             <div class="modal fade" id="editBusinessModal" tabindex="-1" role="dialog" aria-labelledby="editTagModalLabel" aria-hidden="true">
                <div class="modal-dialog modal-dialog-centered" role="document">
                   <div class="modal-content">
@@ -79,14 +80,14 @@
                      </div>
                      <form @submit.prevent="updateBusiness()">
                         <div class="modal-body">
-                           <!-- Tag name form input -->
+                           <!-- Business name form input -->
                            <div class="form-group">
                               <label>Name</label><span class="red">&#42;</span>
                               <input v-model="businessForm.name" type="text" name="name" placeholder="Enter a name for the business"
                                  class="form-control" :class="{ 'is-invalid': businessForm.errors.has('name') }">
                               <has-error :form="businessForm" field="name"></has-error>
                            </div>
-                           <!-- Voucher image input-->
+                           <!-- business image input-->
                            <div class="form-group">
                               <label for="image" class="control-label">Image (OPTIONAL)</label>
                               <div class="col-sm-12">
