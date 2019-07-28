@@ -15,13 +15,13 @@
    </div>
    <div data-u="slides" class="jssor1-d-slides">
       <div>
-         <img data-u="image" src="home1.png" />
+         <img data-u="image" src="1.webp" />
       </div>
       <div>
-         <img data-u="image" src="home2.jpg" />
+         <img data-u="image" src="2.webp" />
       </div>
       <div>
-         <img data-u="image" src="home3.png" />
+         <img data-u="image" src="3.webp" />
       </div>
    </div>
    <!-- Bullet Navigator -->

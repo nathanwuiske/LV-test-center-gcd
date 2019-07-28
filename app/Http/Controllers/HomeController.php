@@ -53,13 +53,6 @@ class HomeController extends Controller
 
     public function search(Request $request)
     {
-      /*
-      $search = $request->get('search');
-      $categories = Category::orderBy('id')->get();
-      $vouchers = Voucher::where(function($query) use ($search) {
-        $query->where('name','LIKE',"%$search%")->orWhere('description','LIKE',"%$search%");
-    })->latest()->paginate(10);
-*/
 
     $vouchersPerPage = 8;
     $categories = Category::orderBy('id')->get();

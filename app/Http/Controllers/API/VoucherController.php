@@ -29,7 +29,8 @@ class VoucherController extends Controller
             //'image' => 'required' //must be an image (jpg, png, bmp or gif)
         ]);
 
-        if($request->image){
+        if($request->image) {
+            /* Get a unique name for voucher image */
             $name = time().'.' . explode('/', explode(':', substr($request->image, 0, strpos($request->image, ';')))[1])[1];
             \Image::make($request->image)->save(public_path('imgs/vouchers/').$name); 
             $request->merge(['image' => $name]);
