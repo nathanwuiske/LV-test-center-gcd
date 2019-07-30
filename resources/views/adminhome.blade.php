@@ -49,7 +49,7 @@
                      </router-link>
                   </li>
                   <li class="nav-item">
-                     <router-link to="/locations" class="nav-link">
+                     <router-link to="/locations" class="nav-link"> 
                         <i class="nav-icon fas fa-map-marker-alt"></i>
                         <p class="white">Locations</p>
                      </router-link>

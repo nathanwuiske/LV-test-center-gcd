@@ -16,8 +16,8 @@ let routes = [
     { path: '/reports', component: require('./components/Reports.vue').default },
     { path: '/messages', component: require('./components/Messages.vue').default },
     { path: '/locations', component: require('./components/Locations.vue').default },
-    { path: '/business', component: require('./components/Business.vue').default },
-    { path: '*', component: require('./components/NotFound.vue').default }
+    { path: '/business', component: require('./components/Business.vue').default }
+   // { path: '*', component: require('./components/NotFound.vue').default }
   ];
 
 const router = new VueRouter({

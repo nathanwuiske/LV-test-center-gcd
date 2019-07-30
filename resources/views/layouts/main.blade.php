@@ -121,7 +121,7 @@
 	
 	  <!-- Scripts -->
 	  <!-- jquery core -->
-      <script src="/js/jquery-1.11.1.min.js"></script>
+     <script src="/js/jquery-1.11.1.min.js"></script>
       <!-- Bootstrap -->
       <script src="/js/bootstrap.min.js"></script>
       <!-- jssor slider -->
