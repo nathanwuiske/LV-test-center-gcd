@@ -19,7 +19,7 @@ class CreateVouchersTable extends Migration
             $table->string('name');
             $table->longText('description');
             $table->string('image')->nullable();
-            $table->dateTime('expiry_date')->nullable();
+            $table->date('expiry_date')->nullable();
             $table->integer('timeout')->default(15);
             $table->string('website_link')->nullable();
             $table->integer('popular_flag')->nullable();

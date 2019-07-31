@@ -3588,7 +3588,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -75134,26 +75133,6 @@ var render = function() {
                           [_vm._v("* ")]
                         ),
                         _vm._v(" "),
-                        _c(
-                          "span",
-                          {
-                            directives: [
-                              {
-                                name: "show",
-                                rawName: "v-show",
-                                value: _vm.editmode,
-                                expression: "editmode"
-                              }
-                            ],
-                            staticClass: "red"
-                          },
-                          [
-                            _vm._v(
-                              "Leave this field blank to keep original date"
-                            )
-                          ]
-                        ),
-                        _vm._v(" "),
                         _c("input", {
                           directives: [
                             {
@@ -75169,10 +75148,7 @@ var render = function() {
                               "expiry_date"
                             )
                           },
-                          attrs: {
-                            type: "datetime-local",
-                            name: "expiry_date"
-                          },
+                          attrs: { type: "date", name: "expiry_date" },
                           domProps: { value: _vm.voucherForm.expiry_date },
                           on: {
                             input: function($event) {
@@ -90856,7 +90832,7 @@ Vue.component(vform__WEBPACK_IMPORTED_MODULE_1__["AlertError"].name, vform__WEBP
 /* Format the dates in the vouchers table to something more readable */
 
 Vue.filter('formatDate', function (expiryDate) {
-  return moment__WEBPACK_IMPORTED_MODULE_2___default()(expiryDate).format('MMMM Do YYYY, h:mm:ss a');
+  return moment__WEBPACK_IMPORTED_MODULE_2___default()(expiryDate).format('Do MMMM YYYY');
 });
 /* Capitalize the first character */
 

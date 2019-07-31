@@ -108,8 +108,7 @@
                      <!-- Expiry Date form input  -->
                      <div class="form-group">
                         <label>Expiry Date</label><span v-show="!editmode" class="red">&#42; </span> 
-                        <span v-show="editmode" class="red">Leave this field blank to keep original date</span> 
-                        <input v-model="voucherForm.expiry_date" type="datetime-local" name="expiry_date"
+                        <input v-model="voucherForm.expiry_date" type="date" name="expiry_date"
                            class="form-control" :class="{ 'is-invalid': voucherForm.errors.has('expiry_date') }">
                         <has-error :form="voucherForm" field="expiry_date"></has-error>
                      </div>

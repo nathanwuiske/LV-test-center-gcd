@@ -38,7 +38,7 @@ Vue.component(AlertError.name, AlertError)
 /* Vue filters */
 /* Format the dates in the vouchers table to something more readable */
 Vue.filter('formatDate', function(expiryDate){
-    return moment(expiryDate).format('MMMM Do YYYY, h:mm:ss a');
+    return moment(expiryDate).format('Do MMMM YYYY');
 });
 /* Capitalize the first character */
 Vue.filter('capitalize', function (text) {
