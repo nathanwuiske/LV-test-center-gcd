@@ -35,7 +35,11 @@ class LocationController extends Controller
 
     public function update(Request $request, $id)
     {
-
+        $location = Location::findOrFail($id);
+        $this->validate($request,[
+            'name' => 'required|max:150'
+        ]);
+        $location->update($request->all());
     }
 
     public function destroy($id, Request $request)

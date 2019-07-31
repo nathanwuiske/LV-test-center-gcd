@@ -23,6 +23,7 @@
                            <td>{{location.latitude}}</td>
                            <td>{{location.longitude}}</td>
                            <td>
+                               <a href="#" @click="editLocationModal(location)"> <i class="far fas fa-pencil-alt"  style="color: #FFC107;"></i></a>
                               <a href="#" @click="deleteLocation(location.id, location.name)"><i class="fas fa-trash red"></i></a>
                            </td>
                         </tr>
@@ -71,6 +72,33 @@
                   </div>
                </div>
             </div>
+
+            <!-- Modal for editing locations -->
+            <div class="modal fade" id="editLocationModal" tabindex="-1" role="dialog" aria-labelledby="editTagModalLabel" aria-hidden="true">
+               <div class="modal-dialog modal-dialog-centered" role="document">
+                  <div class="modal-content">
+                     <div class="modal-header">
+                        <h5 class="modal-title">Update an existing location</h5>
+                     </div>
+                     <form @submit.prevent="updateLocation()">
+                        <div class="modal-body">
+                           <!-- Location name form input -->
+                           <div class="form-group">
+                              <label>Name</label><span class="red">&#42;</span>
+                              <input v-model="locationForm.name" type="text" name="name" placeholder="Enter a location name"
+                                 class="form-control" :class="{ 'is-invalid': locationForm.errors.has('name') }">
+                              <has-error :form="locationForm" field="name"></has-error>
+                           </div>
+                        </div>
+                        <!-- Footer -->
+                        <div class="modal-footer">
+                           <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                           <button type="submit" class="btn btn-warning">Update</button>
+                        </div>
+                     </form>
+                  </div>
+               </div>
+            </div>
          </div>
       </div>
    </div>
@@ -80,8 +108,9 @@
     export default {
         data() {
 			return {
-                locations: {},
+            locations: {},
 				locationForm: new Form({
+                    id: '',
                     name: '',
                     long: '',
                     lat: ''
@@ -94,6 +123,31 @@
                     .then(response => {
                         this.locations = response.data;
                     });
+            },
+             editLocationModal(location) {
+                this.locationForm.clear();
+                this.locationForm.reset();
+                $('#editLocationModal').modal('show');
+                this.locationForm.fill(location);
+            },
+             updateLocation() {
+                this.locationForm.put('api/location/' + this.locationForm.id)
+                    .then(() => {
+                        Fire.$emit('RefreshLocations');
+                        $('#editLocationModal').modal('hide');
+                        swal.fire(
+                            'Success!',
+                            'Location has been successfully updated.',
+                            'success'
+                        )
+                    })
+                    .catch(() => {
+                        swal.fire({
+                            title: 'Error',
+                            text: "Failed to update location.",
+                            type: 'error'
+                        })
+                    })
             },
             deleteLocation(id, name) {
                 swal.fire({
@@ -126,9 +180,9 @@
 						swal.fire(
 							'Success!',
 							'Location added',
-							'success'
+							'success',
                         )
-                        this.locationForm.clear();
+                    this.locationForm.clear();
 				        this.locationForm.reset();
 					})
 					.catch(() => {

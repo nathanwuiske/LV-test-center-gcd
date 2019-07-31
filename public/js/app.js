@@ -2751,11 +2751,40 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       locations: {},
       locationForm: new Form({
+        id: '',
         name: '',
         "long": '',
         lat: ''
@@ -2769,6 +2798,25 @@ __webpack_require__.r(__webpack_exports__);
       var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
       axios.get('api/location?page=' + page).then(function (response) {
         _this.locations = response.data;
+      });
+    },
+    editLocationModal: function editLocationModal(location) {
+      this.locationForm.clear();
+      this.locationForm.reset();
+      $('#editLocationModal').modal('show');
+      this.locationForm.fill(location);
+    },
+    updateLocation: function updateLocation() {
+      this.locationForm.put('api/location/' + this.locationForm.id).then(function () {
+        Fire.$emit('RefreshLocations');
+        $('#editLocationModal').modal('hide');
+        swal.fire('Success!', 'Location has been successfully updated.', 'success');
+      })["catch"](function () {
+        swal.fire({
+          title: 'Error',
+          text: "Failed to update location.",
+          type: 'error'
+        });
       });
     },
     deleteLocation: function deleteLocation(id, name) {
@@ -73204,6 +73252,24 @@ var render = function() {
                             attrs: { href: "#" },
                             on: {
                               click: function($event) {
+                                return _vm.editLocationModal(location)
+                              }
+                            }
+                          },
+                          [
+                            _c("i", {
+                              staticClass: "far fas fa-pencil-alt",
+                              staticStyle: { color: "#FFC107" }
+                            })
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "a",
+                          {
+                            attrs: { href: "#" },
+                            on: {
+                              click: function($event) {
                                 return _vm.deleteLocation(
                                   location.id,
                                   location.name
@@ -73411,7 +73477,101 @@ var render = function() {
           ])
         ]),
         _vm._v(" "),
-        _vm._m(3)
+        _vm._m(3),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass: "modal fade",
+            attrs: {
+              id: "editLocationModal",
+              tabindex: "-1",
+              role: "dialog",
+              "aria-labelledby": "editTagModalLabel",
+              "aria-hidden": "true"
+            }
+          },
+          [
+            _c(
+              "div",
+              {
+                staticClass: "modal-dialog modal-dialog-centered",
+                attrs: { role: "document" }
+              },
+              [
+                _c("div", { staticClass: "modal-content" }, [
+                  _vm._m(4),
+                  _vm._v(" "),
+                  _c(
+                    "form",
+                    {
+                      on: {
+                        submit: function($event) {
+                          $event.preventDefault()
+                          return _vm.updateLocation()
+                        }
+                      }
+                    },
+                    [
+                      _c("div", { staticClass: "modal-body" }, [
+                        _c(
+                          "div",
+                          { staticClass: "form-group" },
+                          [
+                            _c("label", [_vm._v("Name")]),
+                            _c("span", { staticClass: "red" }, [_vm._v("*")]),
+                            _vm._v(" "),
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.locationForm.name,
+                                  expression: "locationForm.name"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              class: {
+                                "is-invalid": _vm.locationForm.errors.has(
+                                  "name"
+                                )
+                              },
+                              attrs: {
+                                type: "text",
+                                name: "name",
+                                placeholder: "Enter a location name"
+                              },
+                              domProps: { value: _vm.locationForm.name },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    _vm.locationForm,
+                                    "name",
+                                    $event.target.value
+                                  )
+                                }
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("has-error", {
+                              attrs: { form: _vm.locationForm, field: "name" }
+                            })
+                          ],
+                          1
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _vm._m(5)
+                    ]
+                  )
+                ])
+              ]
+            )
+          ]
+        )
       ])
     ])
   ])
@@ -73477,6 +73637,37 @@ var staticRenderFns = [
           })
         ])
       ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c("h5", { staticClass: "modal-title" }, [
+        _vm._v("Update an existing location")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-footer" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-danger",
+          attrs: { type: "button", "data-dismiss": "modal" }
+        },
+        [_vm._v("Close")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        { staticClass: "btn btn-warning", attrs: { type: "submit" } },
+        [_vm._v("Update")]
+      )
     ])
   }
 ]
