@@ -266,22 +266,29 @@
                     <span aria-hidden="true"><i class="fas fa-times"></i></span>
                 </button>
             </div>
-            <div class="modal-body" style="background-color: #F2F2F2">
+            <div class="modal-body" style="background-color: #F2F2F2"> 
                 <img id="modal_image_{{$voucher->id}}" src="{{url('imgs/vouchers/' . $voucher->image)}}" class="img-fluid img-center testa" alt='{{$voucher->name}}'>
                 <p style="word-wrap: break-word;">
-                    <br><strong>About Deal</strong>
+                    <br><strong class="header-modal">About Deal</strong>
                     <br>{{$voucher->description}}</p>
+                @if (!empty($voucher->website_link))
+                <a href="{{$voucher->website_link}}" target="_blank">
+                    <i class="fas fa-globe-americas"></i><strong> Visit Website</strong></a>
+                @endif
                 @if (empty($voucher->expiry_date))
                 <p>
-                    <br><strong>Expiry Date</strong>
-                    <br><i>Expiry date not available</i></p>
+                    <br><strong class="header-modal">Expiry Date</strong>
+                    <br><i>Expiry date not available</i>
+                </p>
                 @else
                 <p>
-                    <br><strong>Expiry Date</strong>
-                    <br>{{\Carbon\Carbon::parse($voucher->expiry_date)->format('d/m/Y')}}</p>
-                @endif @if (!empty($voucher->website_link))
-                <a href="{{$voucher->website_link}}" target="_blank" style="color: #07AD4D;">
-                    <br><i class="fas fa-globe-americas"></i><strong> Visit Website</strong></a>
+                    <br><strong class="header-modal">Expiry Date</strong>
+                    <br>{{\Carbon\Carbon::parse($voucher->expiry_date)->format('d/m/Y')}}
+                </p>
+                @endif 
+                @if(!empty($voucher->latitude))
+                <strong class="header-modal">Location</strong><br><br>
+                <iframe src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCC6emn13XOdxMhZAsbaGIgt2HcK3iKAoc&q={{$voucher->latitude}},{{$voucher->longitude}}" width="100%" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
                 @endif
                 <button class="btn btn-lg" style="width: 100%; height: 100%; background-color: #07AD4D; color:white;"><i class="fa fa-close"></i>Redeem Voucher on App</button>
             </div>

@@ -5,6 +5,8 @@
       <meta charset="utf-8">
       <meta name="description" content="Providing free vouchers to the Gold Coast community">
       <meta name="viewport" content="width=device-width, initial-scale=1">
+      <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCC6emn13XOdxMhZAsbaGIgt2HcK3iKAoc"></script>
+    
       <!--Search bar -->
      <link rel="stylesheet" href="/css/search.css">
 	   <!-- Fontawesome Icon -->

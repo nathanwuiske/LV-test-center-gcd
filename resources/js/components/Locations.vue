@@ -12,53 +12,55 @@
                      <tbody>
                         <tr>
                            <th>ID</th>
-                           <th>Name</th>
+                           <th>Voucher Name</th>
                            <th>Latitude</th>
                            <th>Longitude</th>
                            <th style="width: 25%">Modify</th>
                         </tr>
-                        <tr v-for="location in locations.data" :key="location.id">
-                           <td>{{location.id}}</td>
-                           <td>{{location.name}}</td>
-                           <td>{{location.latitude}}</td>
-                           <td>{{location.longitude}}</td>
+                        <tr v-for="voucher in vouchers.data" :key="voucher.id">
+                           <td>{{voucher.id}}</td>
+                           <td>{{voucher.name}}</td>
+                           <td>{{voucher.latitude}}</td>
+                           <td>{{voucher.longitude}}</td>
                            <td>
-                               <a href="#" @click="editLocationModal(location)"> <i class="far fas fa-pencil-alt"  style="color: #FFC107;"></i></a>
-                              <a href="#" @click="deleteLocation(location.id, location.name)"><i class="fas fa-trash red"></i></a>
+                              <a href="#" @click="editLocationModal(voucher)"> <i class="far fas fa-pencil-alt"  style="color: #FFC107;"></i></a>
                            </td>
                         </tr>
                      </tbody>
                   </table>
                </div>
                <div class="card-footer">
-                  <pagination :data="locations" @pagination-change-page="getResults" :limit=5>
+                  <pagination :data="vouchers" @pagination-change-page="getResults" :limit=5>
                      <span slot="prev-nav">&lt; Previous</span>
                      <span slot="next-nav">Next &gt;</span>
                   </pagination>
                </div>
             </div>
             <div class="card">
-               <div class="card-header">Add New Location</div>
+               <div class="card-header">Assign Location to Voucher</div>
                <div class="card-body">
                   <form id="form-create" @submit.prevent="createLocation()">
                      <input type="hidden" name="_token"  id="token-create" />
                      <div class="form-group">
-                        <label>Name</label>
-                        <input v-model="locationForm.name" type="text" class="form-control" name="name" id="name" :class="{ 'is-invalid': locationForm.errors.has('name') }">
+                        <select name="name" v-model="locationForm.id" id="name" class="form-control" 
+                           :class="{ 'is-invalid': locationForm.errors.has('name') }">
+                           <option value="" disabled selected>Select Voucher</option>
+                           <option v-for="voucher in sortedVouchers" :key="voucher.id" v-bind:value="voucher.id">{{voucher.name}}</option>
+                        </select>
                         <has-error :form="locationForm" field="name"></has-error>
                      </div>
                      <div class="form-group">
                         <label>Latitude</label>
-                        <input disabled v-model="locationForm.lat" type="text" id="txtLat" name="lat" class="form-control" :class="{ 'is-invalid': locationForm.errors.has('lat') }">
-                        <has-error :form="locationForm" field="lat"></has-error>
+                        <input disabled v-model="locationForm.latitude" type="text" id="txtLat" name="latitude" class="form-control" :class="{ 'is-invalid': locationForm.errors.has('latitude') }">
+                        <has-error :form="locationForm" field="latitude"></has-error>
                      </div>
                      <div class="form-group">
                         <label>Longitude</label>
-                        <input disabled v-model="locationForm.long" type="text" id="txtLng" class="form-control" name="lng" :class="{ 'is-invalid': locationForm.errors.has('long') }"> 
-                        <has-error :form="locationForm" field="long"></has-error>
+                        <input disabled v-model="locationForm.longitude" type="text" id="txtLng" class="form-control" name="longitude" :class="{ 'is-invalid': locationForm.errors.has('longitude') }"> 
+                        <has-error :form="locationForm" field="longitude"></has-error>
                      </div>
                      <div class="text-center">
-                        <button type="submit" class="btn btn-primary" id="btn-create">Create</button>
+                        <button type="submit" class="btn btn-primary" id="btn-create">Create Location</button>
                      </div>
                   </form>
                </div>
@@ -72,7 +74,6 @@
                   </div>
                </div>
             </div>
-
             <!-- Modal for editing locations -->
             <div class="modal fade" id="editLocationModal" tabindex="-1" role="dialog" aria-labelledby="editTagModalLabel" aria-hidden="true">
                <div class="modal-dialog modal-dialog-centered" role="document">
@@ -82,12 +83,19 @@
                      </div>
                      <form @submit.prevent="updateLocation()">
                         <div class="modal-body">
-                           <!-- Location name form input -->
+                           <!-- longitude input -->
                            <div class="form-group">
-                              <label>Name</label><span class="red">&#42;</span>
-                              <input v-model="locationForm.name" type="text" name="name" placeholder="Enter a location name"
-                                 class="form-control" :class="{ 'is-invalid': locationForm.errors.has('name') }">
-                              <has-error :form="locationForm" field="name"></has-error>
+                              <label>longitude</label><span class="red">&#42;</span>
+                              <input v-model="locationForm.longitude" type="text" name="longitude" placeholder="Enter longitude"
+                                 class="form-control" :class="{ 'is-invalid': locationForm.errors.has('longitude') }">
+                              <has-error :form="locationForm" field="longitude"></has-error>
+                           </div>
+                           <!-- latitude input -->
+                           <div class="form-group">
+                              <label>latitude</label><span class="red">&#42;</span>
+                              <input v-model="locationForm.latitude" type="text" name="latitude" placeholder="Enter latitude"
+                                 class="form-control" :class="{ 'is-invalid': locationForm.errors.has('latitude') }">
+                              <has-error :form="locationForm" field="latitude"></has-error>
                            </div>
                         </div>
                         <!-- Footer -->
@@ -109,31 +117,37 @@
         data() {
 			return {
             locations: {},
+            vouchers: {},
+            allVouchers: {},
 				locationForm: new Form({
                     id: '',
-                    name: '',
-                    long: '',
-                    lat: ''
+                    longitude: '',
+                    latitude: ''
 				})
 			}
         },
+        computed: {
+			sortedVouchers() {
+				return _.sortBy(this.allVouchers, [voucher => voucher.name], 'id');
+			},
+		},
         methods:{
              getResults(page = 1) {
-                axios.get('api/location?page=' + page)
+                axios.get('api/voucher?page=' + page)
                     .then(response => {
-                        this.locations = response.data;
+                        this.vouchers = response.data;
                     });
             },
-             editLocationModal(location) {
+             editLocationModal(voucher) {
                 this.locationForm.clear();
                 this.locationForm.reset();
                 $('#editLocationModal').modal('show');
-                this.locationForm.fill(location);
+                this.locationForm.fill(voucher);
             },
              updateLocation() {
                 this.locationForm.put('api/location/' + this.locationForm.id)
                     .then(() => {
-                        Fire.$emit('RefreshLocations');
+                        Fire.$emit('RefreshVouchers');
                         $('#editLocationModal').modal('hide');
                         swal.fire(
                             'Success!',
@@ -149,37 +163,13 @@
                         })
                     })
             },
-            deleteLocation(id, name) {
-                swal.fire({
-                    title: 'Are you sure?',
-                    html: 'The following location will be permanently deleted: <b><b><br>' + name,
-                    type: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#d33',
-                    cancelButtonColor: '#07AD4D',
-                    confirmButtonText: 'Delete'
-                }).then((result) => {
-                    if (result.value) {
-                        this.locationForm.delete('api/location/' + id).then(() => {
-                            swal.fire(
-                                'Deleted!',
-                                'Location has been deleted.',
-                                'success'
-                            )
-                            Fire.$emit('RefreshLocations');
-                        }).catch(() => {
-                            swal("Failed!", "Failed to delete location.", "warning");
-                        });
-                    }
-                })
-            },
             createLocation() {
-				this.locationForm.post('api/location')
+				this.locationForm.put('api/location/' + this.locationForm.id)
 					.then(() => {
-                        Fire.$emit('RefreshLocations');
+                        Fire.$emit('RefreshVouchers');
 						swal.fire(
 							'Success!',
-							'Location added',
+							'Location assigned to voucher.',
 							'success',
                         )
                     this.locationForm.clear();
@@ -188,15 +178,20 @@
 					.catch(() => {
 						swal.fire({
 							title: 'Error',
-							text: "Error creating location.",
+							text: "Error assigning location.",
 							type: 'error'
 						})
 					})
             },
-             getLocations() {
-                axios.get('api/location').then(({
+            getVouchers() {
+                axios.get('api/voucher').then(({
                     data
-                }) => (this.locations = data));
+                }) => (this.vouchers = data));
+            },
+             getAllVouchers() {
+                axios.get('api/voucherall').then(({
+                    data
+                }) => (this.allVouchers = data));
             },
             loadMap(){
                 // Creating map object
@@ -240,12 +235,12 @@
             }
         },
         mounted() {
-             Fire.$on('RefreshLocations', () => {
-                this.getLocations();
+             Fire.$on('RefreshVouchers', () => {
+                this.getVouchers();
             });
-            this.getLocations();
+            this.getAllVouchers();
+            this.getVouchers();
             this.loadMap();
-
         }
     }
 </script>

@@ -15,6 +15,11 @@ class VoucherController extends Controller
         /* display the latest 10 vouchers */
         return Voucher::with('gettags')->with('getCategories')->latest()->paginate(10);
     }
+    
+    public function voucherall()
+    {
+        return Voucher::latest()->get();
+    }
 
     public function store(Request $request)
     {

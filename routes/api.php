@@ -21,6 +21,7 @@ Route::apiResource('location', 'API\LocationController');
 /* Get all the tags and categories in a single endpoint */
 Route::get('categoryall', 'API\CategoryController@categoryall');
 Route::get('tagall', 'API\TagController@tagall');
+Route::get('voucherall', 'API\VoucherController@voucherall');
 
 Route::apiResource('redeem', 'API\RedeemController');
 

@@ -2779,36 +2779,52 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       locations: {},
+      vouchers: {},
+      allVouchers: {},
       locationForm: new Form({
         id: '',
-        name: '',
-        "long": '',
-        lat: ''
+        longitude: '',
+        latitude: ''
       })
     };
+  },
+  computed: {
+    sortedVouchers: function sortedVouchers() {
+      return _.sortBy(this.allVouchers, [function (voucher) {
+        return voucher.name;
+      }], 'id');
+    }
   },
   methods: {
     getResults: function getResults() {
       var _this = this;
 
       var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
-      axios.get('api/location?page=' + page).then(function (response) {
-        _this.locations = response.data;
+      axios.get('api/voucher?page=' + page).then(function (response) {
+        _this.vouchers = response.data;
       });
     },
-    editLocationModal: function editLocationModal(location) {
+    editLocationModal: function editLocationModal(voucher) {
       this.locationForm.clear();
       this.locationForm.reset();
       $('#editLocationModal').modal('show');
-      this.locationForm.fill(location);
+      this.locationForm.fill(voucher);
     },
     updateLocation: function updateLocation() {
       this.locationForm.put('api/location/' + this.locationForm.id).then(function () {
-        Fire.$emit('RefreshLocations');
+        Fire.$emit('RefreshVouchers');
         $('#editLocationModal').modal('hide');
         swal.fire('Success!', 'Location has been successfully updated.', 'success');
       })["catch"](function () {
@@ -2819,52 +2835,38 @@ __webpack_require__.r(__webpack_exports__);
         });
       });
     },
-    deleteLocation: function deleteLocation(id, name) {
+    createLocation: function createLocation() {
       var _this2 = this;
 
-      swal.fire({
-        title: 'Are you sure?',
-        html: 'The following location will be permanently deleted: <b><b><br>' + name,
-        type: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#d33',
-        cancelButtonColor: '#07AD4D',
-        confirmButtonText: 'Delete'
-      }).then(function (result) {
-        if (result.value) {
-          _this2.locationForm["delete"]('api/location/' + id).then(function () {
-            swal.fire('Deleted!', 'Location has been deleted.', 'success');
-            Fire.$emit('RefreshLocations');
-          })["catch"](function () {
-            swal("Failed!", "Failed to delete location.", "warning");
-          });
-        }
-      });
-    },
-    createLocation: function createLocation() {
-      var _this3 = this;
+      this.locationForm.put('api/location/' + this.locationForm.id).then(function () {
+        Fire.$emit('RefreshVouchers');
+        swal.fire('Success!', 'Location assigned to voucher.', 'success');
 
-      this.locationForm.post('api/location').then(function () {
-        Fire.$emit('RefreshLocations');
-        swal.fire('Success!', 'Location added', 'success');
+        _this2.locationForm.clear();
 
-        _this3.locationForm.clear();
-
-        _this3.locationForm.reset();
+        _this2.locationForm.reset();
       })["catch"](function () {
         swal.fire({
           title: 'Error',
-          text: "Error creating location.",
+          text: "Error assigning location.",
           type: 'error'
         });
       });
     },
-    getLocations: function getLocations() {
+    getVouchers: function getVouchers() {
+      var _this3 = this;
+
+      axios.get('api/voucher').then(function (_ref) {
+        var data = _ref.data;
+        return _this3.vouchers = data;
+      });
+    },
+    getAllVouchers: function getAllVouchers() {
       var _this4 = this;
 
-      axios.get('api/location').then(function (_ref) {
-        var data = _ref.data;
-        return _this4.locations = data;
+      axios.get('api/voucherall').then(function (_ref2) {
+        var data = _ref2.data;
+        return _this4.allVouchers = data;
       });
     },
     loadMap: function loadMap() {
@@ -2910,10 +2912,11 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     var _this5 = this;
 
-    Fire.$on('RefreshLocations', function () {
-      _this5.getLocations();
+    Fire.$on('RefreshVouchers', function () {
+      _this5.getVouchers();
     });
-    this.getLocations();
+    this.getAllVouchers();
+    this.getVouchers();
     this.loadMap();
   }
 });
@@ -73234,15 +73237,15 @@ var render = function() {
                 [
                   _vm._m(1),
                   _vm._v(" "),
-                  _vm._l(_vm.locations.data, function(location) {
-                    return _c("tr", { key: location.id }, [
-                      _c("td", [_vm._v(_vm._s(location.id))]),
+                  _vm._l(_vm.vouchers.data, function(voucher) {
+                    return _c("tr", { key: voucher.id }, [
+                      _c("td", [_vm._v(_vm._s(voucher.id))]),
                       _vm._v(" "),
-                      _c("td", [_vm._v(_vm._s(location.name))]),
+                      _c("td", [_vm._v(_vm._s(voucher.name))]),
                       _vm._v(" "),
-                      _c("td", [_vm._v(_vm._s(location.latitude))]),
+                      _c("td", [_vm._v(_vm._s(voucher.latitude))]),
                       _vm._v(" "),
-                      _c("td", [_vm._v(_vm._s(location.longitude))]),
+                      _c("td", [_vm._v(_vm._s(voucher.longitude))]),
                       _vm._v(" "),
                       _c("td", [
                         _c(
@@ -73251,7 +73254,7 @@ var render = function() {
                             attrs: { href: "#" },
                             on: {
                               click: function($event) {
-                                return _vm.editLocationModal(location)
+                                return _vm.editLocationModal(voucher)
                               }
                             }
                           },
@@ -73261,22 +73264,6 @@ var render = function() {
                               staticStyle: { color: "#FFC107" }
                             })
                           ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "a",
-                          {
-                            attrs: { href: "#" },
-                            on: {
-                              click: function($event) {
-                                return _vm.deleteLocation(
-                                  location.id,
-                                  location.name
-                                )
-                              }
-                            }
-                          },
-                          [_c("i", { staticClass: "fas fa-trash red" })]
                         )
                       ])
                     ])
@@ -73294,7 +73281,7 @@ var render = function() {
               _c(
                 "pagination",
                 {
-                  attrs: { data: _vm.locations, limit: 5 },
+                  attrs: { data: _vm.vouchers, limit: 5 },
                   on: { "pagination-change-page": _vm.getResults }
                 },
                 [
@@ -73318,7 +73305,7 @@ var render = function() {
         _vm._v(" "),
         _c("div", { staticClass: "card" }, [
           _c("div", { staticClass: "card-header" }, [
-            _vm._v("Add New Location")
+            _vm._v("Assign Location to Voucher")
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "card-body" }, [
@@ -73342,36 +73329,62 @@ var render = function() {
                   "div",
                   { staticClass: "form-group" },
                   [
-                    _c("label", [_vm._v("Name")]),
-                    _vm._v(" "),
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.locationForm.name,
-                          expression: "locationForm.name"
-                        }
-                      ],
-                      staticClass: "form-control",
-                      class: {
-                        "is-invalid": _vm.locationForm.errors.has("name")
-                      },
-                      attrs: { type: "text", name: "name", id: "name" },
-                      domProps: { value: _vm.locationForm.name },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
+                    _c(
+                      "select",
+                      {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.locationForm.id,
+                            expression: "locationForm.id"
                           }
-                          _vm.$set(
-                            _vm.locationForm,
-                            "name",
-                            $event.target.value
-                          )
+                        ],
+                        staticClass: "form-control",
+                        class: {
+                          "is-invalid": _vm.locationForm.errors.has("name")
+                        },
+                        attrs: { name: "name", id: "name" },
+                        on: {
+                          change: function($event) {
+                            var $$selectedVal = Array.prototype.filter
+                              .call($event.target.options, function(o) {
+                                return o.selected
+                              })
+                              .map(function(o) {
+                                var val = "_value" in o ? o._value : o.value
+                                return val
+                              })
+                            _vm.$set(
+                              _vm.locationForm,
+                              "id",
+                              $event.target.multiple
+                                ? $$selectedVal
+                                : $$selectedVal[0]
+                            )
+                          }
                         }
-                      }
-                    }),
+                      },
+                      [
+                        _c(
+                          "option",
+                          { attrs: { value: "", disabled: "", selected: "" } },
+                          [_vm._v("Select Voucher")]
+                        ),
+                        _vm._v(" "),
+                        _vm._l(_vm.sortedVouchers, function(voucher) {
+                          return _c(
+                            "option",
+                            {
+                              key: voucher.id,
+                              domProps: { value: voucher.id }
+                            },
+                            [_vm._v(_vm._s(voucher.name))]
+                          )
+                        })
+                      ],
+                      2
+                    ),
                     _vm._v(" "),
                     _c("has-error", {
                       attrs: { form: _vm.locationForm, field: "name" }
@@ -73391,33 +73404,37 @@ var render = function() {
                         {
                           name: "model",
                           rawName: "v-model",
-                          value: _vm.locationForm.lat,
-                          expression: "locationForm.lat"
+                          value: _vm.locationForm.latitude,
+                          expression: "locationForm.latitude"
                         }
                       ],
                       staticClass: "form-control",
                       class: {
-                        "is-invalid": _vm.locationForm.errors.has("lat")
+                        "is-invalid": _vm.locationForm.errors.has("latitude")
                       },
                       attrs: {
                         disabled: "",
                         type: "text",
                         id: "txtLat",
-                        name: "lat"
+                        name: "latitude"
                       },
-                      domProps: { value: _vm.locationForm.lat },
+                      domProps: { value: _vm.locationForm.latitude },
                       on: {
                         input: function($event) {
                           if ($event.target.composing) {
                             return
                           }
-                          _vm.$set(_vm.locationForm, "lat", $event.target.value)
+                          _vm.$set(
+                            _vm.locationForm,
+                            "latitude",
+                            $event.target.value
+                          )
                         }
                       }
                     }),
                     _vm._v(" "),
                     _c("has-error", {
-                      attrs: { form: _vm.locationForm, field: "lat" }
+                      attrs: { form: _vm.locationForm, field: "latitude" }
                     })
                   ],
                   1
@@ -73434,21 +73451,21 @@ var render = function() {
                         {
                           name: "model",
                           rawName: "v-model",
-                          value: _vm.locationForm.long,
-                          expression: "locationForm.long"
+                          value: _vm.locationForm.longitude,
+                          expression: "locationForm.longitude"
                         }
                       ],
                       staticClass: "form-control",
                       class: {
-                        "is-invalid": _vm.locationForm.errors.has("long")
+                        "is-invalid": _vm.locationForm.errors.has("longitude")
                       },
                       attrs: {
                         disabled: "",
                         type: "text",
                         id: "txtLng",
-                        name: "lng"
+                        name: "longitude"
                       },
-                      domProps: { value: _vm.locationForm.long },
+                      domProps: { value: _vm.locationForm.longitude },
                       on: {
                         input: function($event) {
                           if ($event.target.composing) {
@@ -73456,7 +73473,7 @@ var render = function() {
                           }
                           _vm.$set(
                             _vm.locationForm,
-                            "long",
+                            "longitude",
                             $event.target.value
                           )
                         }
@@ -73464,7 +73481,7 @@ var render = function() {
                     }),
                     _vm._v(" "),
                     _c("has-error", {
-                      attrs: { form: _vm.locationForm, field: "long" }
+                      attrs: { form: _vm.locationForm, field: "longitude" }
                     })
                   ],
                   1
@@ -73517,7 +73534,7 @@ var render = function() {
                           "div",
                           { staticClass: "form-group" },
                           [
-                            _c("label", [_vm._v("Name")]),
+                            _c("label", [_vm._v("longitude")]),
                             _c("span", { staticClass: "red" }, [_vm._v("*")]),
                             _vm._v(" "),
                             _c("input", {
@@ -73525,22 +73542,22 @@ var render = function() {
                                 {
                                   name: "model",
                                   rawName: "v-model",
-                                  value: _vm.locationForm.name,
-                                  expression: "locationForm.name"
+                                  value: _vm.locationForm.longitude,
+                                  expression: "locationForm.longitude"
                                 }
                               ],
                               staticClass: "form-control",
                               class: {
                                 "is-invalid": _vm.locationForm.errors.has(
-                                  "name"
+                                  "longitude"
                                 )
                               },
                               attrs: {
                                 type: "text",
-                                name: "name",
-                                placeholder: "Enter a location name"
+                                name: "longitude",
+                                placeholder: "Enter longitude"
                               },
-                              domProps: { value: _vm.locationForm.name },
+                              domProps: { value: _vm.locationForm.longitude },
                               on: {
                                 input: function($event) {
                                   if ($event.target.composing) {
@@ -73548,7 +73565,7 @@ var render = function() {
                                   }
                                   _vm.$set(
                                     _vm.locationForm,
-                                    "name",
+                                    "longitude",
                                     $event.target.value
                                   )
                                 }
@@ -73556,7 +73573,62 @@ var render = function() {
                             }),
                             _vm._v(" "),
                             _c("has-error", {
-                              attrs: { form: _vm.locationForm, field: "name" }
+                              attrs: {
+                                form: _vm.locationForm,
+                                field: "longitude"
+                              }
+                            })
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          { staticClass: "form-group" },
+                          [
+                            _c("label", [_vm._v("latitude")]),
+                            _c("span", { staticClass: "red" }, [_vm._v("*")]),
+                            _vm._v(" "),
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.locationForm.latitude,
+                                  expression: "locationForm.latitude"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              class: {
+                                "is-invalid": _vm.locationForm.errors.has(
+                                  "latitude"
+                                )
+                              },
+                              attrs: {
+                                type: "text",
+                                name: "latitude",
+                                placeholder: "Enter latitude"
+                              },
+                              domProps: { value: _vm.locationForm.latitude },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    _vm.locationForm,
+                                    "latitude",
+                                    $event.target.value
+                                  )
+                                }
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("has-error", {
+                              attrs: {
+                                form: _vm.locationForm,
+                                field: "latitude"
+                              }
                             })
                           ],
                           1
@@ -73591,7 +73663,7 @@ var staticRenderFns = [
     return _c("tr", [
       _c("th", [_vm._v("ID")]),
       _vm._v(" "),
-      _c("th", [_vm._v("Name")]),
+      _c("th", [_vm._v("Voucher Name")]),
       _vm._v(" "),
       _c("th", [_vm._v("Latitude")]),
       _vm._v(" "),
@@ -73611,7 +73683,7 @@ var staticRenderFns = [
           staticClass: "btn btn-primary",
           attrs: { type: "submit", id: "btn-create" }
         },
-        [_vm._v("Create")]
+        [_vm._v("Create Location")]
       )
     ])
   },
@@ -91121,14 +91193,15 @@ __webpack_require__.r(__webpack_exports__);
 /*!***********************************************!*\
   !*** ./resources/js/components/Dashboard.vue ***!
   \***********************************************/
-/*! exports provided: default */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Dashboard_vue_vue_type_template_id_040e2ab9___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Dashboard.vue?vue&type=template&id=040e2ab9& */ "./resources/js/components/Dashboard.vue?vue&type=template&id=040e2ab9&");
 /* harmony import */ var _Dashboard_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Dashboard.vue?vue&type=script&lang=js& */ "./resources/js/components/Dashboard.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _Dashboard_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _Dashboard_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -91158,7 +91231,7 @@ component.options.__file = "resources/js/components/Dashboard.vue"
 /*!************************************************************************!*\
   !*** ./resources/js/components/Dashboard.vue?vue&type=script&lang=js& ***!
   \************************************************************************/
-/*! exports provided: default */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
