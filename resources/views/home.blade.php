@@ -249,13 +249,15 @@
 
 
 <div class="row responsive-center">
-    @if(count($vouchers)<=0 ) 
+@if(count($vouchers)<=0 ) 
         <div class="alert alert-danger text-center">
         <strong>Sorry!</strong> We couldn't find what you were looking for.
         <br>
         <a class="errorReturn" href="{{route('home')}}">Click here to return home</a>
 </div>
-@endif @if(!empty($vouchers)) @foreach($vouchers as $voucher)
+@endif 
+@if(!empty($vouchers)) 
+@foreach($vouchers as $voucher)
 
 <div class="modal fade" id="voucher{{$voucher->id}}" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -286,7 +288,7 @@
                     <br>{{\Carbon\Carbon::parse($voucher->expiry_date)->format('d/m/Y')}}
                 </p>
                 @endif 
-                @if(!empty($voucher->latitude))
+                @if(!empty($voucher->latitude) && !empty($voucher->longitude))
                 <strong class="header-modal">Location</strong><br><br>
                 <iframe src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCC6emn13XOdxMhZAsbaGIgt2HcK3iKAoc&q={{$voucher->latitude}},{{$voucher->longitude}}" width="100%" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
                 @endif

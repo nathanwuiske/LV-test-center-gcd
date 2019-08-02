@@ -10,7 +10,13 @@ class MetricsController extends Controller
 {
     public function metrics()
     {
-        $metrics['countVouchersUsers'] = $voucherCount = DB::table('vouchers')->count();
+        $metrics['favourited'] = DB::table('user_favourites')
+        ->select('voucher_id', \DB::raw("COUNT('voucher_id') AS favourite_count"))
+        ->orderBy('favourite_count', 'desc')
+        ->groupBy('voucher_id')
+        ->take(5)
+        ->get();
+        $metrics['countVouchersUsers'] = DB::table('vouchers')->count();
         $metrics['countTotalUsers'] = $userCount = DB::table('users')->count();
         $metrics['countUsersToday'] = DB::table('users')->where('created_at', '>=', Carbon::today())->count();
         $metrics['countVouchersToday'] = DB::table('vouchers')->where('created_at', '>=', Carbon::today())->count();

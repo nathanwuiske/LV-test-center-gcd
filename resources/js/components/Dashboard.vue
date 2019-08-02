@@ -47,6 +47,37 @@
          <h3>User activity</h3>
       </div>
       <p class="text-center">To be added.</p>
+      <div class="col-md-12">
+        <div class="card">
+               <div class="card-header">
+                  <h3 class="card-title">Top favourited vouchers</h3>
+               </div>
+               <div class="card-body table-responsive p-0">
+                  <table class="table table-hover">
+                    <tbody>
+                        <tr>
+                           <th>Voucher ID</th>
+                           <th>Favourite Count</th>
+   
+                    
+                        </tr>
+                        <tr v-for="voucher in metric_data.favourited" :key="voucher.id">
+                           <td>{{voucher.voucher_id}}</td>
+                           <td>{{voucher.favourite_count}}</td>
+                       
+                        
+                        </tr>
+                     </tbody>
+                  </table>
+               </div>
+               <div class="card-footer">
+                  <pagination :data="vouchers" @pagination-change-page="getResults" :limit=5>
+                     <span slot="prev-nav">&lt; Previous</span>
+                     <span slot="next-nav">Next &gt;</span>
+                  </pagination>
+               </div>
+            </div>
+        </div>
    </div>
 </template>
 
