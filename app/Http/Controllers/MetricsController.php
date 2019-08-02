@@ -11,9 +11,10 @@ class MetricsController extends Controller
     public function metrics()
     {
         $metrics['favourited'] = DB::table('user_favourites')
-        ->select('voucher_id', \DB::raw("COUNT('voucher_id') AS favourite_count"))
+        ->join('vouchers', 'vouchers.id', '=', 'user_favourites.voucher_id')
+        ->select('voucher_id', 'vouchers.name', \DB::raw("COUNT('voucher_id') AS favourite_count"))
         ->orderBy('favourite_count', 'desc')
-        ->groupBy('voucher_id')
+        ->groupBy('voucher_id', 'vouchers.name')
         ->take(5)
         ->get();
         $metrics['countVouchersUsers'] = DB::table('vouchers')->count();

@@ -57,25 +57,18 @@
                     <tbody>
                         <tr>
                            <th>Voucher ID</th>
+                           <th>Voucher Name</th>
                            <th>Favourite Count</th>
-   
-                    
                         </tr>
                         <tr v-for="voucher in metric_data.favourited" :key="voucher.id">
                            <td>{{voucher.voucher_id}}</td>
+                           <td>{{voucher.name}}</td>
                            <td>{{voucher.favourite_count}}</td>
-                       
-                        
                         </tr>
                      </tbody>
                   </table>
                </div>
-               <div class="card-footer">
-                  <pagination :data="vouchers" @pagination-change-page="getResults" :limit=5>
-                     <span slot="prev-nav">&lt; Previous</span>
-                     <span slot="next-nav">Next &gt;</span>
-                  </pagination>
-               </div>
+               <div class="card-footer"></div>
             </div>
         </div>
    </div>

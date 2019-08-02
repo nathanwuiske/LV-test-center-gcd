@@ -2666,13 +2666,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -73212,6 +73205,8 @@ var render = function() {
                   return _c("tr", { key: voucher.id }, [
                     _c("td", [_vm._v(_vm._s(voucher.voucher_id))]),
                     _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(voucher.name))]),
+                    _vm._v(" "),
                     _c("td", [_vm._v(_vm._s(voucher.favourite_count))])
                   ])
                 })
@@ -73221,29 +73216,7 @@ var render = function() {
           ])
         ]),
         _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "card-footer" },
-          [
-            _c(
-              "pagination",
-              {
-                attrs: { data: _vm.vouchers, limit: 5 },
-                on: { "pagination-change-page": _vm.getResults }
-              },
-              [
-                _c("span", { attrs: { slot: "prev-nav" }, slot: "prev-nav" }, [
-                  _vm._v("< Previous")
-                ]),
-                _vm._v(" "),
-                _c("span", { attrs: { slot: "next-nav" }, slot: "next-nav" }, [
-                  _vm._v("Next >")
-                ])
-              ]
-            )
-          ],
-          1
-        )
+        _c("div", { staticClass: "card-footer" })
       ])
     ])
   ])
@@ -73297,6 +73270,8 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("tr", [
       _c("th", [_vm._v("Voucher ID")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Voucher Name")]),
       _vm._v(" "),
       _c("th", [_vm._v("Favourite Count")])
     ])
