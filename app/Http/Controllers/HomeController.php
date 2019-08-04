@@ -26,7 +26,8 @@ class HomeController extends Controller
       $latest = Voucher::latest()->limit(20)->get();
       $businesses = Business::latest()->limit(20)->get();
       
-      return view('home')->with('vouchers', $vouchers)->with('categories', $categories)->with('popular', $popular)->with('latest', $latest)->with('businesses', $businesses);
+      return view('home')->with('vouchers', $vouchers)->with('categories', $categories)
+      ->with('popular', $popular)->with('latest', $latest)->with('businesses', $businesses);
     }
     public function addfavourite(Request $request)
     {

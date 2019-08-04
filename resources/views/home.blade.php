@@ -77,7 +77,7 @@
    <div class="container">
        <div class="row">
            <h2 class="home-header-pop">Businesses</h2>
-           <div id="jssor_5" style="position:relative;margin:0 auto;top:0px;left:0px;width:1050px;height:300px;overflow:hidden;visibility:hidden;top:50px">
+           <div id="jssor_5" style="position:relative;margin:0 auto;top:35px;width:1050px;height:300px;visibility:hidden;">
                <!-- Loading Screen -->
                <div data-u="loading" class="jssorl-009-spin" style="position:absolute;top:0px;left:0px;width:100%;height:100%;text-align:center;background-color:rgba(0,0,0,0.7);">
                    <img style="margin-top:-19px;position:relative;top:50%;width:38px;height:38px;" src="../svg/slider/spin.svg" />
@@ -96,16 +96,13 @@
                </div>
 
                <!-- Arrow Navigator -->
-               <div data-u="arrowleft" class="jssora073" style="width:50px;height:50px;top:0px;left:0px;" data-autocenter="2" data-scale="0.75" data-scale-left="0.75">
-                   <svg viewBox="0 0 16000 16000" style="position:absolute;top:-55px;left:0;width:100%;height:100%;">
-                       <path class="a" d="M4037.7,8357.3l5891.8,5891.8c100.6,100.6,219.7,150.9,357.3,150.9s256.7-50.3,357.3-150.9 l1318.1-1318.1c100.6-100.6,150.9-219.7,150.9-357.3c0-137.6-50.3-256.7-150.9-357.3L7745.9,8000l4216.4-4216.4 c100.6-100.6,150.9-219.7,150.9-357.3c0-137.6-50.3-256.7-150.9-357.3l-1318.1-1318.1c-100.6-100.6-219.7-150.9-357.3-150.9 s-256.7,50.3-357.3,150.9L4037.7,7642.7c-100.6,100.6-150.9,219.7-150.9,357.3C3886.8,8137.6,3937.1,8256.7,4037.7,8357.3 L4037.7,8357.3z"></path>
-                   </svg>
-               </div>
-               <div data-u="arrowright" class="jssora073" style="width:50px;height:50px;top:0px;right:0px;" data-autocenter="2" data-scale="0.75" data-scale-right="0.75">
-                   <svg viewBox="0 0 16000 16000" style="position:absolute;top:-55px;left:0;width:100%;height:100%;">
-                       <path class="a" d="M11962.3,8357.3l-5891.8,5891.8c-100.6,100.6-219.7,150.9-357.3,150.9s-256.7-50.3-357.3-150.9 L4037.7,12931c-100.6-100.6-150.9-219.7-150.9-357.3c0-137.6,50.3-256.7,150.9-357.3L8254.1,8000L4037.7,3783.6 c-100.6-100.6-150.9-219.7-150.9-357.3c0-137.6,50.3-256.7,150.9-357.3l1318.1-1318.1c100.6-100.6,219.7-150.9,357.3-150.9 s256.7,50.3,357.3,150.9l5891.8,5891.8c100.6,100.6,150.9,219.7,150.9,357.3C12113.2,8137.6,12062.9,8256.7,11962.3,8357.3 L11962.3,8357.3z"></path>
-                   </svg>
-               </div>
+               <div data-u="arrowleft" class="jssora073" style="width:50px;height:50px;top:0px;left:-40px;" data-autocenter="2" data-scale="0.75" data-scale-left="0.75">
+                    <img src="/imgs/arrows/left.png" height="50px" width="50px">
+                </div>
+                   
+                <div data-u="arrowright" class="jssora073" style="width:50px;height:50px;top:0px;right:-46px;" data-autocenter="2" data-scale="0.75" data-scale-right="0.75">
+                    <img src="/imgs/arrows/right.png" height="50px" width="50px">
+                </div>
            </div>
        </div>
    </div>
@@ -126,7 +123,8 @@
                     <img class="jssor2-img" src="../svg/slider/spin.svg" />
                 </div>
                 <div data-u="slides" class="jssor2-d-sliders">
-                    @if(!empty($popular)) @foreach($popular as $voucher)
+                    @if(!empty($popular)) 
+                    @foreach($popular as $voucher)
                     <div class="card alignVoucherCards">
                         <a href="#voucher{{$voucher->id}}" role="button" data-toggle="modal">
                             <div class="hoverOver voucher-style">
@@ -135,6 +133,7 @@
                                 <h2 class="voucher-name">{{ str_limit($voucher->name, $limit = 22, $end='...') }}</h2>
                                 <button class="btn btn-lg voucher-view-btn"><i class="fa fa-close"></i>View</button>
                         </a>
+
                         <form action="/addfavourite" method="get" class="fav-hover" style="float:right; ">
                             <button id="addfavourite" value="{{$voucher->id}}" name="addfavourite" class="btn btn-lg" style="background-color:#07AD4D; color:white; position: relative; right: 65%;"><i class="fas fa-heart "></i></button>
                         </form>
@@ -144,25 +143,21 @@
                     @endforeach @endif
                 </div>
                 <!-- Arrow Navigator   -->
-                <div data-u="arrowleft" class="jssora073" style="width:50px;height:50px;top:0px;left:0px;" data-autocenter="2" data-scale="0.75" data-scale-left="0.75">
-                    <svg viewBox="0 0 16000 16000" style="position:absolute;top:0;left:0;width:100%;height:100%;">
-                        <path class="a" d="M4037.7,8357.3l5891.8,5891.8c100.6,100.6,219.7,150.9,357.3,150.9s256.7-50.3,357.3-150.9 l1318.1-1318.1c100.6-100.6,150.9-219.7,150.9-357.3c0-137.6-50.3-256.7-150.9-357.3L7745.9,8000l4216.4-4216.4 c100.6-100.6,150.9-219.7,150.9-357.3c0-137.6-50.3-256.7-150.9-357.3l-1318.1-1318.1c-100.6-100.6-219.7-150.9-357.3-150.9 s-256.7,50.3-357.3,150.9L4037.7,7642.7c-100.6,100.6-150.9,219.7-150.9,357.3C3886.8,8137.6,3937.1,8256.7,4037.7,8357.3 L4037.7,8357.3z"></path>
-                    </svg>
-                </div>
-                <div data-u="arrowright" class="jssora073" style="width:50px;height:50px;top:0px;right:0px;" data-autocenter="2" data-scale="0.75" data-scale-right="0.75">
-                    <svg viewBox="0 0 16000 16000" style="position:absolute;top:0;left:0;width:100%;height:100%;">
-                        <path class="a" d="M11962.3,8357.3l-5891.8,5891.8c-100.6,100.6-219.7,150.9-357.3,150.9s-256.7-50.3-357.3-150.9 L4037.7,12931c-100.6-100.6-150.9-219.7-150.9-357.3c0-137.6,50.3-256.7,150.9-357.3L8254.1,8000L4037.7,3783.6 c-100.6-100.6-150.9-219.7-150.9-357.3c0-137.6,50.3-256.7,150.9-357.3l1318.1-1318.1c100.6-100.6,219.7-150.9,357.3-150.9 s256.7,50.3,357.3,150.9l5891.8,5891.8c100.6,100.6,150.9,219.7,150.9,357.3C12113.2,8137.6,12062.9,8256.7,11962.3,8357.3 L11962.3,8357.3z"></path>
-                    </svg>
+                <div data-u="arrowleft" class="jssora073" style="width:50px;height:50px;top:0px;left:-40px;" data-autocenter="2" data-scale="0.75" data-scale-left="0.75">
+                    <img src="/imgs/arrows/left.png" height="50px" width="50px">
+                </div> 
+                <div data-u="arrowright" class="jssora073" style="width:50px;height:50px;top:0px;right:-40px;" data-autocenter="2" data-scale="0.75" data-scale-right="0.75">
+                    <img src="/imgs/arrows/right.png" height="50px" width="50px">
                 </div>
             </div>
 </section>
 
-<section id="newest" class="content-background-grey">
+<section id="newest" class="content-background-white">
     <div class="container">
         <div class="row">
             <h2 class="home-header-pop" style="float:left;">Newest Vouchers</h2>
             <a href="{{action('VoucherPageController@newest_all')}}"><h1 class="view-all">View all </h1></a>
-            <div id="jssor_3" style="position:relative;margin:0 auto;top:0px;left:0px;width:1050px;height:420px;overflow:hidden;visibility:hidden;">
+            <div id="jssor_3" style="position:relative;margin:0 auto;margin-bottom:35px;top:35px;width:1050px;height:420px;visibility:hidden;">
                 <!-- Loading Screen -->
                 <div data-u="loading" class="jssorl-009-spin" style="position:absolute;top:0px;left:0px;width:100%;height:100%;text-align:center;background-color:rgba(0,0,0,0.7);">
                     <img style="margin-top:-19px;position:relative;top:50%;width:38px;height:38px;" src="../svg/slider/spin.svg" />
@@ -186,27 +181,24 @@
                     @endforeach @endif
                 </div>
                 <!-- Arrow Navigator -->
-                <div data-u="arrowleft" class="jssora073" style="width:50px;height:50px;top:0px;left:0px;" data-autocenter="2" data-scale="0.75" data-scale-left="0.75">
-                    <svg viewBox="0 0 16000 16000" style="position:absolute;top:0;left:0;width:100%;height:100%;">
-                        <path class="a" d="M4037.7,8357.3l5891.8,5891.8c100.6,100.6,219.7,150.9,357.3,150.9s256.7-50.3,357.3-150.9 l1318.1-1318.1c100.6-100.6,150.9-219.7,150.9-357.3c0-137.6-50.3-256.7-150.9-357.3L7745.9,8000l4216.4-4216.4 c100.6-100.6,150.9-219.7,150.9-357.3c0-137.6-50.3-256.7-150.9-357.3l-1318.1-1318.1c-100.6-100.6-219.7-150.9-357.3-150.9 s-256.7,50.3-357.3,150.9L4037.7,7642.7c-100.6,100.6-150.9,219.7-150.9,357.3C3886.8,8137.6,3937.1,8256.7,4037.7,8357.3 L4037.7,8357.3z"></path>
-                    </svg>
+                <div data-u="arrowleft" class="jssora073" style="width:50px;height:50px;top:0px;left:-40px;" data-autocenter="2" data-scale="0.75" data-scale-left="0.75">
+                    <img src="/imgs/arrows/left.png" height="50px" width="50px">
                 </div>
-                <div data-u="arrowright" class="jssora073" style="width:50px;height:50px;top:0px;right:0px;" data-autocenter="2" data-scale="0.75" data-scale-right="0.75">
-                    <svg viewBox="0 0 16000 16000" style="position:absolute;top:0;left:0;width:100%;height:100%;">
-                        <path class="a" d="M11962.3,8357.3l-5891.8,5891.8c-100.6,100.6-219.7,150.9-357.3,150.9s-256.7-50.3-357.3-150.9 L4037.7,12931c-100.6-100.6-150.9-219.7-150.9-357.3c0-137.6,50.3-256.7,150.9-357.3L8254.1,8000L4037.7,3783.6 c-100.6-100.6-150.9-219.7-150.9-357.3c0-137.6,50.3-256.7,150.9-357.3l1318.1-1318.1c100.6-100.6,219.7-150.9,357.3-150.9 s256.7,50.3,357.3,150.9l5891.8,5891.8c100.6,100.6,150.9,219.7,150.9,357.3C12113.2,8137.6,12062.9,8256.7,11962.3,8357.3 L11962.3,8357.3z"></path>
-                    </svg>
+                   
+                <div data-u="arrowright" class="jssora073" style="width:50px;height:50px;top:0px;right:-46px;" data-autocenter="2" data-scale="0.75" data-scale-right="0.75">
+                    <img src="/imgs/arrows/right.png" height="50px" width="50px">
                 </div>
             </div>
         </div>
 </section>
 
 
-<section id="other" class="content-background-white">
+<section id="other" class="content-background-grey">
     <div class="container">
         <div class="row">
             <h2 class="home-header-pop" style="float:left;">Other Vouchers</h2>
             <a href="#"><h1 class="view-all">View all </h1></a>
-            <div id="jssor_4" style="position:relative;margin:0 auto;top:0px;left:0px;width:1050px;height:420px;overflow:hidden;visibility:hidden;">
+            <div id="jssor_4" style="position:relative;margin:0 auto;margin-bottom:35px;top:35px;width:1050px;height:420px;visibility:hidden;">
                 <!-- Loading Screen -->
                 <div data-u="loading" class="jssorl-009-spin" style="position:absolute;top:0px;left:0px;width:100%;height:100%;text-align:center;background-color:rgba(0,0,0,0.7);">
                     <img style="margin-top:-19px;position:relative;top:50%;width:38px;height:38px;" src="../svg/slider/spin.svg" />
@@ -221,30 +213,45 @@
                                 <h2 style="color:#07AD4D; font-size: 20px; margin-bottom: 10px;margin-top: 10px;">{{ str_limit($voucher->name, $limit = 22, $end='...') }}</h2>
                                 <button class="btn btn-lg" style="background-color:#07AD4D;  width: 50%; height: 100%; margin-right: 10px;"><i class="fa fa-close"></i>View</button>
                         </a>
-                        <form action="/addfavourite" method="get" class="fav-hover" style="float:right; ">
-                            <button id="addfavourite" value="{{$voucher->id}}" name="addfavourite" class="btn btn-lg" style="background-color:#07AD4D; color:white; position: relative; right: 65%;"><i class="fas fa-heart "></i></button>
-                        </form>
+                        <div class="fav-hover" style="float:right;">
+                            @auth
+                            @php
+                            $hasFavVoucher = false
+                            @endphp
+                            @foreach(Auth::user()->getfavourites as $favouriteVoucher) 
+                            @if($favouriteVoucher->id == $voucher->id)   
+                            @php
+                            $hasFavVoucher = true
+                            @endphp
+                            @endif
+                            @endforeach
+                            @if($hasFavVoucher)
+                            <button id="addfavourite" value="{{$voucher->id}}" onClick="getVoucherID({{$voucher->id}}, {{ Auth::user()->id }})" name="addfavourite" class="btn btn-lg" style="background-color:#07AD4D; color:#ad1707; position: relative; right: 65%;"><i class="fas fa-heart"></i></button>
+                            @else
+                            <button id="addfavourites{{$voucher->id}}" value="{{$voucher->id}}" onClick="getVoucherID({{$voucher->id}}, {{ Auth::user()->id }})" name="addfavourite" class="btn btn-lg" style="background-color:#07AD4D; color:white; position: relative; right: 65%;"><i class="fas fa-heart" ></i></button>
+                            @endif
+                            @endauth
+                            @guest
+                            <a href="{{ route('login') }}"> <button class="btn btn-lg" style="background-color:#07AD4D; color:white; position: relative; right: 65%;"><i class="fas fa-heart "></i></button> </a> 
+                            @endguest
+                        </div>
                         <div style="margin-bottom: 20px;"></div>
                         </div>
                     </div>
                     @endforeach @endif
                 </div>
                 <!-- Arrow Navigator -->
-                <div data-u="arrowleft" class="jssora073" style="width:50px;height:50px;top:0px;left:0px;" data-autocenter="2" data-scale="0.75" data-scale-left="0.75">
-                    <svg viewBox="0 0 16000 16000" style="position:absolute;top:0;left:0;width:100%;height:100%;">
-                        <path class="a" d="M4037.7,8357.3l5891.8,5891.8c100.6,100.6,219.7,150.9,357.3,150.9s256.7-50.3,357.3-150.9 l1318.1-1318.1c100.6-100.6,150.9-219.7,150.9-357.3c0-137.6-50.3-256.7-150.9-357.3L7745.9,8000l4216.4-4216.4 c100.6-100.6,150.9-219.7,150.9-357.3c0-137.6-50.3-256.7-150.9-357.3l-1318.1-1318.1c-100.6-100.6-219.7-150.9-357.3-150.9 s-256.7,50.3-357.3,150.9L4037.7,7642.7c-100.6,100.6-150.9,219.7-150.9,357.3C3886.8,8137.6,3937.1,8256.7,4037.7,8357.3 L4037.7,8357.3z"></path>
-                    </svg>
+                <div data-u="arrowleft" class="jssora073" style="width:50px;height:50px;top:0px;left:-40px;" data-autocenter="2" data-scale="0.75" data-scale-left="0.75">
+                    <img src="/imgs/arrows/left.png" height="50px" width="50px">
                 </div>
-                <div data-u="arrowright" class="jssora073" style="width:50px;height:50px;top:0px;right:0px;" data-autocenter="2" data-scale="0.75" data-scale-right="0.75">
-                    <svg viewBox="0 0 16000 16000" style="position:absolute;top:0;left:0;width:100%;height:100%;">
-                        <path class="a" d="M11962.3,8357.3l-5891.8,5891.8c-100.6,100.6-219.7,150.9-357.3,150.9s-256.7-50.3-357.3-150.9 L4037.7,12931c-100.6-100.6-150.9-219.7-150.9-357.3c0-137.6,50.3-256.7,150.9-357.3L8254.1,8000L4037.7,3783.6 c-100.6-100.6-150.9-219.7-150.9-357.3c0-137.6,50.3-256.7,150.9-357.3l1318.1-1318.1c100.6-100.6,219.7-150.9,357.3-150.9 s256.7,50.3,357.3,150.9l5891.8,5891.8c100.6,100.6,150.9,219.7,150.9,357.3C12113.2,8137.6,12062.9,8256.7,11962.3,8357.3 L11962.3,8357.3z"></path>
-                    </svg>
+               
+                <div data-u="arrowright" class="jssora073" style="width:50px;height:50px;top:0px;right:-46px;" data-autocenter="2" data-scale="0.75" data-scale-right="0.75">
+                    <img src="/imgs/arrows/right.png" height="50px" width="50px">
                 </div>
             </div>
         </div>
     </div>
 </section>
-
 
 
 
@@ -317,4 +324,44 @@
     jssor_4_slider_init();
     jssor_5_slider_init();
 </script>
+<script type="text/javascript">
+ function getVoucherID(voucherid, userid){
+            var user_id = userid;
+            var voucher_id = voucherid;
+            $('#addfavourites'+voucherid).css({
+                        'color': '#ad1707'
+                    });
+            $.ajax({
+            type: 'post',
+            url: 'api/addfavourite',
+            data: {
+               // '_token': $('input[name=_token]').val(),
+                 'user_id': user_id ,
+                 'voucher_id': voucher_id,
+            },
+            success: function () {     
+                Swal.fire({
+                    toast: true,
+                    position: 'top',
+                    showConfirmButton: false,
+                    timer: 3500,
+                    type: 'success',
+                    title: 'Voucher added to favourites'
+                })
+            },
+            error: function(XMLHttpRequest) {
+                Swal.fire({
+                    toast: true,
+                    position: 'top',
+                    showConfirmButton: false,
+                    timer: 3500,
+                    type: 'error',
+                    title: 'Failed to add voucher to favourites'
+                })
+            }
+        });
+            
+        }
+        </script>
+
 @stop

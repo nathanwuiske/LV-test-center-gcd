@@ -6,7 +6,9 @@
       <meta name="description" content="Providing free vouchers to the Gold Coast community">
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCC6emn13XOdxMhZAsbaGIgt2HcK3iKAoc"></script>
-    
+
+      <!-- jquery core -->
+      <script src="/js/jquery-1.11.1.min.js"></script>
       <!--Search bar -->
      <link rel="stylesheet" href="/css/search.css">
 	   <!-- Fontawesome Icon -->
@@ -122,14 +124,14 @@
       </footer>
 	
 	  <!-- Scripts -->
-	  <!-- jquery core -->
-     <script src="/js/jquery-1.11.1.min.js"></script>
+	  
+     <script src="/js/sweetalert2.all.min.js"></script>
+     <link rel="stylesheet" href="/css/sweetalert2.min.css">
       <!-- Bootstrap -->
       <script src="/js/bootstrap.min.js"></script>
       <!-- jssor slider -->
       <script src="/js/jssor.slider.min.js"></script>
 
-    
       <!-- WOW animations -->
       <script src="/js/wow.min.js"></script>
       <script>

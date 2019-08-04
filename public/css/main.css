@@ -384,6 +384,11 @@ textarea {
 /*	Basic Style 
 /* =================================== */
 
+/* Fix sweet alert sizing */
+.swal2-popup {
+  font-size: 1.6rem !important;
+}
+
 body {
     background-color: #F4F6F9;
     font-family: "Ubuntu";

@@ -32,6 +32,9 @@ Route::get('findVoucher', 'API\VoucherController@search');
 //Route::group(['middleware' => 'auth:api'], function() {
 
  // });
+ 
+ 
+ Route::post('addfavourite', 'API\FavouriteController@store');
 
 Route::group(['prefix' => 'auth'], function () {
     Route::post('login', 'Auth\AuthController@login')->name('login');
