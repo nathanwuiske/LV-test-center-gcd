@@ -17,6 +17,13 @@ class MetricsController extends Controller
         ->groupBy('voucher_id', 'vouchers.name')
         ->take(5)
         ->get();
+        $metrics['redeemed'] = DB::table('redeems')
+        ->join('vouchers', 'vouchers.id', '=', 'redeems.voucher_id')
+        ->select('voucher_id', 'vouchers.name', \DB::raw("COUNT('voucher_id') AS redeem_count"))
+        ->orderBy('redeem_count', 'desc')
+        ->groupBy('voucher_id', 'vouchers.name')
+        ->take(5)
+        ->get();
         $metrics['countVouchersUsers'] = DB::table('vouchers')->count();
         $metrics['countTotalUsers'] = $userCount = DB::table('users')->count();
         $metrics['countUsersToday'] = DB::table('users')->where('created_at', '>=', Carbon::today())->count();

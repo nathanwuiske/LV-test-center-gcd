@@ -45,7 +45,7 @@ class HomeController extends Controller
             }
         }
     }
-
+    if($user){
     foreach($popular as $voucher){
       $favourite = $user->getfavourites()->where([
         ['user_id', '=', Auth::user()->id],
@@ -56,7 +56,8 @@ class HomeController extends Controller
           $voucher->isFavourited = true;
         } 
     }
-
+  
+  
     foreach($latest as $voucher){
       $favourite = $user->getfavourites()->where([
         ['user_id', '=', Auth::user()->id],
@@ -67,6 +68,7 @@ class HomeController extends Controller
           $voucher->isFavourited = true;
         } 
     }
+  }
       return view('home')->with('vouchers', $vouchers)->with('categories', $categories)
       ->with('popular', $popular)->with('latest', $latest)->with('businesses', $businesses);
     }

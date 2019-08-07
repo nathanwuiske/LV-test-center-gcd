@@ -2666,6 +2666,32 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -73228,6 +73254,36 @@ var render = function() {
         _vm._v(" "),
         _c("div", { staticClass: "card-footer" })
       ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "col-md-12" }, [
+      _c("div", { staticClass: "card" }, [
+        _vm._m(6),
+        _vm._v(" "),
+        _c("div", { staticClass: "card-body table-responsive p-0" }, [
+          _c("table", { staticClass: "table table-hover" }, [
+            _c(
+              "tbody",
+              [
+                _vm._m(7),
+                _vm._v(" "),
+                _vm._l(_vm.metric_data.redeemed, function(voucher) {
+                  return _c("tr", { key: voucher.id }, [
+                    _c("td", [_vm._v(_vm._s(voucher.voucher_id))]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(voucher.name))]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(voucher.redeem_count))])
+                  ])
+                })
+              ],
+              2
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "card-footer" })
+      ])
     ])
   ])
 }
@@ -73270,7 +73326,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "card-header" }, [
       _c("h3", { staticClass: "card-title" }, [
-        _vm._v("Top favourited vouchers")
+        _vm._v("Top 5 Favourited Vouchers")
       ])
     ])
   },
@@ -73284,6 +73340,28 @@ var staticRenderFns = [
       _c("th", [_vm._v("Voucher Name")]),
       _vm._v(" "),
       _c("th", [_vm._v("Favourite Count")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card-header" }, [
+      _c("h3", { staticClass: "card-title" }, [
+        _vm._v("Top 5 Redeemed Vouchers")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("tr", [
+      _c("th", [_vm._v("Voucher ID")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Voucher Name")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Redeem Count")])
     ])
   }
 ]
