@@ -11,6 +11,7 @@
       </div>
    </div>
    @if(!empty($deleted))
+  
    <div class="alert alert-success text-center" role="alert">
       <p>Voucher deleted </p>
    </div>

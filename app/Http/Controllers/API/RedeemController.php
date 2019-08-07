@@ -19,7 +19,10 @@ class RedeemController extends Controller
 
     public function store(Request $request)
     {
-        /*
+        $this->validate($request,[
+            'user_id' => 'required',
+            'voucher_id'  => 'required'
+        ]);
         $redeem = new Redeem;
         $redeem->voucher_id = $request['voucher_id'];
         $redeem->user_id = $request['user_id'];
@@ -28,23 +31,6 @@ class RedeemController extends Controller
         $dateAvailable = $redeem->created_at->addHours($redeem->voucher()->first()->timeout)->toDayDateTimeString(); //Get Date available for next redeem in readable format
         
         return response()->json(['dateRedeemed' => $dateRedeemed, 'dateAvailable' => $dateAvailable]);
-       */
-       $redeemedVouchers = array();
-       $user = User::latest()->first(); //$user = $request->user();
-        $vouchers = Voucher::latest()->get();
-        foreach($vouchers as $voucher){
-                $redemption = $user->redeems()->where([
-                ['created_at', '>=', Carbon::now()->subHours($voucher->timeout)],
-                ['voucher_id', '=', $voucher->id]
-                ])->first();
-                if ($redemption){
-                    //$voucher->isRedeemed = true;
-                    $voucher->redeemedAt = $redemption->created_at->toDayDateTimeString();
-                    $voucher->redeemAvailable = $redemption->created_at->addHours($voucher->timeout)->toDayDateTimeString();  
-                    array_push($redeemedVouchers, [$voucher->name, $voucher->redeemedAt, $voucher->redeemAvailable]);
-                }
-            
-        } 
         return response()->json(['Redeemed' => $redeemedVouchers]);
        
     }

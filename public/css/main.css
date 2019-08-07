@@ -384,6 +384,11 @@ textarea {
 /*	Basic Style 
 /* =================================== */
 
+/* Disbale text area resizing */
+textarea {
+  resize: none;
+}
+
 /* Fix sweet alert sizing */
 .swal2-popup {
   font-size: 1.6rem !important;

@@ -33,8 +33,10 @@ Route::get('findVoucher', 'API\VoucherController@search');
 
  // });
  
+ Route::post('redeem', 'API\RedeemController@store');
  
  Route::post('addfavourite', 'API\FavouriteController@store');
+ Route::delete('deletefavourite/{id}', 'API\FavouriteController@destroy');
 
 Route::group(['prefix' => 'auth'], function () {
     Route::post('login', 'Auth\AuthController@login')->name('login');

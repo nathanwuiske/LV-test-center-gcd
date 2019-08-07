@@ -48,6 +48,9 @@ class FavouriteController extends Controller
 
     public function destroy($id, Request $request)
     {
-        
+        $findFavourite = Userfavourite::where('user_id',$request['user_id'])
+        ->where('voucher_id',$request['voucher_id'])->first();
+        $fav = Userfavourite::findOrFail($findFavourite->id);
+        $fav->delete();
     }
 }

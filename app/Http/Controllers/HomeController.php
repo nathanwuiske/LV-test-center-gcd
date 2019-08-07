@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 use App\Voucher;
 use App\Category;
 use App\User;
@@ -25,13 +26,30 @@ class HomeController extends Controller
       $popular = Voucher::where('popular_flag', '1')->limit(20)->get();
       $latest = Voucher::latest()->limit(20)->get();
       $businesses = Business::latest()->limit(20)->get();
-      
+      if(\Auth::check()){
+        $user = \Auth::user();
+       }else{
+        $user = false;
+      }
+      foreach($vouchers as $voucher){
+        if($user){
+            $redemption = $user->redeems()->where([
+            ['created_at', '>=', Carbon::now()->subHours($voucher->timeout)],
+            ['voucher_id', '=', $voucher->id]
+            ])->first();
+            if ($redemption){
+                $voucher->isRedeemed = true;
+                $voucher->redeemedAt = $redemption->created_at->toDayDateTimeString();
+                $voucher->redeemAvailable = $redemption->created_at->addHours($voucher->timeout)->toDayDateTimeString();  
+            }
+        }
+    }
       return view('home')->with('vouchers', $vouchers)->with('categories', $categories)
       ->with('popular', $popular)->with('latest', $latest)->with('businesses', $businesses);
     }
     public function addfavourite(Request $request)
     {
-
+      
       if (!$user = Auth::user()){
         return view('auth.login');
       }

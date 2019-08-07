@@ -24,6 +24,14 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+<style>    
+@media (min-width: 950px) and (max-width: 1440px) {
+    .moveNav {
+    position: relative;
+    left:20%;
+    }
+}
+</style>
 </head>
 <body>
     <div id="app">
@@ -32,13 +40,14 @@
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <ul class="navbar-nav">
+                <ul class="navbar-nav moveNav">
                     <li class="nav-item">
-                      <a class="nav-link"data-widget="pushmenu" href="#"><i class="fas fa-arrows-alt-h"></i> Expand/Collapse Menu </a>
+                      <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-arrows-alt-h"></i> Expand/Collapse Menu </a>
                     </li>
                     <li class="nav-item">
                     <a href="{{route('home')}}" class="nav-link"><i class="fas fa-home"></i> Return to Home page </a>
                       </li>
+                  
                 </ul>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Right Side Of Navbar -->

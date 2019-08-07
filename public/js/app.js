@@ -3615,6 +3615,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -3630,6 +3639,7 @@ __webpack_require__.r(__webpack_exports__);
         website_link: '',
         category: '',
         popular_flag: '',
+        timeout: '',
         is_archive: ''
       })
     };
@@ -74820,7 +74830,7 @@ var render = function() {
               },
               [
                 _c("i", { staticClass: "fas fa-plus pr-1" }),
-                _vm._v("Add New Voucher\n               ")
+                _vm._v("Add New Voucher\n                  ")
               ]
             ),
             _vm._v(" "),
@@ -74908,6 +74918,8 @@ var render = function() {
                         _c("td", { staticClass: "truncateText" }, [
                           _c("span", [_vm._v(_vm._s(voucher.website_link))])
                         ]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(voucher.timeout))]),
                         _vm._v(" "),
                         _c("td", [_vm._v(_vm._s(voucher.popular_flag))]),
                         _vm._v(" "),
@@ -75264,6 +75276,54 @@ var render = function() {
                       "div",
                       { staticClass: "form-group" },
                       [
+                        _c("label", [_vm._v("Timeout")]),
+                        _c("span", { staticClass: "red" }, [_vm._v("*")]),
+                        _vm._v(" "),
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.voucherForm.timeout,
+                              expression: "voucherForm.timeout"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          class: {
+                            "is-invalid": _vm.voucherForm.errors.has("timeout")
+                          },
+                          attrs: {
+                            type: "text",
+                            name: "timeout",
+                            placeholder:
+                              "Enter voucher timeout in hours (Default is 15)"
+                          },
+                          domProps: { value: _vm.voucherForm.timeout },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.voucherForm,
+                                "timeout",
+                                $event.target.value
+                              )
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("has-error", {
+                          attrs: { form: _vm.voucherForm, field: "timeout" }
+                        })
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "form-group" },
+                      [
                         _c("label", [_vm._v("Expiry Date")]),
                         _c(
                           "span",
@@ -75577,13 +75637,15 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("th", [_vm._v("Website Link")]),
       _vm._v(" "),
+      _c("th", [_vm._v("Timeout (hrs)")]),
+      _vm._v(" "),
       _c("th", [_vm._v("Popular")]),
       _vm._v(" "),
       _c("th", [_vm._v("Tags")]),
       _vm._v(" "),
       _c("th", [_vm._v("Image")]),
       _vm._v(" "),
-      _c("th", [_vm._v("Category")]),
+      _c("th", [_vm._v("Categories")]),
       _vm._v(" "),
       _c("th", { staticClass: "text-center", staticStyle: { width: "10%" } }, [
         _vm._v("Modify")
@@ -75603,7 +75665,7 @@ var staticRenderFns = [
         },
         [
           _c("i", { staticClass: "fas fa-exclamation-triangle red" }),
-          _vm._v(" Warning\n               ")
+          _vm._v(" Warning\n                  ")
         ]
       )
     ])

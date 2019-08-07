@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" class="no-js">
    <head>
-	  <title>Gold Coast Discounts</title>
+     <title>Gold Coast Discounts</title>
+      <!-- CSRF Token -->
+      <meta name="csrf-token" content="{{ csrf_token() }}">
       <meta charset="utf-8">
       <meta name="description" content="Providing free vouchers to the Gold Coast community">
       <meta name="viewport" content="width=device-width, initial-scale=1">

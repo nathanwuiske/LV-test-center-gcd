@@ -26,10 +26,11 @@
                            <th>Description</th>
                            <th>Expiry Date</th>
                            <th>Website Link</th>
+						   <th>Timeout (hrs)</th>
                            <th>Popular</th>
                            <th>Tags</th>
                            <th>Image</th>
-                           <th>Category</th>
+                           <th>Categories</th>
                            <th class="text-center" style="width: 10%">Modify</th>
                         </tr>
                         <!-- Display vouchers from database using the voucher object created -->
@@ -41,6 +42,7 @@
                            </td>
                            <td>{{voucher.expiry_date | formatDate}}</td>
                            <td class="truncateText"><span>{{voucher.website_link}}</span></td>
+						   <td>{{voucher.timeout}}</td>
                            <td>{{voucher.popular_flag}}</td>
                            <!-- Display tags -->
                            <td v-if="voucher.gettags.length == 0">-</td>
@@ -104,6 +106,13 @@
                         <input v-model="voucherForm.website_link" type="text" name="website_link" placeholder="Enter a link to the voucher's website (OPTIONAL)"
                            class="form-control" :class="{ 'is-invalid': voucherForm.errors.has('website_link') }">
                         <has-error :form="voucherForm" field="website_link"></has-error>
+                     </div>
+					 <!-- Timeout form input -->
+                     <div class="form-group">
+                        <label>Timeout</label><span class="red">&#42;</span>
+                        <input v-model="voucherForm.timeout" type="text" name="timeout" placeholder="Enter voucher timeout in hours (Default is 15)"
+                           class="form-control" :class="{ 'is-invalid': voucherForm.errors.has('timeout') }">
+                        <has-error :form="voucherForm" field="timeout"></has-error>
                      </div>
                      <!-- Expiry Date form input  -->
                      <div class="form-group">
@@ -192,6 +201,7 @@
 					website_link: '',
 					category: '',
 					popular_flag: '',
+					timeout: '',
 					is_archive: ''
 				})
 			}

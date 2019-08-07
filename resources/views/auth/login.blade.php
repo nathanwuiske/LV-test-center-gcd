@@ -15,8 +15,8 @@
             <input id="email" type="email" placeholder="Enter your email" class="{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required autofocus>     
             <label>Password  </label>
             <input id="password" type="password" placeholder="Enter your account password" class="{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
-            <label class="" for="remember">Remember Me</label>
-            <input class="" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+            <label for="remember">Remember Me</label>
+            <input type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
             @if ($errors->has('password'))
             <span class="invalid-feedback" role="alert">
             <strong>{{ $errors->first('password') }}</strong>
