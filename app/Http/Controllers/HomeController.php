@@ -28,7 +28,7 @@ class HomeController extends Controller
       $businesses = Business::latest()->limit(20)->get();
       if(\Auth::check()){
         $user = \Auth::user();
-       }else{
+       } else {
         $user = false;
       }
       foreach($vouchers as $voucher){
@@ -37,6 +37,7 @@ class HomeController extends Controller
             ['created_at', '>=', Carbon::now()->subHours($voucher->timeout)],
             ['voucher_id', '=', $voucher->id]
             ])->first();
+
             if ($redemption){
                 $voucher->isRedeemed = true;
                 $voucher->redeemedAt = $redemption->created_at->toDayDateTimeString();
@@ -44,12 +45,35 @@ class HomeController extends Controller
             }
         }
     }
+
+    foreach($popular as $voucher){
+      $favourite = $user->getfavourites()->where([
+        ['user_id', '=', Auth::user()->id],
+        ['voucher_id', '=', $voucher->id]
+        ])->first();
+
+        if ($favourite){
+          $voucher->isFavourited = true;
+        } 
+    }
+
+    foreach($latest as $voucher){
+      $favourite = $user->getfavourites()->where([
+        ['user_id', '=', Auth::user()->id],
+        ['voucher_id', '=', $voucher->id]
+        ])->first();
+
+        if ($favourite){
+          $voucher->isFavourited = true;
+        } 
+    }
       return view('home')->with('vouchers', $vouchers)->with('categories', $categories)
       ->with('popular', $popular)->with('latest', $latest)->with('businesses', $businesses);
     }
+
     public function addfavourite(Request $request)
     {
-      
+
       if (!$user = Auth::user()){
         return view('auth.login');
       }

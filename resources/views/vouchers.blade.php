@@ -98,7 +98,7 @@
                      </button>
                  </div>
                  <div class="modal-body" style="background-color: #F2F2F2"> 
-                     <img id="modal_image_{{$voucher->id}}" src="{{url('imgs/vouchers/' . $voucher->image)}}" class="img-fluid img-center testa" alt='{{$voucher->name}}'>
+                     <img id="modal_image_{{$voucher->id}}" src="{{url('imgs/vouchers/' . $voucher->image)}}" class="img-fluid img-center modal-image" alt='{{$voucher->name}}'>
                      <p style="word-wrap: break-word;">
                          <br><strong class="header-modal">About Deal</strong>
                          <br>{{$voucher->description}}</p>
