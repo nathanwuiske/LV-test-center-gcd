@@ -28,6 +28,7 @@ Route::get('metrics', 'MetricsController@metrics');
 
 
 Route::get('findVoucher', 'API\VoucherController@search');
+Route::get('findUser', 'API\UserController@search');
 
 //Route::group(['middleware' => 'auth:api'], function() {
 

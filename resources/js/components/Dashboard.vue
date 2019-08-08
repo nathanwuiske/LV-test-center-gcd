@@ -9,7 +9,7 @@
                      <span class="info-box-icon bg-success elevation-1"><i class="fas fa-columns"></i></span>
                      <div class="info-box-content">
                         <span class="info-box-text">Total Vouchers</span>
-                        <h3>{{metric_data['countVouchersUsers']}}</h3>
+                        <h3>{{metric_data['countTotalVouchers']}}</h3>
                      </div>
                   </div>
                </div>
@@ -105,6 +105,7 @@
         data(){
             return {
                 metric_data: ''
+                
             }
         },
         methods: {

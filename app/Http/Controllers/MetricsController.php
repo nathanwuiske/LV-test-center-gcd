@@ -24,10 +24,11 @@ class MetricsController extends Controller
         ->groupBy('voucher_id', 'vouchers.name')
         ->take(5)
         ->get();
-        $metrics['countVouchersUsers'] = DB::table('vouchers')->count();
+        $metrics['countTotalVouchers'] = DB::table('vouchers')->count();
         $metrics['countTotalUsers'] = $userCount = DB::table('users')->count();
         $metrics['countUsersToday'] = DB::table('users')->where('created_at', '>=', Carbon::today())->count();
         $metrics['countVouchersToday'] = DB::table('vouchers')->where('created_at', '>=', Carbon::today())->count();
         return $metrics;
     }
+    
 }
