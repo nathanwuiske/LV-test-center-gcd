@@ -69,8 +69,8 @@ class HomeController extends Controller
         } 
     }
   }
-      return view('home')->with('vouchers', $vouchers)->with('categories', $categories)
-      ->with('popular', $popular)->with('latest', $latest)->with('businesses', $businesses);
+      return view('home', compact('vouchers', 'popular', 'categories', 'latest','businesses'));
+      
     }
 
     public function addfavourite(Request $request)

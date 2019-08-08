@@ -27,12 +27,9 @@ class RedeemController extends Controller
         $redeem->voucher_id = $request['voucher_id'];
         $redeem->user_id = $request['user_id'];
         $redeem->save();        
-        $dateRedeemed = $redeem->created_at->toDayDateTimeString(); //Get Date Redeemed in readable format
-        $dateAvailable = $redeem->created_at->addHours($redeem->voucher()->first()->timeout)->toDayDateTimeString(); //Get Date available for next redeem in readable format
-        
+        $dateRedeemed = $redeem->created_at->toDayDateTimeString(); 
+        $dateAvailable = $redeem->created_at->addHours($redeem->voucher()->first()->timeout)->toDayDateTimeString(); 
         return response()->json(['dateRedeemed' => $dateRedeemed, 'dateAvailable' => $dateAvailable]);
-        return response()->json(['Redeemed' => $redeemedVouchers]);
-       
     }
 
     public function show($id)

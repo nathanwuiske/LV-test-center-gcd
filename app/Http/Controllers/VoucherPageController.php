@@ -13,7 +13,7 @@ class VoucherPageController extends Controller
         $vouchersPerPage = 8;
         $vouchers = Voucher::latest()->paginate($vouchersPerPage);
         $categories = Category::orderBy('id')->get();
-        return view('vouchers')->with('vouchers', $vouchers)->with('categories', $categories); 
+        return view('vouchers', compact('vouchers','categories')); 
     }
     public function newest_all()
     {
@@ -21,7 +21,7 @@ class VoucherPageController extends Controller
         $vouchers = Voucher::latest()->paginate($vouchersPerPage);
         $categories = Category::orderBy('id')->get();
         $newestall = 1;
-        return view('vouchers')->with('vouchers', $vouchers)->with('categories', $categories)->with('newestall', $newestall); 
+        return view('vouchers', compact('vouchers', 'categories' ,'newestall')); 
     }
 
     public function popular_all()
@@ -30,6 +30,6 @@ class VoucherPageController extends Controller
         $vouchers = Voucher::latest()->where('popular_flag', '=', '1')->paginate($vouchersPerPage);
         $categories = Category::orderBy('id')->get();
         $popularall = 1;
-        return view('vouchers')->with('vouchers', $vouchers)->with('categories', $categories)->with('popularall', $popularall); 
+        return view('vouchers', compact('vouchers', 'categories', 'popularall')); 
     }
 }
