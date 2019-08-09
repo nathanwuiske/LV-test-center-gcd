@@ -41,7 +41,7 @@
                               <span>{{voucher.description}}</span><!--<a href="#">view more</a>-->
                            </td>
                            <td>{{voucher.expiry_date | formatDate}}</td>
-                           <td class="truncateText"><span>{{voucher.website_link}}</span></td>
+                           <td class="truncateText"><span>{{voucher.website_link | cleanURL}}</span></td>
 						   <td>{{voucher.timeout}}</td>
                            <td>{{voucher.popular_flag}}</td>
                            <!-- Display tags -->
@@ -110,7 +110,7 @@
 					 <!-- Timeout form input -->
                      <div class="form-group">
                         <label>Timeout</label><span class="red">&#42;</span>
-                        <input v-model="voucherForm.timeout" type="text" name="timeout" placeholder="Enter voucher timeout in hours (Default is 15)"
+                        <input v-model="voucherForm.timeout" type="text" name="timeout" placeholder="Enter voucher timeout in hours (Default is 24 hours)"
                            class="form-control" :class="{ 'is-invalid': voucherForm.errors.has('timeout') }">
                         <has-error :form="voucherForm" field="timeout"></has-error>
                      </div>

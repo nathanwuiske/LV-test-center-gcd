@@ -21,7 +21,7 @@ class HomeController extends Controller
 
     public function index()
     {
-      $vouchers = Voucher::latest()->paginate(5);
+      $vouchers = Voucher::latest()->paginate(20);
       $categories = Category::orderBy('id')->get();
       $popular = Voucher::where('popular_flag', '1')->limit(20)->get();
       $latest = Voucher::latest()->limit(20)->get();
@@ -38,6 +38,7 @@ class HomeController extends Controller
             ['voucher_id', '=', $voucher->id]
             ])->first();
 
+
             if ($redemption){
                 $voucher->isRedeemed = true;
                 $voucher->redeemedAt = $redemption->created_at->toDayDateTimeString();
@@ -46,46 +47,30 @@ class HomeController extends Controller
         }
     }
     if($user){
-    foreach($popular as $voucher){
-      $favourite = $user->getfavourites()->where([
-        ['user_id', '=', Auth::user()->id],
-        ['voucher_id', '=', $voucher->id]
-        ])->first();
+      foreach($popular as $voucher){
+        $favourite = $user->getfavourites()->where([
+          ['user_id', '=', Auth::user()->id],
+          ['voucher_id', '=', $voucher->id]
+          ])->first();
 
-        if ($favourite){
-          $voucher->isFavourited = true;
-        } 
-    }
-  
-  
-    foreach($latest as $voucher){
-      $favourite = $user->getfavourites()->where([
-        ['user_id', '=', Auth::user()->id],
-        ['voucher_id', '=', $voucher->id]
-        ])->first();
+          if ($favourite){
+            $voucher->isFavourited = true;
+          } 
+      }
+    
+    
+      foreach($latest as $voucher){
+        $favourite = $user->getfavourites()->where([
+          ['user_id', '=', Auth::user()->id],
+          ['voucher_id', '=', $voucher->id]
+          ])->first();
 
-        if ($favourite){
-          $voucher->isFavourited = true;
-        } 
+          if ($favourite){
+            $voucher->isFavourited = true;
+          } 
+      }
     }
-  }
       return view('home', compact('vouchers', 'popular', 'categories', 'latest','businesses'));
-      
-    }
-
-    public function addfavourite(Request $request)
-    {
-
-      if (!$user = Auth::user()){
-        return view('auth.login');
-      }
-      if (DB::table('user_favourites')->where('user_id', $user->id)->where('voucher_id', $request->get('addfavourite'))->first()){
-        $existing = 1;
-        return view('favourites')->with('existing', $existing);
-      }
-      DB::table('user_favourites')->insert(array ('user_id' => $user->id,'voucher_id' => $request->get('addfavourite')));
-      $added = 1;
-      return view('favourites')->with('added', $added);
     }
 
     public function removefavourite(Request $request)

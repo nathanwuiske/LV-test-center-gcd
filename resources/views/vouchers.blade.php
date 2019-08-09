@@ -76,10 +76,18 @@
                         <h2 style="color:#07AD4D; font-size: 20px; margin-bottom: 10px;margin-top: 10px;">{{ str_limit($voucher->name, $limit = 22, $end='...') }}</h2>
                         <button class="btn btn-lg" style="background-color:#07AD4D;  width: 50%; height: 100%; margin-right: 10px;"><i class="fa fa-close"></i>View</button>
                      </a>
-                     <form action="/addfavourite" method="get" class="fav-hover" style="float:right; ">
-                       
-                        <button id="addfavourite" value="{{$voucher->id}}" name="addfavourite"  class="btn btn-lg" style="background-color:#07AD4D; color:white; position: relative; right: 65%;"><i class="fas fa-heart "></i></button>
-                        </form>
+                     <div style="float:right;">
+                        @auth
+                        @if($voucher->isFavourited)
+                        <button id="deletefavourite{{$voucher->id}}" onClick="deleteFromFavourites({{$voucher->id}}, {{ Auth::user()->id }})" name="addfavourite" class="btn btn-lg" style="background-color:#07AD4D; color:#ad1707; position: relative; right: 65%;"><i class="fas fa-heart"></i></button>
+                        @else
+                        <button id="addfavourites{{$voucher->id}}" onClick="addToFavourites({{$voucher->id}}, {{ Auth::user()->id }})" name="addfavourite" class="btn btn-lg" style="background-color:#07AD4D; color:white; position: relative; right: 65%;"><i class="fas fa-heart" ></i></button>
+                        @endif
+                        @endauth
+                        @guest
+                        <a href="{{ route('login') }}"> <button class="btn btn-lg" style="background-color:#07AD4D; color:white; position: relative; right: 65%;"><i class="fas fa-heart "></i></button> </a> 
+                        @endguest
+                        </div>
                         <div style="margin-bottom: 20px;"></div>
                         
                      </div>
@@ -89,45 +97,67 @@
                </div>
        </div>
        <div class="modal fade" id="voucher{{$voucher->id}}" tabindex="-1" role="dialog" aria-hidden="true">
-         <div class="modal-dialog" role="document">
-             <div class="modal-content">
-                 <div class="modal-header" style="background-color:#07AD4D;">
-                     <h5 class="modal-title" style="color: white; font-size: 15px;">VOUCHER DETAILS</h5>
-                     <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="opacity: 0.9; color: white; position:absolute;right: 2%;top: 2%;">
-                         <span aria-hidden="true"><i class="fas fa-times"></i></span>
-                     </button>
+        <div class="modal-dialog" role="document">
+           <div class="modal-content">
+              <div class="modal-header" style="background-color:#07AD4D;">
+                 <h5 class="modal-title" style="color: white; font-size: 15px;">VOUCHER DETAILS</h5>
+                 <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="opacity: 0.9; color: white; position:absolute;right: 2%;top: 2%;">
+                 <span aria-hidden="true"><i class="fas fa-times"></i></span>
+                 </button>
+              </div>
+              <div class="modal-body" style="background-color: #F2F2F2">
+                 <img id="modal_image_{{$voucher->id}}" src="{{url('imgs/vouchers/' . $voucher->image)}}" class="img-fluid img-center modal-image" alt='{{$voucher->name}}'>
+                 <p style="word-wrap: break-word;">
+                    <br><strong class="header-modal">About Deal</strong>
+                    <br>  {!! nl2br(e($voucher->description)) !!}
+                 </p>
+                 @if (!empty($voucher->website_link))
+                 <a href="{{$voucher->website_link}}" target="_blank">
+                 <i class="fas fa-globe-americas"></i><strong> Visit Website</strong></a>
+                 @endif
+                 @if (empty($voucher->expiry_date))
+                 <p>
+                    <br><strong class="header-modal">Expiry Date</strong>
+                    <br><i>Expiry date not available</i>
+                 </p>
+                 @else
+                 <p>
+                    <br><strong class="header-modal">Expiry Date</strong>
+                    <br>{{\Carbon\Carbon::parse($voucher->expiry_date)->format('d/m/Y')}}
+                 </p>
+                 @endif 
+                 @if(!empty($voucher->latitude) && !empty($voucher->longitude))
+                 <strong class="header-modal">Location</strong><br><br>
+                 <iframe src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCC6emn13XOdxMhZAsbaGIgt2HcK3iKAoc&q={{$voucher->latitude}},{{$voucher->longitude}}" width="100%" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+                 @endif
+                 @if ($voucher->isRedeemed)
+                 <div class="redeem-overlay redeem-overlay-previous">
+                    <p style="text-align:center;color:#A61106;">Voucher Already Redeemed</p>
+                    <p class="text-center">Voucher available again after <strong><span>{{$voucher->redeemAvailable}}</span></strong></p>
                  </div>
-                 <div class="modal-body" style="background-color: #F2F2F2"> 
-                     <img id="modal_image_{{$voucher->id}}" src="{{url('imgs/vouchers/' . $voucher->image)}}" class="img-fluid img-center modal-image" alt='{{$voucher->name}}'>
-                     <p style="word-wrap: break-word;">
-                         <br><strong class="header-modal">About Deal</strong>
-                         <br>{{$voucher->description}}</p>
-                     @if (!empty($voucher->website_link))
-                     <a href="{{$voucher->website_link}}" target="_blank">
-                         <i class="fas fa-globe-americas"></i><strong> Visit Website</strong></a>
-                     @endif
-                     @if (empty($voucher->expiry_date))
-                     <p>
-                         <br><strong class="header-modal">Expiry Date</strong>
-                         <br><i>Expiry date not available</i>
-                     </p>
-                     @else
-                     <p>
-                         <br><strong class="header-modal">Expiry Date</strong>
-                         <br>{{\Carbon\Carbon::parse($voucher->expiry_date)->format('d/m/Y')}}
-                     </p>
-                     @endif 
-                     @if(!empty($voucher->latitude) && !empty($voucher->longitude))
-                     <strong class="header-modal">Location</strong><br><br>
-                     <iframe src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCC6emn13XOdxMhZAsbaGIgt2HcK3iKAoc&q={{$voucher->latitude}},{{$voucher->longitude}}" width="100%" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
-                     @endif
-                     <button class="btn btn-lg" style="width: 100%; height: 100%; background-color: #07AD4D; color:white;"><i class="fa fa-close"></i>Redeem Voucher on App</button>
+                 @else
+                 <div id="redeem-current-{{$voucher->id}}" class="redeem-overlay redeem-overlay-current" style="display:none">
+                    <p class="header-modal text-center"><span style="color:#07AD4D;"class="fas fa-check-circle check-circle"></span> Voucher Redeemed!</p>
+                    <p class="text-center">Voucher redeemed at <strong><span id="redeem-current-time-{{$voucher->id}}"></span></strong></p>
+                    <p class="text-center" style="margin-bottom:0px;">Voucher next available at <strong><span id="redeem-next-time-{{$voucher->id}}"></span></strong></p>
                  </div>
-                 <div class="modal-footer" style="background-color: #F2F2F2">
-                     <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                 </div>
-             </div>
-         </div>
+                 @endif
+                 @auth
+                 <button class="btn btn-lg" id="redeem_btn_{{$voucher->id}}" onclick="ajaxRedeem({{$voucher->id}}, {{ Auth::user()->id }})" style="width: 100%; height: 100%; background-color: #07AD4D; color:white;"
+                 @if ($voucher->isRedeemed)
+                 disabled
+                 @endif>Redeem</button>
+                 @endauth
+                 @guest
+                 <p class="text-center"style="color:#A61106;">Must be logged in to redeem vouchers</p>
+                 <button class="btn btn-lg" style="width: 100%; height: 100%; background-color: #07AD4D; color:white;" disabled>Redeem</button>
+                 @endguest
+              </div>
+              <div class="modal-footer" style="background-color: #F2F2F2">
+                 <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+              </div>
+           </div>
+        </div>
      </div>
        @endforeach
        @endif 
@@ -137,4 +167,122 @@
 <div class="text-center" style="">
    {{ $vouchers->links() }}
 </div>
+
+<script type="text/javascript">
+
+    function currentRedeem(voucher_id, user_id, times) {
+        $("#redeem-current-" + voucher_id).css("display", "inline");
+        $("#redeem_btn_" + voucher_id).attr("disabled", "disabled");
+        $("#redeem-current-time-" + voucher_id).html(times['dateRedeemed']);
+        $("#redeem-next-time-" + voucher_id).html(times['dateAvailable']);
+    }
+    
+    function ajaxRedeem(voucher_id, user_id) {
+        $.ajax({
+            method: 'POST',
+            url: 'api/redeem',
+            data: {
+                'voucher_id': voucher_id,
+                'user_id': user_id
+            },
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function (response) {
+                currentRedeem(voucher_id, user_id, response);
+            },
+            error: function () {
+                Swal.fire({
+                    toast: true,
+                    position: 'top',
+                    showConfirmButton: false,
+                    timer: 3500,
+                    type: 'error',
+                    title: 'Failed to redeem voucher.'
+                })
+            }
+        });
+    }
+    
+    
+    function addToFavourites(voucherid, userid) {
+        var user_id = userid;
+        var voucher_id = voucherid;
+    
+        $.ajax({
+            type: 'post',
+            url: 'api/addfavourite',
+            data: {
+                'user_id': user_id,
+                'voucher_id': voucher_id,
+            },
+            success: function () {
+                Swal.fire({
+                    toast: true,
+                    position: 'top',
+                    showConfirmButton: false,
+                    timer: 3500,
+                    type: 'success',
+                    title: 'Voucher added to favourites'
+                })
+                $('#addfavourites' + voucherid).css({
+                    'color': '#ad1707'
+                });
+            },
+            error: function (XMLHttpRequest) {
+                Swal.fire({
+                    toast: true,
+                    position: 'top',
+                    showConfirmButton: false,
+                    timer: 3500,
+                    type: 'error',
+                    title: 'Failed to add voucher to favourites'
+                })
+            }
+        });
+    
+    }
+    
+    function deleteFromFavourites(voucherid, userid) {
+        var user_id = userid;
+        var voucher_id = voucherid;
+    
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            type: 'post',
+            url: 'api/deletefavourite/' + user_id,
+            data: {
+                'user_id': user_id,
+                'voucher_id': voucher_id,
+            },
+            success: function () {
+                Swal.fire({
+                    toast: true,
+                    position: 'top',
+                    showConfirmButton: false,
+                    timer: 3500,
+                    type: 'success',
+                    title: 'Voucher removed from favourites'
+                })
+                $('#deletefavourite' + voucherid).css({
+                    'color': '#fff'
+                });
+            },
+            error: function (xhr) {
+                Swal.fire({
+                    toast: true,
+                    position: 'top',
+                    showConfirmButton: false,
+                    timer: 3500,
+                    type: 'error',
+                    title: 'Failed to remove voucher from favourites'
+                })
+            }
+        });
+    }
+    </script>
 @stop

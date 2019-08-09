@@ -47,6 +47,13 @@ Vue.filter('capitalize', function (text) {
     return text.charAt(0).toUpperCase() + text.slice(1)
 });
 
+/* Remove https://, http:// and www. from the start of URLs */
+Vue.filter('cleanURL', function (url) {
+    if (!url) return ''
+    url = url.replace(/^(?:https?:\/\/)?(?:www\.)?/i, "");
+    return url
+});
+
 /* Create a fresh Vue application instance and attach it to the page. */
 const app = new Vue({
     el: '#app',

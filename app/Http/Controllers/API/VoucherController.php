@@ -27,10 +27,10 @@ class VoucherController extends Controller
             //maybe have a unique:name for name to prevent duplicate vouchers? 
             'name' => 'required|string|max:150', /* max 150 characters*/
             'description' => 'required|string|max:500',
-            'timeout' => 'required|numeric',
-            'website_link' => 'nullable|url',
+           // 'timeout' => 'required|numeric',
+            'website_link' => 'nullable|url'
             //'expiry_date' => 'required|after:yesterday|before:2030-01-01', //can only set expiry date AFTER the date of voucher creation
-            'popular_flag' => 'required'
+           // 'popular_flag' => 'required'
             //'image' => 'required' //must be an image (jpg, png, bmp or gif)
         ]);
 
@@ -48,6 +48,7 @@ class VoucherController extends Controller
             'popular_flag' => $request['popular_flag'],
             'expiry_date' => $request['expiry_date'],
             'category' => $request['category'],
+            'timeout' => $request['timeout'],
             'image' => $request['image'],
         ]);
     }

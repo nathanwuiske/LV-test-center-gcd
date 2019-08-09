@@ -10,7 +10,6 @@ Route::get('/popular_all', 'VoucherPageController@popular_all');
 Route::get('/newest_all', 'VoucherPageController@newest_all');
 
 /* Home controller functions */
-Route::get('/addfavourite', 'HomeController@addfavourite');
 Route::get('/removefavourite', 'HomeController@removefavourite');
 Route::get('/search', 'HomeController@search');
 Route::get('/filter', 'HomeController@filter');

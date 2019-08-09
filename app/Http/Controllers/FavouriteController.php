@@ -8,9 +8,13 @@ use Illuminate\Support\Facades\Auth;
 
 class FavouriteController extends Controller
 {
-    public function index()
-    {
+  public function __construct()
+  {
+    $this->middleware('auth'); 
+  }
 
-      return view('favourites');
-    }
+  public function index()
+  {
+    return view('favourites');
+  }
 }

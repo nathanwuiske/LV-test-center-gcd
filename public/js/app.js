@@ -2914,7 +2914,7 @@ __webpack_require__.r(__webpack_exports__);
     getAllVouchers: function getAllVouchers() {
       var _this4 = this;
 
-      axios.get('api/voucherall').then(function (_ref2) {
+      axios.get('api/voucherall/' + 0).then(function (_ref2) {
         var data = _ref2.data;
         return _this4.allVouchers = data;
       });
@@ -73715,7 +73715,13 @@ var render = function() {
                               key: voucher.id,
                               domProps: { value: voucher.id }
                             },
-                            [_vm._v(_vm._s(voucher.name))]
+                            [
+                              _vm._v(
+                                _vm._s(voucher.id) +
+                                  " - " +
+                                  _vm._s(voucher.name)
+                              )
+                            ]
                           )
                         })
                       ],
@@ -75592,7 +75598,11 @@ var render = function() {
                         ]),
                         _vm._v(" "),
                         _c("td", { staticClass: "truncateText" }, [
-                          _c("span", [_vm._v(_vm._s(voucher.website_link))])
+                          _c("span", [
+                            _vm._v(
+                              _vm._s(_vm._f("cleanURL")(voucher.website_link))
+                            )
+                          ])
                         ]),
                         _vm._v(" "),
                         _c("td", [_vm._v(_vm._s(voucher.timeout))]),
@@ -75972,7 +75982,7 @@ var render = function() {
                             type: "text",
                             name: "timeout",
                             placeholder:
-                              "Enter voucher timeout in hours (Default is 15)"
+                              "Enter voucher timeout in hours (Default is 24 hours)"
                           },
                           domProps: { value: _vm.voucherForm.timeout },
                           on: {
@@ -91726,6 +91736,13 @@ Vue.filter('capitalize', function (text) {
   if (!text) return '';
   text = text.toString();
   return text.charAt(0).toUpperCase() + text.slice(1);
+});
+/* Remove https://, http:// and www. from the start of URLs */
+
+Vue.filter('cleanURL', function (url) {
+  if (!url) return '';
+  url = url.replace(/^(?:https?:\/\/)?(?:www\.)?/i, "");
+  return url;
 });
 /* Create a fresh Vue application instance and attach it to the page. */
 

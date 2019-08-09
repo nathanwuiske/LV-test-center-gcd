@@ -18,6 +18,11 @@ class UserController extends Controller
         return User::with('getfavourites')->latest()->paginate(10);
     }
 
+    public function returnall()
+    {
+        return User::with('getfavourites')->latest()->get();
+    }
+
     public function store(Request $request)
     {
        

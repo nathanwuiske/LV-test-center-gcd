@@ -277,7 +277,8 @@
              <img id="modal_image_{{$voucher->id}}" src="{{url('imgs/vouchers/' . $voucher->image)}}" class="img-fluid img-center modal-image" alt='{{$voucher->name}}'>
              <p style="word-wrap: break-word;">
                 <br><strong class="header-modal">About Deal</strong>
-                <br>{{$voucher->description}}
+                <br>
+                {!! nl2br(e($voucher->description)) !!}
              </p>
              @if (!empty($voucher->website_link))
              <a href="{{$voucher->website_link}}" target="_blank">
@@ -397,8 +398,8 @@ function addToFavourites(voucherid, userid) {
 			Swal.fire({
 				toast: true,
 				position: 'top',
-				showConfirmButton: false,
-				timer: 3500,
+            showConfirmButton: false,
+				timer: 2000,
 				type: 'success',
 				title: 'Voucher added to favourites'
             })
@@ -430,8 +431,8 @@ function deleteFromFavourites(voucherid, userid) {
 		}
 	});
 	$.ajax({
-		type: 'delete',
-		url: 'api/deletefavourite/' + user_id,
+		type: 'post',
+		url: 'api/deletefavourite/' + voucher_id,
 		data: {
 			'user_id': user_id,
 			'voucher_id': voucher_id,

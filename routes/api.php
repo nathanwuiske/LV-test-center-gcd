@@ -22,22 +22,21 @@ Route::get('categoryall', 'API\CategoryController@categoryall');
 Route::get('tagall', 'API\TagController@tagall');
 Route::get('voucherall', 'API\VoucherController@voucherall');
 
-Route::apiResource('redeem', 'API\RedeemController');
+Route::get('usersall', 'API\UserController@returnall');
 
-Route::get('metrics', 'MetricsController@metrics');
-
+Route::post('redeem', 'API\RedeemController@store');
 
 Route::get('findVoucher', 'API\VoucherController@search');
 Route::get('findUser', 'API\UserController@search');
 
-//Route::group(['middleware' => 'auth:api'], function() {
-
- // });
+Route::group(['middleware' => 'auth:api'], function() {
+    Route::get('metrics', 'MetricsController@metrics');
+});
  
  Route::post('redeem', 'API\RedeemController@store');
  
  Route::post('addfavourite', 'API\FavouriteController@store');
- Route::delete('deletefavourite/{id}', 'API\FavouriteController@destroy');
+ Route::post('deletefavourite/{id}', 'API\FavouriteController@destroy');
 
 Route::group(['prefix' => 'auth'], function () {
     Route::post('login', 'Auth\AuthController@login')->name('login');

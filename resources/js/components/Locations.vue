@@ -45,7 +45,7 @@
                         <select name="name" v-model="locationForm.id" id="name" class="form-control" 
                            :class="{ 'is-invalid': locationForm.errors.has('name') }">
                            <option value="" disabled selected>Select Voucher</option>
-                           <option v-for="voucher in sortedVouchers" :key="voucher.id" v-bind:value="voucher.id">{{voucher.name}}</option>
+                           <option v-for="voucher in sortedVouchers" :key="voucher.id" v-bind:value="voucher.id">{{voucher.id}} - {{voucher.name}}</option>
                         </select>
                         <has-error :form="locationForm" field="name"></has-error>
                      </div>
@@ -189,7 +189,7 @@
                 }) => (this.vouchers = data));
             },
              getAllVouchers() {
-                axios.get('api/voucherall').then(({
+                axios.get('api/voucherall/' + 0).then(({
                     data
                 }) => (this.allVouchers = data));
             },

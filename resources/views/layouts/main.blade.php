@@ -50,6 +50,8 @@
                   <li><a href="{{route('advertise')}}">Advertise With Us</a></li>
                   <li><a href="{{route('contact')}}">Contact Us</a></li>
                   <li><a href="https://goldcoastdiscounts.com.au/LatestBrochure.pdf" target="_blank">Latest Brochure</a></li>
+                  <li><a href="http://gcbusinessnetwork.com.au/" target="_blank">Business Network</a></li>
+                  
                   @if (Route::has('login'))
                   @auth
 
