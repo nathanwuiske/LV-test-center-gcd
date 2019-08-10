@@ -1,5 +1,6 @@
 @extends('layouts.main')
 @section('content')
+<script src="js/main.js"></script>
 <div style="margin-bottom: 80px"></div>
 <h2 style="text-align:center;font-size: 25px;color:#07AD4D; font-weight: bold;">Browse Vouchers</h2>
 <!-- Content -->
@@ -77,12 +78,23 @@
                         <button class="btn btn-lg" style="background-color:#07AD4D;  width: 50%; height: 100%; margin-right: 10px;"><i class="fa fa-close"></i>View</button>
                      </a>
                      <div style="float:right;">
-                        @auth
-                        @if($voucher->isFavourited)
-                        <button id="deletefavourite{{$voucher->id}}" onClick="deleteFromFavourites({{$voucher->id}}, {{ Auth::user()->id }})" name="addfavourite" class="btn btn-lg" style="background-color:#07AD4D; color:#ad1707; position: relative; right: 65%;"><i class="fas fa-heart"></i></button>
-                        @else
-                        <button id="addfavourites{{$voucher->id}}" onClick="addToFavourites({{$voucher->id}}, {{ Auth::user()->id }})" name="addfavourite" class="btn btn-lg" style="background-color:#07AD4D; color:white; position: relative; right: 65%;"><i class="fas fa-heart" ></i></button>
-                        @endif
+                      @auth
+                       <!-- favourited -->
+                        <button id="deletefavourite{{$voucher->id}}" 
+                                onClick="deleteFromFavourites({{$voucher->id}}, {{ Auth::user()->id }})" 
+                                name="addfavourite" 
+                                class="btn btn-lg"
+                                style="background-color:#07AD4D; color:white; position: relative; right: 65%;color: #ad1707; {{ $voucher->isFavourited ? '' : 'display: none;' }}">
+                        <i class="fas fa-heart"></i>
+                    </button>
+                    <!-- not favourited -->
+                    <button id="addfavourites{{$voucher->id}}" 
+                                onClick="addToFavourites({{$voucher->id}}, {{ Auth::user()->id }})" 
+                                name="deletefavourite" 
+                                class="btn btn-lg"
+                                style="background-color:#07AD4D; color:white; position: relative; right: 65%;{{ $voucher->isFavourited ? 'display: none;' : '' }}">
+                        <i class="fas fa-heart" ></i>
+                    </button>
                         @endauth
                         @guest
                         <a href="{{ route('login') }}"> <button class="btn btn-lg" style="background-color:#07AD4D; color:white; position: relative; right: 65%;"><i class="fas fa-heart "></i></button> </a> 
@@ -167,122 +179,4 @@
 <div class="text-center" style="">
    {{ $vouchers->links() }}
 </div>
-
-<script type="text/javascript">
-
-    function currentRedeem(voucher_id, user_id, times) {
-        $("#redeem-current-" + voucher_id).css("display", "inline");
-        $("#redeem_btn_" + voucher_id).attr("disabled", "disabled");
-        $("#redeem-current-time-" + voucher_id).html(times['dateRedeemed']);
-        $("#redeem-next-time-" + voucher_id).html(times['dateAvailable']);
-    }
-    
-    function ajaxRedeem(voucher_id, user_id) {
-        $.ajax({
-            method: 'POST',
-            url: 'api/redeem',
-            data: {
-                'voucher_id': voucher_id,
-                'user_id': user_id
-            },
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-            success: function (response) {
-                currentRedeem(voucher_id, user_id, response);
-            },
-            error: function () {
-                Swal.fire({
-                    toast: true,
-                    position: 'top',
-                    showConfirmButton: false,
-                    timer: 3500,
-                    type: 'error',
-                    title: 'Failed to redeem voucher.'
-                })
-            }
-        });
-    }
-    
-    
-    function addToFavourites(voucherid, userid) {
-        var user_id = userid;
-        var voucher_id = voucherid;
-    
-        $.ajax({
-            type: 'post',
-            url: 'api/addfavourite',
-            data: {
-                'user_id': user_id,
-                'voucher_id': voucher_id,
-            },
-            success: function () {
-                Swal.fire({
-                    toast: true,
-                    position: 'top',
-                    showConfirmButton: false,
-                    timer: 3500,
-                    type: 'success',
-                    title: 'Voucher added to favourites'
-                })
-                $('#addfavourites' + voucherid).css({
-                    'color': '#ad1707'
-                });
-            },
-            error: function (XMLHttpRequest) {
-                Swal.fire({
-                    toast: true,
-                    position: 'top',
-                    showConfirmButton: false,
-                    timer: 3500,
-                    type: 'error',
-                    title: 'Failed to add voucher to favourites'
-                })
-            }
-        });
-    
-    }
-    
-    function deleteFromFavourites(voucherid, userid) {
-        var user_id = userid;
-        var voucher_id = voucherid;
-    
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-        $.ajax({
-            type: 'post',
-            url: 'api/deletefavourite/' + user_id,
-            data: {
-                'user_id': user_id,
-                'voucher_id': voucher_id,
-            },
-            success: function () {
-                Swal.fire({
-                    toast: true,
-                    position: 'top',
-                    showConfirmButton: false,
-                    timer: 3500,
-                    type: 'success',
-                    title: 'Voucher removed from favourites'
-                })
-                $('#deletefavourite' + voucherid).css({
-                    'color': '#fff'
-                });
-            },
-            error: function (xhr) {
-                Swal.fire({
-                    toast: true,
-                    position: 'top',
-                    showConfirmButton: false,
-                    timer: 3500,
-                    type: 'error',
-                    title: 'Failed to remove voucher from favourites'
-                })
-            }
-        });
-    }
-    </script>
 @stop

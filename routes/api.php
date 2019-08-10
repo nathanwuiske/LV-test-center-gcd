@@ -9,6 +9,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 // Register resourceful routes with post, get, patch and delete requests
 Route::apiResource('voucher', 'API\VoucherController');
 Route::apiResource('users', 'API\UserController');
+Route::put('users/{id}', 'API\UserController@update');
 Route::apiResource('tag', 'API\TagController');
 Route::apiResource('vouchertag', 'API\VoucherTagController');
 Route::apiResource('category', 'API\CategoryController');

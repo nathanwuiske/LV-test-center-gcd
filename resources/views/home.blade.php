@@ -1,9 +1,9 @@
 @extends('layouts.main') @section('content')
-
 <!-- Load jssor slider -->
 <script src="js/jssor.slider.min.js" type="text/javascript"></script>
 <script src="js/slider.js"></script>
 <script src="js/extention/choices.js"></script>
+<script src="js/main.js"></script>
 <link rel="stylesheet" href="/css/slider.css">
 
 <!-- START jssor1 slider -->
@@ -133,11 +133,25 @@
              </a>
              <div style="float:right;">
              @auth
-             @if($voucher->isFavourited)
-             <button id="deletefavourite{{$voucher->id}}" onClick="deleteFromFavourites({{$voucher->id}}, {{ Auth::user()->id }})" name="addfavourite" class="btn btn-lg" style="background-color:#07AD4D; color:#ad1707; position: relative; right: 65%;"><i class="fas fa-heart"></i></button>
-             @else
-             <button id="addfavourites{{$voucher->id}}" onClick="addToFavourites({{$voucher->id}}, {{ Auth::user()->id }})" name="addfavourite" class="btn btn-lg" style="background-color:#07AD4D; color:white; position: relative; right: 65%;"><i class="fas fa-heart" ></i></button>
-             @endif
+
+            <!-- favourited -->
+            <button id="deletefavourite{{$voucher->id}}" 
+                     onClick="deleteFromFavourites({{$voucher->id}}, {{ Auth::user()->id }})" 
+                     name="addfavourite" 
+                     class="btn btn-lg"
+                     style="background-color:#07AD4D; color:white; position: relative; right: 65%;color: #ad1707; {{ $voucher->isFavourited ? '' : 'display: none;' }}">
+               <i class="fas fa-heart"></i>
+            </button>
+
+            <!-- not favourited -->
+            <button id="addfavourites{{$voucher->id}}" 
+                     onClick="addToFavourites({{$voucher->id}}, {{ Auth::user()->id }})" 
+                     name="deletefavourite" 
+                     class="btn btn-lg"
+                     style="background-color:#07AD4D; color:white; position: relative; right: 65%;{{ $voucher->isFavourited ? 'display: none;' : '' }}">
+               <i class="fas fa-heart" ></i>
+            </button>
+
              @endauth
              @guest
              <a href="{{ route('login') }}"> <button class="btn btn-lg" style="background-color:#07AD4D; color:white; position: relative; right: 65%;"><i class="fas fa-heart "></i></button> </a> 
@@ -171,7 +185,8 @@
              <img style="margin-top:-19px;position:relative;top:50%;width:38px;height:38px;" src="../svg/slider/spin.svg" />
           </div>
           <div data-u="slides" style="cursor:default;position:relative;top:0px;left:0px;width:1050px;height:420px;overflow:hidden;">
-             @if(!empty($latest)) @foreach($latest as $voucher)
+             @if(!empty($latest)) 
+             @foreach($latest as $voucher)
              <div class="card alignVoucherCards">
                 <a href="#voucher{{$voucher->id}}" role="button" data-toggle="modal">
                    <div class="hoverOver" style="background-color: white; border: 1px solid #CCCCCC; text-align: center; ">
@@ -182,11 +197,24 @@
                 </a>
                 <div style="float:right;">
                 @auth
-                @if($voucher->isFavourited)
-                <button id="deletefavourite{{$voucher->id}}" onClick="deleteFromFavourites({{$voucher->id}}, {{ Auth::user()->id }})" name="addfavourite" class="btn btn-lg" style="background-color:#07AD4D; color:#ad1707; position: relative; right: 65%;"><i class="fas fa-heart"></i></button>
-                @else
-                <button id="addfavourites{{$voucher->id}}" onClick="addToFavourites({{$voucher->id}}, {{ Auth::user()->id }})" name="addfavourite" class="btn btn-lg" style="background-color:#07AD4D; color:white; position: relative; right: 65%;"><i class="fas fa-heart" ></i></button>
-                @endif
+                  <!-- if favourited -->
+                  <button id="deletefavourite{{$voucher->id}}" 
+                           onClick="deleteFromFavourites({{$voucher->id}}, {{ Auth::user()->id }})" 
+                           name="addfavourite" 
+                           class="btn btn-lg"
+                           style="background-color:#07AD4D; color:white; position: relative; right: 65%;color: #ad1707; {{ $voucher->isFavourited ? '' : 'display: none;' }}">
+                     <i class="fas fa-heart"></i>
+                  </button>
+
+                  <!-- if not favourited -->
+                  <button id="addfavourites{{$voucher->id}}" 
+                           onClick="addToFavourites({{$voucher->id}}, {{ Auth::user()->id }})" 
+                           name="deletefavourite" 
+                           class="btn btn-lg"
+                           style="background-color:#07AD4D; color:white; position: relative; right: 65%;{{ $voucher->isFavourited ? 'display: none;' : '' }}">
+                     <i class="fas fa-heart" ></i>
+                  </button>
+
                 @endauth
                 @guest
                 <a href="{{ route('login') }}"> <button class="btn btn-lg" style="background-color:#07AD4D; color:white; position: relative; right: 65%;"><i class="fas fa-heart "></i></button> </a> 
@@ -234,11 +262,24 @@
                    </a>
                    <div style="float:right;">
                    @auth
-                   @if($voucher->isFavourited)
-                   <button id="deletefavourite{{$voucher->id}}" onClick="deleteFromFavourites({{$voucher->id}}, {{ Auth::user()->id }})" name="addfavourite" class="btn btn-lg" style="background-color:#07AD4D; color:#ad1707; position: relative; right: 65%;"><i class="fas fa-heart"></i></button>
-                   @else
-                   <button id="addfavourites{{$voucher->id}}" onClick="addToFavourites({{$voucher->id}}, {{ Auth::user()->id }})" name="addfavourite" class="btn btn-lg" style="background-color:#07AD4D; color:white; position: relative; right: 65%;"><i class="fas fa-heart" ></i></button>
-                   @endif
+                  <!-- if favourited -->
+                  <button id="deletefavourite{{$voucher->id}}" 
+                        onClick="deleteFromFavourites({{$voucher->id}}, {{ Auth::user()->id }})" 
+                        name="addfavourite" 
+                        class="btn btn-lg"
+                        style="background-color:#07AD4D; color:white; position: relative; right: 65%;color: #ad1707; {{ $voucher->isFavourited ? '' : 'display: none;' }}">
+                  <i class="fas fa-heart"></i>
+                  </button>
+
+                  <!-- if not favourited -->
+                   <button id="addfavourites{{$voucher->id}}" 
+                        onClick="addToFavourites({{$voucher->id}}, {{ Auth::user()->id }})" 
+                        name="deletefavourite" 
+                        class="btn btn-lg"
+                        style="background-color:#07AD4D; color:white; position: relative; right: 65%;{{ $voucher->isFavourited ? 'display: none;' : '' }}">
+                   <i class="fas fa-heart" ></i>
+                  </button>
+
                    @endauth
                    @guest
                    <a href="{{ route('login') }}"> <button class="btn btn-lg" style="background-color:#07AD4D; color:white; position: relative; right: 65%;"><i class="fas fa-heart "></i></button> </a> 
@@ -345,123 +386,6 @@
     jssor_3_slider_init();
     jssor_4_slider_init();
     jssor_5_slider_init();
-</script>
-<script type="text/javascript">
-
-function currentRedeem(voucher_id, user_id, times) {
-	$("#redeem-current-" + voucher_id).css("display", "inline");
-	$("#redeem_btn_" + voucher_id).attr("disabled", "disabled");
-	$("#redeem-current-time-" + voucher_id).html(times['dateRedeemed']);
-	$("#redeem-next-time-" + voucher_id).html(times['dateAvailable']);
-}
-
-function ajaxRedeem(voucher_id, user_id) {
-	$.ajax({
-		method: 'POST',
-		url: 'api/redeem',
-		data: {
-			'voucher_id': voucher_id,
-			'user_id': user_id
-		},
-		headers: {
-			'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-		},
-		success: function (response) {
-			currentRedeem(voucher_id, user_id, response);
-		},
-		error: function () {
-            Swal.fire({
-				toast: true,
-				position: 'top',
-				showConfirmButton: false,
-				timer: 3500,
-				type: 'error',
-				title: 'Failed to redeem voucher.'
-			})
-		}
-	});
-}
-
-
-function addToFavourites(voucherid, userid) {
-	var user_id = userid;
-	var voucher_id = voucherid;
-
-	$.ajax({
-		type: 'post',
-		url: 'api/addfavourite',
-		data: {
-			'user_id': user_id,
-			'voucher_id': voucher_id,
-		},
-		success: function () {
-			Swal.fire({
-				toast: true,
-				position: 'top',
-            showConfirmButton: false,
-				timer: 2000,
-				type: 'success',
-				title: 'Voucher added to favourites'
-            })
-            $('#addfavourites' + voucherid).css({
-				'color': '#ad1707'
-            });
-		},
-		error: function (XMLHttpRequest) {
-			Swal.fire({
-				toast: true,
-				position: 'top',
-				showConfirmButton: false,
-				timer: 3500,
-				type: 'error',
-				title: 'Failed to add voucher to favourites'
-			})
-		}
-	});
-
-}
-
-function deleteFromFavourites(voucherid, userid) {
-	var user_id = userid;
-	var voucher_id = voucherid;
-
-	$.ajaxSetup({
-		headers: {
-			'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-		}
-	});
-	$.ajax({
-		type: 'post',
-		url: 'api/deletefavourite/' + voucher_id,
-		data: {
-			'user_id': user_id,
-			'voucher_id': voucher_id,
-		},
-		success: function () {
-			Swal.fire({
-				toast: true,
-				position: 'top',
-				showConfirmButton: false,
-				timer: 3500,
-				type: 'success',
-				title: 'Voucher removed from favourites'
-			})
-			$('#deletefavourite' + voucherid).css({
-				'color': '#fff'
-            });
-		},
-		error: function (xhr) {
-			Swal.fire({
-				toast: true,
-				position: 'top',
-				showConfirmButton: false,
-				timer: 3500,
-				type: 'error',
-				title: 'Failed to remove voucher from favourites'
-			})
-		}
-	});
-}
 </script>
 
 @stop

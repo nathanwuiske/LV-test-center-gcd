@@ -23,7 +23,7 @@ class BusinessController extends Controller
 
         if($request->image) {
             $name = time().'.' . explode('/', explode(':', substr($request->image, 0, strpos($request->image, ';')))[1])[1];
-            \Image::make($request->image)->save(public_path('imgs/businesses/').$name); 
+            \Image::make($request->image)->save('imgs/businesses/'.$name); 
             $request->merge(['image' => $name]);
         }
         return Business::create([
@@ -46,9 +46,9 @@ class BusinessController extends Controller
         $currentImage = $business->image;   
         if($request->image != $currentImage) {
             $name = time().'.' . explode('/', explode(':', substr($request->image, 0, strpos($request->image, ';')))[1])[1];
-            \Image::make($request->image)->save(public_path('imgs/businesses/').$name); 
+            \Image::make($request->image)->save('imgs/businesses/'.$name); 
             $request->merge(['image' => $name]);
-            $getCurrentImage = public_path('imgs/businesses/'.$currentImage);
+            $getCurrentImage = 'imgs/businesses/'.$currentImage;
             if(file_exists($getCurrentImage)){
                 @unlink($getCurrentImage); /* Delete the previous image that is being updated */
             }
@@ -60,7 +60,7 @@ class BusinessController extends Controller
     {
         $business = Business::findOrFail($id);
         $currentImage = $business->image;
-        $getCurrentImage = public_path('imgs/businesses/'.$currentImage);
+        $getCurrentImage = 'imgs/businesses/'.$currentImage;
         if(file_exists($getCurrentImage)){
             @unlink($getCurrentImage);
         }

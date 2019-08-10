@@ -37,7 +37,7 @@ class VoucherController extends Controller
         if($request->image) {
             /* Get a unique name for voucher image */
             $name = time().'.' . explode('/', explode(':', substr($request->image, 0, strpos($request->image, ';')))[1])[1];
-            \Image::make($request->image)->save(public_path('imgs/vouchers/').$name); 
+            \Image::make($request->image)->save('imgs/vouchers/'.$name); 
             $request->merge(['image' => $name]);
         }
 
@@ -73,10 +73,10 @@ class VoucherController extends Controller
         $currentImage = $voucher->image;   
         if($request->image != $currentImage) {
             $name = time().'.' . explode('/', explode(':', substr($request->image, 0, strpos($request->image, ';')))[1])[1];
-            \Image::make($request->image)->save(public_path('imgs/vouchers/').$name); 
+            \Image::make($request->image)->save('imgs/vouchers/'.$name); 
             $request->merge(['image' => $name]);
 
-            $getCurrentImage = public_path('imgs/vouchers/'.$currentImage);
+            $getCurrentImage = 'imgs/vouchers/'.$currentImage;
             if(file_exists($getCurrentImage)){
                 @unlink($getCurrentImage); /* Delete the previous image that is being updated */
             }
@@ -94,7 +94,7 @@ class VoucherController extends Controller
         else if ($request->is_archive == "no"){
             $voucher = Voucher::findOrFail($id);
             $currentImage = $voucher->image;
-            $getCurrentImage = public_path('imgs/vouchers/'.$currentImage);
+            $getCurrentImage = 'imgs/vouchers/'.$currentImage;
             if(file_exists($getCurrentImage)){
                 @unlink($getCurrentImage); /* Delete the image */
             }
