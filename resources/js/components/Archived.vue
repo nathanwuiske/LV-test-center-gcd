@@ -19,6 +19,7 @@
                            <th>Image</th>
                            <th>Restore</th>
                         </tr>
+                        <tr v-if="archived.data.length == 0"><p style="text-align:center;color:#AD1707;">There are currently no archived vouchers.</p></tr>
                         <tr v-for="archive in archived.data" :key="archive.id">
                            <td>{{archive.id}}</td>
                            <td>{{archive.name}}</td>
@@ -99,14 +100,24 @@
 				}).then((result) => {
 					if (result.value) {
 						this.archiveForm.delete('api/archived/' + id).then(() => {
-							swal.fire(
-								'Restored!',
-								'Voucher has been restored.',
-								'success'
-							)
+							swal.fire({
+                        toast: true,
+                        position: 'top',
+                        showConfirmButton: false,
+                        timer: 3500,
+                        type: 'success',
+                        title: 'Voucher has been successfully restored.'
+							})
 							Fire.$emit('RefreshVouchers');
 						}).catch(() => {
-							swal("Failed!", "Failed to restore voucher.", "warning");
+							swal.fire({
+                        toast: true,
+                        position: 'top',
+                        showConfirmButton: false,
+                        timer: 3500,
+                        type: 'error',
+                        title: 'Failed to restore voucher.'
+							})
 						});
 					}
 				})

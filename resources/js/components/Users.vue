@@ -131,11 +131,14 @@
 					.then(() => {
 						Fire.$emit('RefreshUsers');
 						$('#updateUser').modal('hide');
-						swal.fire(
-							'Success!',
-							'User has been successfully updated.',
-							'success'
-						)
+						swal.fire({
+                     toast: true,
+                     position: 'top',
+                     showConfirmButton: false,
+                     timer: 3500,
+                     type: 'success',
+                     title: 'User has been successfully updated'
+                  })
 					})
 					.catch(() => {
 						swal.fire({

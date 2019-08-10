@@ -21,7 +21,6 @@ Route::apiResource('location', 'API\LocationController');
 Route::get('categoryall', 'API\CategoryController@categoryall');
 Route::get('tagall', 'API\TagController@tagall');
 Route::get('voucherall', 'API\VoucherController@voucherall');
-
 Route::get('usersall', 'API\UserController@returnall');
 
 Route::post('redeem', 'API\RedeemController@store');

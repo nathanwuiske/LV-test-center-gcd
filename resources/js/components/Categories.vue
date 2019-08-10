@@ -243,11 +243,14 @@
 					.then(() => {
 						Fire.$emit('RefreshVouchersAndCategories');
 						$('#editCategoryModal').modal('hide');
-						swal.fire(
-							'Success!',
-							'Category has been successfully updated.',
-							'success'
-						)
+						swal.fire({
+                     toast: true,
+                     position: 'top',
+                     showConfirmButton: false,
+                     timer: 3500,
+                     type: 'success',
+                     title: 'Category has been successfully updated'
+						})
 					})
 					.catch(() => {
 						swal.fire({
@@ -275,11 +278,14 @@
 				}).then((result) => {
 					if (result.value) {
 						this.categoryForm.delete('api/category/' + categoryID).then(() => {
-							swal.fire(
-								'Deleted!',
-								'Category has been deleted.',
-								'success'
-							)
+							swal.fire({
+								toast: true,
+								position: 'top',
+								showConfirmButton: false,
+								timer: 3500,
+								type: 'success',
+								title: 'Category has been successfully deleted'
+							})
 							Fire.$emit('RefreshVouchersAndCategories');
 						}).catch(() => {
 							swal("Failed!", "Failed to delete category.", "warning");
@@ -292,11 +298,14 @@
 					.then(() => {
 						Fire.$emit('RefreshVouchersAndCategories');
 						$('#addNewCategoryModal').modal('hide');
-						swal.fire(
-							'Success!',
-							'Category has been created successfully',
-							'success'
-						)
+						swal.fire({
+                     toast: true,
+                     position: 'top',
+                     showConfirmButton: false,
+                     timer: 3500,
+                     type: 'success',
+                     title: 'Category has been successfully created'
+						})
 					})
 					.catch(() => {
 						swal.fire({
@@ -317,11 +326,14 @@
 				this.categoryForm.delete('api/vouchercategory/' + id).then(() => {
 						Fire.$emit('RefreshVouchersAndCategories');
 						$('#deleteCategoryModal').modal('hide');
-						swal.fire(
-							'Success!',
-							'Category has been successfully removed.',
-							'success'
-						)
+						swal.fire({
+                     toast: true,
+                     position: 'top',
+                     showConfirmButton: false,
+                     timer: 3500,
+                     type: 'success',
+                     title: 'Category successfully removed from voucher'
+						})
 					})
 					.catch(() => {
 						swal.fire({
@@ -348,11 +360,14 @@
 				this.categoryForm.post('api/vouchercategory').then(() => {
 						Fire.$emit('RefreshVouchersAndCategories');
 						$('#addNewCategory').modal('hide');
-						swal.fire(
-							'Success!',
-							'Category has been successfully added.',
-							'success'
-						)
+						swal.fire({
+							toast: true,
+                     position: 'top',
+                     showConfirmButton: false,
+                     timer: 3500,
+                     type: 'success',
+                     title: 'Category successfully assigned to voucher'
+						})
 					})
 					.catch(() => {
 						swal.fire({
@@ -394,7 +409,8 @@
          
 			Fire.$on('RefreshVouchersAndCategories', () => {
 				this.getVouch();
-				this.getCategory();
+            this.getCategory();
+            this.getAllCategory();
          });
          this.getAllCategory();
 			this.getVouch();

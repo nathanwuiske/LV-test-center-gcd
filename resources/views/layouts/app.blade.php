@@ -1,25 +1,23 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
    <head>
+      <title>Admin Panel</title>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1">
-      <!-- Links  -->
-      <link rel="stylesheet" href="/css/app.css">
-      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
-      <script src="/js/jquery-1.11.1.min.js"></script>
-      <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCC6emn13XOdxMhZAsbaGIgt2HcK3iKAoc"></script>
       <!-- CSRF Token -->
       <meta name="csrf-token" content="{{ csrf_token() }}">
       <meta http-equiv="x-ua-compatible" content="ie=edge">
-      <title>Admin Panel</title>
-      <!-- Scripts -->
-      <script src="{{ asset('js/app.js') }}" defer></script>
       <!-- Fonts -->
       <link rel="dns-prefetch" href="//fonts.gstatic.com">
       <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
       <!-- Styles -->
       <link href="{{ asset('css/app.css') }}" rel="stylesheet">
       <link rel="stylesheet" href="/css/media-queries.css">
+      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+      <!-- Scripts -->
+      <script src="/js/jquery-1.11.1.min.js"></script>
+      <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCC6emn13XOdxMhZAsbaGIgt2HcK3iKAoc"></script>
+      <script src="{{ asset('js/app.js') }}" defer></script>
    </head>
    <body>
       <div id="app">

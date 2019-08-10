@@ -160,11 +160,14 @@
                     .then(() => {
                         Fire.$emit('RefreshBusinesses');
                         $('#addNewBusiness').modal('hide');
-                        swal.fire(
-                            'Success!',
-                            'Business has been created successfully',
-                            'success'
-                        )
+                        swal.fire({
+                           toast: true,
+                           position: 'top',
+                           showConfirmButton: false,
+                           timer: 3500,
+                           type: 'success',
+                           title: 'Business has been successfully created'
+                         })
                     })
                     .catch(() => {
                         swal.fire({
@@ -207,11 +210,14 @@
                 }).then((result) => {
                     if (result.value) {
                         this.businessForm.delete('api/business/' + id).then(() => {
-                            swal.fire(
-                                'Deleted!',
-                                'Business has been deleted.',
-                                'success'
-                            )
+                            swal.fire({
+                           toast: true,
+                           position: 'top',
+                           showConfirmButton: false,
+                           timer: 3500,
+                           type: 'success',
+                           title: 'Business has been successfully deleted'
+                         })
                             Fire.$emit('RefreshBusinesses');
                         }).catch(() => {
                             swal("Failed!", "Failed to delete business.", "warning");
@@ -230,11 +236,14 @@
                     .then(() => {
                         Fire.$emit('RefreshBusinesses');
                         $('#editBusinessModal').modal('hide');
-                        swal.fire(
-                            'Success!',
-                            'Business has been successfully updated.',
-                            'success'
-                        )
+                        swal.fire({
+                           toast: true,
+                           position: 'top',
+                           showConfirmButton: false,
+                           timer: 3500,
+                           type: 'success',
+                           title: 'Business has been successfully updated'
+                         })
                     })
                     .catch(() => {
                         swal.fire({

@@ -16,6 +16,10 @@ class VoucherTagController extends Controller
 
     public function store(Request $request)
     {
+        $this->validate($request,[
+            'tag_id' => 'required|numeric', 
+            'voucher_id' => 'required|numeric'
+        ]);
         return Vouchertag::create([
             'tag_id' => $request['tag_id'],
             'voucher_id' => $request['voucher_id'],

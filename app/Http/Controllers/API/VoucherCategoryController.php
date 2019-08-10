@@ -16,6 +16,10 @@ class VoucherCategoryController extends Controller
 
     public function store(Request $request)
     {
+        $this->validate($request,[
+            'category_id' => 'required|numeric', 
+            'voucher_id' => 'required|numeric'
+        ]);
         return VoucherCategory::create([
             'category_id' => $request['category_id'],
             'voucher_id' => $request['voucher_id'],

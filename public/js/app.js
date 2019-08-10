@@ -1843,6 +1843,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -1887,10 +1888,24 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (result) {
         if (result.value) {
           _this3.archiveForm["delete"]('api/archived/' + id).then(function () {
-            swal.fire('Restored!', 'Voucher has been restored.', 'success');
+            swal.fire({
+              toast: true,
+              position: 'top',
+              showConfirmButton: false,
+              timer: 3500,
+              type: 'success',
+              title: 'Voucher has been successfully restored.'
+            });
             Fire.$emit('RefreshVouchers');
           })["catch"](function () {
-            swal("Failed!", "Failed to restore voucher.", "warning");
+            swal.fire({
+              toast: true,
+              position: 'top',
+              showConfirmButton: false,
+              timer: 3500,
+              type: 'error',
+              title: 'Failed to restore voucher.'
+            });
           });
         }
       });
@@ -2082,7 +2097,14 @@ __webpack_require__.r(__webpack_exports__);
       this.businessForm.post('api/business').then(function () {
         Fire.$emit('RefreshBusinesses');
         $('#addNewBusiness').modal('hide');
-        swal.fire('Success!', 'Business has been created successfully', 'success');
+        swal.fire({
+          toast: true,
+          position: 'top',
+          showConfirmButton: false,
+          timer: 3500,
+          type: 'success',
+          title: 'Business has been successfully created'
+        });
       })["catch"](function () {
         swal.fire({
           title: 'Error',
@@ -2130,7 +2152,14 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (result) {
         if (result.value) {
           _this4.businessForm["delete"]('api/business/' + id).then(function () {
-            swal.fire('Deleted!', 'Business has been deleted.', 'success');
+            swal.fire({
+              toast: true,
+              position: 'top',
+              showConfirmButton: false,
+              timer: 3500,
+              type: 'success',
+              title: 'Business has been successfully deleted'
+            });
             Fire.$emit('RefreshBusinesses');
           })["catch"](function () {
             swal("Failed!", "Failed to delete business.", "warning");
@@ -2148,7 +2177,14 @@ __webpack_require__.r(__webpack_exports__);
       this.businessForm.put('api/business/' + this.businessForm.id).then(function () {
         Fire.$emit('RefreshBusinesses');
         $('#editBusinessModal').modal('hide');
-        swal.fire('Success!', 'Business has been successfully updated.', 'success');
+        swal.fire({
+          toast: true,
+          position: 'top',
+          showConfirmButton: false,
+          timer: 3500,
+          type: 'success',
+          title: 'Business has been successfully updated'
+        });
       })["catch"](function () {
         swal.fire({
           title: 'Error',
@@ -2430,7 +2466,14 @@ __webpack_require__.r(__webpack_exports__);
       this.categoryForm.put('api/category/' + this.categoryForm.id).then(function () {
         Fire.$emit('RefreshVouchersAndCategories');
         $('#editCategoryModal').modal('hide');
-        swal.fire('Success!', 'Category has been successfully updated.', 'success');
+        swal.fire({
+          toast: true,
+          position: 'top',
+          showConfirmButton: false,
+          timer: 3500,
+          type: 'success',
+          title: 'Category has been successfully updated'
+        });
       })["catch"](function () {
         swal.fire({
           title: 'Error',
@@ -2459,7 +2502,14 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (result) {
         if (result.value) {
           _this3.categoryForm["delete"]('api/category/' + categoryID).then(function () {
-            swal.fire('Deleted!', 'Category has been deleted.', 'success');
+            swal.fire({
+              toast: true,
+              position: 'top',
+              showConfirmButton: false,
+              timer: 3500,
+              type: 'success',
+              title: 'Category has been successfully deleted'
+            });
             Fire.$emit('RefreshVouchersAndCategories');
           })["catch"](function () {
             swal("Failed!", "Failed to delete category.", "warning");
@@ -2471,7 +2521,14 @@ __webpack_require__.r(__webpack_exports__);
       this.categoryForm.post('api/category').then(function () {
         Fire.$emit('RefreshVouchersAndCategories');
         $('#addNewCategoryModal').modal('hide');
-        swal.fire('Success!', 'Category has been created successfully', 'success');
+        swal.fire({
+          toast: true,
+          position: 'top',
+          showConfirmButton: false,
+          timer: 3500,
+          type: 'success',
+          title: 'Category has been successfully created'
+        });
       })["catch"](function () {
         swal.fire({
           title: 'Error',
@@ -2492,7 +2549,14 @@ __webpack_require__.r(__webpack_exports__);
       this.categoryForm["delete"]('api/vouchercategory/' + id).then(function () {
         Fire.$emit('RefreshVouchersAndCategories');
         $('#deleteCategoryModal').modal('hide');
-        swal.fire('Success!', 'Category has been successfully removed.', 'success');
+        swal.fire({
+          toast: true,
+          position: 'top',
+          showConfirmButton: false,
+          timer: 3500,
+          type: 'success',
+          title: 'Category successfully removed from voucher'
+        });
       })["catch"](function () {
         swal.fire({
           title: 'Error',
@@ -2519,7 +2583,14 @@ __webpack_require__.r(__webpack_exports__);
       this.categoryForm.post('api/vouchercategory').then(function () {
         Fire.$emit('RefreshVouchersAndCategories');
         $('#addNewCategory').modal('hide');
-        swal.fire('Success!', 'Category has been successfully added.', 'success');
+        swal.fire({
+          toast: true,
+          position: 'top',
+          showConfirmButton: false,
+          timer: 3500,
+          type: 'success',
+          title: 'Category successfully assigned to voucher'
+        });
       })["catch"](function () {
         swal.fire({
           title: 'Error',
@@ -2572,6 +2643,8 @@ __webpack_require__.r(__webpack_exports__);
       _this7.getVouch();
 
       _this7.getCategory();
+
+      _this7.getAllCategory();
     });
     this.getAllCategory();
     this.getVouch();
@@ -2876,7 +2949,14 @@ __webpack_require__.r(__webpack_exports__);
       this.locationForm.put('api/location/' + this.locationForm.id).then(function () {
         Fire.$emit('RefreshVouchers');
         $('#editLocationModal').modal('hide');
-        swal.fire('Success!', 'Location has been successfully updated.', 'success');
+        swal.fire({
+          toast: true,
+          position: 'top',
+          showConfirmButton: false,
+          timer: 3500,
+          type: 'success',
+          title: 'Location has been successfully updated'
+        });
       })["catch"](function () {
         swal.fire({
           title: 'Error',
@@ -2890,7 +2970,14 @@ __webpack_require__.r(__webpack_exports__);
 
       this.locationForm.put('api/location/' + this.locationForm.id).then(function () {
         Fire.$emit('RefreshVouchers');
-        swal.fire('Success!', 'Location assigned to voucher.', 'success');
+        swal.fire({
+          toast: true,
+          position: 'top',
+          showConfirmButton: false,
+          timer: 3500,
+          type: 'success',
+          title: 'Location successfully assigned to voucher'
+        });
 
         _this2.locationForm.clear();
 
@@ -2914,7 +3001,7 @@ __webpack_require__.r(__webpack_exports__);
     getAllVouchers: function getAllVouchers() {
       var _this4 = this;
 
-      axios.get('api/voucherall/' + 0).then(function (_ref2) {
+      axios.get('api/voucherall').then(function (_ref2) {
         var data = _ref2.data;
         return _this4.allVouchers = data;
       });
@@ -3280,7 +3367,14 @@ __webpack_require__.r(__webpack_exports__);
       this.tagForm.put('api/tag/' + this.tagForm.id).then(function () {
         Fire.$emit('RefreshVouchersAndTags');
         $('#editTagModal').modal('hide');
-        swal.fire('Success!', 'Tag has been successfully updated.', 'success');
+        swal.fire({
+          toast: true,
+          position: 'top',
+          showConfirmButton: false,
+          timer: 3500,
+          type: 'success',
+          title: 'Tag has been successfully updated'
+        });
       })["catch"](function () {
         swal.fire({
           title: 'Error',
@@ -3309,7 +3403,14 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (result) {
         if (result.value) {
           _this3.tagForm["delete"]('api/tag/' + tagID).then(function () {
-            swal.fire('Deleted!', 'Tag has been deleted.', 'success');
+            swal.fire({
+              toast: true,
+              position: 'top',
+              showConfirmButton: false,
+              timer: 3500,
+              type: 'success',
+              title: 'Tag has been successfully deleted'
+            });
             Fire.$emit('RefreshVouchersAndTags');
           })["catch"](function () {
             swal("Failed!", "Failed to delete tag.", "warning");
@@ -3321,7 +3422,14 @@ __webpack_require__.r(__webpack_exports__);
       this.tagForm.post('api/tag').then(function () {
         Fire.$emit('RefreshVouchersAndTags');
         $('#addNewTagModal').modal('hide');
-        swal.fire('Success!', 'Tag has been created successfully', 'success');
+        swal.fire({
+          toast: true,
+          position: 'top',
+          showConfirmButton: false,
+          timer: 3500,
+          type: 'success',
+          title: 'Tag has been successfully created'
+        });
       })["catch"](function () {
         swal.fire({
           title: 'Error',
@@ -3342,7 +3450,14 @@ __webpack_require__.r(__webpack_exports__);
       this.tagForm["delete"]('api/vouchertag/' + id).then(function () {
         Fire.$emit('RefreshVouchersAndTags');
         $('#deleteTagModal').modal('hide');
-        swal.fire('Success!', 'Tag has been successfully removed.', 'success');
+        swal.fire({
+          toast: true,
+          position: 'top',
+          showConfirmButton: false,
+          timer: 3500,
+          type: 'success',
+          title: 'Tag successfully removed from voucher'
+        });
       })["catch"](function () {
         swal.fire({
           title: 'Error',
@@ -3369,7 +3484,14 @@ __webpack_require__.r(__webpack_exports__);
       this.tagForm.post('api/vouchertag').then(function () {
         Fire.$emit('RefreshVouchersAndTags');
         $('#addNewTag').modal('hide');
-        swal.fire('Success!', 'Tag has been successfully added.', 'success');
+        swal.fire({
+          toast: true,
+          position: 'top',
+          showConfirmButton: false,
+          timer: 3500,
+          type: 'success',
+          title: 'Tag successfully assgined to voucher'
+        });
       })["catch"](function () {
         swal.fire({
           title: 'Error',
@@ -3411,6 +3533,8 @@ __webpack_require__.r(__webpack_exports__);
     var _this7 = this;
 
     Fire.$on('RefreshVouchersAndTags', function () {
+      _this7.getAllTags();
+
       _this7.getVouch();
 
       _this7.getTags();
@@ -3563,7 +3687,14 @@ __webpack_require__.r(__webpack_exports__);
       this.userForm.put('api/users/' + this.userForm.id).then(function () {
         Fire.$emit('RefreshUsers');
         $('#updateUser').modal('hide');
-        swal.fire('Success!', 'User has been successfully updated.', 'success');
+        swal.fire({
+          toast: true,
+          position: 'top',
+          showConfirmButton: false,
+          timer: 3500,
+          type: 'success',
+          title: 'User has been successfully updated'
+        });
       })["catch"](function () {
         swal.fire({
           title: 'Error',
@@ -3880,7 +4011,14 @@ __webpack_require__.r(__webpack_exports__);
       this.voucherForm.put('api/voucher/' + this.voucherForm.id).then(function () {
         Fire.$emit('RefreshVouchers');
         $('#addNewVoucher').modal('hide');
-        swal.fire('Success!', 'Voucher has been successfully updated.', 'success');
+        swal.fire({
+          toast: true,
+          position: 'top',
+          showConfirmButton: false,
+          timer: 3500,
+          type: 'success',
+          title: 'Voucher has been successfully updated.'
+        });
       })["catch"](function () {
         swal.fire({
           title: 'Error',
@@ -3905,7 +4043,14 @@ __webpack_require__.r(__webpack_exports__);
           _this2.voucherForm.is_archive = "yes";
 
           _this2.voucherForm["delete"]('api/voucher/' + id).then(function () {
-            swal.fire('Archived!', 'Voucher has been archived.', 'success');
+            swal.fire({
+              toast: true,
+              position: 'top',
+              showConfirmButton: false,
+              timer: 3500,
+              type: 'success',
+              title: 'Voucher has been archived.'
+            });
             /* After archiving, send an event to refresh the voucher table */
 
             Fire.$emit('RefreshVouchers');
@@ -3954,7 +4099,14 @@ __webpack_require__.r(__webpack_exports__);
         /* If the post was successful then hide the modal and print success message */
         Fire.$emit('RefreshVouchers');
         $('#addNewVoucher').modal('hide');
-        swal.fire('Success!', 'Voucher has been created successfully', 'success');
+        swal.fire({
+          toast: true,
+          position: 'top',
+          showConfirmButton: false,
+          timer: 3500,
+          type: 'success',
+          title: 'Voucher successfully created'
+        });
 
         _this4.$Progress.finish();
       })["catch"](function () {
@@ -3977,7 +4129,7 @@ __webpack_require__.r(__webpack_exports__);
       /*store the data in the voucher object */
       ["catch"](function (error) {
         swal.fire({
-          title: 'Error',
+          title: 'Voucher data retrieval error',
           text: error,
           type: 'error'
         });
@@ -4001,7 +4153,14 @@ __webpack_require__.r(__webpack_exports__);
           _this6.$Progress.start();
 
           _this6.voucherForm["delete"]('api/voucher/' + id).then(function () {
-            swal.fire('Deleted!', 'Voucher has been deleted.', 'success');
+            swal.fire({
+              toast: true,
+              position: 'top',
+              showConfirmButton: false,
+              timer: 3500,
+              type: 'success',
+              title: 'Voucher has been successfully deleted'
+            });
 
             _this6.$Progress.finish();
             /* After deleting, send an event to fresh the voucher table */
@@ -71699,6 +71858,21 @@ var render = function() {
                 "tbody",
                 [
                   _vm._m(1),
+                  _vm._v(" "),
+                  _vm.archived.data.length == 0
+                    ? _c("tr", [
+                        _c(
+                          "p",
+                          {
+                            staticStyle: {
+                              "text-align": "center",
+                              color: "#AD1707"
+                            }
+                          },
+                          [_vm._v("There are currently no archived vouchers.")]
+                        )
+                      ])
+                    : _vm._e(),
                   _vm._v(" "),
                   _vm._l(_vm.archived.data, function(archive) {
                     return _c("tr", { key: archive.id }, [

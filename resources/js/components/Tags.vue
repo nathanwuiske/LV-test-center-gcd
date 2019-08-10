@@ -228,11 +228,14 @@
 					.then(() => {
 						Fire.$emit('RefreshVouchersAndTags');
 						$('#editTagModal').modal('hide');
-						swal.fire(
-							'Success!',
-							'Tag has been successfully updated.',
-							'success'
-						)
+						swal.fire({
+                     toast: true,
+                     position: 'top',
+                     showConfirmButton: false,
+                     timer: 3500,
+                     type: 'success',
+                     title: 'Tag has been successfully updated'
+						})
 					})
 					.catch(() => {
 						swal.fire({
@@ -260,11 +263,14 @@
 				}).then((result) => {
 					if (result.value) {
 						this.tagForm.delete('api/tag/' + tagID).then(() => {
-							swal.fire(
-								'Deleted!',
-								'Tag has been deleted.',
-								'success'
-							)
+							swal.fire({
+                        toast: true,
+                        position: 'top',
+                        showConfirmButton: false,
+                        timer: 3500,
+                        type: 'success',
+                        title: 'Tag has been successfully deleted'
+						   })
 							Fire.$emit('RefreshVouchersAndTags');
 						}).catch(() => {
 							swal("Failed!", "Failed to delete tag.", "warning");
@@ -277,11 +283,14 @@
 					.then(() => {
 						Fire.$emit('RefreshVouchersAndTags');
 						$('#addNewTagModal').modal('hide');
-						swal.fire(
-							'Success!',
-							'Tag has been created successfully',
-							'success'
-						)
+						swal.fire({
+                     toast: true,
+                     position: 'top',
+                     showConfirmButton: false,
+                     timer: 3500,
+                     type: 'success',
+                     title: 'Tag has been successfully created'
+						})
 					})
 					.catch(() => {
 						swal.fire({
@@ -302,11 +311,14 @@
 				this.tagForm.delete('api/vouchertag/' + id).then(() => {
 						Fire.$emit('RefreshVouchersAndTags');
 						$('#deleteTagModal').modal('hide');
-						swal.fire(
-							'Success!',
-							'Tag has been successfully removed.',
-							'success'
-						)
+						swal.fire({
+                     toast: true,
+                     position: 'top',
+                     showConfirmButton: false,
+                     timer: 3500,
+                     type: 'success',
+                     title: 'Tag successfully removed from voucher'
+						})
 					})
 					.catch(() => {
 						swal.fire({
@@ -333,11 +345,14 @@
 				this.tagForm.post('api/vouchertag').then(() => {
 						Fire.$emit('RefreshVouchersAndTags');
 						$('#addNewTag').modal('hide');
-						swal.fire(
-							'Success!',
-							'Tag has been successfully added.',
-							'success'
-						)
+						swal.fire({
+                     toast: true,
+                     position: 'top',
+                     showConfirmButton: false,
+                     timer: 3500,
+                     type: 'success',
+                     title: 'Tag successfully assgined to voucher'
+						})
 					})
 					.catch(() => {
 						swal.fire({
@@ -367,8 +382,9 @@
 		},
 		mounted() {
 			Fire.$on('RefreshVouchersAndTags', () => {
-				this.getVouch();
-				this.getTags();
+            this.getAllTags();
+            this.getVouch();
+            this.getTags();
          });
          this.getAllTags();
 			this.getVouch();

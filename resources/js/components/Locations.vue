@@ -149,11 +149,14 @@
                     .then(() => {
                         Fire.$emit('RefreshVouchers');
                         $('#editLocationModal').modal('hide');
-                        swal.fire(
-                            'Success!',
-                            'Location has been successfully updated.',
-                            'success'
-                        )
+                        swal.fire({
+                           toast: true,
+                           position: 'top',
+                           showConfirmButton: false,
+                           timer: 3500,
+                           type: 'success',
+                           title: 'Location has been successfully updated'
+                         })
                     })
                     .catch(() => {
                         swal.fire({
@@ -167,11 +170,14 @@
 				this.locationForm.put('api/location/' + this.locationForm.id)
 					.then(() => {
                         Fire.$emit('RefreshVouchers');
-						swal.fire(
-							'Success!',
-							'Location assigned to voucher.',
-							'success',
-                        )
+						      swal.fire({
+                           toast: true,
+                           position: 'top',
+                           showConfirmButton: false,
+                           timer: 3500,
+                           type: 'success',
+                           title: 'Location successfully assigned to voucher'
+                         })
                     this.locationForm.clear();
 				        this.locationForm.reset();
 					})
@@ -189,7 +195,7 @@
                 }) => (this.vouchers = data));
             },
              getAllVouchers() {
-                axios.get('api/voucherall/' + 0).then(({
+                axios.get('api/voucherall').then(({
                     data
                 }) => (this.allVouchers = data));
             },
