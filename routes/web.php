@@ -29,6 +29,8 @@ Route::post('/contact', 'ContactController@store')->name('contact.store');
 
 //Route::get('/{any}', 'HomeController@index')->where('any', '.*');
 
+Route::put('/updateaccount/{id}', 'AccountController@update');
+
 /* Admin */
 Route::group(['middleware' => isAdmin::class], function (){
     Route::get('/adminhome', 'AdminHomeController@index')->name('adminhome');
