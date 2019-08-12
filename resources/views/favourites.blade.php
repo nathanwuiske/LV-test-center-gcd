@@ -6,7 +6,7 @@
    <div class="padding-top-md" >
       <div class="row">
          <div class="col-sm-12 border-bottom-sm">
-            <h3 class="text-center">Favourite Vouchers</h3>
+            <h2 class="text-center">Favourite Vouchers</h2>
          </div>
       </div>
    </div>

@@ -25,6 +25,8 @@
       <link rel="stylesheet" href="/css/media-queries.css">
       <!-- Modernizer Script for old Browsers -->
       <script src="/js/modernizr-2.6.2.min.js"></script>
+    
+      <script src="js/main.js"></script>
    </head>
 
    <body id="body">
@@ -69,10 +71,8 @@
                      @csrf
                   </form>
                   @else
-                  <li><a href="{{ route('login') }}"><strong>Login</strong></a> </li>
-                  @if (Route::has('register'))
-                  <li><a href="{{ route('register') }}"><strong>Register</strong></a> </li>
-                  @endif
+                  <li><a href="{{ route('login') }}"><strong>Login / Register</strong></a> </li>
+               
                   @endauth
                   @endif
                </ul>
@@ -91,19 +91,14 @@
          <div class="container">
             <div class="row">
                <div class="col-md-3 col-sm-6 col-xs-12">
-                  <div class="footer-single">
-				  <br><br><p>Gold Coast Discounts provides free vouchers to the Gold Coast community.</p>
-                  </div>
-               </div>
-               <div class="col-md-3 col-sm-6 col-xs-12">
-                  <div class="footer-single">
-                     <h6>Information</h6>
-                     <ul>
-                        <li><a href="{{route('advertise')}}"> Advertise with Us</a></li>
-                        <li><a href="{{route('privacy')}}"> Privacy Policy</a></li>
-                        <li><a href="{{route('terms')}}"> Terms and Conditions</a></li>
-                     </ul>
-                  </div>
+                     <div class="footer-single">
+                           <h6>Information</h6>
+                           <ul>
+                              <li><a href="{{route('advertise')}}"> Advertise with Us</a></li>
+                              <li><a href="{{route('privacy')}}"> Privacy Policy</a></li>
+                              <li><a href="{{route('terms')}}"> Terms and Conditions</a></li>
+                           </ul>
+                        </div>
                </div>
                <div class="col-md-3 col-sm-6 col-xs-12">
                   <div class="footer-single">
@@ -113,6 +108,11 @@
                         <li><a href="https://twitter.com/DiscountsGold"><img src="/imgs/twitter.png" width="20" height="20"> Twitter</a></li>
                         <li><a href="https://www.instagram.com/gold_coast_discounts/"><img src="/imgs/instagram.png" width="20" height="20"> Instagram</a></li>
                      </ul>
+                  </div>
+               </div>
+               <div class="col-md-3 col-sm-6 col-xs-12">
+                  <div class="footer-single">
+                     <br><br><p>Gold Coast Discounts provides free vouchers to the Gold Coast community.</p>
                   </div>
                </div>
             </div>

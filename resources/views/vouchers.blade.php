@@ -1,13 +1,10 @@
 @extends('layouts.main')
 @section('content')
-<script src="js/main.js"></script>
-<div style="margin-bottom: 80px"></div>
+<div class="mb80"></div>
 <h2 style="text-align:center;font-size: 25px;color:#07AD4D; font-weight: bold;">Browse Vouchers</h2>
 <!-- Content -->
 <div class="container">
       <div class="row">
-    
-         
     <!-- Start search -->
 <div class="s131" style="border:none;">
    <form action="/search" method="get">
@@ -155,10 +152,14 @@
                  </div>
                  @endif
                  @auth
-                 <button class="btn btn-lg" id="redeem_btn_{{$voucher->id}}" onclick="ajaxRedeem({{$voucher->id}}, {{ Auth::user()->id }})" style="width: 100%; height: 100%; background-color: #07AD4D; color:white;"
-                 @if ($voucher->isRedeemed)
-                 disabled
-                 @endif>Redeem</button>
+                 <p class="text-center"><span id="time{{$voucher->id}}" style="color:#A61106; font-size:18px;"></span><br></p>
+                 <a id="redeem-a{{$voucher->id}}" href="#warningRedeem{{$voucher->id}}" role="button" data-toggle="modal"  @if ($voucher->isRedeemed)
+                      class="disabled-a"
+                      @endif>
+                 <button class="btn btn-lg" id="start_redeem_{{$voucher->id}}" style="width: 100%; height: 100%; background-color: #07AD4D; color:white;"
+                      @if ($voucher->isRedeemed)
+                      disabled
+                      @endif>Redeem</button></a>
                  @endauth
                  @guest
                  <p class="text-center"style="color:#A61106;">Must be logged in to redeem vouchers</p>
@@ -171,6 +172,28 @@
            </div>
         </div>
      </div>
+     @auth
+     <div class="modal fade" id="warningRedeem{{$voucher->id}}" tabindex="-1" role="dialog">
+         <div class="modal-dialog" role="document">
+            <div class="modal-content">
+               <div class="modal-header" style="background-color:#07AD4D;">
+                  <h5 class="modal-title" style="color: white; font-size: 15px;">Voucher Redemption</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="opacity: 0.9; color: white; position:absolute;right: 2%;top: 2%;">
+                  <span aria-hidden="true"><i class="fas fa-times"></i></span>
+                  </button>
+               </div>
+               <div class="modal-body" style="background-color: #F2F2F2">
+                  Please ensure you are at the establishment before redeeming the voucher.<br>
+                  Once redeemed, you will have 5:00 min to present the voucher at the counter before the voucher is disabled.<br><br>
+               </div>
+               <div class="modal-footer" style="background-color: #F2F2F2">
+                  <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-success" onClick="startRedeem({{$voucher->id}}, {{ Auth::user()->id }})" data-dismiss="modal">Redeem</button>
+               </div>
+            </div>
+         </div>
+      </div>
+@endauth
        @endforeach
        @endif 
       </div>

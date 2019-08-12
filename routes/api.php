@@ -34,6 +34,7 @@ Route::group(['middleware' => 'auth:api'], function() {
 });
  
  Route::post('redeem', 'API\RedeemController@store');
+ Route::get('redeem', 'API\RedeemController@index');
  
  Route::post('addfavourite', 'API\FavouriteController@store');
  Route::post('deletefavourite/{id}', 'API\FavouriteController@destroy');

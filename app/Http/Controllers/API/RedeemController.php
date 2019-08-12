@@ -8,20 +8,28 @@ use App\Voucher;
 use App\Redeem;
 use App\User;
 use Carbon\Carbon;
+use Illuminate\Validation\Rule;
 
 class RedeemController extends Controller
 {
 
     public function index()
     {
-        
+        return Redeem::latest()->get();
     }
 
     public function store(Request $request)
     {
         $this->validate($request,[
             'user_id' => 'required',
-            'voucher_id'  => 'required'
+            'voucher_id'  => [
+                'required', 
+                Rule::unique('redeems')->where(function ($query) use ($request) {
+                    return $query
+                        ->whereUser_id($request->user_id)
+                        ->whereVoucher_id($request->voucher_id);
+                }),
+            ]
         ]);
         $redeem = new Redeem;
         $redeem->voucher_id = $request['voucher_id'];

@@ -1,9 +1,15 @@
    
 function currentRedeem(voucher_id, user_id, times) {
 	$("#redeem-current-" + voucher_id).css("display", "inline");
-	$("#redeem_btn_" + voucher_id).attr("disabled", "disabled");
+	$("#start_redeem_" + voucher_id).attr("disabled", "disabled");
+	$("#redeem-a" + voucher_id).addClass("disabled-a");
 	$("#redeem-current-time-" + voucher_id).html(times['dateRedeemed']);
 	$("#redeem-next-time-" + voucher_id).html(times['dateAvailable']);
+}
+
+function warningRedeem(voucher_id) {
+	$("#start_redeem_" + voucher_id).attr("disabled", "disabled");
+	$("#redeem-a" + voucher_id).addClass("disabled-a");
 }
 
 function ajaxRedeem(voucher_id, user_id) {
@@ -20,15 +26,8 @@ function ajaxRedeem(voucher_id, user_id) {
 		success: function (response) {
 			currentRedeem(voucher_id, user_id, response);
 		},
-		error: function () {
-            Swal.fire({
-				toast: true,
-				position: 'top',
-				showConfirmButton: false,
-				timer: 3500,
-				type: 'error',
-				title: 'Failed to redeem voucher.'
-			})
+		error: function (response) {
+           //console.log(response);
 		}
 	});
 }
@@ -109,4 +108,74 @@ function deleteFromFavourites(voucherid, userid) {
 		}
 	});
 }
+
+function startTimer(duration, display, voucherid, userid) {
+    var start = Date.now(),
+        diff,
+        minutes,
+        seconds;
+    function timer() {
+        diff = duration - (((Date.now() - start) / 1000) | 0);
+        minutes = (diff / 60) | 0;
+        seconds = (diff % 60) | 0;
+
+        minutes = minutes < 10 ?  minutes : minutes;
+        seconds = seconds < 10 ? "0" + seconds : seconds;
+
+        display.textContent = "Voucher will be redeemed in " + minutes + ":" + seconds; 
+
+        if (diff <= 0) {
+         display.textContent = "Timer Ended"; 
+         ajaxRedeem(voucherid, userid);
+         clearInterval(myTimer);
+        }
+        
+    };
+    timer();
+    var myTimer = setInterval(timer, 1000);
+}
+
+function startRedeem(voucherid, userid){
+	warningRedeem(voucherid);
+	$('#warningRedeem' + voucherid).modal('hide');
+	 var fiveMinutes = 10;
+	 var display = document.querySelector('#time'+voucherid);
+	 startTimer(fiveMinutes, display, voucherid, userid);
+ }
+
+ function updateAccount(id, name, phone_number) {
+	$.ajaxSetup({
+		headers: {
+			'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+		}
+	});
+	$.ajax({
+		type: 'put',
+		url: 'updateaccount/' + id,
+		data: {
+			'first_name': name,
+			'phone_number': phone_number
+		},
+		success: function () {
+			Swal.fire({
+				toast: true,
+				position: 'top',
+				showConfirmButton: false,
+				timer: 2000,
+				type: 'success',
+				title: 'Account settings successfully updated'
+			})
+		},
+		error: function (XMLHttpRequest) {
+			Swal.fire({
+				toast: true,
+				position: 'top',
+				showConfirmButton: false,
+				timer: 3500,
+				type: 'error',
+				title: 'The given information is invalid'
+			})
+		}
+	});
+} 
 

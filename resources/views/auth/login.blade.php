@@ -1,52 +1,59 @@
 @extends('layouts.main')
 @section('content')
+<style>
+body { 
+  background-image: url(../imgs/coast-bay-min.jpg); 
+  background-size: cover;  
+  background-repeat: no-repeat; 
+  background-position: center center; 
+}
+</style>
+
+<div style="margin-bottom: 300px"></div>
 <div class="container">
-   <div class="row" >
-      @guest
-      <div class="mb350"></div>
-      <!--log form -->
-      <div class="log-form" >
-         <div class="sec-title">
-            <h2>Login to your account</h2>
-         </div>
-         <form method="POST" action="{{ route('login') }}">
-            @csrf
-            <label>Email Address</label>
-            <input id="email" type="email" placeholder="Enter your email" class="{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required autofocus>     
-            <label>Password  </label>
-            <input id="password" type="password" placeholder="Enter your account password" class="{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
-            <label for="remember">Remember Me</label>
-            <input type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-            @if ($errors->has('password'))
-            <span class="invalid-feedback" role="alert">
-            <strong>{{ $errors->first('password') }}</strong>
-            </span>
-            @endif
-            <br>
-            <button type="submit" class="btn">
-            {{ __('Login') }}
-            </button>
-            <a class="forgot" href="password/reset">Forgot your password?</a>
-            @if(count($errors))
-            <ul class="alert alert-danger">
-               @foreach($errors->all() as $error)
-               <li class="login-error-message">{{$error}}</li>
-               @endforeach
-            </ul>
-            @endif
-         </form>
-      </div>
-      <!--end log form -->
-      @else
-      <script>window.location = "/home";</script>
-      <div class="card">
-         <div class="card-header">Login error</div>
-         <div class="card-body">
-            <p>You tried to access the login page, but you are already logged in.</p>
-            <a href="{{ route('home') }}" class="btn btn-success">Return to home</a>
-         </div>
-      </div>
-      @endguest
+   <div class="login" id="login">
+      <form method="POST" action="{{ route('login') }}">
+         @csrf
+         <h1><span>GCD</span> Login</h1>
+         <input type="text" id="email-login" class="{{ $errors->has('email-login') ? ' is-invalid' : '' }}" name="email" placeholder="Enter your email" required autofocus> 
+         <input type="password" id="password-login" class="{{ $errors->has('password-login') ? ' is-invalid' : '' }}" name="password" placeholder="Enter your password" required>
+         <label class="rememberlabel"> Remember me </label>
+         <input class="rememberinput" style="background-color:transparent;" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+         <button type="submit">Login</button>
+         <p class="text-center" style="color:white;"> <br>New User? <br> <a class="login-a" onclick="changeTab(event, 'register')">Create an account</a> </p>
+         <p class="text-center"><a class="login-a" href="password/reset"> I forgot my password</a></p>
+      </form>
+      @if(count($errors))
+      <ul class="alert alert-danger">
+         @foreach($errors->all() as $error)
+         <li class="login-error-message">{{$error}}</li>
+         @endforeach
+      </ul>
+      @endif
+   </div>
+   <div class="login" id="register" style="display:none">
+      <form method="POST" action="{{ route('register') }}">
+         @csrf
+         <h1><span>GCD</span> Register</h1>
+         <input id="first_name" placeholder="Enter your name"  type="text" class="{{ $errors->has('first_name') ? ' is-invalid' : '' }}" name="first_name" value="{{ old('first_name') }}" required>
+         <input id="email" placeholder="Enter your email" type="email" class="{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required>
+         <input id="password" placeholder="Enter your password" type="password" class="{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
+         <input id="password-confirm" placeholder="Confirm your password" type="password" name="password_confirmation" required>
+         <button type="submit">Register</button>
+         <p class="text-center" style="color:white;"> Already have an account? <br> <a class="login-a"  onclick="changeTab(event, 'login')">Login here</a> </p>
+      </form>
    </div>
 </div>
+<div style="margin-bottom: 300px"></div>
+<script>
+function changeTab(evt, cityName) {
+    var i;
+    var x = document.getElementsByClassName("login");
+    for (i = 0; i < x.length; i++) {
+      x[i].style.display = "none";
+    }
+    document.getElementById(cityName).style.display = "block";
+}
+</script>
+         
 @endsection

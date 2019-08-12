@@ -1,159 +1,276 @@
 /* =================================== */
 /*	Account Page
 /* =================================== */
+.sidebar {
+  display: inline-block;
+  width: 25%;
+  border-radius: 3px;
+  overflow: hidden;
+}
 
-/* Responsive Text Area for all devices */
-textarea {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
+.sidebar i {
+  margin-right: 15px;
+}
+
+.sidebar-menu-item {
+  background: #FFF;
+  padding: 20px;
+  color: #999;
+  border-bottom: 1px solid #F0F1F2;
+  transition: all 0.3s ease;
+}
+.sidebar-menu-item--active {
+  color: #000;
+  border-left: 3px solid #348AA7;
+}
+.sidebar-menu-item:hover {
+  background: #f7f7f7;
+  cursor: pointer;
+}
+
+.account-main {
+  width: 70%;
+  vertical-align: top;
+  display: inline-block;
+  background: #FFF;
+  margin-left: 3%;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.main-header {
+  padding: 20px;
+  border-bottom: 1px solid #F0F1F2;
+}
+
+.main-content {
+  padding: 20px;
+}
+
+.main-settings-form {
+  max-width: 80%;
+  display: block;
+  margin: 0 auto;
+}
+
+.main-input-label {
+  font-size: 100%;
+  display: block;
+  margin: 5px 5px 5px 5px;
+}
+
+.main-input {
+  display: inline-block;
   width: 100%;
+  border: 1px solid #F1F3F5;
+  margin-bottom: 20px;
+  outline: none;
+  padding: 15px;
+  border-radius: 3px;
+  color: #000;
+
+}
+
+.main-input:disabled {
+   background: #dddddd;
+}
+
+.main-input:focus {
+  border: 1px solid #07AD4D;
+  transition: all 0.3s ease;
+}
+
+.main-content .btn {
+  margin-bottom: 20px;
+  border: none;
+  outline: none;
+  padding: 15px 25px;
+  border-radius: 3px;
+  transition: all 0.3s ease;
+}
+
+.main-save-button {
+  color: #FFF;
+  background-color: #07AD4D;
+}
+.main-save-button:hover {
+  background-color: #037835;
+  color:white;
+  cursor: pointer;
+}
+
+.main-cancel-button {
+  color: #FFF;
+  background: #CCC;
+}
+.main-cancel-button:hover {
+  background-color: #b3b3b3;
+  cursor: pointer;
+}
+
+@media (max-width: 764px) {
+  .sidebar {
+    width: 100%;
+    margin-bottom: 20px;
   }
 
-  .padding-top-sm{
+  .sidebar-menu-item {
+    padding: 15px;
+  }
+
+  .account-main {
+    width: 100%;
+    margin: 0;
+  }
+}
+.padding-top-sm{
   padding-top:10px;
-  }
-  .padding-top-md{
+}
+.padding-top-md{
   padding-top:20px;
-  }
-  /* Border */
-  .border-bottom {
+}
+/* Border */
+.border-bottom {
   border-bottom: 2px solid dimgrey;
-  }
-  .border-bottom-sm {
+}
+.border-bottom-sm {
   border-bottom: 1px solid dimgrey;
-  }
-  /* Form */
-  form > a{
+}
+/* Form */
+form > a{
   padding-right:80px;
-  }
-  form a {
+}
+form a {
   font-size:20px;
-  }
-  form a:hover {
+}
+form a:hover {
   text-decoration: none;
-  }
-  .border-top {
+}
+.border-top {
   border-top: 2px solid dimgrey;
   padding-left:10px;
-  }
-
+}
 
 /* =================================== */
 /*	Login Page
 /* =================================== */
 
-.mb650 {
-  margin-bottom: 650px;
+.disabled-a {
+  pointer-events: none;
+cursor: default;
 }
 
-.mb350 {
-  margin-bottom: 350px;
-}
-
-.mb250 {
-  margin-bottom: 250px;
-}
-
-.mb150 {
-  margin-bottom: 150px;
-}
-
-.login-checkbox {
-  display: inline;
-  margin-bottom: 0;
-}
-
-.log-form {
-  width: 40%;
-  min-width: 320px;
-  max-width: 475px;
-  background: #fff;
+.login {
   position: relative;
-  top: 50%;
-  left: 50%;
+  margin: 0 auto;
+  margin-top: 100px;
+  left: 15%;
+  width: 28%;
+  height: 450px;
   -webkit-transform: translate(-50%, -50%);
-  -moz-transform: translate(-50%, -50%);
-  -o-transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
-  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.25);
-}
-@media (max-width: 40em) {
-  .log-form {
-    width: 95%;
-    position: relative;
-    margin: 2.5% auto 0 auto;
-    left: 0%;
-    -webkit-transform: translate(0%, 0%);
-    -moz-transform: translate(0%, 0%);
-    -o-transform: translate(0%, 0%);
-    -ms-transform: translate(0%, 0%);
-    transform: translate(0%, 0%);
-  }
-}
-.log-form form {
-  display: block;
-  width: 100%;
-  padding: 2em;
-}
-.log-form h2 {
-  color: #fff;
-  font-size: 1.35em;
-  display: block;
-  background: #4272D7;
-  width: 100%;
-  text-transform: uppercase;
-  padding: 0.75em 1em 0.75em 1.5em;
-  box-shadow: inset 0px 1px 1px rgba(255, 255, 255, 0.05);
-  margin: 0;
-  font-weight: 200;
-}
-.log-form input {
-  display: block;
-  margin: auto auto;
-  width: 100%;
-  margin-bottom: 2em;
-  padding: 0.5em 0;
-  border: none;
-  border-bottom: 1px solid #eaeaea;
-  padding-bottom: 1.25em;
-  padding-left: 15px;
-  color: #757575;
-}
-.log-form input:focus {
-  outline: none;
-}
-.log-form .btn {
-  display: inline-block;
-  background-color: #4272D7;
-  padding: 0.5em 2em;
-  color: white;
-  margin-right: 0.5em;
-  box-shadow: inset 0px 1px 0px rgba(255, 255, 255, 0.2);
-}
-.log-form .btn:hover {
-  background-color: #2D62D3;
 }
 
-.log-form .btn:focus {
-  outline: none;
+@media only screen and (max-width: 767px) {
+    .login {
+      margin-top: 0px;
+      left: 50%;
+      width: 100%;
+    }
 }
-.log-form .forgot {
-  color: black;
-  line-height: 0.5em;
+
+.login h1 {
   position: relative;
-  top: 2.5em;
-  text-decoration: none;
-  font-size: 11px;
-  margin: 0;
-  padding: 0;
-  float: right;
+  margin-top: 20px;
+  margin-bottom: 40px;
+  color: #f0f5fa;
+  text-align: center;
 }
-.log-form .forgot:hover {
-  color: #07AD4D;
+.login h1 span {
+  color:#07AD4D;
 }
 
+.login form {
+  height: 100%;
+  padding: 20px;
+  padding-bottom: 40px;
+  background-color: #23282d;
+  border-top: 4px solid #3c4146;
+  border-bottom: 4px solid #3c4146;
+}
+
+.login form input,
+.login form button {
+  width: 100%;
+  margin-bottom: 10px;
+  border: none;
+  outline: none;
+  padding: 10px;
+  background-color: #3c4146;
+  color: #f8f8f2;
+  font-size: 16px;
+  line-height: 1.5em;
+  border-radius: 4px;
+  transition: all .5s ease;
+}
+.login form input::-webkit-input-placeholder,
+.login form button::-webkit-input-placeholder {
+  color: #8c9196;
+}
+.login form input:-ms-input-placeholder,
+.login form button:-ms-input-placeholder {
+  color: #8c9196;
+}
+.login form input::-ms-input-placeholder,
+.login form button::-ms-input-placeholder {
+  color: #8c9196;
+}
+.login form input::placeholder,
+.login form button::placeholder {
+  color: #8c9196;
+}
+.login form input:focus,
+.login form button:focus {
+  background-color: #50555a;
+}
+
+.login form button[type="submit"] {
+  text-transform: uppercase;
+  font-weight: 700;
+  background-color: #07AD4D;
+  color: #f0f5fa;
+  cursor: pointer;
+  transition: all .5s ease;
+}
+
+.login form button[type="submit"]:hover {
+  background-color: #037835;
+}
+
+.login-a {
+   font-size: 14px;
+   color:#07AD4D;
+}
+
+.rememberlabel {
+  display: block;
+  position:relative;
+  top: 10px;
+  padding-left: 20px;
+  text-indent: -15px;
+
+}
+.rememberinput {
+  width: 13px;
+  height: 13px;
+  padding: 0;
+  margin:0;
+  vertical-align: bottom;
+  position: relative;
+  top: -15px;
+  *overflow: hidden;
+
+}
 /* =================================== */
 /*	Home Page (home.blade.php)
 /* =================================== */
@@ -384,7 +501,39 @@ textarea {
 /*	Basic Style 
 /* =================================== */
 
-/* Disbale text area resizing */
+.main-red-col {
+  color: #ad1707;
+}
+
+.mb650 {
+  margin-bottom: 650px;
+}
+
+.mb350 {
+  margin-bottom: 350px;
+}
+
+.mb250 {
+  margin-bottom: 250px;
+}
+
+.mb150 {
+  margin-bottom: 150px;
+}
+
+.mb300 {
+  margin-bottom: 300px
+}
+
+.mb80 {
+  margin-bottom: 80px
+}
+
+.mb70 {
+  margin-bottom: 70px
+}
+
+/* Disable text area resizing */
 textarea {
   resize: none;
 }
@@ -582,7 +731,6 @@ body > section,
   top: 0; 
 }
 
-
 /* Simple clearfix */
 
 .nav ul:before,
@@ -595,7 +743,6 @@ body > section,
     clear: both;
 }
 
-
 /*=========================================
 	Slider
 ==========================================*/
@@ -604,8 +751,10 @@ body > section,
 	padding: 0;
 }
 
+
+
 /*=========================================
-	Features
+	Advertise Page (advertise.blade.php)
 ==========================================*/
 
 .features {
@@ -632,9 +781,6 @@ body > section,
   font-weight: 600;
   margin-bottom: 25px;
 }
-/*=========================================
-	Advertise Page (advertise.blade.php)
-==========================================*/
 
 /* ---Pricing--- */
 .pt40 {
@@ -770,23 +916,130 @@ body > section,
   margin-top: 15px;
 }
 
-
-
-
 /*=========================================
 	Contact Us
 ==========================================*/
 
-.contact {
-	padding-bottom: 0;
+.contact-header {
+  color:white;
+  margin-bottom:12px;
+  font-size:32px; 
 }
 
-label.error {
-  color: #c0392b;
-  font-weight: normal;
-  text-transform: capitalize;
+.contact-subtext {
+  font-size:15px;
+  color:white;
 }
 
+.contact-sep {
+  color:white;
+}
+
+.contact-call {
+  margin-top:20px;
+  font-size:28px; 
+  color:white;
+}
+
+.contact-call-on {
+  color:#07AD4D;
+  font-size:28px;
+}
+
+.container-form .input,
+.container-form .msg .area{
+   background-color:#F4F6F9;
+  width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+  margin-bottom: 25px;
+  border: 2px solid #e9eaea;
+  font-size: 14px;
+  border-radius: 5px;
+  outline: none;
+  transform: all 0.5s ease;
+}
+
+.contact-main .input{
+  width: 48%;
+  float: left;
+  margin-right: 4%;
+}
+
+.contact-main .input:last-child{
+  margin-right: 0;
+}
+
+.container-form {
+  max-width: 800px;
+  height: 500px;
+  background: transparent;
+  margin: 20px auto;
+  padding: 40px;
+}
+
+.container-message {
+  max-width: 800px;
+  background: transparent;
+  margin: 20px auto;
+}
+
+.container-form .btn {
+  margin-bottom: 20px;
+  border: none;
+  outline: none;
+  padding: 15px 25px;
+  border-radius: 3px;
+  transition: all 0.3s ease;
+  position: relative;
+  left:40%;
+}
+
+.container-form .input:focus,
+.container-form .msg .area:focus{
+   border: 2px solid #07AD4D;
+  transition: all 0.3s ease;
+}
+
+.msg .area{
+  height: 200px;
+}
+
+.container-form .main-save-button {
+  color: #FFF;
+  background-color: #07AD4D;
+}
+.container-form .main-save-button:hover {
+   background-color: #037835;
+  cursor: pointer;
+  color:white;
+}
+
+@media only screen and (max-width: 767px) {
+  .contact-main .input{
+ width: 100%;
+ margin-right: 4%;
+}
+
+.container-form .btn {
+  border: none;
+  outline: none;
+  padding: 15px 25px;
+  border-radius: 3px;
+  transition: all 0.3s ease;
+  position: relative;
+  left:25%;
+}
+
+.contact-phone{
+  display: block;
+  position:relative;
+  top:20px;
+}
+.contact-or{
+  margin-top:110px;
+}
+}
 /*=========================================
 Privacy Policy
 ==========================================*/
@@ -809,6 +1062,7 @@ Privacy Policy
 /*=========================================
 Terms and conditions
 ==========================================*/
+
 .terms h3 {
   line-height:40px;
   font-weight: bold;
@@ -822,7 +1076,7 @@ Terms and conditions
 }
 
 /*=========================================
-	Contact Us
+	Footer
 ==========================================*/
 
 .footer {
