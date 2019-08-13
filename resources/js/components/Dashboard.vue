@@ -1,5 +1,8 @@
 <template>
    <div class="container">
+       <div class="vld-parent">
+            <loading :active.sync="isLoading"></loading>
+       </div>
       <div class="row justify-content-center">
          <h3>Voucher and User overview</h3>
          <div class="col-md-12">
@@ -134,18 +137,27 @@
    </div>
 </template>
 <script>
+import Loading from 'vue-loading-overlay';
+import 'vue-loading-overlay/dist/vue-loading.css';
+
     export default {
         data(){
             return {
-                metric_data: {} 
+                metric_data: {},
+                 isLoading: false
             }
+        },
+         components: {
+            Loading
         },
         methods: {
              getMetrics(){
+                this.isLoading = true;
                 axios.get('api/metrics').then(response => {
                 this.metric_data = response.data;
                 this.loadPageViewsChart(this.metric_data);
                 this.loadBrowserChart(this.metric_data);
+                this.isLoading = false;
             });
             },
             loadPageViewsChart(metric_data){
@@ -258,9 +270,7 @@
             }
         },
         mounted() {
-           
            this.getMetrics();
-
         }
     }
 </script>

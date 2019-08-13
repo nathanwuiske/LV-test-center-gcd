@@ -46,7 +46,7 @@
                            <td>{{voucher.popular_flag}}</td>
                            <!-- Display tags -->
                            <td v-if="voucher.gettags.length == 0">-</td>
-                           <div v-for="tag in voucher.gettags" :key="tag.id">
+                           <div v-for="tag in voucher.gettags" :key="tag.tag_title">
                               <td>{{tag.tag_title}}</td>
                            </div>
                            <!-- End of Display tags -->
@@ -119,8 +119,8 @@
                         <label>Expiry Date</label><span v-show="!editmode" class="red">&#42; </span> 
                         <input v-model="voucherForm.expiry_date" type="date" name="expiry_date"
                            class="form-control" :class="{ 'is-invalid': voucherForm.errors.has('expiry_date') }">
-                        <has-error :form="voucherForm" field="expiry_date"></has-error>
-                     </div>
+                        <has-error :form="voucherForm" field="expiry_date"></has-error>					
+                     </div>	 
                      <!-- Popular form input -->
                      <div class="form-group">
                         <label>Popular voucher?</label><span class="red">&#42;</span>
@@ -318,6 +318,7 @@
 			},
 			createVoucher() {
 				this.$Progress.start();
+				//this.voucherForm.expiry_date = moment(this.voucherForm.expiry_date).format("YYYY-MM-DD");
 				this.voucherForm.post('api/voucher')
 					.then(() => {
 
