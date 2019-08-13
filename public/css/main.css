@@ -1,3 +1,10 @@
+
+/*Stop page moving left/right on smaller screens  */
+
+@media only screen and (max-width: 1025px) {
+  html, body {width: auto!important; overflow-x: hidden!important} 
+}
+
 /* =================================== */
 /*	Account Page
 /* =================================== */
@@ -545,7 +552,7 @@ textarea {
 
 body {
     background-color: #F4F6F9;
-    font-family: "Ubuntu";
+    font-family: "Ubuntu", "Arial";
     line-height: 21px;
 	  font-size: 13px;
     color: #6a737b;

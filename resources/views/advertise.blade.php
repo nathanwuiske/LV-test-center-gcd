@@ -111,7 +111,7 @@
    <div class="container">
       <div class="row">
          <h2 class="text-center mb10">Package 2</h2>
-         <p class="text-center fontSize17 mb20">Promote your business to the MAX with (4x) Powerful Ads for a FULL 12 Months</p>
+         <p class="text-center fontSize17 mb20">Promote your business to the MAX with 4 Powerful Ads for 12 Months</p>
          <p class="text-center fontSize17 mb20">This includes</p>
 
          <!-- Start info item -->
