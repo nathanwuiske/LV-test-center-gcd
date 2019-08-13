@@ -2765,10 +2765,43 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      metric_data: ''
+      metric_data: {}
     };
   },
   methods: {
@@ -2777,6 +2810,94 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.get('api/metrics').then(function (response) {
         _this.metric_data = response.data;
+
+        _this.loadPageViewsChart(_this.metric_data);
+
+        _this.loadBrowserChart(_this.metric_data);
+      });
+    },
+    loadPageViewsChart: function loadPageViewsChart(metric_data) {
+      var ctx = document.getElementById('myChart').getContext('2d');
+      var i;
+      var arr = [];
+      var labels = [];
+
+      for (i = 0; i < metric_data.mostVisited.length; i++) {
+        arr.push(metric_data.mostVisited[i].pageViews);
+        labels.push(metric_data.mostVisited[i].url);
+      }
+
+      var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: labels,
+          datasets: [{
+            label: '# of Views',
+            data: arr,
+            backgroundColor: ['rgba(255, 99, 132)', 'rgba(54, 162, 235)', 'rgba(255, 206, 86)', 'rgba(75, 192, 192)', 'rgba(153, 102, 255)', 'rgba(255, 159, 64)'],
+            borderColor: ['rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)', 'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)', 'rgba(255, 159, 64, 1)'],
+            borderWidth: 1
+          }]
+        },
+        options: {
+          legend: {
+            display: false
+          },
+          title: {
+            display: true,
+            text: 'Most Visited Pages (last 7 days)'
+          },
+          responsive: true,
+          scales: {
+            yAxes: [{
+              ticks: {
+                beginAtZero: true
+              }
+            }]
+          }
+        }
+      });
+    },
+    loadBrowserChart: function loadBrowserChart(metric_data) {
+      var ctx = document.getElementById('browserChart').getContext('2d');
+      var i;
+      var browserData = [];
+      var labels = [];
+
+      for (i = 0; i < metric_data.browser.length; i++) {
+        browserData.push(metric_data.browser[i].sessions);
+        labels.push(metric_data.browser[i].browser);
+      }
+
+      var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: labels,
+          datasets: [{
+            label: '# of Sessions',
+            data: browserData,
+            backgroundColor: ['rgba(255, 99, 132)', 'rgba(54, 162, 235)', 'rgba(255, 206, 86)', 'rgba(75, 192, 192)', 'rgba(153, 102, 255)', 'rgba(255, 159, 64)'],
+            borderColor: ['rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)', 'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)', 'rgba(255, 159, 64, 1)'],
+            borderWidth: 1
+          }]
+        },
+        options: {
+          legend: {
+            display: false
+          },
+          title: {
+            display: true,
+            text: 'Top Browsers Used'
+          },
+          responsive: true,
+          scales: {
+            yAxes: [{
+              ticks: {
+                beginAtZero: true
+              }
+            }]
+          }
+        }
       });
     }
   },
@@ -73499,7 +73620,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container" }, [
     _c("div", { staticClass: "row justify-content-center" }, [
-      _c("h3", [_vm._v("Voucher and User data")]),
+      _c("h3", [_vm._v("Voucher and User overview")]),
       _vm._v(" "),
       _c("div", { staticClass: "col-md-12" }, [
         _c("div", { staticClass: "row" }, [
@@ -73519,25 +73640,11 @@ var render = function() {
             ])
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "col-12 col-sm-3 col-md-3" }, [
-            _c("div", { staticClass: "info-box mb-3" }, [
-              _vm._m(1),
-              _vm._v(" "),
-              _c("div", { staticClass: "info-box-content" }, [
-                _c("span", { staticClass: "info-box-text" }, [
-                  _vm._v("Total Users")
-                ]),
-                _vm._v(" "),
-                _c("h3", [_vm._v(_vm._s(_vm.metric_data["countTotalUsers"]))])
-              ])
-            ])
-          ]),
-          _vm._v(" "),
           _c("div", { staticClass: "clearfix hidden-md-up" }),
           _vm._v(" "),
           _c("div", { staticClass: "col-12 col-sm-3 col-md-3" }, [
             _c("div", { staticClass: "info-box mb-3" }, [
-              _vm._m(2),
+              _vm._m(1),
               _vm._v(" "),
               _c("div", { staticClass: "info-box-content" }, [
                 _c("span", { staticClass: "info-box-text" }, [
@@ -73547,6 +73654,20 @@ var render = function() {
                 _c("h3", [
                   _vm._v(_vm._s(_vm.metric_data["countVouchersToday"]))
                 ])
+              ])
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-12 col-sm-3 col-md-3" }, [
+            _c("div", { staticClass: "info-box mb-3" }, [
+              _vm._m(2),
+              _vm._v(" "),
+              _c("div", { staticClass: "info-box-content" }, [
+                _c("span", { staticClass: "info-box-text" }, [
+                  _vm._v("Total Users")
+                ]),
+                _vm._v(" "),
+                _c("h3", [_vm._v(_vm._s(_vm.metric_data["countTotalUsers"]))])
               ])
             ])
           ]),
@@ -73565,23 +73686,81 @@ var render = function() {
             ])
           ])
         ])
+      ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "row justify-content-center" }, [
+      _c("div", { staticClass: "col-md-12" }, [
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "clearfix hidden-md-up" }),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-12 col-sm-6 col-md-6" }, [
+            _c("div", { staticClass: "info-box mb-3" }, [
+              _vm._m(4),
+              _vm._v(" "),
+              _c("div", { staticClass: "info-box-content" }, [
+                _c("span", { staticClass: "info-box-text" }, [
+                  _vm._v("Active Users")
+                ]),
+                _vm._v(" "),
+                _c("h3", [
+                  _vm._v(
+                    _vm._s(_vm.metric_data["activeUsers"]) +
+                      " user(s) online right now"
+                  )
+                ])
+              ])
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-12 col-sm-6 col-md-6" }, [
+            _c("div", { staticClass: "info-box mb-3" }, [
+              _vm._m(5),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "info-box-content" },
+                [
+                  _c("span", { staticClass: "info-box-text" }, [
+                    _vm._v("Site activity (last 7 days)")
+                  ]),
+                  _vm._v(" "),
+                  _vm._l(_vm.metric_data.pageVisits, function(page) {
+                    return _c("h3", { key: page.pageTitle }, [
+                      _vm._v(
+                        "\n                       " +
+                          _vm._s(page.visitors) +
+                          " vistors"
+                      )
+                    ])
+                  })
+                ],
+                2
+              )
+            ])
+          ])
+        ])
       ]),
       _vm._v(" "),
       _c("h3", [_vm._v("User activity")])
     ]),
     _vm._v(" "),
-    _c("p", { staticClass: "text-center" }, [_vm._v("To be added.")]),
+    _c("canvas", { attrs: { id: "myChart", width: "400", height: "200" } }),
+    _vm._v(" "),
+    _c("canvas", {
+      attrs: { id: "browserChart", width: "400", height: "200" }
+    }),
     _vm._v(" "),
     _c("div", { staticClass: "col-md-12" }, [
       _c("div", { staticClass: "card" }, [
-        _vm._m(4),
+        _vm._m(6),
         _vm._v(" "),
         _c("div", { staticClass: "card-body table-responsive p-0" }, [
           _c("table", { staticClass: "table table-hover" }, [
             _c(
               "tbody",
               [
-                _vm._m(5),
+                _vm._m(7),
                 _vm._v(" "),
                 _vm._l(_vm.metric_data.favourited, function(voucher) {
                   return _c("tr", { key: voucher.id }, [
@@ -73604,14 +73783,14 @@ var render = function() {
     _vm._v(" "),
     _c("div", { staticClass: "col-md-12" }, [
       _c("div", { staticClass: "card" }, [
-        _vm._m(6),
+        _vm._m(8),
         _vm._v(" "),
         _c("div", { staticClass: "card-body table-responsive p-0" }, [
           _c("table", { staticClass: "table table-hover" }, [
             _c(
               "tbody",
               [
-                _vm._m(7),
+                _vm._m(9),
                 _vm._v(" "),
                 _vm._l(_vm.metric_data.redeemed, function(voucher) {
                   return _c("tr", { key: voucher.id }, [
@@ -73638,8 +73817,16 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("span", { staticClass: "info-box-icon bg-success elevation-1" }, [
+    return _c("span", { staticClass: "info-box-icon bg-primary elevation-1" }, [
       _c("i", { staticClass: "fas fa-columns" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", { staticClass: "info-box-icon bg-primary elevation-1" }, [
+      _c("i", { staticClass: "far fa-plus-square" })
     ])
   },
   function() {
@@ -73654,16 +73841,24 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("span", { staticClass: "info-box-icon bg-danger elevation-1" }, [
-      _c("i", { staticClass: "far fa-plus-square" })
+    return _c("span", { staticClass: "info-box-icon bg-primary elevation-1" }, [
+      _c("i", { staticClass: "fa fa-user-plus" })
     ])
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("span", { staticClass: "info-box-icon bg-warning elevation-1" }, [
-      _c("i", { staticClass: "fa fa-user-plus" })
+    return _c("span", { staticClass: "info-box-icon bg-primary elevation-1" }, [
+      _c("i", { staticClass: "fas fa-user-alt" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", { staticClass: "info-box-icon bg-primary elevation-1" }, [
+      _c("i", { staticClass: "fas fa-user-circle" })
     ])
   },
   function() {

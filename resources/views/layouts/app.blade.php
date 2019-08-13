@@ -17,6 +17,8 @@
       <!-- Scripts -->
       <script src="/js/jquery-1.11.1.min.js"></script>
       <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCC6emn13XOdxMhZAsbaGIgt2HcK3iKAoc"></script>
+      <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0/dist/Chart.min.js"></script>
+      
       <script src="{{ asset('js/app.js') }}" defer></script>
    </head>
    <body>
