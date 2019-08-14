@@ -13,7 +13,7 @@ let routes = [
     { path: '/categories', component: require('./components/Categories.vue').default },
     { path: '/tags', component: require('./components/Tags.vue').default },
     { path: '/archived', component: require('./components/Archived.vue').default },
-    { path: '/reports', component: require('./components/Reports.vue').default },
+    { path: '/issues', component: require('./components/Issues.vue').default },
     { path: '/messages', component: require('./components/Messages.vue').default },
     { path: '/locations', component: require('./components/Locations.vue').default },
     { path: '/business', component: require('./components/Business.vue').default }

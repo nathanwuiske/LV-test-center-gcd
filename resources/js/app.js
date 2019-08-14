@@ -45,11 +45,20 @@ Vue.component(AlertError.name, AlertError)
 Vue.filter('formatDate', function(expiryDate){
     return moment(expiryDate).format('Do MMMM YYYY');
 });
+
 /* Capitalize the first character */
 Vue.filter('capitalize', function (text) {
     if (!text) return ''
     text = text.toString()
     return text.charAt(0).toUpperCase() + text.slice(1)
+});
+
+/* Get string from int value */
+Vue.filter('isResolved', function (resolveValue) {
+    if(resolveValue == 1){
+        return 'Yes';
+    }
+    return 'No';
 });
 
 /* Remove https://, http:// and www. from the start of URLs */

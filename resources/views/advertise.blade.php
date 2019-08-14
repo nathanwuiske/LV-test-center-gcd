@@ -172,7 +172,7 @@
          <!-- end service item -->
 
           <!-- Start info item -->
-         <div class="col-md-4 wow fadeInRight" data-wow-duration="500ms" data-wow-delay="1500ms">
+         <div class="col-md-4 wow fadeInLeft" data-wow-duration="500ms" data-wow-delay="500ms">
             <div class="service-item">
                <div class="service-icon">
                   <i class="fas fa-palette fa-2x"></i>

@@ -22,6 +22,8 @@ class CreateVouchersTable extends Migration
             $table->date('expiry_date')->nullable();
             $table->integer('timeout')->default(15);
             $table->string('website_link')->nullable();
+            $table->string('latitude')->nullable();
+            $table->string('longitude')->nullable();
             $table->integer('popular_flag')->nullable();
             $table->softDeletes();
             $table->timestamps();

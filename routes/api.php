@@ -17,6 +17,7 @@ Route::apiResource('vouchercategory', 'API\VoucherCategoryController');
 Route::apiResource('archived', 'API\ArchivedController');
 Route::apiResource('business', 'API\BusinessController');
 Route::apiResource('location', 'API\LocationController');
+Route::apiResource('issue', 'API\IssueController');
 
 /* Get all the tags and categories in a single endpoint */
 Route::get('categoryall', 'API\CategoryController@categoryall');

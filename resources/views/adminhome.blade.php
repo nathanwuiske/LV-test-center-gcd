@@ -24,9 +24,9 @@
                         </router-link>
                      </li>
                   <li class="nav-item">
-                     <router-link to="/reports" class="nav-link">
+                     <router-link to="/issues" class="nav-link">
                         <i class="nav-icon fas fa-exclamation"></i>
-                        <p class="white">User Reports</p>
+                        <p class="white">User Issues</p>
                      </router-link>
                   </li>
                   <li class="nav-header" style="color: white">Voucher Management</li>
