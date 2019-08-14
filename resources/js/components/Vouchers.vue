@@ -321,7 +321,6 @@
 				//this.voucherForm.expiry_date = moment(this.voucherForm.expiry_date).format("YYYY-MM-DD");
 				this.voucherForm.post('api/voucher')
 					.then(() => {
-
 						/* If the post was successful then hide the modal and print success message */
 						Fire.$emit('RefreshVouchers');
 						$('#addNewVoucher').modal('hide');

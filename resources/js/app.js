@@ -7,6 +7,11 @@ import swal from 'sweetalert2'
 import { Datetime } from 'vue-datetime';
 import 'vue-datetime/dist/vue-datetime.css'
 import VueProgressBar from 'vue-progressbar'
+import Loading from 'vue-loading-overlay';
+import 'vue-loading-overlay/dist/vue-loading.css';
+
+/* Loading animation for Admin Panel */
+Vue.component('loading', Loading)
 
 /* Vue progress bar */
 Vue.use(VueProgressBar, {

@@ -32,7 +32,7 @@ class MetricsController extends Controller
         $metrics['countVouchersToday'] = DB::table('vouchers')->where('created_at', '>=', Carbon::today())->count();
         $metrics['mostVisited'] =  Analytics::fetchMostVisitedPages(Period::days(7), 7);
         $metrics['browser'] =  Analytics::fetchTopBrowsers(Period::days(7));
-        $metrics['pageVisits'] = Analytics::fetchVisitorsAndPageViews(Period::days(7), 5);
+        $metrics['pageVisits'] = Analytics::fetchVisitorsAndPageViews(Period::days(30), 5);
         $metrics['activeUsers'] = Analytics::getAnalyticsService()->data_realtime->get('ga:'.env('ANALYTICS_VIEW_ID'), 'rt:activeVisitors')->totalsForAllResults['rt:activeVisitors'];
         return $metrics;
     }

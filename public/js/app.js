@@ -2663,10 +2663,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vue_loading_overlay__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-loading-overlay */ "./node_modules/vue-loading-overlay/dist/vue-loading.min.js");
-/* harmony import */ var vue_loading_overlay__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue_loading_overlay__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var vue_loading_overlay_dist_vue_loading_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-loading-overlay/dist/vue-loading.css */ "./node_modules/vue-loading-overlay/dist/vue-loading.css");
-/* harmony import */ var vue_loading_overlay_dist_vue_loading_css__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue_loading_overlay_dist_vue_loading_css__WEBPACK_IMPORTED_MODULE_1__);
 //
 //
 //
@@ -2785,37 +2781,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       metric_data: {},
       isLoading: false
     };
-  },
-  components: {
-    Loading: vue_loading_overlay__WEBPACK_IMPORTED_MODULE_0___default.a
   },
   methods: {
     getMetrics: function getMetrics() {
@@ -2828,6 +2799,8 @@ __webpack_require__.r(__webpack_exports__);
         _this.loadPageViewsChart(_this.metric_data);
 
         _this.loadBrowserChart(_this.metric_data);
+
+        _this.loadVisitorChart(_this.metric_data);
 
         _this.isLoading = false;
       });
@@ -2862,6 +2835,49 @@ __webpack_require__.r(__webpack_exports__);
           title: {
             display: true,
             text: 'Most Visited Pages (last 7 days)'
+          },
+          responsive: true,
+          scales: {
+            yAxes: [{
+              ticks: {
+                beginAtZero: true
+              }
+            }]
+          }
+        }
+      });
+    },
+    loadVisitorChart: function loadVisitorChart(metric_data) {
+      var ctx = document.getElementById('visitorChart').getContext('2d');
+      var i;
+      var visitData = [];
+      var labels = [];
+
+      for (i = 0; i < metric_data.pageVisits.length; i++) {
+        visitData.push(metric_data.pageVisits[i].visitors);
+        labels.push(moment(metric_data.pageVisits[i].date).format("DD-MM"));
+      }
+
+      var myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: labels,
+          datasets: [{
+            label: '# of Sessions',
+            data: visitData,
+            fill: false,
+            backgroundColor: ['#5ABFC0'],
+            borderColor: ['#5ABFC0'],
+            pointBorderColor: ['#5ABFC0']
+          }]
+        },
+        options: {
+          legend: {
+            display: false
+          },
+          title: {
+            display: true,
+            text: 'Website Visitors this month'
           },
           responsive: true,
           scales: {
@@ -73746,10 +73762,8 @@ var render = function() {
         _c("div", { staticClass: "row" }, [
           _c("div", { staticClass: "clearfix hidden-md-up" }),
           _vm._v(" "),
-          _c("div", { staticClass: "col-12 col-sm-6 col-md-6" }, [
+          _c("div", { staticClass: "col-12 col-sm-12 col-md-12 text-center" }, [
             _c("div", { staticClass: "info-box mb-3" }, [
-              _vm._m(4),
-              _vm._v(" "),
               _c("div", { staticClass: "info-box-content" }, [
                 _c("span", { staticClass: "info-box-text" }, [
                   _vm._v("Active Users")
@@ -73758,37 +73772,74 @@ var render = function() {
                 _c("h3", [
                   _vm._v(
                     _vm._s(_vm.metric_data["activeUsers"]) +
-                      " user(s) online right now"
+                      " website users online right now"
                   )
                 ])
               ])
             ])
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "col-12 col-sm-6 col-md-6" }, [
+          _c("div", { staticClass: "col-12 col-sm-6 col-md-6 text-center" }, [
             _c("div", { staticClass: "info-box mb-3" }, [
-              _vm._m(5),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "info-box-content" },
-                [
-                  _c("span", { staticClass: "info-box-text" }, [
-                    _vm._v("Site activity (last 7 days)")
-                  ]),
-                  _vm._v(" "),
-                  _vm._l(_vm.metric_data.pageVisits, function(page) {
-                    return _c("h3", { key: page.pageTitle }, [
-                      _vm._v(
-                        "\n                       " +
-                          _vm._s(page.visitors) +
-                          " vistors"
-                      )
-                    ])
-                  })
-                ],
-                2
-              )
+              _c("div", { staticClass: "info-box-content" }, [
+                _c("span", { staticClass: "info-box-text" }, [
+                  _vm._v("Top 5 Redeemed Vouchers")
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "table-responsive p-0" }, [
+                  _c("table", { staticClass: "table table-hover" }, [
+                    _c(
+                      "tbody",
+                      [
+                        _vm._m(4),
+                        _vm._v(" "),
+                        _vm._l(_vm.metric_data.redeemed, function(voucher) {
+                          return _c("tr", { key: voucher.id }, [
+                            _c("td", [_vm._v(_vm._s(voucher.voucher_id))]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(voucher.name))]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(voucher.redeem_count))])
+                          ])
+                        })
+                      ],
+                      2
+                    )
+                  ])
+                ])
+              ])
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-12 col-sm-6 col-md-6 text-center" }, [
+            _c("div", { staticClass: "info-box mb-3" }, [
+              _c("div", { staticClass: "info-box-content" }, [
+                _c("span", { staticClass: "info-box-text" }, [
+                  _vm._v("Top 5 Favourited Vouchers")
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "table-responsive p-0" }, [
+                  _c("table", { staticClass: "table table-hover" }, [
+                    _c(
+                      "tbody",
+                      [
+                        _vm._m(5),
+                        _vm._v(" "),
+                        _vm._l(_vm.metric_data.favourited, function(voucher) {
+                          return _c("tr", { key: voucher.id }, [
+                            _c("td", [_vm._v(_vm._s(voucher.voucher_id))]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(voucher.name))]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(voucher.favourite_count))])
+                          ])
+                        })
+                      ],
+                      2
+                    )
+                  ])
+                ])
+              ])
             ])
           ])
         ])
@@ -73797,71 +73848,13 @@ var render = function() {
       _c("h3", [_vm._v("User activity")])
     ]),
     _vm._v(" "),
-    _c("canvas", { attrs: { id: "myChart", width: "400", height: "200" } }),
-    _vm._v(" "),
     _c("canvas", {
-      attrs: { id: "browserChart", width: "400", height: "200" }
+      attrs: { id: "visitorChart", width: "400", height: "200" }
     }),
     _vm._v(" "),
-    _c("div", { staticClass: "col-md-12" }, [
-      _c("div", { staticClass: "card" }, [
-        _vm._m(6),
-        _vm._v(" "),
-        _c("div", { staticClass: "card-body table-responsive p-0" }, [
-          _c("table", { staticClass: "table table-hover" }, [
-            _c(
-              "tbody",
-              [
-                _vm._m(7),
-                _vm._v(" "),
-                _vm._l(_vm.metric_data.favourited, function(voucher) {
-                  return _c("tr", { key: voucher.id }, [
-                    _c("td", [_vm._v(_vm._s(voucher.voucher_id))]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(voucher.name))]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(voucher.favourite_count))])
-                  ])
-                })
-              ],
-              2
-            )
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "card-footer" })
-      ])
-    ]),
+    _c("canvas", { attrs: { id: "myChart", width: "400", height: "200" } }),
     _vm._v(" "),
-    _c("div", { staticClass: "col-md-12" }, [
-      _c("div", { staticClass: "card" }, [
-        _vm._m(8),
-        _vm._v(" "),
-        _c("div", { staticClass: "card-body table-responsive p-0" }, [
-          _c("table", { staticClass: "table table-hover" }, [
-            _c(
-              "tbody",
-              [
-                _vm._m(9),
-                _vm._v(" "),
-                _vm._l(_vm.metric_data.redeemed, function(voucher) {
-                  return _c("tr", { key: voucher.id }, [
-                    _c("td", [_vm._v(_vm._s(voucher.voucher_id))]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(voucher.name))]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(voucher.redeem_count))])
-                  ])
-                })
-              ],
-              2
-            )
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "card-footer" })
-      ])
-    ])
+    _c("canvas", { attrs: { id: "browserChart", width: "400", height: "200" } })
   ])
 }
 var staticRenderFns = [
@@ -73901,26 +73894,12 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("span", { staticClass: "info-box-icon bg-primary elevation-1" }, [
-      _c("i", { staticClass: "fas fa-user-alt" })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("span", { staticClass: "info-box-icon bg-primary elevation-1" }, [
-      _c("i", { staticClass: "fas fa-user-circle" })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-header" }, [
-      _c("h3", { staticClass: "card-title" }, [
-        _vm._v("Top 5 Favourited Vouchers")
-      ])
+    return _c("tr", [
+      _c("th", [_vm._v("Voucher ID")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Voucher Name")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Redeem Count")])
     ])
   },
   function() {
@@ -73933,28 +73912,6 @@ var staticRenderFns = [
       _c("th", [_vm._v("Voucher Name")]),
       _vm._v(" "),
       _c("th", [_vm._v("Favourite Count")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-header" }, [
-      _c("h3", { staticClass: "card-title" }, [
-        _vm._v("Top 5 Redeemed Vouchers")
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("tr", [
-      _c("th", [_vm._v("Voucher ID")]),
-      _vm._v(" "),
-      _c("th", [_vm._v("Voucher Name")]),
-      _vm._v(" "),
-      _c("th", [_vm._v("Redeem Count")])
     ])
   }
 ]
@@ -92148,6 +92105,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_datetime_dist_vue_datetime_css__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(vue_datetime_dist_vue_datetime_css__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var vue_progressbar__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! vue-progressbar */ "./node_modules/vue-progressbar/dist/vue-progressbar.js");
 /* harmony import */ var vue_progressbar__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(vue_progressbar__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var vue_loading_overlay__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! vue-loading-overlay */ "./node_modules/vue-loading-overlay/dist/vue-loading.min.js");
+/* harmony import */ var vue_loading_overlay__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(vue_loading_overlay__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var vue_loading_overlay_dist_vue_loading_css__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! vue-loading-overlay/dist/vue-loading.css */ "./node_modules/vue-loading-overlay/dist/vue-loading.css");
+/* harmony import */ var vue_loading_overlay_dist_vue_loading_css__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(vue_loading_overlay_dist_vue_loading_css__WEBPACK_IMPORTED_MODULE_8__);
 /* Dependencies */
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
@@ -92158,6 +92119,11 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 
 
+
+
+/* Loading animation for Admin Panel */
+
+Vue.component('loading', vue_loading_overlay__WEBPACK_IMPORTED_MODULE_7___default.a);
 /* Vue progress bar */
 
 Vue.use(vue_progressbar__WEBPACK_IMPORTED_MODULE_6___default.a, {
