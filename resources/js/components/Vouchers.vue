@@ -38,7 +38,7 @@
                            <td>{{voucher.id}}</td>
                            <td>{{voucher.name}}</td>
                            <td class="truncateText">
-                              <span>{{voucher.description}}</span><!--<a href="#">view more</a>-->
+                              <span>{{voucher.description}}</span>
                            </td>
                            <td>{{voucher.expiry_date | formatDate}}</td>
                            <td class="truncateText"><span>{{voucher.website_link | cleanURL}}</span></td>
@@ -50,7 +50,7 @@
                               <td>{{tag.tag_title}}</td>
                            </div>
                            <!-- End of Display tags -->
-                           <td><a href="#" @click="getImage(voucher.image)">Show</a></td>
+                           <td><a @click="getImage(voucher.image)">Show</a></td>
                            <!-- Display categories -->
                            <td v-if="voucher.get_categories.length == 0">-</td>
                            <div v-for="category in voucher.get_categories" :key="category.id">
@@ -58,9 +58,9 @@
                            </div>
                            <!-- End of Display tags -->
                            <td>
-                              <a href="#" @click="editVoucherModal(voucher)"> <i class="far fas fa-pencil-alt"  style="color: #FFC107;"></i></a>
-                              <a href="#" @click="archiveVoucher(voucher.id, voucher.name)"><i class="fas fa-archive" style="color: #428bca;"></i></a>
-                              <a href="#" @click="deleteVoucher(voucher.id, voucher.name)"><i class="fas fa-trash red"></i></a>
+                              <a class="cursor-pointer" @click="editVoucherModal(voucher)"> <i class="far fas fa-pencil-alt"  style="color: #FFC107;"></i></a>
+                              <a class="cursor-pointer" @click="archiveVoucher(voucher.id, voucher.name)"><i class="fas fa-archive" style="color: #428bca;"></i></a>
+                              <a class="cursor-pointer" @click="deleteVoucher(voucher.id, voucher.name)"><i class="fas fa-trash red"></i></a>
                            </td>
                         </tr>
                      </tbody>

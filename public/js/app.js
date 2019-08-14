@@ -72271,7 +72271,7 @@ var render = function() {
                         _c(
                           "a",
                           {
-                            attrs: { href: "#" },
+                            staticClass: "cursor-pointer",
                             on: {
                               click: function($event) {
                                 return _vm.restoreVoucher(
@@ -72281,7 +72281,12 @@ var render = function() {
                               }
                             }
                           },
-                          [_c("i", { staticClass: "fas fa-trash-restore" })]
+                          [
+                            _c("i", {
+                              staticClass: "fas fa-trash-restore",
+                              staticStyle: { color: "#4B8ADC" }
+                            })
+                          ]
                         )
                       ])
                     ])
@@ -72465,7 +72470,6 @@ var render = function() {
                         _c(
                           "a",
                           {
-                            attrs: { href: "#" },
                             on: {
                               click: function($event) {
                                 return _vm.getImage(business.image)
@@ -72480,7 +72484,7 @@ var render = function() {
                         _c(
                           "a",
                           {
-                            attrs: { href: "#" },
+                            staticClass: "cursor-pointer",
                             on: {
                               click: function($event) {
                                 return _vm.editBusinessModal(business)
@@ -72498,7 +72502,7 @@ var render = function() {
                         _c(
                           "a",
                           {
-                            attrs: { href: "#" },
+                            staticClass: "cursor-pointer",
                             on: {
                               click: function($event) {
                                 return _vm.deleteBusiness(
@@ -73003,7 +73007,7 @@ var render = function() {
                         _c(
                           "a",
                           {
-                            attrs: { href: "#" },
+                            staticClass: "cursor-pointer",
                             on: {
                               click: function($event) {
                                 return _vm.editCategory(category)
@@ -73021,7 +73025,7 @@ var render = function() {
                         _c(
                           "a",
                           {
-                            attrs: { href: "#" },
+                            staticClass: "cursor-pointer",
                             on: {
                               click: function($event) {
                                 return _vm.deleteCategoryTitle(
@@ -73162,7 +73166,7 @@ var render = function() {
                           _c(
                             "a",
                             {
-                              attrs: { href: "#" },
+                              staticClass: "cursor-pointer",
                               on: {
                                 click: function($event) {
                                   return _vm.categorymodal(voucher.id)
@@ -73175,7 +73179,7 @@ var render = function() {
                           _c(
                             "a",
                             {
-                              attrs: { href: "#" },
+                              staticClass: "cursor-pointer",
                               on: {
                                 click: function($event) {
                                   return _vm.deleteCategory(voucher)
@@ -74184,7 +74188,7 @@ var render = function() {
                         _c(
                           "a",
                           {
-                            attrs: { href: "#" },
+                            staticClass: "cursor-pointer",
                             on: {
                               click: function($event) {
                                 return _vm.deleteIssue(issue.id)
@@ -74488,7 +74492,7 @@ var render = function() {
                         _c(
                           "a",
                           {
-                            attrs: { href: "#" },
+                            staticClass: "cursor-pointer",
                             on: {
                               click: function($event) {
                                 return _vm.editLocationModal(voucher)
@@ -75090,7 +75094,7 @@ var render = function() {
                         _c(
                           "a",
                           {
-                            attrs: { href: "#" },
+                            staticClass: "cursor-pointer",
                             on: {
                               click: function($event) {
                                 return _vm.editTag(tag)
@@ -75108,7 +75112,7 @@ var render = function() {
                         _c(
                           "a",
                           {
-                            attrs: { href: "#" },
+                            staticClass: "cursor-pointer",
                             on: {
                               click: function($event) {
                                 return _vm.deleteTagTitle(tag.id, tag.tag_title)
@@ -75188,7 +75192,7 @@ var render = function() {
                           _c(
                             "a",
                             {
-                              attrs: { href: "#" },
+                              staticClass: "cursor-pointer",
                               on: {
                                 click: function($event) {
                                   return _vm.tagmodal(voucher.id)
@@ -75201,7 +75205,7 @@ var render = function() {
                           _c(
                             "a",
                             {
-                              attrs: { href: "#" },
+                              staticClass: "cursor-pointer",
                               on: {
                                 click: function($event) {
                                   return _vm.deleteTag(voucher)
@@ -75971,7 +75975,7 @@ var render = function() {
                         _c(
                           "a",
                           {
-                            attrs: { href: "#" },
+                            staticClass: "cursor-pointer",
                             on: {
                               click: function($event) {
                                 return _vm.editUserModal(user)
@@ -76479,7 +76483,6 @@ var render = function() {
                           _c(
                             "a",
                             {
-                              attrs: { href: "#" },
                               on: {
                                 click: function($event) {
                                   return _vm.getImage(voucher.image)
@@ -76504,7 +76507,7 @@ var render = function() {
                           _c(
                             "a",
                             {
-                              attrs: { href: "#" },
+                              staticClass: "cursor-pointer",
                               on: {
                                 click: function($event) {
                                   return _vm.editVoucherModal(voucher)
@@ -76522,7 +76525,7 @@ var render = function() {
                           _c(
                             "a",
                             {
-                              attrs: { href: "#" },
+                              staticClass: "cursor-pointer",
                               on: {
                                 click: function($event) {
                                   return _vm.archiveVoucher(
@@ -76543,7 +76546,7 @@ var render = function() {
                           _c(
                             "a",
                             {
-                              attrs: { href: "#" },
+                              staticClass: "cursor-pointer",
                               on: {
                                 click: function($event) {
                                   return _vm.deleteVoucher(

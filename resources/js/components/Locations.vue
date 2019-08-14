@@ -23,7 +23,7 @@
                            <td>{{voucher.latitude}}</td>
                            <td>{{voucher.longitude}}</td>
                            <td>
-                              <a href="#" @click="editLocationModal(voucher)"> <i class="far fas fa-pencil-alt"  style="color: #FFC107;"></i></a>
+                              <a class="cursor-pointer" @click="editLocationModal(voucher)"> <i class="far fas fa-pencil-alt"  style="color: #FFC107;"></i></a>
                            </td>
                         </tr>
                      </tbody>

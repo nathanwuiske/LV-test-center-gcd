@@ -31,7 +31,7 @@
                            <td>{{archive.popular_flag}}</td>
                            <td><a href="#" @click="getImage(archive.image)">Show</a></td>
                            <td>
-                              <a href="#" @click="restoreVoucher(archive.id, archive.name)"> <i class="fas fa-trash-restore"></i></a>
+                              <a class="cursor-pointer" @click="restoreVoucher(archive.id, archive.name)"> <i class="fas fa-trash-restore" style="color:#4B8ADC;"></i></a>
                            </td>
                         </tr>
                      </tbody>

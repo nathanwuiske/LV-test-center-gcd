@@ -106,9 +106,8 @@ class HomeController extends Controller
                 $query->orWhere('description', 'like', '%' . $term . '%');
             }
         })->latest()->paginate($vouchersPerPage);
+        $vouchers->appends(['search' => $request->get('search'), 'per_page' => "8"]);
   }
-
-
       return view('vouchers')->with('vouchers', $vouchers)->with('categories', $categories)->with('searchname', $request->get('search'));
 
     }
@@ -121,13 +120,16 @@ class HomeController extends Controller
         $selectValue = $request->get('slct');
         $q->where('category_id', '=', $selectValue);
      })->paginate(8);
+     $vouchers->appends(['slct' => $request->get('slct'), 'per_page' => "8"]);
+    
+
 
      foreach ($categories as $category) {
        if($request->get('slct') == $category->id){
          $categoryname = $category->name;
        }  
       }
-      
+     
       
       return view('vouchers')->with('vouchers', $vouchers)->with('categories', $categories)->with('categoryname', $categoryname);
   }

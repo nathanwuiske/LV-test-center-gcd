@@ -21,8 +21,8 @@
                            <td>{{category.id}}</td>
                            <td>{{category.name}}</td>
                            <td>
-                              <a href="#" @click="editCategory(category)"> <i class="far fas fa-pencil-alt"  style="color: #FFC107;"></i></a>
-                              <a href="#" @click="deleteCategoryTitle(category.id, category.name)"><i class="fas fa-trash red"></i></a>
+                              <a class="cursor-pointer" @click="editCategory(category)"> <i class="far fas fa-pencil-alt"  style="color: #FFC107;"></i></a>
+                              <a class="cursor-pointer" @click="deleteCategoryTitle(category.id, category.name)"><i class="fas fa-trash red"></i></a>
                            </td>
                         </tr>
                      </tbody>
@@ -64,8 +64,8 @@
                               <td>{{category.name}}</td>
                            </div>
                            <td>
-                              <a href="#" @click="categorymodal(voucher.id)"><i class="fas fa-plus green"></i></a>
-                              <a href="#" @click="deleteCategory(voucher)"><i class="fas fa-trash red"></i></a>
+                              <a class="cursor-pointer" @click="categorymodal(voucher.id)"><i class="fas fa-plus green"></i></a>
+                              <a class="cursor-pointer" @click="deleteCategory(voucher)"><i class="fas fa-trash red"></i></a>
                            </td>
                         </tr>
                      </tbody>

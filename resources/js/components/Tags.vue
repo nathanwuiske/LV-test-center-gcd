@@ -21,8 +21,8 @@
                            <td>{{tag.id}}</td>
                            <td>{{tag.tag_title}}</td>
                            <td>
-                              <a href="#" @click="editTag(tag)"> <i class="far fas fa-pencil-alt"  style="color: #FFC107;"></i></a>
-                              <a href="#" @click="deleteTagTitle(tag.id, tag.tag_title)"><i class="fas fa-trash red"></i></a>
+                              <a class="cursor-pointer" @click="editTag(tag)"> <i class="far fas fa-pencil-alt"  style="color: #FFC107;"></i></a>
+                              <a class="cursor-pointer" @click="deleteTagTitle(tag.id, tag.tag_title)"><i class="fas fa-trash red"></i></a>
                            </td>
                         </tr>
                      </tbody>
@@ -56,8 +56,8 @@
                               <td>{{tag.tag_title}}</td>
                            </div>
                            <td> 
-                              <a href="#" @click="tagmodal(voucher.id)"><i class="fas fa-plus green"></i></a>
-                              <a href="#" @click="deleteTag(voucher)"><i class="fas fa-trash red"></i></a>
+                              <a class="cursor-pointer" @click="tagmodal(voucher.id)"><i class="fas fa-plus green"></i></a>
+                              <a class="cursor-pointer" @click="deleteTag(voucher)"><i class="fas fa-trash red"></i></a>
                            </td>
                         </tr>
                      </tbody>

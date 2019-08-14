@@ -34,7 +34,7 @@
                            <td>{{user.phone_number}}</td>
                            <td>{{user.created_at | formatDate}}</td>
                            <td>
-                              <a href="#" @click="editUserModal(user)"> <i class="far fas fa-pencil-alt"  style="color: #FFC107;"></i></a>
+                              <a class="cursor-pointer" @click="editUserModal(user)"> <i class="far fas fa-pencil-alt"  style="color: #FFC107;"></i></a>
                            </td>
                         </tr>
                      </tbody>

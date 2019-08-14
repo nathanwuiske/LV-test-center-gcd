@@ -66,9 +66,9 @@ class VoucherController extends Controller
             'name' => 'required|string|max:150', 
             'description' => 'required|string',
             'website_link' => 'nullable|url',
-            'timeout' => 'required|numeric',
+            'timeout' => 'required|numeric'
            // 'expiry_date' => 'required|after:yesterday|before:2030-01-01', 
-            'popular_flag' => 'required'
+            //'popular_flag' => 'required'
         ]);
         $currentImage = $voucher->image;   
         if($request->image != $currentImage) {

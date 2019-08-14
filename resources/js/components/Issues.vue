@@ -31,7 +31,7 @@
                            <td>{{issue.resolved | isResolved}}</td>
                            <td> <a href="#" @click="viewIssueModal(issue)">View</a> </td>
                            <td>
-                              <a href="#" @click="deleteIssue(issue.id)"><i class="fas fa-trash red"></i></a>
+                              <a class="cursor-pointer" @click="deleteIssue(issue.id)"><i class="fas fa-trash red"></i></a>
                            </td>
                         </tr>
                      </tbody>
