@@ -104,9 +104,9 @@
                   <div class="footer-single">
                      <h6>Follow Us</h6>
                      <ul>
-                        <li><a href="https://www.facebook.com/GoldCoastDiscounts/"><img src="/imgs/face.png" width="20" height="20"> Facebook</a></li>
-                        <li><a href="https://twitter.com/DiscountsGold"><img src="/imgs/twitter.png" width="20" height="20"> Twitter</a></li>
-                        <li><a href="https://www.instagram.com/gold_coast_discounts/"><img src="/imgs/instagram.png" width="20" height="20"> Instagram</a></li>
+                        <li><a href="https://www.facebook.com/GoldCoastDiscounts/"><img src="/imgs/footer/facebook.png" width="20" height="20"> Facebook</a></li>
+                        <li><a href="https://twitter.com/DiscountsGold"><img src="/imgs/footer/twitter.png" width="20" height="20"> Twitter</a></li>
+                        <li><a href="https://www.instagram.com/gold_coast_discounts/"><img src="/imgs/footer/instagram.png" width="20" height="20"> Instagram</a></li>
                      </ul>
                   </div>
                </div>

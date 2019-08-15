@@ -1,6 +1,6 @@
 @extends('layouts.main')
 @section('content')
-<style>body { background-image: url(../imgs/contact.jpg); background-size: cover; background-repeat: no-repeat; background-position: center right; }</style>
+<style>body { background-image: url(/imgs/contact/phone-laptop.jpg); background-size: cover; background-repeat: no-repeat; background-position: center right; }</style>
 <div class="mb80"></div>
 <h2 class="text-center contact-header">CONTACT US</h2>
 <p class="text-center contact-subtext"> Have any inquiries? Send us a message!</p>

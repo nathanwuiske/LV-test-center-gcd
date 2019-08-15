@@ -883,7 +883,7 @@ body > section,
 }
 
 #advertiseFacts {
-	background-image: url(../imgs/coast.png);
+	background-image: url(/imgs/packages/coast.png);
 	background-color: rgba(6,32,51,.8);
 	background-attachment: fixed !important;
 	background-position: center center;

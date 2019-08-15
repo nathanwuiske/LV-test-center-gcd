@@ -54,13 +54,13 @@
                      </div>
                         <div class="modal-body">
                            <div class="form-group">
-                              <label>Subject</label>
+                              <label>Problem Subject</label>
                               <input v-model="issueForm.subject" type="text" name="subject" 
                                  class="form-control" :class="{ 'is-invalid': issueForm.errors.has('subject') }">
                               <has-error :form="issueForm" field="subject"></has-error>
                            </div>
                            <div class="form-group">
-                              <label>Description</label>
+                              <label>Problem Description</label>
                               <textarea v-model="issueForm.description" type="text" name="description"
                                  class="form-control" :class="{ 'is-invalid': issueForm.errors.has('description') }"
                                  style="height: 25em;"> </textarea>

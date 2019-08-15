@@ -74329,7 +74329,7 @@ var render = function() {
                       "div",
                       { staticClass: "form-group" },
                       [
-                        _c("label", [_vm._v("Subject")]),
+                        _c("label", [_vm._v("Problem Subject")]),
                         _vm._v(" "),
                         _c("input", {
                           directives: [
@@ -74371,7 +74371,7 @@ var render = function() {
                       "div",
                       { staticClass: "form-group" },
                       [
-                        _c("label", [_vm._v("Description")]),
+                        _c("label", [_vm._v("Problem Description")]),
                         _vm._v(" "),
                         _c("textarea", {
                           directives: [

@@ -13,13 +13,13 @@
     </div>
     <div data-u="slides" class="jssor1-d-slides">
         <div>
-            <img data-u="image" src="1.webp" />
+            <img data-u="image" src="/imgs/homeSlider/home1.jpg" />
         </div>
         <div>
-            <img data-u="image" src="2.webp" />
+            <img data-u="image" src="/imgs/homeSlider/home2.jpg" />
         </div>
         <div>
-            <img data-u="image" src="3.webp" />
+            <img data-u="image" src="/imgs/homeSlider/home3.jpg" />
         </div>
     </div>
     <!-- Bullet Navigator -->
