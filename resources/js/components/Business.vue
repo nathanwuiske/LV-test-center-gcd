@@ -21,7 +21,7 @@
                         <tr v-for="business in businesses.data" :key="business.created_at">
                            <td>{{business.id}}</td>
                            <td>{{business.name}}</td>
-                           <td><a @click="getImage(business.image)">Show</a></td>
+                           <td><a href="#" @click="getImage(business.image)">Show</a></td>
                            <td>
                               <a class="cursor-pointer" @click="editBusinessModal(business)"> <i class="far fas fa-pencil-alt"  style="color: #FFC107;"></i></a>
                               <a class="cursor-pointer" @click="deleteBusiness(business.id, business.name)"><i class="fas fa-trash red"></i></a>

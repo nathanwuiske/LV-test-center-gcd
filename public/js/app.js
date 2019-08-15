@@ -2415,6 +2415,7 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       search: '',
+      currentPage: '',
       categories: {},
       allCategories: {},
       vouchers: {},
@@ -2458,6 +2459,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+      this.currentPage = page;
       axios.get('api/voucher?page=' + page).then(function (response) {
         _this2.vouchers = response.data;
       });
@@ -2626,25 +2628,46 @@ __webpack_require__.r(__webpack_exports__);
         var data = _ref3.data;
         return _this6.vouchers = data;
       });
+    },
+    getVoucherPaginate: function getVoucherPaginate() {
+      var _this7 = this;
+
+      axios.get('api/voucher?page=' + this.currentPage).then(function (response) {
+        _this7.vouchers = response.data;
+      });
+    },
+    getVoucherSearch: function getVoucherSearch() {
+      var _this8 = this;
+
+      var query = this.search;
+      axios.get('api/findVoucher?q=' + query).then(function (data) {
+        _this8.vouchers = data.data;
+      })["catch"](function (error) {
+        console.log(error);
+      });
     }
   },
   mounted: function mounted() {
-    var _this7 = this;
+    var _this9 = this;
 
     Fire.$on('searching', function () {
-      var query = _this7.search;
+      var query = _this9.search;
       axios.get('api/findVoucher?q=' + query).then(function (data) {
-        _this7.vouchers = data.data;
+        _this9.vouchers = data.data;
       })["catch"](function (error) {
         console.log(error);
       });
     });
     Fire.$on('RefreshVouchersAndCategories', function () {
-      _this7.getVouch();
+      _this9.getCategory();
 
-      _this7.getCategory();
+      if (_this9.search == '') {
+        _this9.getVoucherPaginate();
+      } else {
+        _this9.getVoucherSearch();
+      }
 
-      _this7.getAllCategory();
+      _this9.getAllCategory();
     });
     this.getAllCategory();
     this.getVouch();
@@ -3659,6 +3682,7 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       tags: {},
+      currentPage: '',
       tagsall: {},
       tagForm: new Form({
         id: '',
@@ -3695,6 +3719,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+      this.currentPage = page;
       axios.get('api/voucher?page=' + page).then(function (response) {
         _this2.vouchers = response.data;
       });
@@ -3871,7 +3896,9 @@ __webpack_require__.r(__webpack_exports__);
     Fire.$on('RefreshVouchersAndTags', function () {
       _this7.getAllTags();
 
-      _this7.getVouch();
+      axios.get('api/voucher?page=' + _this7.currentPage).then(function (response) {
+        _this7.vouchers = response.data;
+      });
 
       _this7.getTags();
     });
@@ -4002,6 +4029,7 @@ __webpack_require__.r(__webpack_exports__);
     return {
       search: '',
       users: {},
+      currentPage: '',
       userForm: new Form({
         id: '',
         first_name: '',
@@ -4052,6 +4080,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+      this.currentPage = page;
       axios.get('api/users?page=' + page).then(function (response) {
         _this.users = response.data;
       });
@@ -4069,24 +4098,38 @@ __webpack_require__.r(__webpack_exports__);
           type: 'error'
         });
       });
+    },
+    displayUsersPaginate: function displayUsersPaginate() {
+      var _this3 = this;
+
+      axios.get("api/users?page=" + this.currentPage).then(function (_ref2) {
+        var data = _ref2.data;
+        return _this3.users = data;
+      })["catch"](function (error) {
+        swal.fire({
+          title: 'Error',
+          text: error,
+          type: 'error'
+        });
+      });
     }
   },
 
   /* END OF METHODS */
   mounted: function mounted() {
-    var _this3 = this;
+    var _this4 = this;
 
     Fire.$on('searching', function () {
-      var query = _this3.search;
+      var query = _this4.search;
       axios.get('api/findUser?q=' + query).then(function (data) {
-        _this3.users = data.data;
+        _this4.users = data.data;
       })["catch"](function (error) {
         console.log(error);
       });
     });
     this.displayUsers();
     Fire.$on('RefreshUsers', function () {
-      _this3.displayUsers();
+      _this4.displayUsersPaginate();
     });
   }
 });
@@ -4298,6 +4341,7 @@ __webpack_require__.r(__webpack_exports__);
       voucherForm: new Form({
         id: '',
         name: '',
+        currentPage: '',
         description: '',
         image: '',
         expiry_date: '',
@@ -4423,6 +4467,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this3 = this;
 
       var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+      this.currentPage = page;
       axios.get('api/voucher?page=' + page).then(function (response) {
         _this3.vouchers = response.data;
       });
@@ -4472,8 +4517,34 @@ __webpack_require__.r(__webpack_exports__);
         });
       });
     },
-    deleteVoucher: function deleteVoucher(id, name) {
+    displayVouchersPaginate: function displayVouchersPaginate() {
       var _this6 = this;
+
+      axios.get("api/voucher?page=" + this.currentPage).then(function (_ref2) {
+        var data = _ref2.data;
+        return _this6.vouchers = data;
+      })
+      /*store the data in the voucher object */
+      ["catch"](function (error) {
+        swal.fire({
+          title: 'Voucher data retrieval error',
+          text: error,
+          type: 'error'
+        });
+      });
+    },
+    displayVouchersSearch: function displayVouchersSearch() {
+      var _this7 = this;
+
+      var query = this.search;
+      axios.get('api/findVoucher?q=' + query).then(function (data) {
+        _this7.vouchers = data.data;
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    deleteVoucher: function deleteVoucher(id, name) {
+      var _this8 = this;
 
       swal.fire({
         title: 'Are you sure?',
@@ -4485,11 +4556,11 @@ __webpack_require__.r(__webpack_exports__);
         confirmButtonText: 'Delete'
       }).then(function (result) {
         if (result.value) {
-          _this6.voucherForm.is_archive = "no";
+          _this8.voucherForm.is_archive = "no";
 
-          _this6.$Progress.start();
+          _this8.$Progress.start();
 
-          _this6.voucherForm["delete"]('api/voucher/' + id).then(function () {
+          _this8.voucherForm["delete"]('api/voucher/' + id).then(function () {
             swal.fire({
               toast: true,
               position: 'top',
@@ -4499,7 +4570,7 @@ __webpack_require__.r(__webpack_exports__);
               title: 'Voucher has been successfully deleted'
             });
 
-            _this6.$Progress.finish();
+            _this8.$Progress.finish();
             /* After deleting, send an event to fresh the voucher table */
 
 
@@ -4507,7 +4578,7 @@ __webpack_require__.r(__webpack_exports__);
           })["catch"](function () {
             swal("Failed!", "Failed to delete voucher.", "warning");
 
-            _this6.$Progress.fail();
+            _this8.$Progress.fail();
           });
         }
       });
@@ -4516,12 +4587,12 @@ __webpack_require__.r(__webpack_exports__);
 
   /* END OF METHODS */
   mounted: function mounted() {
-    var _this7 = this;
+    var _this9 = this;
 
     Fire.$on('searching', function () {
-      var query = _this7.search;
+      var query = _this9.search;
       axios.get('api/findVoucher?q=' + query).then(function (data) {
-        _this7.vouchers = data.data;
+        _this9.vouchers = data.data;
       })["catch"](function (error) {
         console.log(error);
       });
@@ -4530,7 +4601,11 @@ __webpack_require__.r(__webpack_exports__);
     /* If a voucher is created, call the displayVouchers function again to refresh vouchers table*/
 
     Fire.$on('RefreshVouchers', function () {
-      _this7.displayVouchers();
+      if (_this9.search == '') {
+        _this9.displayVouchersPaginate();
+      } else {
+        _this9.displayVouchersSearch();
+      }
     });
     /* Show a warning modal before closing the 'Create Voucher' modal  */
 
@@ -4550,10 +4625,6 @@ __webpack_require__.r(__webpack_exports__);
     $(".voucherFormToolTip").tooltip({
       placement: "top",
       title: "Popular vouchers will be displayed on the home page"
-    });
-    $(".deleteToolTip").tooltip({
-      placement: "top",
-      title: "Delete"
     });
   }
 });
@@ -72470,6 +72541,7 @@ var render = function() {
                         _c(
                           "a",
                           {
+                            attrs: { href: "#" },
                             on: {
                               click: function($event) {
                                 return _vm.getImage(business.image)
@@ -76483,6 +76555,7 @@ var render = function() {
                           _c(
                             "a",
                             {
+                              attrs: { href: "#" },
                               on: {
                                 click: function($event) {
                                   return _vm.getImage(voucher.image)

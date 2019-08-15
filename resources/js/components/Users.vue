@@ -108,7 +108,8 @@
 		data() {
 			return {
 				search: '',
-				users: {},
+            users: {},
+            currentPage: '',
 				userForm: new Form({
 					id: '',
 					first_name: '',
@@ -158,6 +159,7 @@
 				this.userForm.fill(user);
 			},
 			getResults(page = 1) {
+            this.currentPage = page;
 				axios.get('api/users?page=' + page)
 					.then(response => {
 						this.users = response.data;
@@ -174,7 +176,19 @@
 							type: 'error'
 						})
 				})
-			}
+         },
+         displayUsersPaginate() {
+         axios.get("api/users?page=" + this.currentPage).then(({
+            data
+         }) => (this.users = data)) 
+         .catch(error => {
+                  swal.fire({
+                  title: 'Error',
+                  text: error,
+                  type: 'error'
+               })
+         })
+      }
 		},
 		/* END OF METHODS */
 		mounted() {
@@ -190,7 +204,7 @@
 			});
 			this.displayUsers();
 			Fire.$on('RefreshUsers', () => {
-				this.displayUsers();
+				this.displayUsersPaginate();
 			});
 		}
 	} 

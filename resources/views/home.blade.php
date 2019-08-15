@@ -320,7 +320,7 @@
                 {!! nl2br(e($voucher->description)) !!}
              </p>
              @if (!empty($voucher->website_link))
-             <a href="{{$voucher->website_link}}" target="_blank">
+             <a class="web-link" href="{{$voucher->website_link}}" target="_blank">
              <i class="fas fa-globe-americas"></i><strong> Visit Website</strong></a>
              @endif
              @if (empty($voucher->expiry_date))

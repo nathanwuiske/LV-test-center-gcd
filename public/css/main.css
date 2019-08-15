@@ -257,6 +257,11 @@ cursor: default;
 .login-a {
    font-size: 14px;
    color:#07AD4D;
+   cursor: pointer;
+}
+
+.login-a:hover{
+  color:#037835;
 }
 
 .rememberlabel {
@@ -552,7 +557,7 @@ textarea {
 
 body {
     background-color: #F4F6F9;
-    font-family: "Ubuntu", "Arial";
+    font-family: "Ubuntu", "Montserrat", "Arial";
     line-height: 21px;
 	  font-size: 13px;
     color: #6a737b;
@@ -580,8 +585,14 @@ a, a:focus, a:hover {
 }
 
 a:focus, a:hover {
-    color: black;
+   text-decoration: none;
+   color:white;
 }
+
+.web-link:hover{
+ color:#24AF4D;
+}
+
 
 h1, h2, h3,
 h4, h5, h6 {

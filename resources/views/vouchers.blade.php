@@ -42,7 +42,7 @@
 </script>
  
  @if(!empty($categoryname))
-<h2 style="font-size: 25px;"> Sorting vouchers by "{{$categoryname}}"</h2>
+<h2 style="font-size: 25px;"> Sorting vouchers by {{$categoryname}}</h2>
 @endif
 
 @if(!empty($searchname))
@@ -62,6 +62,7 @@
     <strong>Sorry!</strong> We couldn't find what you were looking for.<br>
     <a class="errorReturn" href="{{route('vouchers')}}">Click here to return to vouchers</a>
  </div>
+ <div class="mb350"></div>
  @endif
        @if(!empty($vouchers))
        @foreach($vouchers as $voucher) 

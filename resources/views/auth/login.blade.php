@@ -20,8 +20,8 @@ body {
          <label class="rememberlabel"> Remember me </label>
          <input class="rememberinput" style="background-color:transparent;" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
          <button type="submit">Login</button>
-         <p class="text-center" style="color:white;"> <br>New User? <br> <a class="login-a" onclick="changeTab(event, 'register')">Create an account</a> </p>
-         <p class="text-center"><a class="login-a" href="password/reset"> I forgot my password</a></p>
+         <p class="text-center" style="color:white;"> <br>New User? <br> <a class="login-a cursor-pointer" onclick="changeTab(event, 'register')">Create an account</a> </p>
+         <p class="text-center "><a class="login-a" href="password/reset"> I forgot my password</a></p>
       </form>
       @if(count($errors))
       <ul class="alert alert-danger">

@@ -199,6 +199,7 @@
 		data() {
 			return {
             search: '',
+            currentPage: '',
             categories: {},
             allCategories: {},
 				vouchers: {},
@@ -233,6 +234,7 @@
 					});
 			},
 			getVoucherResults(page = 1) {
+            this.currentPage = page;
 				axios.get('api/voucher?page=' + page)
 					.then(response => {
 						this.vouchers = response.data;
@@ -359,7 +361,7 @@
 			assignCategory() {
 				this.categoryForm.post('api/vouchercategory').then(() => {
 						Fire.$emit('RefreshVouchersAndCategories');
-						$('#addNewCategory').modal('hide');
+                  $('#addNewCategory').modal('hide'); 
 						swal.fire({
 							toast: true,
                      position: 'top',
@@ -367,7 +369,7 @@
                      timer: 3500,
                      type: 'success',
                      title: 'Category successfully assigned to voucher'
-						})
+                  })
 					})
 					.catch(() => {
 						swal.fire({
@@ -393,8 +395,24 @@
 				axios.get('api/voucher').then(({
 					data
 				}) => (this.vouchers = data));
-			}
-		},
+         },
+         getVoucherPaginate(){
+            axios.get('api/voucher?page=' + this.currentPage)
+               .then(response => {
+               this.vouchers = response.data;
+            });
+         },
+         getVoucherSearch(){
+            let query = this.search;
+				axios.get('api/findVoucher?q=' + query)
+				.then((data) => {
+					this.vouchers = data.data;
+				})
+				.catch(error => {
+               console.log(error);
+				})
+         }
+      },
 		mounted() {
          	Fire.$on('searching', () => {
 				let query = this.search;
@@ -408,13 +426,18 @@
          });
          
 			Fire.$on('RefreshVouchersAndCategories', () => {
-				this.getVouch();
             this.getCategory();
+            if(this.search == ''){
+				this.getVoucherPaginate();
+				}
+				else {
+					this.getVoucherSearch();
+				}
             this.getAllCategory();
          });
          this.getAllCategory();
 			this.getVouch();
-			this.getCategory();
+         this.getCategory();    
 		}
 	} 
 </script>

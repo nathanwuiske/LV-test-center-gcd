@@ -50,7 +50,7 @@
                               <td>{{tag.tag_title}}</td>
                            </div>
                            <!-- End of Display tags -->
-                           <td><a @click="getImage(voucher.image)">Show</a></td>
+                           <td><a href="#" @click="getImage(voucher.image)">Show</a></td>
                            <!-- Display categories -->
                            <td v-if="voucher.get_categories.length == 0">-</td>
                            <div v-for="category in voucher.get_categories" :key="category.id">
@@ -195,6 +195,7 @@
 				voucherForm: new Form({
 					id: '',
 					name: '',
+					currentPage: '',
 					description: '',
 					image: '',
 					expiry_date: '',
@@ -311,6 +312,7 @@
 			},
 			/* Method to paginate the voucher data */
 			getResults(page = 1) {
+				this.currentPage = page;
 				axios.get('api/voucher?page=' + page)
 					.then(response => {
 						this.vouchers = response.data;
@@ -353,6 +355,28 @@
 							text: error,
 							type: 'error'
 						})
+				})
+			},
+			displayVouchersPaginate() {
+			axios.get("api/voucher?page=" + this.currentPage).then(({
+				data
+			}) => (this.vouchers = data)) /*store the data in the voucher object */
+			.catch(error => {
+						swal.fire({
+						title: 'Voucher data retrieval error',
+						text: error,
+						type: 'error'
+					})
+			})
+			},
+			displayVouchersSearch(){
+				let query = this.search;
+				axios.get('api/findVoucher?q=' + query)
+				.then((data) => {
+					this.vouchers = data.data;
+				})
+				.catch(error => {
+					console.log(error);
 				})
 			},
 			deleteVoucher(id, name) {
@@ -398,7 +422,6 @@
 				let query = this.search;
 				axios.get('api/findVoucher?q=' + query)
 				.then((data) => {
-					
 					this.vouchers = data.data;
 				})
 				.catch(error => {
@@ -408,7 +431,12 @@
 			this.displayVouchers();
 			/* If a voucher is created, call the displayVouchers function again to refresh vouchers table*/
 			Fire.$on('RefreshVouchers', () => {
-				this.displayVouchers();
+				if(this.search == ''){
+					this.displayVouchersPaginate();
+				}
+				else {
+					this.displayVouchersSearch();
+				}
 			});
 			/* Show a warning modal before closing the 'Create Voucher' modal  */
 			$(document).ready(function () {
@@ -426,11 +454,6 @@
 				placement: "top",
 				title: "Popular vouchers will be displayed on the home page"
 			});
-			$(".deleteToolTip").tooltip({
-				placement: "top",
-				title: "Delete"
-			});
-
 		}
 	} 
 </script>

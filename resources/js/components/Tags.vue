@@ -191,6 +191,7 @@
 		data() {
 			return {
             tags: {},
+            currentPage: '',
             tagsall: {},
 				tagForm: new Form({
 					id: '',
@@ -218,6 +219,7 @@
 					});
 			},
 			getVoucherResults(page = 1) {
+            this.currentPage = page;
 				axios.get('api/voucher?page=' + page)
 					.then(response => {
 						this.vouchers = response.data;
@@ -383,7 +385,10 @@
 		mounted() {
 			Fire.$on('RefreshVouchersAndTags', () => {
             this.getAllTags();
-            this.getVouch();
+            axios.get('api/voucher?page=' + this.currentPage)
+            .then(response => {
+               this.vouchers = response.data;
+            });
             this.getTags();
          });
          this.getAllTags();
