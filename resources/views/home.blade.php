@@ -88,6 +88,7 @@
                    <a href="#business{{$business->id}}" role="button" data-toggle="modal">
                       <div class="hoverOver" style="background-color: white; text-align: center; ">
                          <img class="card-img-top" class="img-fluid" width="200" height="200" src="{{url('imgs/businesses/' . $business->image)}}" alt='{{$business->name}}'>
+                      
                    </a>
                    <div style="margin-bottom: 20px;"></div>
                    </div>
@@ -104,9 +105,11 @@
              </div>
           </div>
        </div>
+       
     </div>
  </section>
 
+ 
 
 <section id="popular" class="content-background-grey">
     <div class="container">
@@ -126,14 +129,12 @@
              <a href="#voucher{{$voucher->id}}" role="button" data-toggle="modal">
                 <div class="hoverOver voucher-style">
                    <br>
-                   <img class="card-img-top" class="img-fluid" width="220" height="270" src="{{url('imgs/vouchers/' . $voucher->image)}}" alt='{{$voucher->name}}'>
+                   <img class="card-img-top" class="img-fluid" width="220" height="270" src="{{url('imgs/vouchers/' . $voucher->image)}}" alt="{{$voucher->name}}" onerror="this.onerror=null;this.src='imgs/no-voucher-image.png';">
                    <h2 class="voucher-name">{{ str_limit($voucher->name, $limit = 22, $end='...') }}</h2>
                    <button class="btn btn-lg voucher-view-btn"><i class="fa fa-close"></i>View</button>
              </a>
              <div style="float:right;">
              @auth
-
-            <!-- favourited -->
             <button id="deletefavourite{{$voucher->id}}" 
                      onClick="deleteFromFavourites({{$voucher->id}}, {{ Auth::user()->id }})" 
                      name="addfavourite" 
@@ -141,8 +142,6 @@
                      style="background-color:#07AD4D; color:white; position: relative; right: 65%;color: #ad1707; {{ $voucher->isFavourited ? '' : 'display: none;' }}">
                <i class="fas fa-heart"></i>
             </button>
-
-            <!-- not favourited -->
             <button id="addfavourites{{$voucher->id}}" 
                      onClick="addToFavourites({{$voucher->id}}, {{ Auth::user()->id }})" 
                      name="deletefavourite" 
@@ -150,7 +149,6 @@
                      style="background-color:#07AD4D; color:white; position: relative; right: 65%;{{ $voucher->isFavourited ? 'display: none;' : '' }}">
                <i class="fas fa-heart" ></i>
             </button>
-
              @endauth
              @guest
              <a href="{{ route('login') }}"> <button class="btn btn-lg" style="background-color:#07AD4D; color:white; position: relative; right: 65%;"><i class="fas fa-heart "></i></button> </a> 
@@ -190,13 +188,12 @@
                 <a href="#voucher{{$voucher->id}}" role="button" data-toggle="modal">
                    <div class="hoverOver" style="background-color: white; border: 1px solid #CCCCCC; text-align: center; ">
                       <br>
-                      <img class="card-img-top" class="img-fluid" width="220" height="270" src="{{url('imgs/vouchers/' . $voucher->image)}}" alt='{{$voucher->name}}'>
+                      <img class="card-img-top" class="img-fluid" width="220" height="270" src="{{url('imgs/vouchers/' . $voucher->image)}}" alt="{{$voucher->name}}" onerror="this.onerror=null;this.src='imgs/no-voucher-image.png';">
                       <h2 style="color:#07AD4D; font-size: 20px; margin-bottom: 10px;margin-top: 10px;">{{ str_limit($voucher->name, $limit = 22, $end='...') }}</h2>
                       <button class="btn btn-lg" style="background-color:#07AD4D;  width: 50%; height: 100%; margin-right: 10px;"><i class="fa fa-close"></i>View</button>
                 </a>
                 <div style="float:right;">
                 @auth
-                  <!-- if favourited -->
                   <button id="deletefavourite{{$voucher->id}}" 
                            onClick="deleteFromFavourites({{$voucher->id}}, {{ Auth::user()->id }})" 
                            name="addfavourite" 
@@ -204,8 +201,6 @@
                            style="background-color:#07AD4D; color:white; position: relative; right: 65%;color: #ad1707; {{ $voucher->isFavourited ? '' : 'display: none;' }}">
                      <i class="fas fa-heart"></i>
                   </button>
-
-                  <!-- if not favourited -->
                   <button id="addfavourites{{$voucher->id}}" 
                            onClick="addToFavourites({{$voucher->id}}, {{ Auth::user()->id }})" 
                            name="deletefavourite" 
@@ -255,13 +250,12 @@
                    <a href="#voucher{{$voucher->id}}" role="button" data-toggle="modal">
                       <div class="hoverOver" style="background-color: white; border: 1px solid #CCCCCC; text-align: center; ">
                          <br>
-                         <img class="card-img-top" class="img-fluid" width="220" height="270" src="{{url('imgs/vouchers/' . $voucher->image)}}" alt='{{$voucher->name}}'>
+                         <img class="card-img-top" class="img-fluid" width="220" height="270" src="{{url('imgs/vouchers/' . $voucher->image)}}" alt="{{$voucher->name}}" onerror="this.onerror=null;this.src='imgs/no-voucher-image.png';">
                          <h2 style="color:#07AD4D; font-size: 20px; margin-bottom: 10px;margin-top: 10px;">{{ str_limit($voucher->name, $limit = 22, $end='...') }}</h2>
                          <button class="btn btn-lg" style="background-color:#07AD4D;  width: 50%; height: 100%; margin-right: 10px;"><i class="fa fa-close"></i>View</button>
                    </a>
                    <div style="float:right;">
                    @auth
-                  <!-- if favourited -->
                   <button id="deletefavourite{{$voucher->id}}" 
                         onClick="deleteFromFavourites({{$voucher->id}}, {{ Auth::user()->id }})" 
                         name="addfavourite" 
@@ -269,8 +263,6 @@
                         style="background-color:#07AD4D; color:white; position: relative; right: 65%;color: #ad1707; {{ $voucher->isFavourited ? '' : 'display: none;' }}">
                   <i class="fas fa-heart"></i>
                   </button>
-
-                  <!-- if not favourited -->
                    <button id="addfavourites{{$voucher->id}}" 
                         onClick="addToFavourites({{$voucher->id}}, {{ Auth::user()->id }})" 
                         name="deletefavourite" 
@@ -278,7 +270,6 @@
                         style="background-color:#07AD4D; color:white; position: relative; right: 65%;{{ $voucher->isFavourited ? 'display: none;' : '' }}">
                    <i class="fas fa-heart" ></i>
                   </button>
-
                    @endauth
                    @guest
                    <a href="{{ route('login') }}"> <button class="btn btn-lg" style="background-color:#07AD4D; color:white; position: relative; right: 65%;"><i class="fas fa-heart "></i></button> </a> 
@@ -313,7 +304,7 @@
              </button>
           </div>
           <div class="modal-body  text-center" style="background-color: #F2F2F2">
-             <img id="modal_image_{{$voucher->id}}" src="{{url('imgs/vouchers/' . $voucher->image)}}" class="img-fluid img-center modal-image" alt='{{$voucher->name}}'>
+             <img id="modal_image_{{$voucher->id}}" src="{{url('imgs/vouchers/' . $voucher->image)}}" class="img-fluid img-center modal-image" alt='{{$voucher->name}}' onerror="this.onerror=null;this.src='imgs/no-voucher-image.png';">
              <p style="word-wrap: break-word; font-size: 18px;">
                 <br><span class="header-modal">About Deal</span>
                 <br>

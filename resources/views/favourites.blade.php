@@ -32,7 +32,7 @@
          <a href="#voucher{{$favouriteVoucher->id}}" role="button" data-toggle="modal">
             <div class="hoverOver" style="background-color: white; border: 1px solid #CCCCCC; text-align: center; ">
                <br>
-               <img class="card-img-top" class="img-fluid" width="220" height="270" src="{{url('imgs/vouchers/' . $favouriteVoucher->image)}}" alt='{{$favouriteVoucher->name}}'>
+               <img class="card-img-top" class="img-fluid" width="220" height="270" src="{{url('imgs/vouchers/' . $favouriteVoucher->image)}}" alt='{{$favouriteVoucher->name}}' onerror="this.onerror=null;this.src='imgs/no-voucher-image.png';">
                <h2 style="color:#07AD4D; font-size: 20px; margin-bottom: 10px;margin-top: 10px;">{{ str_limit($favouriteVoucher->name, $limit = 22, $end='...') }}</h2>
                <button class="btn btn-lg" style="background-color:#07AD4D;  width: 50%; height: 100%; margin-right: 10px;"><i class="fa fa-close"></i>View</button>
          </a>
@@ -53,7 +53,7 @@
                </button>
             </div>
             <div class="modal-body">
-               <img id="modal_image_{{$favouriteVoucher->id}}" src="{{url('imgs/vouchers/' . $favouriteVoucher->image)}}" class="img-fluid img-center" alt='{{$favouriteVoucher->name}}'>
+               <img id="modal_image_{{$favouriteVoucher->id}}" src="{{url('imgs/vouchers/' . $favouriteVoucher->image)}}" class="img-fluid img-center" alt='{{$favouriteVoucher->name}}' onerror="this.onerror=null;this.src='imgs/no-voucher-image.png';">
                <p><br><strong>About Deal</strong><br>{{$favouriteVoucher->description}}</p>
                <p><br><strong>Expiry Date</strong><br>{{$favouriteVoucher->expiry_date}}</p>
                <a href="#"><br><i class="fas fa-globe-americas"></i><strong>Visit Website</strong><br>{{$favouriteVoucher->website_link}}</a>
