@@ -18,7 +18,7 @@
                            <th></th>
                            <th style="width: 25%">Modify</th>
                         </tr>
-                        <tr v-if="issues.data.length === 0"><p style="text-align:center;color:#AD1707;">There are currently no user issues.</p></tr>
+                        <tr v-if="issues.data && issues.data.length === 0"><p style="text-align:center;color:#AD1707;">There are currently no user issues.</p></tr>
                         <tr v-for="issue in issues.data" :key="issue.created_at">
                            <td>{{issue.id}}</td>
                            <td>{{issue.user_id}}</td>

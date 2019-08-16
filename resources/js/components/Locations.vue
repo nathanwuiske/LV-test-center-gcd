@@ -117,6 +117,7 @@
         data() {
 			return {
             locations: {},
+            currentPage: '',
             vouchers: {},
             allVouchers: {},
 				locationForm: new Form({
@@ -133,6 +134,7 @@
 		},
         methods:{
              getResults(page = 1) {
+                this.currentPage = page;
                 axios.get('api/voucher?page=' + page)
                     .then(response => {
                         this.vouchers = response.data;
@@ -242,7 +244,10 @@
         },
         mounted() {
              Fire.$on('RefreshVouchers', () => {
-                this.getVouchers();
+                axios.get('api/voucher?page=' + this.currentPage)
+                  .then(response => {
+                     this.vouchers = response.data;
+                  });
             });
             this.getAllVouchers();
             this.getVouchers();

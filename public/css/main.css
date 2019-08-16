@@ -305,7 +305,8 @@ cursor: default;
 
 .header-modal {
   color: #07AD4D;
-  font-size: 15px;
+  font-size: 20px;
+
 }
 
 /* START modal Content */
@@ -588,6 +589,7 @@ a:focus, a:hover {
    text-decoration: none;
    color:white;
 }
+
 
 .web-link:hover{
  color:#24AF4D;

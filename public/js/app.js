@@ -3304,6 +3304,7 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       locations: {},
+      currentPage: '',
       vouchers: {},
       allVouchers: {},
       locationForm: new Form({
@@ -3325,6 +3326,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+      this.currentPage = page;
       axios.get('api/voucher?page=' + page).then(function (response) {
         _this.vouchers = response.data;
       });
@@ -3440,7 +3442,9 @@ __webpack_require__.r(__webpack_exports__);
     var _this5 = this;
 
     Fire.$on('RefreshVouchers', function () {
-      _this5.getVouchers();
+      axios.get('api/voucher?page=' + _this5.currentPage).then(function (response) {
+        _this5.vouchers = response.data;
+      });
     });
     this.getAllVouchers();
     this.getVouchers();
@@ -72286,7 +72290,7 @@ var render = function() {
                 [
                   _vm._m(1),
                   _vm._v(" "),
-                  _vm.archived.data.length === 0
+                  _vm.archived.data && _vm.archived.data.length === 0
                     ? _c("tr", [
                         _c(
                           "p",
@@ -74208,7 +74212,7 @@ var render = function() {
                 [
                   _vm._m(1),
                   _vm._v(" "),
-                  _vm.issues.data.length === 0
+                  _vm.issues.data && _vm.issues.data.length === 0
                     ? _c("tr", [
                         _c(
                           "p",

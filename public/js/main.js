@@ -125,7 +125,7 @@ function startTimer(duration, display, voucherid, userid) {
         display.textContent = "Voucher will be redeemed in " + minutes + ":" + seconds; 
 
         if (diff <= 0) {
-         display.textContent = "Timer Ended"; 
+         display.textContent = ""; 
          ajaxRedeem(voucherid, userid);
          clearInterval(myTimer);
         }

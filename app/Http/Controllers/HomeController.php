@@ -31,6 +31,7 @@ class HomeController extends Controller
        } else {
         $user = false;
       }
+      $now = Carbon::now();
       foreach($vouchers as $voucher){
         if($user){
             $redemption = $user->redeems()->where([
@@ -45,6 +46,9 @@ class HomeController extends Controller
                 $voucher->redeemAvailable = $redemption->created_at->addHours($voucher->timeout)->toDayDateTimeString();  
             }
         }
+            $end = Carbon::parse($voucher->expiry_date);
+            $DeferenceInDays = $end->startOfDay()->diffInDays($now->startOfDay());
+            $voucher->expiry_days = $DeferenceInDays;
     }
     if($user){
       foreach($popular as $voucher){

@@ -19,7 +19,7 @@
                            <th>Image</th>
                            <th>Restore</th>
                         </tr>
-                        <tr v-if="archived.data.length === 0"><p style="text-align:center;color:#AD1707;">There are currently no archived vouchers.</p></tr>
+                        <tr v-if="archived.data && archived.data.length === 0"><p style="text-align:center;color:#AD1707;">There are currently no archived vouchers.</p></tr>
                         <tr v-for="archive in archived.data" :key="archive.id">
                            <td>{{archive.id}}</td>
                            <td>{{archive.name}}</td>

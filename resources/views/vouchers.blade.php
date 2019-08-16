@@ -115,36 +115,44 @@
                  <span aria-hidden="true"><i class="fas fa-times"></i></span>
                  </button>
               </div>
-              <div class="modal-body" style="background-color: #F2F2F2">
-                 <img id="modal_image_{{$voucher->id}}" src="{{url('imgs/vouchers/' . $voucher->image)}}" class="img-fluid img-center modal-image" alt='{{$voucher->name}}'>
-                 <p style="word-wrap: break-word;">
-                    <br><strong class="header-modal">About Deal</strong>
-                    <br>  {!! nl2br(e($voucher->description)) !!}
-                 </p>
-                 @if (!empty($voucher->website_link))
-                 <a href="{{$voucher->website_link}}" target="_blank">
-                 <i class="fas fa-globe-americas"></i><strong> Visit Website</strong></a>
-                 @endif
-                 @if (empty($voucher->expiry_date))
-                 <p>
-                    <br><strong class="header-modal">Expiry Date</strong>
-                    <br><i>Expiry date not available</i>
-                 </p>
-                 @else
-                 <p>
-                    <br><strong class="header-modal">Expiry Date</strong>
-                    <br>{{\Carbon\Carbon::parse($voucher->expiry_date)->format('d/m/Y')}}
-                 </p>
-                 @endif 
-                 @if(!empty($voucher->latitude) && !empty($voucher->longitude))
-                 <strong class="header-modal">Location</strong><br><br>
-                 <iframe src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCC6emn13XOdxMhZAsbaGIgt2HcK3iKAoc&q={{$voucher->latitude}},{{$voucher->longitude}}" width="100%" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
-                 @endif
-                 @if ($voucher->isRedeemed)
-                 <div class="redeem-overlay redeem-overlay-previous">
-                    <p style="text-align:center;color:#A61106;">Voucher Already Redeemed</p>
-                    <p class="text-center">Voucher available again after <strong><span>{{$voucher->redeemAvailable}}</span></strong></p>
-                 </div>
+              <div class="modal-body  text-center" style="background-color: #F2F2F2">
+               <img id="modal_image_{{$voucher->id}}" src="{{url('imgs/vouchers/' . $voucher->image)}}" class="img-fluid img-center modal-image" alt='{{$voucher->name}}'>
+               <p style="word-wrap: break-word; font-size: 18px;">
+                  <br><span class="header-modal">About Deal</span>
+                  <br>
+                 <p style="font-size: 14px;">{!! nl2br(e($voucher->description)) !!}</p>
+               </p>
+               @if (!empty($voucher->website_link))
+               <a class="web-link" style="color:#4272D7" href="{{$voucher->website_link}}" target="_blank">
+               <i class="fas fa-globe-americas"  style="color:#4272D7"></i><strong> Visit Website</strong></a>
+               @endif
+               @if (empty($voucher->expiry_date))
+               <p>
+                  <br><span class="header-modal">Voucher Expiry</span>
+                  <br><i>Expiry information not available</i>
+               </p>
+               @else
+               <p>
+                  <br><span class="header-modal">Voucher Expiry</span>
+                  <br>
+                   @if ($voucher->expiry_days == 0)
+                   <p style="font-size: 14px;">Voucher will expire <strong>today</strong></p>
+                   @elseif ($voucher->expiry_days == 1)
+                   <p style="font-size: 14px;">Voucher will expire <strong>tomorrow</strong></p>
+                   @else
+                   <p style="font-size: 14px;">Voucher will expire in <strong>{{$voucher->expiry_days}}</strong> days</p>
+                   @endif
+               </p>
+               @endif 
+               @if(!empty($voucher->latitude) && !empty($voucher->longitude))
+               <span class="header-modal">Location</span><br><br>
+               <iframe src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCC6emn13XOdxMhZAsbaGIgt2HcK3iKAoc&q={{$voucher->latitude}},{{$voucher->longitude}}" width="100%" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+               @endif
+               @if ($voucher->isRedeemed)
+               <div class="redeem-overlay redeem-overlay-previous">
+                  <p style="text-align:center;color:#A61106;">You've already redeemed this voucher</p>
+                  <p class="text-center">You can redeem again after <strong><span>{{$voucher->redeemAvailable}}</span></strong></p>
+               </div>
                  @else
                  <div id="redeem-current-{{$voucher->id}}" class="redeem-overlay redeem-overlay-current" style="display:none">
                     <p class="header-modal text-center"><span style="color:#07AD4D;"class="fas fa-check-circle check-circle"></span> Voucher Redeemed!</p>

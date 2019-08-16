@@ -20,6 +20,7 @@ class VoucherPageController extends Controller
            } else {
             $user = false;
           }
+          $now = Carbon::now();
           foreach($vouchers as $voucher){
             if($user){
                 $favourite = $user->getfavourites()->where([
@@ -41,7 +42,11 @@ class VoucherPageController extends Controller
                     $voucher->redeemedAt = $redemption->created_at->toDayDateTimeString();
                     $voucher->redeemAvailable = $redemption->created_at->addHours($voucher->timeout)->toDayDateTimeString();  
                 }
+
             }
+            $end = Carbon::parse($voucher->expiry_date);
+            $DeferenceInDays = $end->startOfDay()->diffInDays($now->startOfDay());
+            $voucher->expiry_days = $DeferenceInDays;
         }
         return view('vouchers', compact('vouchers','categories')); 
     }
