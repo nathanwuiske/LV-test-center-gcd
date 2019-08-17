@@ -58,7 +58,7 @@
                   @auth
                   <li><a href="#"><i class="fas fa-user"></i> {{ str_limit(Auth::user()->first_name, $limit = 20, $end='...') }} <i class="fas fa-caret-down"></i></a>
                   <ul>
-                  <li><a href="{{route('account')}}"><i class="fas fa-cog"></i> Settings</a></li>
+                  <li><a href="{{route('account')}}"><i class="fas fa-cog"></i> Account</a></li>
                   <li><a href="{{route('favourites')}}"><i class="fas fa-star"></i> Favourites</a></li>
                   <li><a href="{{route('adminhome')}}"><i class="fas fa-user-shield"></i> Admin</a></li>
                   <li><a href="{{ route('logout') }}"

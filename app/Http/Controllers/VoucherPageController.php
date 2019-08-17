@@ -52,19 +52,29 @@ class VoucherPageController extends Controller
     }
     public function newest_all()
     {
-        $vouchersPerPage = 8;
-        $vouchers = Voucher::latest()->paginate($vouchersPerPage);
+        $vouchers = Voucher::latest()->paginate(8);
         $categories = Category::orderBy('id')->get();
         $newestall = 1;
+        $now = Carbon::now();
+        foreach($vouchers as $voucher){
+              $end = Carbon::parse($voucher->expiry_date);
+              $DeferenceInDays = $end->startOfDay()->diffInDays($now->startOfDay());
+              $voucher->expiry_days = $DeferenceInDays;
+         }
         return view('vouchers', compact('vouchers', 'categories' ,'newestall')); 
     }
 
     public function popular_all()
     {
-        $vouchersPerPage = 8;
-        $vouchers = Voucher::latest()->where('popular_flag', '=', '1')->paginate($vouchersPerPage);
+        $vouchers = Voucher::latest()->where('popular_flag', '=', '1')->paginate(8);
         $categories = Category::orderBy('id')->get();
         $popularall = 1;
+        $now = Carbon::now();
+        foreach($vouchers as $voucher){
+              $end = Carbon::parse($voucher->expiry_date);
+              $DeferenceInDays = $end->startOfDay()->diffInDays($now->startOfDay());
+              $voucher->expiry_days = $DeferenceInDays;
+         }
         return view('vouchers', compact('vouchers', 'categories', 'popularall')); 
     }
 }

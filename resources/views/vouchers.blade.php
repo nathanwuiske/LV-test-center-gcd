@@ -171,7 +171,7 @@
                       @endif>Redeem</button></a>
                  @endauth
                  @guest
-                 <p class="text-center"style="color:#A61106;">Must be logged in to redeem vouchers</p>
+                 <a href="{{route('login')}}"><p class="text-center"style="color:#A61106;">Must be logged in to redeem vouchers</p></a>
                  <button class="btn btn-lg" style="width: 100%; height: 100%; background-color: #07AD4D; color:white;" disabled>Redeem</button>
                  @endguest
               </div>

@@ -8,14 +8,7 @@ body {
   background-position: center center; 
 }
 .login {
-  position: relative;
-  margin: 0 auto;
-  margin-top: 100px;
-  left: 15%;
-  width: 28%;
   height:  275px;
-  -webkit-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
 }
 </style>
 <div class="mb300"></div>

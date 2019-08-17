@@ -52,11 +52,70 @@ transform: rotate(360deg);
 .jssora073.jssora073dn {opacity:.4;}
 .jssora073.jssora073ds {opacity:.3;pointer-events:none;}
 
-/* jssor 1 */
+/* jssor 1 (main) */
+.jssor1-main {position:relative;margin:0 auto;top:0px;left:0px;width:1300px;height:360px;overflow:hidden;visibility:hidden;}
+.jssor1-img {margin-top:-19px;position:relative;top:50%;width:38px;height:38px;}
 .jssor1-load{position:absolute;top:0px;left:0px;width:100%;height:100%;text-align:center;background-color:rgba(0,0,0,0.7);}
 .jssor1-d-slides{cursor:default;position:relative;top:25px;left:0px;width:1300px;height:360px;overflow:hidden;}
+.jssor1-bullet-nav {position:absolute;bottom:12px;right:12px;}
+.jssor1-bullet-proto {width:16px;height:16px;}
+.jssor1-bullet-svg {position:absolute;top:0;left:0;width:100%;height:100%;}
+.jssor1-arrow-left-main {width:65px;height:65px;top:0px;left:25px;} 
+.jssor1-arrow-left-svg {position:absolute;top:0;left:0;width:100%;height:100%;}
+.jssor1-arrow-right-main {width:65px;height:65px;top:0px;right:25px;}
+.jssor1-arrow-right-svg {position:absolute;top:0;left:0;width:100%;height:100%;}
 
-/* jssor 2 */
+@media only screen and (max-width: 767px) {
+    .jssor1-main {display: none;}
+    .page-position {margin-bottom:100px;}
+}
+
+
+/* jssor 2 (popular) */
 .jssor2-main {position:relative;margin:0 auto;margin-bottom:35px;top:35px;width:1050px;height:420px;visibility:hidden;}
 .jssor2-img {margin-top:-19px;position:relative;top:50%;width:38px;height:38px;}
 .jssor2-d-sliders{cursor:default;position:relative;top:0px;left:0px;width:1050px;height:420px;overflow:hidden;}
+.jssor2-load {position:absolute;top:0px;left:0px;width:100%;height:100%;text-align:center;background-color:rgba(0,0,0,0.7);}
+.jssor2-arrow-left {width:50px;height:50px;top:0px;left:-40px;}
+.jssor2-arrow-right {width:50px;height:50px;top:0px;right:-40px;}
+
+@media only screen and (max-width: 767px) {
+    .jssor2-main {position:relative;margin:0 auto;margin-bottom:35px;top:35px;width:73%;height:420px;visibility:hidden;}
+    .jssor2-d-sliders{cursor:default;position:relative;top:0px;left:0px;width:400px;height:420px;overflow:hidden;}
+}
+
+/* jssor 3 (newest) */
+.jssor3-main {position:relative;margin:0 auto;margin-bottom:35px;top:35px;width:1050px;height:420px;visibility:hidden;}
+.jssor3-img {margin-top:-19px;position:relative;top:50%;width:38px;height:38px;}
+.jssor3-d-sliders {cursor:default;position:relative;top:0px;left:0px;width:1050px;height:420px;overflow:hidden;}
+.jssor3-load {position:absolute;top:0px;left:0px;width:100%;height:100%;text-align:center;background-color:rgba(0,0,0,0.7);}
+.jssor3-arrow-left {width:50px;height:50px;top:0px;left:-40px;}
+.jssor3-arrow-right {width:50px;height:50px;top:0px;right:-46px;}
+
+@media only screen and (max-width: 767px) {
+    .jssor3-main {position:relative;margin:0 auto;margin-bottom:35px;top:35px;width:73%;height:420px;visibility:hidden;}
+    .jssor3-d-sliders{cursor:default;position:relative;top:0px;left:0px;width:400px;height:420px;overflow:hidden;}
+}
+
+/* jssor 4 (other) */
+.jssor4-main {position:relative;margin:0 auto;margin-bottom:35px;top:35px;width:1050px;height:420px;visibility:hidden;}
+.jssor4-img {margin-top:-19px;position:relative;top:50%;width:38px;height:38px;}
+.jssor4-d-sliders {cursor:default;position:relative;top:0px;left:0px;width:1050px;height:420px;overflow:hidden;}
+
+@media only screen and (max-width: 767px) {
+    .jssor4-main {position:relative;margin:0 auto;margin-bottom:35px;top:35px;width:73%;height:420px;visibility:hidden;}
+    .jssor4-d-sliders{cursor:default;position:relative;top:0px;left:0px;width:400px;height:420px;overflow:hidden;}
+}
+
+/* jssor 5 (business) */
+.jssor5-main {position:relative;margin:0 auto;top:35px;width:1050px;height:300px;visibility:hidden;}
+.jssor5-img {margin-top:-19px;position:relative;top:50%;width:38px;height:38px;}
+.jssor5-load {position:absolute;top:0px;left:0px;width:100%;height:100%;text-align:center;background-color:rgba(0,0,0,0.7);}
+.jssor5-d-sliders {cursor:default;position:relative;top:0px;left:0px;width:1050px;height:420px;overflow:hidden;}
+.jssor5-arrow-left {width:50px;height:50px;top:0px;left:-40px;}
+.jssor5-arrow-right {width:50px;height:50px;top:0px;right:-46px;}
+
+@media only screen and (max-width: 767px) {
+    .jssor5-main {position:relative;margin:0 auto;margin-bottom:35px;top:35px;width:73%;height:420px;visibility:hidden;}
+    .jssor5-d-sliders{cursor:default;position:relative;top:0px;left:0px;width:400px;height:420px;overflow:hidden;}
+}

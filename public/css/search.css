@@ -697,6 +697,11 @@
    background-position: center center;
    padding: 15px;
    }
+   @media only screen and (max-width: 767px) {
+      .s131{
+         border: 0px solid white;
+      }
+  }
    .s131 form {
    width: 100%;
    max-width: 940px;

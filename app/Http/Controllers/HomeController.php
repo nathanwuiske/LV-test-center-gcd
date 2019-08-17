@@ -97,6 +97,12 @@ class HomeController extends Controller
     $terms = preg_split('/\s+/', $request->get('search'), -1, PREG_SPLIT_NO_EMPTY); 
     // If the search is empty, return the default vouchers
     if(empty($terms)){
+      $now = Carbon::now();
+        foreach($vouchers as $voucher){
+              $end = Carbon::parse($voucher->expiry_date);
+              $DeferenceInDays = $end->startOfDay()->diffInDays($now->startOfDay());
+              $voucher->expiry_days = $DeferenceInDays;
+         }
       $vouchers = Voucher::orderBy('id')->paginate($vouchersPerPage);
     }
     else {
@@ -110,6 +116,12 @@ class HomeController extends Controller
                 $query->orWhere('description', 'like', '%' . $term . '%');
             }
         })->latest()->paginate($vouchersPerPage);
+        $now = Carbon::now();
+        foreach($vouchers as $voucher){
+              $end = Carbon::parse($voucher->expiry_date);
+              $DeferenceInDays = $end->startOfDay()->diffInDays($now->startOfDay());
+              $voucher->expiry_days = $DeferenceInDays;
+         }
         $vouchers->appends(['search' => $request->get('search'), 'per_page' => "8"]);
   }
       return view('vouchers')->with('vouchers', $vouchers)->with('categories', $categories)->with('searchname', $request->get('search'));
@@ -125,7 +137,12 @@ class HomeController extends Controller
         $q->where('category_id', '=', $selectValue);
      })->paginate(8);
      $vouchers->appends(['slct' => $request->get('slct'), 'per_page' => "8"]);
-    
+     $now = Carbon::now();
+     foreach($vouchers as $voucher){
+           $end = Carbon::parse($voucher->expiry_date);
+           $DeferenceInDays = $end->startOfDay()->diffInDays($now->startOfDay());
+           $voucher->expiry_days = $DeferenceInDays;
+      }
 
 
      foreach ($categories as $category) {

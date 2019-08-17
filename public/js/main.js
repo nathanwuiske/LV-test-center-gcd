@@ -1,10 +1,10 @@
    
-function currentRedeem(voucher_id, user_id, times) {
+function currentRedeem(voucher_id, response) {
 	$("#redeem-current-" + voucher_id).css("display", "inline");
 	$("#start_redeem_" + voucher_id).attr("disabled", "disabled");
 	$("#redeem-a" + voucher_id).addClass("disabled-a");
-	$("#redeem-current-time-" + voucher_id).html(times['dateRedeemed']);
-	$("#redeem-next-time-" + voucher_id).html(times['dateAvailable']);
+	$("#redeem-current-time-" + voucher_id).html(response['dateRedeemed']);
+	$("#redeem-next-time-" + voucher_id).html(response['dateAvailable']);
 }
 
 function warningRedeem(voucher_id) {
@@ -24,7 +24,7 @@ function ajaxRedeem(voucher_id, user_id) {
 			'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
 		},
 		success: function (response) {
-			currentRedeem(voucher_id, user_id, response);
+			currentRedeem(voucher_id, response);
 		},
 		error: function (response) {
            //console.log(response);
@@ -135,9 +135,9 @@ function startTimer(duration, display, voucherid, userid) {
     var myTimer = setInterval(timer, 1000);
 }
 
-function startRedeem(voucherid, userid){
-	warningRedeem(voucherid);
-	$('#warningRedeem' + voucherid).modal('hide');
+function startRedeem(voucherid, userid) {
+	 warningRedeem(voucherid);
+	 $('#warningRedeem' + voucherid).modal('hide');
 	 var fiveMinutes = 10;
 	 var display = document.querySelector('#time'+voucherid);
 	 startTimer(fiveMinutes, display, voucherid, userid);
