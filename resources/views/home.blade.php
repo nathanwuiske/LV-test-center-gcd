@@ -14,13 +14,13 @@
       </div>
       <div data-u="slides" class="jssor1-d-slides">
          <div>
-            <img data-u="image" src="/imgs/homeSlider/home1.jpg" />
+          <img data-u="image" src="/imgs/homeSlider/web_banner_1.jpg"/>
          </div>
          <div>
-            <img data-u="image" src="/imgs/homeSlider/home2.jpg" />
+            <img data-u="image" src="/imgs/homeSlider/web_banner_2.jpg" />
          </div>
          <div>
-            <img data-u="image" src="/imgs/homeSlider/home3.jpg" />
+            <img data-u="image" src="/imgs/homeSlider/web_banner_1.jpg" />
          </div>
       </div>
       <!-- Bullet Navigator -->
@@ -30,17 +30,6 @@
                <circle class="b" cx="8000" cy="8000" r="5800"></circle>
             </svg>
          </div>
-      </div>
-      <!-- Arrow Navigator -->
-      <div data-u="arrowleft" class="jssora051 jssor1-arrow-left-main" data-autocenter="2" data-scale="0.75" data-scale-left="0.75">
-         <svg viewBox="0 0 16000 16000" class="jssor1-arrow-left-svg">
-            <polyline class="a" points="11040,1920 4960,8000 11040,14080 "></polyline>
-         </svg>
-      </div>
-      <div data-u="arrowright" class="jssora051 jssor1-arrow-right-main" data-autocenter="2" data-scale="0.75" data-scale-right="0.75">
-         <svg viewBox="0 0 16000 16000" class="jssor1-arrow-right-svg">
-            <polyline class="a" points="4960,1920 11040,8000 4960,14080 "></polyline>
-         </svg>
       </div>
    </div>
    <!-- END jssor1 slider -->
@@ -238,8 +227,8 @@
                 <img class="jssor4-img" src="../svg/slider/spin.svg" />
              </div>
              <div data-u="slides" class="jssor4-d-sliders">
-                @if(!empty($latest)) 
-                @foreach($latest as $voucher)
+                @if(!empty($sorted_expiry)) 
+                @foreach($sorted_expiry as $voucher)
                 <div class="card alignVoucherCards">
                   <a href="#voucher{{$voucher->id}}" role="button" data-toggle="modal">
                      <div class="hoverOver voucher-style">
@@ -364,26 +353,15 @@
    </div>
 </div>
  @auth
- <div class="modal fade" id="warningRedeem{{$voucher->id}}" tabindex="-1" role="dialog">
-   <div class="modal-dialog" role="document">
-      <div class="modal-content">
-         <div class="modal-header" style="background-color:#07AD4D;">
-            <h5 class="modal-title" style="color: white; font-size: 15px;">Voucher Redemption</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="opacity: 0.9; color: white; position:absolute;right: 2%;top: 2%;">
-            <span aria-hidden="true"><i class="fas fa-times"></i></span>
-            </button>
-         </div>
-         <div class="modal-body" style="background-color: #F2F2F2">
-            Please ensure you are at the establishment before redeeming the voucher.<br>
-            Once redeemed, you will have 5:00 min to present the voucher at the counter before the voucher is disabled.<br><br>
-         </div>
-         <div class="modal-footer" style="background-color: #F2F2F2">
-            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-success" onClick="startRedeem({{$voucher->id}}, {{ Auth::user()->id }})" data-dismiss="modal">Redeem</button>
-         </div>
-      </div>
-   </div>
-</div>
+ @component('modals.warning-modal')
+ @slot('voucherid')
+ {{$voucher->id}}
+ @endslot
+ @slot('userid')
+ {{ Auth::user()->id }}
+ @endslot
+ @endcomponent
+
 @endauth
 @endforeach 
 @endif

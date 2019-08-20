@@ -22,19 +22,12 @@ class RedeemController extends Controller
     {
         $this->validate($request,[
             'user_id' => 'required',
-            'voucher_id'  => [
-                'required', 
-                Rule::unique('redeems')->where(function ($query) use ($request) {
-                    return $query
-                        ->whereUser_id($request->user_id)
-                        ->whereVoucher_id($request->voucher_id);
-                }),
-            ]
+            'voucher_id'  => 'required'
+        ]);   
+       $redeem = Redeem::create([
+            'user_id' => $request['user_id'],
+            'voucher_id' => $request['voucher_id'],
         ]);
-        $redeem = new Redeem;
-        $redeem->voucher_id = $request['voucher_id'];
-        $redeem->user_id = $request['user_id'];
-        $redeem->save();        
         $dateRedeemed = $redeem->created_at->toDayDateTimeString(); 
         $dateAvailable = $redeem->created_at->addHours($redeem->voucher()->first()->timeout)->toDayDateTimeString(); 
         return response()->json(['dateRedeemed' => $dateRedeemed, 'dateAvailable' => $dateAvailable]);

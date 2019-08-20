@@ -42,19 +42,19 @@
 </script>
  
  @if(!empty($categoryname))
-<h2 style="font-size: 25px;"> Sorting vouchers by {{$categoryname}}</h2>
+<h2 style="font-size: 25px; text-align:center;"> Sorting vouchers by {{$categoryname}}</h2>
 @endif
 
 @if(!empty($searchname))
-<h2 style="font-size: 25px;"> Search for "{{$searchname}}"</h2>
+<h2 style="font-size: 25px; text-align:center;"> Search for "{{$searchname}}"</h2>
 @endif
 
 @if(!empty($popularall))
-<h2 style="font-size: 25px;">Popular Vouchers</h2>
+<h2 style="font-size: 25px;text-align:center;">Showing Popular Vouchers</h2>
 @endif
 
 @if(!empty($newestall))
-<h2 style="font-size: 25px;">Newest Vouchers</h2>
+<h2 style="font-size: 25px;text-align:center;">Showing Newest Vouchers</h2>
 @endif
 
 @if(count($vouchers) <= 0)
@@ -182,33 +182,21 @@
         </div>
      </div>
      @auth
-     <div class="modal fade" id="warningRedeem{{$voucher->id}}" tabindex="-1" role="dialog">
-         <div class="modal-dialog" role="document">
-            <div class="modal-content">
-               <div class="modal-header" style="background-color:#07AD4D;">
-                  <h5 class="modal-title" style="color: white; font-size: 15px;">Voucher Redemption</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="opacity: 0.9; color: white; position:absolute;right: 2%;top: 2%;">
-                  <span aria-hidden="true"><i class="fas fa-times"></i></span>
-                  </button>
-               </div>
-               <div class="modal-body" style="background-color: #F2F2F2">
-                  Please ensure you are at the establishment before redeeming the voucher.<br>
-                  Once redeemed, you will have 5:00 min to present the voucher at the counter before the voucher is disabled.<br><br>
-               </div>
-               <div class="modal-footer" style="background-color: #F2F2F2">
-                  <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                  <button type="button" class="btn btn-success" onClick="startRedeem({{$voucher->id}}, {{ Auth::user()->id }})" data-dismiss="modal">Redeem</button>
-               </div>
-            </div>
-         </div>
-      </div>
-@endauth
+     @component('modals.warning-modal')
+     @slot('voucherid')
+     {{$voucher->id}}
+     @endslot
+     @slot('userid')
+     {{ Auth::user()->id }}
+     @endslot
+     @endcomponent
+         @endauth
        @endforeach
        @endif 
       </div>
 
 </div>
-<div class="text-center" style="">
+<div class="text-center">
    {{ $vouchers->links() }}
 </div>
 @stop

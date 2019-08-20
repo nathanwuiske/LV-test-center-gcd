@@ -31,7 +31,7 @@
                            <th>Tags</th>
                            <th>Image</th>
                            <th>Categories</th>
-                           <th class="text-center" style="width: 10%">Modify</th>
+                           <th class="text-center" style="width: 12%">Modify</th>
                         </tr>
                         <!-- Display vouchers from database using the voucher object created -->
                         <tr v-for="voucher in vouchers.data" :key="voucher.id">
@@ -56,8 +56,9 @@
                            <div v-for="category in voucher.get_categories" :key="category.id">
                               <td>{{category.name}}</td>
                            </div>
-                           <!-- End of Display tags -->
-                           <td>
+                           <!-- End of Display categories -->
+                           <td class="text-center">
+							  <a class="cursor-pointer" @click="getMap(voucher.id, voucher.latitude, voucher.longitude, voucher.name)"> <i class="fas fa-map-marker-alt"  style="color: #0F7E15;"></i></a>
                               <a class="cursor-pointer" @click="editVoucherModal(voucher)"> <i class="far fas fa-pencil-alt"  style="color: #FFC107;"></i></a>
                               <a class="cursor-pointer" @click="archiveVoucher(voucher.id, voucher.name)"><i class="fas fa-archive" style="color: #428bca;"></i></a>
                               <a class="cursor-pointer" @click="deleteVoucher(voucher.id, voucher.name)"><i class="fas fa-trash red"></i></a>
@@ -75,6 +76,57 @@
             </div>
          </div>
       </div>
+
+	<div class="modal fade" id="showMap" tabindex="-1" role="dialog" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">Add / Remove a location</h5>
+				</div>
+				<div class="modal-body">
+					<form id="form-create" @submit.prevent="createLocation()">
+					<input type="hidden" name="_token"  id="token-create" />
+					<div class="form-group">
+						<label>Voucher Name</label>
+						<input disabled v-model="voucherForm.name" type="text" name="locName" class="form-control">
+					</div>
+					<div class="form-group">
+						<label>Latitude</label>
+						<input disabled v-model="locationForm.latitude" type="text" id="txtLat" name="latitude" class="form-control" :class="{ 'is-invalid': locationForm.errors.has('latitude') }">
+						<has-error :form="locationForm" field="latitude"></has-error>
+					</div>
+					<div class="form-group">
+						<label>Longitude</label>
+						<input disabled v-model="locationForm.longitude" type="text" id="txtLng" class="form-control" name="longitude" :class="{ 'is-invalid': locationForm.errors.has('longitude') }"> 
+						<has-error :form="locationForm" field="longitude"></has-error>
+					</div>
+					<div class="form-group">
+						<p class="text-center"> To remove a location clear the values and then click Create Location.
+						<div class="text-center">
+							<button type="submit" class="btn btn-primary" id="btn-create">Create Location</button>
+							<button type="button" @click="deleteLocation" class="btn btn-danger">Clear Values</button>
+						</div>
+					</div>
+					</form>
+					<div id="pac-container" class="text-center" style="z-index: 1050;">
+						<div class="form-group">
+							<input id="pac-input" type="text" placeholder="Search for a location" style="width:100%;">
+						</div>
+						<p class="text-center"> Once a location is searched the marker can be dragged for further accuracy</p>
+					</div>
+					<div id="map_canvas" style="width: auto; height: 600px;"></div>
+					<div id="infowindow-content">
+						<img src="" width="16" height="16" id="place-icon">
+						<span id="place-name"  class="title"></span><br>
+						<span id="place-address"></span>
+					</div>
+					<div class="modal-footer">
+					<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
       <!-- Modal for adding new voucher -->
       <div class="modal fade" id="addNewVoucher" tabindex="-1" role="dialog" aria-labelledby="newVoucherLabel" aria-hidden="true">
          <div class="modal-dialog modal-dialog-centered" role="document">
@@ -185,6 +237,12 @@
       </div>
    </div>
 </template>
+<style>
+/* Stops the Google Maps search from disappearing behind the modal */
+.pac-container {
+    z-index: 1050;
+}
+</style>
 <script>
 	export default {
 		data() {
@@ -204,6 +262,11 @@
 					popular_flag: '',
 					timeout: '',
 					is_archive: ''
+				}),
+				locationForm: new Form({
+                    id: '',
+                    longitude: '',
+					latitude: ''
 				})
 			}
 		},
@@ -217,6 +280,15 @@
 			getImage(image) {
 				$('#imagepreview').attr('src', "imgs/vouchers/" + image);
 				$('#showImage').modal('show');
+			},
+			getMap(id, latitude, longitude, vouchername){
+		
+			//	$('#addNewVoucher').modal('hide');
+				$('#showMap').modal('show');
+				this.voucherForm.name = vouchername;
+				this.locationForm.latitude = latitude;
+				this.locationForm.longitude = longitude;
+				this.locationForm.id = id;
 			},
 			insertImage(event) {
 				let file = event.target.files[0];
@@ -239,6 +311,34 @@
 					})
 				}
 			},
+			deleteLocation(){
+				this.locationForm.latitude = null;
+				this.locationForm.longitude = null;
+			},
+			 createLocation() {
+				this.locationForm.put('api/location/' + this.locationForm.id)
+					.then(() => {
+						Fire.$emit('RefreshVouchers');
+						$('#showMap').modal('hide');
+						      swal.fire({
+                           toast: true,
+                           position: 'top',
+                           showConfirmButton: false,
+                           timer: 3500,
+                           type: 'success',
+                           title: 'Location successfully assigned to voucher'
+                         })
+                    this.locationForm.clear();
+				    this.locationForm.reset();
+					})
+					.catch(() => {
+						swal.fire({
+							title: 'Error',
+							text: "Error assigning location.",
+							type: 'error'
+						})
+					})
+            },
 			updateVoucher() {
 				this.voucherForm.put('api/voucher/' + this.voucherForm.id)
 					.then(() => {
@@ -260,6 +360,93 @@
 							type: 'error'
 						})
 					})
+			},
+			loadMap() {
+			// Creating map object
+			var map = new google.maps.Map(document.getElementById('map_canvas'), {
+				center: {
+					lat: -28.017879,
+					lng: 153.397253
+				},
+				zoom: 13
+			});
+
+			var card = document.getElementById('pac-card');
+			var input = document.getElementById('pac-input');
+			var types = document.getElementById('type-selector');
+			var strictBounds = document.getElementById('strict-bounds-selector');
+
+			map.controls[google.maps.ControlPosition.TOP_RIGHT].push(card);
+			var autocomplete = new google.maps.places.Autocomplete(input);
+			autocomplete.bindTo('bounds', map);
+			autocomplete.setFields(['address_components', 'geometry', 'icon', 'name']);
+			var infowindow = new google.maps.InfoWindow();
+			var infowindowContent = document.getElementById('infowindow-content');
+			infowindow.setContent(infowindowContent);
+			var marker = new google.maps.Marker({
+				map: map,
+				anchorPoint: new google.maps.Point(0, -29),
+				draggable: true
+			});
+
+			var el = document.getElementById('txtLat');
+			var el2 = document.getElementById('txtLng');
+				autocomplete.addListener('place_changed', function () {
+
+					infowindow.close();
+					marker.setVisible(false);
+					var place = autocomplete.getPlace();
+					if (!place.geometry) {
+						window.alert("No details available for input: '" + place.name + "'");
+						return;
+					}
+
+					if (place.geometry.viewport) {
+						map.fitBounds(place.geometry.viewport);
+					} else {
+						map.setCenter(place.geometry.location);
+						map.setZoom(17); 
+					}
+					marker.setPosition(place.geometry.location);
+					marker.setVisible(true);
+					el2.value = place.geometry.location.lng();
+					let event2 = new Event('input', {
+						bubbles: true
+					});
+					el2.dispatchEvent(event2);
+					el.value = place.geometry.location.lat();
+					let event = new Event('input', {
+						bubbles: true
+					});
+					el.dispatchEvent(event);
+					var address = '';
+					if (place.address_components) {
+						address = [
+							(place.address_components[0] && place.address_components[0].short_name || ''),
+							(place.address_components[1] && place.address_components[1].short_name || ''),
+							(place.address_components[2] && place.address_components[2].short_name || '')
+						].join(' ');
+					}
+					infowindowContent.children['place-icon'].src = place.icon;
+					infowindowContent.children['place-name'].textContent = place.name;
+					infowindowContent.children['place-address'].textContent = address;
+					infowindow.open(map, marker);
+				});
+
+				google.maps.event.addListener(marker, 'dragend', function (evt) {
+					// trigger an event for v-model in vue instance
+					el.value = evt.latLng.lat().toFixed(6);
+					let event = new Event('input', {
+						bubbles: true
+					});
+					el.dispatchEvent(event);
+					el2.value = evt.latLng.lng().toFixed(6);
+					let event2 = new Event('input', {
+						bubbles: true
+					});
+					el2.dispatchEvent(event2);
+					map.panTo(evt.latLng);
+				});
 			},
 			archiveVoucher(id, name) {
 				swal.fire({
@@ -429,6 +616,7 @@
 				})
 			});
 			this.displayVouchers();
+			this.loadMap();
 			/* If a voucher is created, call the displayVouchers function again to refresh vouchers table*/
 			Fire.$on('RefreshVouchers', () => {
 				if(this.search == ''){

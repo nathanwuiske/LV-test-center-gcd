@@ -485,6 +485,10 @@ cursor: default;
   color: black;
 }
 
+.errorReturn:hover {
+  color: black;
+}
+
 
 /* End Vouchers */
 .alignCategoryDropBox {
@@ -547,7 +551,6 @@ cursor: default;
 /* =================================== */
 
 #mainLogo {
-  font-family: "Ubuntu";
   padding-top: 10px; 
   font-size: 30px;
 }
@@ -588,9 +591,22 @@ cursor: default;
   margin-bottom: 350px;
 }
 
+
+.mb450 {
+  margin-bottom: 450px;
+}
+
 .mb250 {
   margin-bottom: 250px;
 }
+
+
+
+
+.mb100 {
+  margin-bottom: 100px;
+}
+
 
 .mb150 {
   margin-bottom: 150px;
@@ -1024,6 +1040,9 @@ body > section,
 .contact-call-on {
   color:#07AD4D;
   font-size:28px;
+}
+.contact-call-on:hover {
+  color:#037835;
 }
 
 .container-form .input,

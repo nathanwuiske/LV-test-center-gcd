@@ -21,7 +21,7 @@
    </form>
 </div>
 <h2 class="text-center contact-or contact-sep">OR</h2>
-<p class="text-center contact-call">Give us a call on <span class="contact-phone contact-call-on">0425 638 428</span></p>
+<p class="text-center contact-call">Give us a call on <a href="tel:+61425638428" class="contact-phone contact-call-on">0425 638 428</a></p>
 <div class="container-message">
    @if (Session::has('success_message'))
    <p class="alert alert-success">Message successfully sent</p>

@@ -24,6 +24,7 @@ class HomeController extends Controller
       $vouchers = Voucher::latest()->paginate(20);
       $categories = Category::orderBy('id')->get();
       $popular = Voucher::where('popular_flag', '1')->limit(20)->get();
+      $sorted_expiry = Voucher::orderBy('expiry_date')->limit(20)->get();
       $latest = Voucher::latest()->limit(20)->get();
       $businesses = Business::latest()->limit(20)->get();
       if(\Auth::check()){
@@ -61,6 +62,17 @@ class HomeController extends Controller
             $voucher->isFavourited = true;
           } 
       }
+
+      foreach($sorted_expiry as $voucher){
+        $favourite = $user->getfavourites()->where([
+          ['user_id', '=', Auth::user()->id],
+          ['voucher_id', '=', $voucher->id]
+          ])->first();
+
+          if ($favourite){
+            $voucher->isFavourited = true;
+          } 
+      }
     
     
       foreach($latest as $voucher){
@@ -74,15 +86,14 @@ class HomeController extends Controller
           } 
       }
     }
-      return view('home', compact('vouchers', 'popular', 'categories', 'latest','businesses'));
+      return view('home', compact('vouchers', 'popular', 'categories', 'latest','businesses', 'sorted_expiry'));
     }
 
     public function removefavourite(Request $request)
     {
       $user = Auth::user(); 
       if(DB::table('user_favourites')->where('user_id',$user->id)->where('voucher_id',$request->get('removefavourite'))->delete()){
-        $deleted = 1;
-        return view('favourites')->with('deleted', $deleted);
+        return redirect('favourites')->with('deleted', 'Voucher removed from favourites');
       }
       return view('favourites');
     }
@@ -98,12 +109,13 @@ class HomeController extends Controller
     // If the search is empty, return the default vouchers
     if(empty($terms)){
       $now = Carbon::now();
-        foreach($vouchers as $voucher){
-              $end = Carbon::parse($voucher->expiry_date);
-              $DeferenceInDays = $end->startOfDay()->diffInDays($now->startOfDay());
-              $voucher->expiry_days = $DeferenceInDays;
-         }
+  
       $vouchers = Voucher::orderBy('id')->paginate($vouchersPerPage);
+      foreach($vouchers as $voucher){
+        $end = Carbon::parse($voucher->expiry_date);
+        $DeferenceInDays = $end->startOfDay()->diffInDays($now->startOfDay());
+        $voucher->expiry_days = $DeferenceInDays;
+   }
     }
     else {
         $vouchers = Voucher::where(function ($query) use ($terms) {

@@ -49,12 +49,6 @@
                      </router-link>
                   </li>
                   <li class="nav-item">
-                     <router-link to="/locations" class="nav-link"> 
-                        <i class="nav-icon fas fa-map-marker-alt"></i>
-                        <p class="white">Locations</p>
-                     </router-link>
-                  </li>
-                  <li class="nav-item">
                      <router-link to="/business" class="nav-link">
                         <i class="nav-icon fas fa-briefcase"></i>
                         <p class="white">Businesses</p>
