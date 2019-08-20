@@ -278,7 +278,14 @@
 				}, 500);
 			},
 			getImage(image) {
-				$('#imagepreview').attr('src', "imgs/vouchers/" + image);
+				if(!image){
+					var source = "imgs/errors/";
+					image = "no-voucher-image.png";
+				}
+				else {
+					var source = "imgs/vouchers/";
+				}
+				$('#imagepreview').attr('src', source + image);
 				$('#showImage').modal('show');
 			},
 			getMap(id, latitude, longitude, vouchername){

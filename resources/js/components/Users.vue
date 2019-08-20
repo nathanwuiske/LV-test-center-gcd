@@ -60,21 +60,19 @@
                   <div class="modal-body">
                      <!-- Name form input -->
                      <div class="form-group">
-                        <label>Name</label><span class="red">&#42;</span>
+                        <label>Name</label>
                         <input v-model="userForm.first_name" type="text" name="first_name" placeholder="User's name"
                            class="form-control" :class="{ 'is-invalid': userForm.errors.has('first_name') }">
                         <has-error :form="userForm" field="first_name"></has-error>
                      </div>
                      <!-- Email form input -->
                      <div class="form-group">
-                        <label>Email</label><span class="red">&#42;</span>
-                        <input v-model="userForm.email" type="text" name="email" placeholder="User's email"
-                           class="form-control" :class="{ 'is-invalid': userForm.errors.has('email') }">
-                        <has-error :form="userForm" field="email"></has-error>
+                        <label>Email</label>
+                        <input type="text" v-model="userForm.email" name="email" placeholder="User's email" class="form-control" disabled>
                      </div>
                     <!-- Type form input -->
                      <div class="form-group">
-                        <label>Type</label><span class="red">&#42;</span>
+                        <label>Type</label>
                         <select name="type" v-model="userForm.type" id="type" class="form-control" 
                            :class="{ 'is-invalid': userForm.errors.has('type') }">
                            <option value="" disabled selected>Please select an option</option>
@@ -85,7 +83,7 @@
                      </div>
                      <!-- Phone number form input -->
                      <div class="form-group">
-                        <label>Phone number</label><span class="red">&#42;</span>
+                        <label>Phone number</label>
                         <input v-model="userForm.phone_number" type="text" name="phone_number" placeholder="User Phone number"
                            class="form-control" :class="{ 'is-invalid': userForm.errors.has('phone_number') }">
                         <has-error :form="userForm" field="phone_number"></has-error>

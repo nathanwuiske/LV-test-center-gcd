@@ -1855,7 +1855,14 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     getImage: function getImage(image) {
-      $('#imagepreview').attr('src', "imgs/vouchers/" + image);
+      if (!image) {
+        var source = "imgs/errors/";
+        image = "no-voucher-image.png";
+      } else {
+        var source = "imgs/vouchers/";
+      }
+
+      $('#imagepreview').attr('src', source + image);
       $('#showImage').modal('show');
     },
     getResults: function getResults() {
@@ -2135,7 +2142,14 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     getImage: function getImage(image) {
-      $('#imagepreview').attr('src', "imgs/businesses/" + image);
+      if (!image) {
+        var source = "imgs/errors/";
+        image = "no-image.png";
+      } else {
+        var source = "imgs/businesses/";
+      }
+
+      $('#imagepreview').attr('src', source + image);
       $('#showImage').modal('show');
     },
     deleteBusiness: function deleteBusiness(id, name) {
@@ -3749,8 +3763,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -4151,7 +4163,14 @@ __webpack_require__.r(__webpack_exports__);
       }, 500);
     },
     getImage: function getImage(image) {
-      $('#imagepreview').attr('src', "imgs/vouchers/" + image);
+      if (!image) {
+        var source = "imgs/errors/";
+        image = "no-voucher-image.png";
+      } else {
+        var source = "imgs/vouchers/";
+      }
+
+      $('#imagepreview').attr('src', source + image);
       $('#showImage').modal('show');
     },
     getMap: function getMap(id, latitude, longitude, vouchername) {
@@ -75548,7 +75567,6 @@ var render = function() {
                       { staticClass: "form-group" },
                       [
                         _c("label", [_vm._v("Name")]),
-                        _c("span", { staticClass: "red" }, [_vm._v("*")]),
                         _vm._v(" "),
                         _c("input", {
                           directives: [
@@ -75590,59 +75608,42 @@ var render = function() {
                       1
                     ),
                     _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "form-group" },
-                      [
-                        _c("label", [_vm._v("Email")]),
-                        _c("span", { staticClass: "red" }, [_vm._v("*")]),
-                        _vm._v(" "),
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.userForm.email,
-                              expression: "userForm.email"
-                            }
-                          ],
-                          staticClass: "form-control",
-                          class: {
-                            "is-invalid": _vm.userForm.errors.has("email")
-                          },
-                          attrs: {
-                            type: "text",
-                            name: "email",
-                            placeholder: "User's email"
-                          },
-                          domProps: { value: _vm.userForm.email },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.$set(
-                                _vm.userForm,
-                                "email",
-                                $event.target.value
-                              )
-                            }
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("label", [_vm._v("Email")]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.userForm.email,
+                            expression: "userForm.email"
                           }
-                        }),
-                        _vm._v(" "),
-                        _c("has-error", {
-                          attrs: { form: _vm.userForm, field: "email" }
-                        })
-                      ],
-                      1
-                    ),
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "text",
+                          name: "email",
+                          placeholder: "User's email",
+                          disabled: ""
+                        },
+                        domProps: { value: _vm.userForm.email },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(_vm.userForm, "email", $event.target.value)
+                          }
+                        }
+                      })
+                    ]),
                     _vm._v(" "),
                     _c(
                       "div",
                       { staticClass: "form-group" },
                       [
                         _c("label", [_vm._v("Type")]),
-                        _c("span", { staticClass: "red" }, [_vm._v("*")]),
                         _vm._v(" "),
                         _c(
                           "select",
@@ -75711,7 +75712,6 @@ var render = function() {
                       { staticClass: "form-group" },
                       [
                         _c("label", [_vm._v("Phone number")]),
-                        _c("span", { staticClass: "red" }, [_vm._v("*")]),
                         _vm._v(" "),
                         _c("input", {
                           directives: [

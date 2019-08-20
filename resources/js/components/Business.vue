@@ -195,8 +195,15 @@
                 }
             },
             getImage(image) {
-                $('#imagepreview').attr('src', "imgs/businesses/" + image);
-                $('#showImage').modal('show');
+             if(!image){
+					var source = "imgs/errors/";
+					image = "no-image.png";
+            }
+            else {
+               var source = "imgs/businesses/";
+            }
+             	$('#imagepreview').attr('src', source + image);
+			   	$('#showImage').modal('show');
             },
             deleteBusiness(id, name) {
                 swal.fire({

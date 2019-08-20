@@ -71,7 +71,7 @@
                   <a href="#voucher{{$voucher->id}}" role="button" data-toggle="modal">
                      <div class="hoverOver" style="background-color: white; border: 1px solid #CCCCCC; text-align: center; ">
                         <br>
-                        <img class="card-img-top" class="img-fluid" width="220" height="270" src="{{url('imgs/vouchers/' . $voucher->image)}}" alt="{{$voucher->name}}" onerror="this.onerror=null;this.src='imgs/no-voucher-image.png';">
+                        <img class="card-img-top" class="img-fluid" width="220" height="270" src="{{url('imgs/vouchers/' . $voucher->image)}}" alt="{{$voucher->name}}" onerror="this.onerror=null;this.src='imgs/errors/no-voucher-image.png';">
                         <h2 style="color:#07AD4D; font-size: 20px; margin-bottom: 10px;margin-top: 10px;">{{ str_limit($voucher->name, $limit = 22, $end='...') }}</h2>
                         <button class="btn btn-lg" style="background-color:#07AD4D;  width: 50%; height: 100%; margin-right: 10px;"><i class="fa fa-close"></i>View</button>
                      </a>
@@ -116,7 +116,7 @@
                  </button>
               </div>
               <div class="modal-body  text-center" style="background-color: #F2F2F2">
-               <img id="modal_image_{{$voucher->id}}" src="{{url('imgs/vouchers/' . $voucher->image)}}" class="img-fluid img-center modal-image" alt="{{$voucher->name}}" onerror="this.onerror=null;this.src='imgs/no-voucher-image.png';">
+               <img id="modal_image_{{$voucher->id}}" src="{{url('imgs/vouchers/' . $voucher->image)}}" class="img-fluid img-center modal-image" alt="{{$voucher->name}}" onerror="this.onerror=null;this.src='imgs/errors/no-voucher-image.png';">
                <p style="word-wrap: break-word; font-size: 18px;">
                   <br><span class="header-modal">About Deal</span>
                   <br>
