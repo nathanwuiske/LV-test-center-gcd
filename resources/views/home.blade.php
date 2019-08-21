@@ -275,8 +275,8 @@
     </div>
  </section>
 
-@if(!empty($vouchers)) 
-@foreach($vouchers as $voucher)
+@if(!empty($all_home_vouchers)) 
+@foreach($all_home_vouchers as $voucher)
 <div class="modal fade" id="voucher{{$voucher->id}}" tabindex="-1" role="dialog" aria-hidden="true">
    <div class="modal-dialog" role="document">
       <div class="modal-content">

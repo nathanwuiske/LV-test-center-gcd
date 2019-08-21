@@ -21,72 +21,51 @@ class HomeController extends Controller
 
     public function index()
     {
-      $vouchers = Voucher::latest()->paginate(20);
       $categories = Category::orderBy('id')->get();
       $popular = Voucher::where('popular_flag', '1')->limit(20)->get();
       $sorted_expiry = Voucher::orderBy('expiry_date')->limit(20)->get();
       $latest = Voucher::latest()->limit(20)->get();
       $businesses = Business::latest()->limit(20)->get();
+
+      $popular_latest_merge =  $popular->merge($latest);
+      $all_home_vouchers = $popular_latest_merge->merge($sorted_expiry);
+
       if(\Auth::check()){
         $user = \Auth::user();
        } else {
         $user = false;
       }
       $now = Carbon::now();
-      foreach($vouchers as $voucher){
-        if($user){
-            $redemption = $user->redeems()->where([
+      foreach($all_home_vouchers as $voucher) {
+        $end = Carbon::parse($voucher->expiry_date);
+        $DeferenceInDays = $end->startOfDay()->diffInDays($now->startOfDay());
+        $voucher->expiry_days = $DeferenceInDays;
+      }
+
+    if($user){
+      foreach($all_home_vouchers as $voucher){
+        $favourite = $user->getfavourites()->where([
+          ['user_id', '=', Auth::user()->id],
+          ['voucher_id', '=', $voucher->id]
+          ])->first();
+
+          if ($favourite){
+            $voucher->isFavourited = true;
+          } 
+
+          $redemption = $user->redeems()->where([
             ['created_at', '>=', Carbon::now()->subHours($voucher->timeout)],
             ['voucher_id', '=', $voucher->id]
             ])->first();
-
 
             if ($redemption){
                 $voucher->isRedeemed = true;
                 $voucher->redeemedAt = $redemption->created_at->toDayDateTimeString();
                 $voucher->redeemAvailable = $redemption->created_at->addHours($voucher->timeout)->toDayDateTimeString();  
             }
-        }
-            $end = Carbon::parse($voucher->expiry_date);
-            $DeferenceInDays = $end->startOfDay()->diffInDays($now->startOfDay());
-            $voucher->expiry_days = $DeferenceInDays;
-    }
-    if($user){
-      foreach($popular as $voucher){
-        $favourite = $user->getfavourites()->where([
-          ['user_id', '=', Auth::user()->id],
-          ['voucher_id', '=', $voucher->id]
-          ])->first();
-
-          if ($favourite){
-            $voucher->isFavourited = true;
-          } 
-      }
-
-      foreach($sorted_expiry as $voucher){
-        $favourite = $user->getfavourites()->where([
-          ['user_id', '=', Auth::user()->id],
-          ['voucher_id', '=', $voucher->id]
-          ])->first();
-
-          if ($favourite){
-            $voucher->isFavourited = true;
-          } 
-      }
-    
-    
-      foreach($latest as $voucher){
-        $favourite = $user->getfavourites()->where([
-          ['user_id', '=', Auth::user()->id],
-          ['voucher_id', '=', $voucher->id]
-          ])->first();
-
-          if ($favourite){
-            $voucher->isFavourited = true;
-          } 
       }
     }
-      return view('home', compact('vouchers', 'popular', 'categories', 'latest','businesses', 'sorted_expiry'));
+      return view('home', compact('popular', 'categories', 'latest','businesses', 'sorted_expiry', 'all_home_vouchers'));
     }
 
     public function removefavourite(Request $request)
