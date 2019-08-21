@@ -78,7 +78,7 @@
                   <div class="card alignVoucherCards">
                      <a href="#business{{$business->id}}" role="button" data-toggle="modal">
                         <div class="hoverOver business-card">
-                           <img class="card-img-top" class="img-fluid" width="200" height="200" src="{{url('imgs/businesses/' . $business->image)}}" alt='{{$business->name}}'>
+                           <img class="card-img-top" class="img-fluid" width="200" height="200" src="{{url('imgs/businesses/' . $business->image)}}" alt='{{$business->name}}' onerror="this.onerror=null;this.src='imgs/errors/no-image.png'">
                      </a>
                      <div class="mb20"></div>
                      </div>
