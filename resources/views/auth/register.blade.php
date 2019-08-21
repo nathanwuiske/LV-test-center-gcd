@@ -11,7 +11,7 @@
          </div>
          <form method="POST" action="{{ route('register') }}">
             @csrf
-            <input id="first_name" placeholder="Name"  type="text" class="{{ $errors->has('first_name') ? ' is-invalid' : '' }}" name="first_name" value="{{ old('first_name') }}" required autofocus>
+            <input id="full_name" placeholder="Name"  type="text" class="{{ $errors->has('full_name') ? ' is-invalid' : '' }}" name="full_name" value="{{ old('full_name') }}" required autofocus>
             <input id="email" placeholder="Email" type="email" class="{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required>
             <input id="password" placeholder="Password" type="password" class="{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
             <input id="password-confirm" placeholder="Confirm Password" type="password" name="password_confirmation" required>

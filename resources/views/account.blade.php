@@ -25,7 +25,7 @@
             <label class='main-input-label'>E-mail:</label>
             <input class='main-input' placeholder='{{ Auth::user()->email}}' type='text' disabled>
             <label class='main-input-label'>Name:</label>
-            <input id="getname" class='main-input' value='{{ Auth::user()->first_name}}' type='text'>
+            <input id="getname" class='main-input' value='{{ Auth::user()->full_name}}' type='text'>
             <label class='main-input-label'>Phone Number:</label>
             <input id="getnumber" class='main-input' value='{{ Auth::user()->phone_number}}' type='text'>
             <button class='btn main-save-button' onClick="checkToUpdate({{ Auth::user()->id }}, document.getElementById('getname').value, document.getElementById('getnumber').value)">Save</button>

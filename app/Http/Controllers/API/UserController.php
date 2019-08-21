@@ -37,7 +37,7 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
         $this->validate($request,[
-            'first_name' => 'required|string|max:150',
+            'full_name' => 'required|string|max:150',
             'email' => 'required|email',
             'phone_number' => 'nullable|numeric',
             'type' => 'required'
@@ -54,7 +54,7 @@ class UserController extends Controller
     public function search() {
         if ($search = \Request::get('q')) {
             $users = User::where(function($query) use ($search) {
-                $query->where('first_name','LIKE',"%$search%")->orWhere('email','LIKE',"%$search%");
+                $query->where('full_name','LIKE',"%$search%")->orWhere('email','LIKE',"%$search%");
             })->latest()->paginate(10);
         } 
         else {

@@ -153,7 +153,7 @@ function startRedeem(voucherid, userid) {
 		type: 'put',
 		url: 'updateaccount/' + id,
 		data: {
-			'first_name': name,
+			'full_name': name,
 			'phone_number': phone_number
 		},
 		success: function () {

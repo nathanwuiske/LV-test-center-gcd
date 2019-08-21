@@ -35,7 +35,7 @@ body {
       <form method="POST" action="{{ route('register') }}">
          @csrf
          <h1><span>GCD</span> Register</h1>
-         <input id="first_name" placeholder="Enter your name"  type="text" class="{{ $errors->has('first_name') ? ' is-invalid' : '' }}" name="first_name" value="{{ old('first_name') }}" required>
+         <input id="full_name" placeholder="Enter your name"  type="text" class="{{ $errors->has('full_name') ? ' is-invalid' : '' }}" name="full_name" value="{{ old('full_name') }}" required>
          <input id="email" placeholder="Enter your email" type="email" class="{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required>
          <input id="password" placeholder="Enter your password" type="password" class="{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
          <input id="password-confirm" placeholder="Confirm your password" type="password" name="password_confirmation" required>

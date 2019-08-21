@@ -28,7 +28,7 @@
                         </tr>
                         <tr v-for="user in users.data" :key="user.id">
                            <td>{{user.id}}</td>
-                           <td>{{user.first_name}}</td>
+                           <td>{{user.full_name}}</td>
 						   <td>{{user.email}}</td>
                            <td>{{user.type}}</td>
                            <td>{{user.phone_number}}</td>
@@ -61,9 +61,9 @@
                      <!-- Name form input -->
                      <div class="form-group">
                         <label>Name</label>
-                        <input v-model="userForm.first_name" type="text" name="first_name" placeholder="User's name"
-                           class="form-control" :class="{ 'is-invalid': userForm.errors.has('first_name') }">
-                        <has-error :form="userForm" field="first_name"></has-error>
+                        <input v-model="userForm.full_name" type="text" name="full_name" placeholder="User's name"
+                           class="form-control" :class="{ 'is-invalid': userForm.errors.has('full_name') }">
+                        <has-error :form="userForm" field="full_name"></has-error>
                      </div>
                      <!-- Email form input -->
                      <div class="form-group">
@@ -110,7 +110,7 @@
             currentPage: '',
 				userForm: new Form({
 					id: '',
-					first_name: '',
+					full_name: '',
 					email: '',
 					type: '',
 					phone_number: '',
