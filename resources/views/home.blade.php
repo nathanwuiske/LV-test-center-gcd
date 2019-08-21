@@ -114,8 +114,12 @@
          @if(!empty($popular)) 
          @foreach($popular as $voucher)
          <div class="card alignVoucherCards">
-            <a href="#voucher{{$voucher->id}}" role="button" data-toggle="modal">
-               <div class="hoverOver voucher-style">
+               @if(!empty($voucher->latitude) && !empty($voucher->longitude))
+                  <a href="#" onClick="showModalAndLoadMap({{$voucher->id}}, {{$voucher->latitude}}, {{$voucher->longitude}})" role="button" data-toggle="modal">
+               @else
+                   <a href="#voucher{{$voucher->id}}" role="button" data-toggle="modal">
+               @endif
+              <div class="hoverOver voucher-style">
                   <br>
                   <img class="card-img-top" class="img-fluid" width="220" height="270" src="{{url('imgs/vouchers/' . $voucher->image)}}" alt="{{$voucher->name}}" onerror="this.onerror=null;this.src='imgs/errors/no-voucher-image.png';">
                   <h2 class="voucher-name">{{ str_limit($voucher->name, $limit = 22, $end='...') }}</h2>
@@ -171,7 +175,11 @@
              @if(!empty($latest)) 
              @foreach($latest as $voucher)
              <div class="card alignVoucherCards">
-               <a href="#voucher{{$voucher->id}}" role="button" data-toggle="modal">
+               @if(!empty($voucher->latitude) && !empty($voucher->longitude))
+                  <a href="#" onClick="showModalAndLoadMap({{$voucher->id}}, {{$voucher->latitude}}, {{$voucher->longitude}})" role="button" data-toggle="modal">
+               @else
+                   <a href="#voucher{{$voucher->id}}" role="button" data-toggle="modal">
+               @endif
                   <div class="hoverOver voucher-style">
                      <br>
                      <img class="card-img-top" class="img-fluid" width="220" height="270" src="{{url('imgs/vouchers/' . $voucher->image)}}" alt="{{$voucher->name}}" onerror="this.onerror=null;this.src='imgs/errors/no-voucher-image.png';">
@@ -230,8 +238,12 @@
                 @if(!empty($sorted_expiry)) 
                 @foreach($sorted_expiry as $voucher)
                 <div class="card alignVoucherCards">
-                  <a href="#voucher{{$voucher->id}}" role="button" data-toggle="modal">
-                     <div class="hoverOver voucher-style">
+                  @if(!empty($voucher->latitude) && !empty($voucher->longitude))
+                     <a href="#" onClick="showModalAndLoadMap({{$voucher->id}}, {{$voucher->latitude}}, {{$voucher->longitude}})" role="button" data-toggle="modal">
+                  @else
+                      <a href="#voucher{{$voucher->id}}" role="button" data-toggle="modal">
+                  @endif
+                   <div class="hoverOver voucher-style">
                         <br>
                         <img class="card-img-top" class="img-fluid" width="220" height="270" src="{{url('imgs/vouchers/' . $voucher->image)}}" alt="{{$voucher->name}}" onerror="this.onerror=null;this.src='imgs/errors/no-voucher-image.png';">
                         <h2 class="voucher-name">{{ str_limit($voucher->name, $limit = 22, $end='...') }}</h2>
@@ -317,7 +329,7 @@
             @endif 
             @if(!empty($voucher->latitude) && !empty($voucher->longitude))
             <span class="header-modal">Location</span><br><br>
-            <iframe src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCC6emn13XOdxMhZAsbaGIgt2HcK3iKAoc&q={{$voucher->latitude}},{{$voucher->longitude}}" width="100%" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+            <iframe id="mapsid{{$voucher->id}}" src="" width="100%" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
             @endif
             @if ($voucher->isRedeemed)
             <div class="redeem-overlay redeem-overlay-previous">
@@ -366,6 +378,15 @@
 @endforeach 
 @endif
 <script>
+function showModalAndLoadMap(voucherid, voucher_latitude, voucher_longitude) {
+   if(voucher_latitude && voucher_longitude){
+   $('#voucher'+voucherid).modal('show');
+   $('#mapsid'+voucherid).attr('src', 
+   "https://www.google.com/maps/embed/v1/place?key=AIzaSyCC6emn13XOdxMhZAsbaGIgt2HcK3iKAoc&q=" + voucher_latitude + "," + voucher_longitude);
+   }
+}
+</script>
+<script>
 /* Initalize choices selection */
     const choices = new Choices('[data-trigger]', {
         searchEnabled: false
@@ -379,4 +400,5 @@
     jssor_4_slider_init();
     jssor_5_slider_init();
 </script>
+
 @stop
