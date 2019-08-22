@@ -20,7 +20,7 @@
             <img data-u="image" src="/imgs/homeSlider/web_banner_2.jpg" />
          </div>
          <div>
-            <img data-u="image" src="/imgs/homeSlider/web_banner_1.jpg" />
+            <img data-u="image" src="/imgs/homeSlider/web_banner_3.jpg" />
          </div>
       </div>
       <!-- Bullet Navigator -->
@@ -62,7 +62,7 @@
 <!-- End search -->
 
 <!-- Main content -->
-<section id="businesses" class="content-background-white">
+<section id="businesses" class="content-background-white businessShow">
       <div class="container">
          <div class="row">
             <h2 class="home-header-pop">Businesses</h2>

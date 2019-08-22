@@ -21,18 +21,20 @@ class IssueController extends Controller
     public function store(Request $request)
     {
         $this->validate($request,[
-            'user_id' => 'required|numeric', 
             'subject' => 'required|string|max:255',
             'description' => 'required|string|max:800',
             'resolved' => 'required|numeric'
         ]);
 
-        return Issue::create([
-            'user_id' => $request['user_id'],
+        Issue::create([
             'subject' => $request['subject'],
             'description' => $request['description'],
             'resolved' => $request['resolved'],
         ]);
+
+        return response()->json([
+            'message' => ' Thank you. Your report has was successfully sent.'
+        ], 201);
     }
 
     public function show($id)

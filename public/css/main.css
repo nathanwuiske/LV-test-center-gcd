@@ -296,12 +296,21 @@ cursor: default;
   border-bottom: 1px #787878 solid
 }
 
+
 /* view all header */
 .view-all {
   float:right; 
   color:#4272D7; 
   font-size:18px;
 }
+
+@media only screen and (max-width: 767px) {
+  .view-all {
+    margin-right:10%;
+  }
+}
+
+
 
 .header-modal {
   color: #07AD4D;
@@ -553,8 +562,15 @@ cursor: default;
 #mainLogo {
   padding-top: 10px; 
   font-size: 30px;
+ 
 }
 
+@media only screen and (max-width: 1200px) {
+  #mainLogo{
+    padding-top: 20px; 
+    font-size: 16px;
+  }
+}
 
 @media only screen and (max-width: 767px) {
   #mainLogo{
@@ -1211,3 +1227,11 @@ Terms and conditions
   color: #fff;
   margin-top: 100px;
 }
+
+@media only screen and (max-width: 767px) {
+  .businessShow {
+    display: none;
+    background-color:red;
+  }
+}
+

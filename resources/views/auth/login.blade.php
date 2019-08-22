@@ -2,7 +2,7 @@
 @section('content')
 <style>
 body { 
-  background-image: url(/imgs/login/coast-bay-min.jpg); 
+  background-image: url(../imgs/login/coast-bay-min.jpg); 
   background-size: cover;  
   background-repeat: no-repeat; 
   background-position: center center; 
@@ -46,13 +46,13 @@ body {
 </div>
 <div style="margin-bottom: 300px"></div>
 <script>
-function changeTab(evt, cityName) {
+function changeTab(evt, name) {
     var i;
     var x = document.getElementsByClassName("login");
     for (i = 0; i < x.length; i++) {
       x[i].style.display = "none";
     }
-    document.getElementById(cityName).style.display = "block";
+    document.getElementById(name).style.display = "block";
 }
 </script>
          
