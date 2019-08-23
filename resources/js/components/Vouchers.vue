@@ -498,6 +498,8 @@
 				this.editmode = false;
 				this.voucherForm.clear();
 				this.voucherForm.reset();
+				
+				$("#imageUpload").val('');
 				/* Show the modal and make sure it can't be closed when clicking the areas around it */
 				$("#addNewVoucher").modal({
 					backdrop: 'static',

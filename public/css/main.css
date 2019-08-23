@@ -855,6 +855,42 @@ body > section,
     clear: both;
 }
 
+@media only screen and (max-width: 767px) {
+
+  
+
+  /* Display the dropdown */
+  .nav li > ul {
+    display: block; 
+    position: absolute;
+  }
+
+  .nav li li {
+      float: none;
+  }
+  
+  .nav li:hover li a:hover {
+    background: #07ba53;
+  }
+  .main-navigation li ul li {
+    border-top: 0;
+  }
+
+  /* Simple clearfix */
+  
+  .nav ul:before,
+  .nav ul:after {
+      content: " "; /* 1 */
+      display: table; /* 2 */
+  }
+  
+  .nav ul:after {
+      clear: both;
+  }
+
+
+}
+
 /*=========================================
 	Slider
 ==========================================*/
@@ -1231,7 +1267,26 @@ Terms and conditions
 @media only screen and (max-width: 767px) {
   .businessShow {
     display: none;
-    background-color:red;
+  }
+}
+
+
+
+.navbar-collapse.collapse {
+  transition: height 0.1s;
+}
+
+.navbar-collapse.collapse.in {
+  max-height: none;
+  height: 100vh;
+}
+
+@media only screen and (max-width: 320px) {
+
+  #topNav
+  {
+    overflow-y: scroll !important;
+    max-height: 415px !important;
   }
 }
 

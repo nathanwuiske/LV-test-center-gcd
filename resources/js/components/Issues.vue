@@ -11,7 +11,6 @@
                      <tbody>
                         <tr>
                            <th>ID</th>
-                           <th>User ID</th>
                            <th>Subject</th>
                            <th>Description</th>
                            <th>Resolved?</th>
@@ -21,7 +20,6 @@
                         <tr v-if="issues.data && issues.data.length === 0"><p style="text-align:center;color:#AD1707;">There are currently no user issues.</p></tr>
                         <tr v-for="issue in issues.data" :key="issue.created_at">
                            <td>{{issue.id}}</td>
-                           <td>{{issue.user_id}}</td>
                             <td class="truncateText">
                             <span>{{issue.subject}}</span>
                             </td>

@@ -45,7 +45,7 @@
                </a>
             </div>
             <!-- Main navigation -->
-            <nav class="collapse navbar-collapse navbar-right" role="navigation">
+            <nav class="collapse navbar-collapse navbar-right" role="navigation" id="topNav">
                <ul id="nav" class="nav navbar-nav">
                   <li><a href="{{route('home')}}">Home</a></li> 
                   <li><a href="{{route('vouchers')}}">Vouchers</a></li> 
@@ -57,7 +57,7 @@
                   @if (Route::has('login'))
                   @auth
                   <li><a href="#"><i class="fas fa-user"></i> {{ str_limit(Auth::user()->full_name, $limit = 20, $end='...') }} <i class="fas fa-caret-down"></i></a>
-                  <ul>
+               <ul>
                   <li><a href="{{route('account')}}"><i class="fas fa-cog"></i> Account</a></li>
                   <li><a href="{{route('favourites')}}"><i class="fas fa-star"></i> Favourites</a></li>
                   <li><a href="{{route('adminhome')}}"><i class="fas fa-user-shield"></i> Admin</a></li>
@@ -72,10 +72,10 @@
                   </form>
                   @else
                   <li><a href="{{ route('login') }}"><strong>Login / Register</strong></a> </li>
-               
                   @endauth
                   @endif
                </ul>
+            </ul>
             </nav>
             <!-- End Main navigation -->
          </div>
