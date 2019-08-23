@@ -11,10 +11,6 @@
          <i class='fa fa-briefcase'></i>
          Orders
       </div>
-      <div class='sidebar-menu-item' onclick="changeTab(event, 'referal')">
-         <i class='fa fa-user-plus'></i>
-         Referals
-      </div>
    </div>
    <div class='account-main' id="settings">
       <div class='main-header'>
@@ -51,29 +47,17 @@
          </div>
       </div>
    </div>
-   <div class='account-main' id="referal" style="display:none">
-      <div class='main-header'>
-         <h2>Referal History</h2>
-      </div>
-      <div class='main-content'>
-         <p class="text-center">Refer your friends and recieve rewards</p>
-         <div class='main-settings-form' >
-            <p class="text-center main-red-col">You currently have no referals</p>
-            <button class='btn main-save-button' style="margin-top:250px;margin-left:250px;">Start now</button>
-         </div>
-      </div>
-   </div>
 </div>
 <div class="mb300"></div>
 
 <script>
-function changeTab(evt, cityName) {
+function changeTab(evt, tabName) {
 	var i;
 	var x = document.getElementsByClassName("account-main");
 	for (i = 0; i < x.length; i++) {
 		x[i].style.display = "none";
 	}
-	document.getElementById(cityName).style.display = "inline-block";
+	document.getElementById(tabName).style.display = "inline-block";
 	/* Change the menu item active link if clicked on */
 	tablinks = document.getElementsByClassName("sidebar-menu-item");
 	for (i = 0; i < x.length; i++) {
