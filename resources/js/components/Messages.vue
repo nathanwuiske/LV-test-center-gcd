@@ -24,7 +24,7 @@
                            <td>{{message.id}}</td>
                            <td>{{message.title}}</td>
                            <td>{{message.body}}</td>
-                           <td>View</td>
+                           <td><a href="#" @click="getImage(message.image)">Show</a></td>
                            <td>{{message.created_at | formatDate}}</td>
                            <td>
                               <a class="cursor-pointer" @click="editMessageModal(message)"> <i class="far fas fa-pencil-alt"  style="color: #FFC107;"></i></a>
@@ -67,6 +67,13 @@
                         name="body" placeholder="Enter a Home page message body"></textarea>
                         <has-error :form="messageForm" field="body"></has-error>
                      </div>
+                     <div class="form-group">
+                        <label for="image" class="control-label">Image</label>
+                         <div class="col-sm-12">
+                         <input type="file" @change="insertImage" name="image" id="imageUpload" class="form-control" :class="{ 'is-invalid': messageForm.errors.has('image') }">
+                          <has-error :form="messageForm" field="image"></has-error>
+                     </div>
+                  </div>
                   </div>
                   <!-- Footer -->
                   <div class="modal-footer">
@@ -100,6 +107,14 @@
                         class="form-control" :class="{ 'is-invalid': messageForm.errors.has('body') }"
                         name="body" placeholder="Enter a Home page message body"></textarea>
                         <has-error :form="messageForm" field="body"></has-error>
+                     </div>
+                     <!-- image form input -->
+                      <div class="form-group">
+                           <label for="image" class="control-label">Image</label>
+                           <div class="col-sm-12">
+                              <input type="file" @change="insertImage" name="image" id="imageUpload" class="form-control" :class="{ 'is-invalid': messageForm.errors.has('image') }">
+                              <has-error :form="messageForm" field="image"></has-error>
+                           </div>
                      </div>
                   </div>
                   <!-- Footer -->
@@ -216,7 +231,8 @@
             addNewMessageModal() {
 				this.editmode = false;
 				this.messageForm.clear();
-				this.messageForm.reset();
+            this.messageForm.reset();
+             $("#imageUpload").val('');
 				$("#addNewMessage").modal({
 					backdrop: 'static',
 					keyboard: false
@@ -237,7 +253,35 @@
 					.then(response => {
 						this.messages = response.data;
 					});
-			},
+         },
+         insertImage(event) {
+            let file = event.target.files[0];
+            let reader = new FileReader();
+            if (file['size'] < 2097152) {
+               reader.onloadend = (file) => {
+                  this.messageForm.image = reader.result;
+               }
+               reader.readAsDataURL(file);
+            } else {
+               $("#imageUpload").val('');
+               swal.fire({
+                  title: 'Error',
+                  text: "File cannot be larger than 2MB.",
+                  type: 'error'
+               })
+            }
+        },
+         getImage(image) {
+            if(!image){
+            var source = "imgs/errors/";
+            image = "no-image.png";
+         }
+         else {
+            var source = "imgs/app_home/";
+         }
+            $('#imagepreview').attr('src', source + image);
+            $('#showImage').modal('show');
+         },
 			displayMessages() {
 				axios.get("api/message").then(({
 					data
