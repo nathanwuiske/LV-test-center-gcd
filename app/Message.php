@@ -4,9 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Issue extends Model
+class Message extends Model
 {
     protected $fillable = [
-        'user_id', 'subject', 'description', 'resolved',
+        'title', 'body', 'image',
     ];
 }
