@@ -10,7 +10,7 @@
          </div>
          <div class="modal-body" style="background-color: #F2F2F2">
             Please ensure you are at the establishment before redeeming the voucher.<br>
-            Once redeemed, you will have 5:00 min to present the voucher at the counter before the voucher is disabled.<br><br>
+            Once redeemed, you will have 5 minutes to present the voucher at the counter before the voucher is disabled.<br><br>
          </div>
          <div class="modal-footer" style="background-color: #F2F2F2">
             <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>

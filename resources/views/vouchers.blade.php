@@ -32,7 +32,7 @@
 
   
 </div>
-<script src="js/extention/choices.js"></script>
+<script src="js/extention/choices.min.js"></script>
 <script>
    const choices = new Choices('[data-trigger]',
    {

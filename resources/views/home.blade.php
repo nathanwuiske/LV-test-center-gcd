@@ -2,7 +2,7 @@
 <!-- Load jssor slider and category select -->
 <script src="js/jssor.slider.min.js" type="text/javascript"></script>
 <script src="js/slider.js"></script>
-<script src="js/extention/choices.js"></script>
+<script src="js/extention/choices.min.js"></script>
 <link rel="stylesheet" href="/css/slider.css">
 
 <div class="page-position"></div>
@@ -14,13 +14,13 @@
       </div>
       <div data-u="slides" class="jssor1-d-slides">
          <div>
-          <img data-u="image" src="/imgs/homeSlider/web_banner_1.jpg"/>
+          <img data-u="image" alt="Home_1" src="/imgs/homeSlider/web_banner_1.jpg"/>
          </div>
          <div>
-            <img data-u="image" src="/imgs/homeSlider/web_banner_2.jpg" />
+            <img data-u="image" alt="Home_2" src="/imgs/homeSlider/web_banner_2.jpg" />
          </div>
          <div>
-            <img data-u="image" src="/imgs/homeSlider/web_banner_3.jpg" />
+            <img data-u="image" alt="Home_3" src="/imgs/homeSlider/web_banner_3.jpg" />
          </div>
       </div>
       <!-- Bullet Navigator -->
@@ -101,10 +101,10 @@
                </div>
                <!-- Arrow Navigator -->
                <div data-u="arrowleft" class="jssora073 jssor5-arrow-left" data-autocenter="2" data-scale="0.75" data-scale-left="0.75">
-                  <img src="/imgs/arrows/left.png" height="50px" width="50px">
+                  <img src="/imgs/arrows/left.png" height="50px" width="50px" alt="Arrow left">
                </div>
                <div data-u="arrowright" class="jssora073 jssor5-arrow-right" data-autocenter="2" data-scale="0.75" data-scale-right="0.75">
-                  <img src="/imgs/arrows/right.png" height="50px" width="50px">
+                  <img src="/imgs/arrows/right.png" height="50px" width="50px" alt="Arrow right">
                </div>
             </div>
          </div>
@@ -128,9 +128,9 @@
          @foreach($popular as $voucher)
          <div class="card alignVoucherCards">
                @if(!empty($voucher->latitude) && !empty($voucher->longitude))
-                  <a href="#" onClick="showModalAndLoadMap({{$voucher->id}}, {{$voucher->latitude}}, {{$voucher->longitude}})" role="button" data-toggle="modal">
+                  <a href="#" onClick="showModalAndLoadMap({{$voucher->id}}, {{$voucher->latitude}}, {{$voucher->longitude}})" role="button" data-toggle="modal" aria-label="ShowVoucher">
                @else
-                   <a href="#voucher{{$voucher->id}}" role="button" data-toggle="modal">
+                   <a href="#voucher{{$voucher->id}}" role="button" data-toggle="modal" aria-label="ShowVoucher">
                @endif
               <div class="hoverOver voucher-style">
                   <br>
@@ -143,6 +143,7 @@
             <button id="deletefavourite{{$voucher->id}}" 
                onClick="deleteFromFavourites({{$voucher->id}}, {{ Auth::user()->id }})" 
                name="addfavourite" 
+               aria-label="AddFavourite"
                class="btn btn-lg favourite-btn-active"
                style="{{ $voucher->isFavourited ? '' : 'display: none;' }}">
             <i class="fas fa-heart"></i>
@@ -150,6 +151,7 @@
             <button id="addfavourites{{$voucher->id}}" 
                onClick="addToFavourites({{$voucher->id}}, {{ Auth::user()->id }})" 
                name="deletefavourite" 
+               aria-label="DeleteFavourite"
                class="btn btn-lg favourite-btn"
                style="{{ $voucher->isFavourited ? 'display: none;' : '' }}">
             <i class="fas fa-heart" ></i>
@@ -165,10 +167,10 @@
          @endforeach @endif
       </div>
       <div data-u="arrowleft" class="jssora073 jssor2-arrow-left" data-autocenter="2" data-scale="0.75" data-scale-left="0.75">
-         <img src="/imgs/arrows/left.png" height="50px" width="50px">
+         <img src="/imgs/arrows/left.png" height="50px" width="50px" alt="Arrow left">
       </div>
       <div data-u="arrowright" class="jssora073 jssor2-arrow-right" data-autocenter="2" data-scale="0.75" data-scale-right="0.75">
-         <img src="/imgs/arrows/right.png" height="50px" width="50px">
+         <img src="/imgs/arrows/right.png" height="50px" width="50px" alt="Arrow right">
       </div>
    </div>
 </section>
@@ -189,9 +191,9 @@
              @foreach($latest as $voucher)
              <div class="card alignVoucherCards">
                @if(!empty($voucher->latitude) && !empty($voucher->longitude))
-                  <a href="#" onClick="showModalAndLoadMap({{$voucher->id}}, {{$voucher->latitude}}, {{$voucher->longitude}})" role="button" data-toggle="modal">
+                  <a href="#" onClick="showModalAndLoadMap({{$voucher->id}}, {{$voucher->latitude}}, {{$voucher->longitude}})" role="button" data-toggle="modal" aria-label="ShowVoucher">
                @else
-                   <a href="#voucher{{$voucher->id}}" role="button" data-toggle="modal">
+                   <a href="#voucher{{$voucher->id}}" role="button" data-toggle="modal" aria-label="ShowVoucher">
                @endif
                   <div class="hoverOver voucher-style">
                      <br>
@@ -204,6 +206,7 @@
               <button id="deletefavourite{{$voucher->id}}" 
                        onClick="deleteFromFavourites({{$voucher->id}}, {{ Auth::user()->id }})" 
                        name="addfavourite" 
+                       aria-label="AddFavourite"
                        class="btn btn-lg favourite-btn-active"
                        style="{{ $voucher->isFavourited ? '' : 'display: none;' }}">
                  <i class="fas fa-heart"></i>
@@ -211,6 +214,7 @@
               <button id="addfavourites{{$voucher->id}}" 
                        onClick="addToFavourites({{$voucher->id}}, {{ Auth::user()->id }})" 
                        name="deletefavourite" 
+                       aria-label="RemoveFavourite"
                        class="btn btn-lg favourite-btn"
                        style="{{ $voucher->isFavourited ? 'display: none;' : '' }}">
                  <i class="fas fa-heart" ></i>
@@ -226,10 +230,10 @@
              @endforeach @endif
           </div>
           <div data-u="arrowleft" class="jssora073 jssor3-arrow-left" data-autocenter="2" data-scale="0.75" data-scale-left="0.75">
-             <img src="/imgs/arrows/left.png" height="50px" width="50px">
+             <img src="/imgs/arrows/left.png" height="50px" width="50px" alt="Arrow left">
           </div>
           <div data-u="arrowright" class="jssora073 jssor3-arrow-right" data-autocenter="2" data-scale="0.75" data-scale-right="0.75">
-             <img src="/imgs/arrows/right.png" height="50px" width="50px">
+             <img src="/imgs/arrows/right.png" height="50px" width="50px" alt="Arrow right">
           </div>
        </div>
     </div>
@@ -252,9 +256,9 @@
                 @foreach($sorted_expiry as $voucher)
                 <div class="card alignVoucherCards">
                   @if(!empty($voucher->latitude) && !empty($voucher->longitude))
-                     <a href="#" onClick="showModalAndLoadMap({{$voucher->id}}, {{$voucher->latitude}}, {{$voucher->longitude}})" role="button" data-toggle="modal">
+                     <a href="#" onClick="showModalAndLoadMap({{$voucher->id}}, {{$voucher->latitude}}, {{$voucher->longitude}})" role="button" data-toggle="modal" aria-label="OpenVoucher">
                   @else
-                      <a href="#voucher{{$voucher->id}}" role="button" data-toggle="modal">
+                      <a href="#voucher{{$voucher->id}}" role="button" data-toggle="modal" aria-label="ShowVoucher">
                   @endif
                    <div class="hoverOver voucher-style">
                         <br>
@@ -267,6 +271,7 @@
                  <button id="deletefavourite{{$voucher->id}}" 
                           onClick="deleteFromFavourites({{$voucher->id}}, {{ Auth::user()->id }})" 
                           name="addfavourite" 
+                          aria-label="AddFavourite"
                           class="btn btn-lg favourite-btn-active"
                           style="{{ $voucher->isFavourited ? '' : 'display: none;' }}">
                     <i class="fas fa-heart"></i>
@@ -274,6 +279,7 @@
                  <button id="addfavourites{{$voucher->id}}" 
                           onClick="addToFavourites({{$voucher->id}}, {{ Auth::user()->id }})" 
                           name="deletefavourite" 
+                          aria-label="RemoveFavourite"
                           class="btn btn-lg favourite-btn"
                           style="{{ $voucher->isFavourited ? 'display: none;' : '' }}">
                     <i class="fas fa-heart" ></i>
@@ -290,10 +296,10 @@
                 @endif
              </div>
              <div data-u="arrowleft" class="jssora073" style="width:50px;height:50px;top:0px;left:-40px;" data-autocenter="2" data-scale="0.75" data-scale-left="0.75">
-                <img src="/imgs/arrows/left.png" height="50px" width="50px">
+                <img src="/imgs/arrows/left.png" height="50px" width="50px" alt="Arrow left"> 
              </div>
              <div data-u="arrowright" class="jssora073" style="width:50px;height:50px;top:0px;right:-46px;" data-autocenter="2" data-scale="0.75" data-scale-right="0.75">
-                <img src="/imgs/arrows/right.png" height="50px" width="50px">
+                <img src="/imgs/arrows/right.png" height="50px" width="50px" alt="Arrow right">
              </div>
           </div>
        </div>
@@ -319,7 +325,7 @@
             <p style="font-size: 14px;">{!! nl2br(e($voucher->description)) !!}</p>
             </p>
             @if (!empty($voucher->website_link))
-            <a class="web-link" style="color:#4272D7" href="{{$voucher->website_link}}" target="_blank">
+            <a class="web-link" style="color:#4272D7" href="{{$voucher->website_link}}" target="_blank" rel="noopener">
             <i class="fas fa-globe-americas"  style="color:#4272D7"></i><strong> Visit Website</strong></a>
             @endif
             @if (empty($voucher->expiry_date))

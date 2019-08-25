@@ -8,24 +8,14 @@
       <meta name="description" content="Providing free vouchers to the Gold Coast community">
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCC6emn13XOdxMhZAsbaGIgt2HcK3iKAoc"></script>
-
-      <!-- jquery core -->
       <script src="/js/jquery-1.11.1.min.js"></script>
-      <!--Search bar -->
-     <link rel="stylesheet" href="/css/search.css">
-	   <!-- Fontawesome Icon -->
+      <link rel="stylesheet" href="/css/search.min.css">
       <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
-      <!-- Twitter Bootstrap css -->
       <link rel="stylesheet" href="/css/bootstrap.min.css">
-      <!-- CSS animations -->
-      <link rel="stylesheet" href="/css/animate.css">
-      <!-- Main Stylesheet -->
+      <link rel="stylesheet" href="/css/animate.min.css">
       <link rel="stylesheet" href="/css/main.css">
-      <!-- Media-queries for other devices -->
       <link rel="stylesheet" href="/css/media-queries.css">
-      <!-- Modernizer Script for old Browsers -->
       <script src="/js/modernizr-2.6.2.min.js"></script>
-    
       <script src="js/main.js"></script>
    </head>
 
@@ -51,8 +41,8 @@
                   <li><a href="{{route('vouchers')}}">Vouchers</a></li> 
                   <li><a href="{{route('advertise')}}">Advertise With Us</a></li>
                   <li><a href="{{route('contact')}}">Contact Us</a></li>
-                  <li><a href="https://goldcoastdiscounts.com.au/LatestBrochure.pdf" target="_blank">Latest Brochure</a></li>
-                  <li><a href="http://gcbusinessnetwork.com.au/" target="_blank">Business Network</a></li>
+                  <li><a href="https://goldcoastdiscounts.com.au/LatestBrochure.pdf" target="_blank" rel="noopener">Latest Brochure</a></li>
+                  <li><a href="http://gcbusinessnetwork.com.au/" target="_blank" rel="noopener">Business Network</a></li>
                   
                   @if (Route::has('login'))
                   @auth
@@ -106,9 +96,9 @@
                   <div class="footer-single">
                      <h6>Follow Us</h6>
                      <ul>
-                        <li><a href="https://www.facebook.com/GoldCoastDiscounts/"><img src="/imgs/footer/facebook.png" width="20" height="20"> Facebook</a></li>
-                        <li><a href="https://twitter.com/DiscountsGold"><img src="/imgs/footer/twitter.png" width="20" height="20"> Twitter</a></li>
-                        <li><a href="https://www.instagram.com/gold_coast_discounts/"><img src="/imgs/footer/instagram.png" width="20" height="20"> Instagram</a></li>
+                        <li><a href="https://www.facebook.com/GoldCoastDiscounts/"><img src="/imgs/footer/facebook.png" width="20" height="20" alt="Facebook"> Facebook</a></li>
+                        <li><a href="https://twitter.com/DiscountsGold"><img src="/imgs/footer/twitter.png" width="20" height="20" alt="Twitter"> Twitter</a></li>
+                        <li><a href="https://www.instagram.com/gold_coast_discounts/"><img src="/imgs/footer/instagram.png" width="20" height="20" alt="Instagram"> Instagram</a></li>
                      </ul>
                   </div>
                </div>
@@ -127,17 +117,10 @@
             </div>
          </div>
       </footer>
-	
-	  <!-- Scripts -->
-	  
      <script src="/js/sweetalert2.all.min.js"></script>
      <link rel="stylesheet" href="/css/sweetalert2.min.css">
-      <!-- Bootstrap -->
       <script src="/js/bootstrap.min.js"></script>
-      <!-- jssor slider -->
       <script src="/js/jssor.slider.min.js"></script>
-
-      <!-- WOW animations -->
       <script src="/js/wow.min.js"></script>
       <script>
          var wow = new WOW ({

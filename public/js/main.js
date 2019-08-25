@@ -138,7 +138,7 @@ function startTimer(duration, display, voucherid, userid) {
 function startRedeem(voucherid, userid) {
 	 warningRedeem(voucherid);
 	 $('#warningRedeem' + voucherid).modal('hide');
-	 var fiveMinutes = 10;
+	 var fiveMinutes = 5 * 60;
 	 var display = document.querySelector('#time'+voucherid);
 	 startTimer(fiveMinutes, display, voucherid, userid);
  }
@@ -167,7 +167,6 @@ function startRedeem(voucherid, userid) {
 			})
 		},
 		error: function (response) {
-			//console.log(response)
 			Swal.fire({
 				toast: true,
 				position: 'top',
