@@ -476,8 +476,8 @@ cursor: default;
 	transition: .3s ease-in-out;
 }
 .hoverOver:hover img {
-	-webkit-transform: scale(1.01);
-	transform: scale(1.01);
+	-webkit-transform: scale(1.03);
+	transform: scale(1.03);
 }
 
 .business-card {

@@ -99,7 +99,6 @@ class HomeController extends Controller
     else {
         $vouchers = Voucher::where(function ($query) use ($terms) {
             foreach ($terms as $term) {
-                // Loop over the terms and do a search for each.
                 $query->orWhere('name', 'like', '%' . $term . '%');
             }
         })->orWhere(function ($query) use ($terms) {
