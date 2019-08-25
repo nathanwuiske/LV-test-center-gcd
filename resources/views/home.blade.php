@@ -14,7 +14,7 @@
       </div>
       <div data-u="slides" class="jssor1-d-slides">
          <div>
-          <img data-u="image" alt="Home_1" src="/imgs/homeSlider/web_banner_1.jpg"/>
+         <a href="{{route('app')}}"><img data-u="image" alt="Home_1" src="/imgs/homeSlider/web_banner_1.jpg"/></a>
          </div>
          <div>
             <img data-u="image" alt="Home_2" src="/imgs/homeSlider/web_banner_2.jpg" />
