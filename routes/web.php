@@ -16,8 +16,8 @@ Route::get('/filter', 'HomeController@filter');
 
 /* Other Web Pages */
 Route::view('/advertise', 'advertise')->name('advertise');
-Route::view('/purchase', 'purchase')->name('purchase');
-Route::view('/app', 'app')->name('app');
+Route::get('/purchase', 'PurchaseController@index')->name('purchase');
+Route::view('/download_app', 'download_app')->name('download_app');
 Route::view('/privacy', 'privacy')->name('privacy');
 Route::view('/terms', 'terms')->name('terms');
 Route::get('/vouchers', 'VoucherPageController@index')->name('vouchers');

@@ -3,6 +3,7 @@ function currentRedeem(voucher_id, response) {
 	$("#redeem-current-" + voucher_id).css("display", "inline");
 	$("#start_redeem_" + voucher_id).attr("disabled", "disabled");
 	$("#redeem-a" + voucher_id).addClass("disabled-a");
+	$("#modal_image_" + voucher_id).css("opacity", "0.4");
 	$("#redeem-current-time-" + voucher_id).html(response['dateRedeemed']);
 	$("#redeem-next-time-" + voucher_id).html(response['dateAvailable']);
 }

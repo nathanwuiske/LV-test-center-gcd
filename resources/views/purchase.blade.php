@@ -3,10 +3,8 @@
 <div class="mb80"></div>
 <div class='container'>
    <div class="text-center mb50">
-      <h2 style="color:black">Advertise with us</h2>
-      <div class="devider" ><i class="fas fa-arrow-down fa-lg"></i></div>
+      <h2 style="color:black">Buy Package</h2>
    </div>
-
 </div>
 <div class="mb450"></div>
 

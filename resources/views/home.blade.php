@@ -14,7 +14,7 @@
       </div>
       <div data-u="slides" class="jssor1-d-slides">
          <div>
-         <a href="{{route('app')}}"><img data-u="image" alt="Home_1" src="/imgs/homeSlider/web_banner_1.jpg"/></a>
+         <a href="{{route('download_app')}}"><img data-u="image" alt="Home_1" src="/imgs/homeSlider/web_banner_1.jpg"/></a>
          </div>
          <div>
             <img data-u="image" alt="Home_2" src="/imgs/homeSlider/web_banner_2.jpg" />
@@ -318,7 +318,11 @@
             </button>
          </div>
          <div class="modal-body text-center">
-            <img id="modal_image_{{$voucher->id}}" src="{{url('imgs/vouchers/' . $voucher->image)}}" class="img-fluid img-center modal-image" alt='{{$voucher->name}}' onerror="this.onerror=null;this.src='imgs/errors/no-voucher-image.png';">
+            <img id="modal_image_{{$voucher->id}}" src="{{url('imgs/vouchers/' . $voucher->image)}}" 
+            @if ($voucher->isRedeemed)
+            style="opacity:0.4;"
+            @endif
+            class="img-fluid img-center modal-image" alt='{{$voucher->name}}' onerror="this.onerror=null;this.src='imgs/errors/no-voucher-image.png';">
             <p style="font-size: 18px;">
                <br><span class="header-modal">About Deal</span>
                <br>
