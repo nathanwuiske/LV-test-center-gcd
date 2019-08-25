@@ -166,7 +166,8 @@ function startRedeem(voucherid, userid) {
 				title: 'Account settings successfully updated'
 			})
 		},
-		error: function (XMLHttpRequest) {
+		error: function (response) {
+			//console.log(response)
 			Swal.fire({
 				toast: true,
 				position: 'top',

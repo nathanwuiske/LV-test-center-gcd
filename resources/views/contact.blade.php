@@ -8,8 +8,14 @@
    <form method="post" action="{{ route('contact.store' )}}">
       {{csrf_field()}}
       <div class="contact-main">
+         @auth
+      <input type="text" placeholder="Your Name" class="input" name="name" value="{{Auth::user()->full_name}}">
+         <input type="text" placeholder="Your Email Address" class="input" name="email" value="{{Auth::user()->email}}">
+         @endauth
+         @guest
          <input type="text" placeholder="Your Name" class="input" name="name" value="{{ old('name') }}">
          <input type="text" placeholder="Your Email Address" class="input" name="email" value="{{ old('email') }}">
+         @endguest
       </div>
       <div class="subject">
          <input type="text" placeholder="Subject" class="input" name="subject" value="{{ old('subject') }}">

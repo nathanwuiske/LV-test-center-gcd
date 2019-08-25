@@ -17,7 +17,7 @@ class VoucherController extends Controller
     
     public function voucherall()
     {
-        return Voucher::latest()->get();
+        return Voucher::latest()->with('getCategories')->get();
     }
 
     public function store(Request $request)

@@ -61,6 +61,19 @@
 </div>
 <!-- End search -->
 
+@auth
+@if (Auth::user()->full_name == null)
+<a href="{{route('account')}}">
+<div class="alert alert-danger text-center" style="color:black;font-size:15px;" role="alert">
+   Hi there! 
+      It looks like you're an existing user that hasn't updated their account information. <br>
+      Please click here to add a name to your account, you have the option to add a phone number, but it is not needed. <br>
+      This message will disappear once a name is added to your account.  Thank you! 
+</div>
+</a>
+@endif
+@endauth
+
 <!-- Main content -->
 <section id="businesses" class="content-background-white businessShow">
       <div class="container">

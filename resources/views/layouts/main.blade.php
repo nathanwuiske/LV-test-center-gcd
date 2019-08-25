@@ -60,7 +60,9 @@
                <ul>
                   <li><a href="{{route('account')}}"><i class="fas fa-cog"></i> Account</a></li>
                   <li><a href="{{route('favourites')}}"><i class="fas fa-star"></i> Favourites</a></li>
+                  @if (Auth::user()->isAdmin())
                   <li><a href="{{route('adminhome')}}"><i class="fas fa-user-shield"></i> Admin</a></li>
+                  @endif
                   <li><a href="{{ route('logout') }}"
                      onclick="event.preventDefault();
                      document.getElementById('logout-form').submit();">
