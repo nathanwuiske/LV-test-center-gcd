@@ -3,7 +3,7 @@ function currentRedeem(voucher_id, response) {
 	$("#redeem-current-" + voucher_id).css("display", "inline");
 	$("#start_redeem_" + voucher_id).attr("disabled", "disabled");
 	$("#redeem-a" + voucher_id).addClass("disabled-a");
-	$("#modal_image_" + voucher_id).css("opacity", "0.4");
+	$("#modal_image_" + voucher_id).css("opacity", "0.1");
 	$("#redeem-current-time-" + voucher_id).html(response['dateRedeemed']);
 	$("#redeem-next-time-" + voucher_id).html(response['dateAvailable']);
 }
@@ -127,8 +127,8 @@ function startTimer(duration, display, voucherid, userid) {
 
         if (diff <= 0) {
          display.textContent = ""; 
-         ajaxRedeem(voucherid, userid);
-         clearInterval(myTimer);
+		 ajaxRedeem(voucherid, userid);
+		 clearInterval(myTimer);
         }
         
     };

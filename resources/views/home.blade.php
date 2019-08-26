@@ -255,7 +255,7 @@
 <section id="other" class="content-background-grey">
     <div class="container">
        <div class="row">
-          <h2 class="home-header-pop">Almost Expired Vouchers</h2>
+          <h2 class="home-header-pop">Soon to Expire Vouchers</h2>
           <a href="{{action('VoucherPageController@expiry_all')}}">
                <h1 class="view-all">View all </h1>
           </a>
@@ -367,12 +367,12 @@
             <iframe id="mapsid{{$voucher->id}}" src="" width="100%" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
             @endif
             @if ($voucher->isRedeemed)
-            <div class="redeem-overlay redeem-overlay-previous">
-               <p style="text-align:center;color:#A61106;">You've already redeemed this voucher</p>
+            <div class="redeem-overlay">
+               <p style="text-align:center;color:#A61106;font-weight:650;font-size:18px;">You've already redeemed this voucher</p>
                <p class="text-center">You can redeem again after <strong><span>{{$voucher->redeemAvailable}}</span></strong></p>
             </div>
             @else
-            <div id="redeem-current-{{$voucher->id}}" class="redeem-overlay redeem-overlay-current" style="display:none">
+            <div id="redeem-current-{{$voucher->id}}" class="" style="display:none">
                <p class="header-modal text-center"><span style="color:#07AD4D;"class="fas fa-check-circle check-circle"></span> Voucher Redeemed!</p>
                <p class="text-center">Voucher redeemed at <strong><span id="redeem-current-time-{{$voucher->id}}"></span></strong></p>
                <p class="text-center" style="margin-bottom:0px;">Voucher next available at <strong><span id="redeem-next-time-{{$voucher->id}}"></span></strong></p>

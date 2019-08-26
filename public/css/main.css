@@ -1285,7 +1285,6 @@ Terms and conditions
 }
 
 @media only screen and (max-width: 320px) {
-
   #topNav
   {
     overflow-y: scroll !important;
@@ -1293,11 +1292,23 @@ Terms and conditions
   }
 }
 
-
-
 @media only screen and (max-width: 767px) {
   .app-mobile img {
    width:100%;
    height:100%;
   }
+}
+
+
+.redeem-overlay{
+  position: absolute;
+  width: 80%;
+  top: 30%;
+  left:10%;
+  background-color: white;
+  color: black;
+  padding-left: 20px;
+  padding-right: 20px;
+  border-radius: 5px;
+  border: 4px solid #07AD4D;
 }
