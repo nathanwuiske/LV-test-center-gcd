@@ -105,7 +105,7 @@ class HomeController extends Controller
             foreach ($terms as $term) {
                 $query->orWhere('description', 'like', '%' . $term . '%');
             }
-        })->latest()->paginate($vouchersPerPage);
+        })->paginate($vouchersPerPage);
         $now = Carbon::now();
         foreach($vouchers as $voucher){
               $end = Carbon::parse($voucher->expiry_date);

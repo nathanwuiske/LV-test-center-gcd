@@ -67,7 +67,7 @@
 <div class="alert alert-danger text-center" style="color:black;font-size:15px;" role="alert">
    Hi there! 
       It looks like you're an existing user that hasn't updated their account information. <br>
-      Please click here to add a name to your account, you have the option to add a phone number, but it is not needed. <br>
+      Please click here to add a name to your account, you have the option to add a phone number but it is not required. <br>
       This message will disappear once a name is added to your account.  Thank you! 
 </div>
 </a>
@@ -86,16 +86,20 @@
                </div>
                <!-- Slides -->
                <div data-u="slides" class="jssor5-d-sliders">
-                  @if(!empty($businesses)) 
-                  @foreach($businesses as $business)
-                  <div class="card alignVoucherCards">
-                     <a href="#business{{$business->id}}" role="button" data-toggle="modal">
-                        <div class="hoverOver business-card">
-                           <img class="card-img-top" class="img-fluid" width="200" height="200" src="{{url('imgs/businesses/' . $business->image)}}" alt='{{$business->name}}' onerror="this.onerror=null;this.src='imgs/errors/no-image.png'">
-                     </a>
-                     <div class="mb20"></div>
+                     @if(!empty($businesses)) 
+                     @foreach($businesses as $business)
+                     <div class="card alignVoucherCards">
+                        <form id="search_business" action="{{url('vouchers')}}" method="post">
+                           {{ csrf_field() }}
+                           <input type="hidden" name="business_name" id="business_name" value="" />
+                           <a href="#" class="opt_button" data-value="{{$business->name}}" role="button" data-toggle="modal">
+                              <div class="hoverOver business-card">
+                                 <img class="card-img-top" class="img-fluid" width="200" height="200" src="{{url('imgs/businesses/' . $business->image)}}" alt='{{$business->name}}' onerror="this.onerror=null;this.src='imgs/errors/no-image.png'">
+                           </a>
+                        </form>
+                        <div class="mb20"></div>
+                        </div>
                      </div>
-                  </div>
                   @endforeach 
                   @endif
                </div>
@@ -110,6 +114,14 @@
          </div>
       </div>
 </section>
+<script>
+   $(document).ready(function() {
+    $('.opt_button').on('click', function() {
+        $('#business_name').val($(this).attr('data-value'));
+        $('#search_business').submit();
+    });
+});
+</script>
 
 
 <section id="popular" class="content-background-grey">

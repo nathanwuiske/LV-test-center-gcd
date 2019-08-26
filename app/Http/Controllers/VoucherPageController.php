@@ -77,4 +77,30 @@ class VoucherPageController extends Controller
          }
         return view('vouchers', compact('vouchers', 'categories', 'popularall')); 
     }
-}
+
+    public function searchBusiness(Request $request){
+        $categories = Category::orderBy('id')->get();
+             if($request->business_name){
+                 $searchTerm = $request->business_name;
+             }
+            $vouchers = Voucher::where(function ($query) use ($searchTerm) {
+                    $query->orWhere('name', 'like', '%' . $searchTerm . '%');
+            })->orWhere(function ($query) use ($searchTerm) {
+                    $query->orWhere('description', 'like', '%' . $searchTerm . '%');
+            })->paginate(8);
+            $now = Carbon::now();
+            foreach($vouchers as $voucher){
+                  $end = Carbon::parse($voucher->expiry_date);
+                  $DeferenceInDays = $end->startOfDay()->diffInDays($now->startOfDay());
+                  $voucher->expiry_days = $DeferenceInDays;
+             }
+            $vouchers->appends(['search' =>  $searchTerm, 'per_page' => "8"]);
+           $searchname =  $searchTerm;
+           return view('vouchers', compact('vouchers', 'categories', 'searchname')); 
+           return $request->all();
+        }
+      }
+    
+     
+  
+

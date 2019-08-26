@@ -17,7 +17,7 @@ class FavouriteController extends Controller
   public function index()
   {
     $userFav = Auth::user()->getfavourites()->paginate(12);
-    $favCount = $userFav->count();
+    $favCount = Auth::user()->getfavourites()->count();
     $now = Carbon::now();
     foreach($userFav as $voucher){
       $redemption = Auth::user()->redeems()->where([

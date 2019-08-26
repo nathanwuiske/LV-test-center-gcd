@@ -21,6 +21,7 @@ Route::view('/download_app', 'download_app')->name('download_app');
 Route::view('/privacy', 'privacy')->name('privacy');
 Route::view('/terms', 'terms')->name('terms');
 Route::get('/vouchers', 'VoucherPageController@index')->name('vouchers');
+Route::post('/vouchers', 'VoucherPageController@searchBusiness');
 Route::get('/favourites', 'FavouriteController@index')->name('favourites');
 Route::get('/account', 'AccountController@index')->name('account');
 Route::get('/home', 'HomeController@index')->name('home');
