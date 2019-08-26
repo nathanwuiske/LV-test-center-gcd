@@ -8,6 +8,7 @@ Auth::routes();
 /* Routes to "view all" popular and newest vouchers */
 Route::get('/popular_all', 'VoucherPageController@popular_all');
 Route::get('/newest_all', 'VoucherPageController@newest_all');
+Route::get('/expiry_all', 'VoucherPageController@expiry_all');
 
 /* Home controller functions */
 Route::get('/removefavourite', 'HomeController@removefavourite');

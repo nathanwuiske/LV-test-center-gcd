@@ -255,9 +255,9 @@
 <section id="other" class="content-background-grey">
     <div class="container">
        <div class="row">
-          <h2 class="home-header-pop">Other Vouchers</h2>
-          <a href="#">
-             <h1 class="view-all">View all </h1>
+          <h2 class="home-header-pop">Almost Expired Vouchers</h2>
+          <a href="{{action('VoucherPageController@expiry_all')}}">
+               <h1 class="view-all">View all </h1>
           </a>
           <div id="jssor_4" class="jssor4-main">
              <div data-u="loading" class="jssorl-009-spin" style="position:absolute;top:0px;left:0px;width:100%;height:100%;text-align:center;background-color:rgba(0,0,0,0.7);">

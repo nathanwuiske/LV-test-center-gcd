@@ -78,6 +78,20 @@ class VoucherPageController extends Controller
         return view('vouchers', compact('vouchers', 'categories', 'popularall')); 
     }
 
+    public function expiry_all()
+    {
+        $vouchers = Voucher::orderBy('expiry_date')->paginate(8);
+        $categories = Category::orderBy('id')->get();
+        $expiryall = 1;
+        $now = Carbon::now();
+        foreach($vouchers as $voucher){
+              $end = Carbon::parse($voucher->expiry_date);
+              $DeferenceInDays = $end->startOfDay()->diffInDays($now->startOfDay());
+              $voucher->expiry_days = $DeferenceInDays;
+         }
+        return view('vouchers', compact('vouchers', 'categories', 'expiryall')); 
+    }
+
     public function searchBusiness(Request $request){
         $categories = Category::orderBy('id')->get();
              if($request->business_name){

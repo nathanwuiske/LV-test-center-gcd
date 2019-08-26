@@ -57,6 +57,10 @@
 <h2 style="font-size: 25px;text-align:center;">Showing Newest Vouchers</h2>
 @endif
 
+@if(!empty($expiryall))
+<h2 style="font-size: 25px;text-align:center;">Sorting Vouchers by Expiry Date</h2>
+@endif
+
 @if(count($vouchers) <= 0)
  <div class="alert alert-danger text-center">
     <strong>Sorry!</strong> We couldn't find what you were looking for.<br>

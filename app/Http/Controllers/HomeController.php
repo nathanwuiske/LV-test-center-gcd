@@ -16,7 +16,7 @@ class HomeController extends Controller
     
     public function __construct()
     {
-       //$this->middleware('auth'); // Only users logged in can access the page
+      
     }
 
     public function index()
