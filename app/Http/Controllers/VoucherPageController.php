@@ -94,7 +94,7 @@ class VoucherPageController extends Controller
                   $DeferenceInDays = $end->startOfDay()->diffInDays($now->startOfDay());
                   $voucher->expiry_days = $DeferenceInDays;
              }
-            $vouchers->appends(['search' =>  $searchTerm, 'per_page' => "8"]);
+        $vouchers->appends(['search' =>  $searchTerm, 'per_page' => "8"]);
            $searchname =  $searchTerm;
            return view('vouchers', compact('vouchers', 'categories', 'searchname')); 
            return $request->all();

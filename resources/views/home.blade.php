@@ -89,7 +89,7 @@
                      @if(!empty($businesses)) 
                      @foreach($businesses as $business)
                      <div class="card alignVoucherCards">
-                        <form id="search_business" action="{{url('vouchers')}}" method="post">
+                        <form id="search_business" action="{{url('search')}}" method="post">
                            {{ csrf_field() }}
                            <input type="hidden" name="business_name" id="business_name" value="" />
                            <a href="#" class="opt_button" data-value="{{$business->name}}" role="button" data-toggle="modal">
