@@ -75,54 +75,6 @@
 @endauth
 
 <!-- Main content -->
-<section id="businesses" class="content-background-white businessShow">
-      <div class="container">
-         <div class="row">
-            <h2 class="home-header-pop">Businesses</h2>
-            <div id="jssor_5" class="jssor5-main">
-               <!-- Loading Icon -->
-               <div data-u="loading" class="jssorl-009-spin jssor5-load">
-                  <img class="jssor5-img" src="../svg/slider/spin.svg" />
-               </div>
-               <!-- Slides -->
-               <div data-u="slides" class="jssor5-d-sliders">
-                     @if(!empty($businesses)) 
-                     @foreach($businesses as $business)
-                     <div class="card alignVoucherCards">
-                        <form id="search_business" action="{{url('search')}}" method="post">
-                           {{ csrf_field() }}
-                           <input type="hidden" name="business_name" id="business_name" value="" />
-                           <a href="#" class="opt_button" data-value="{{$business->name}}" role="button" data-toggle="modal">
-                              <div class="hoverOver business-card">
-                                 <img class="card-img-top" class="img-fluid" width="200" height="200" src="{{url('imgs/businesses/' . $business->image)}}" alt='{{$business->name}}' onerror="this.onerror=null;this.src='imgs/errors/no-image.png'">
-                           </a>
-                        </form>
-                        <div class="mb20"></div>
-                        </div>
-                     </div>
-                  @endforeach 
-                  @endif
-               </div>
-               <!-- Arrow Navigator -->
-               <div data-u="arrowleft" class="jssora073 jssor5-arrow-left" data-autocenter="2" data-scale="0.75" data-scale-left="0.75">
-                  <img src="/imgs/arrows/left.png" height="50px" width="50px" alt="Arrow left">
-               </div>
-               <div data-u="arrowright" class="jssora073 jssor5-arrow-right" data-autocenter="2" data-scale="0.75" data-scale-right="0.75">
-                  <img src="/imgs/arrows/right.png" height="50px" width="50px" alt="Arrow right">
-               </div>
-            </div>
-         </div>
-      </div>
-</section>
-<script>
-   $(document).ready(function() {
-    $('.opt_button').on('click', function() {
-        $('#business_name').val($(this).attr('data-value'));
-        $('#search_business').submit();
-    });
-});
-</script>
-
 
 <section id="popular" class="content-background-grey">
    <div class="container">
@@ -255,7 +207,7 @@
 <section id="other" class="content-background-grey">
     <div class="container">
        <div class="row">
-          <h2 class="home-header-pop">Soon to Expire Vouchers</h2>
+          <h2 class="home-header-pop">Soon to Expire</h2>
           <a href="{{action('VoucherPageController@expiry_all')}}">
                <h1 class="view-all">View all </h1>
           </a>
@@ -317,6 +269,54 @@
        </div>
     </div>
  </section>
+
+ <section id="businesses" class="content-background-white businessShow">
+   <div class="container">
+      <div class="row">
+         <h2 class="home-header-pop">Businesses</h2>
+         <div id="jssor_5" class="jssor5-main">
+            <!-- Loading Icon -->
+            <div data-u="loading" class="jssorl-009-spin jssor5-load">
+               <img class="jssor5-img" src="../svg/slider/spin.svg" />
+            </div>
+            <!-- Slides -->
+            <div data-u="slides" class="jssor5-d-sliders">
+                  @if(!empty($businesses)) 
+                  @foreach($businesses as $business)
+                  <div class="card alignVoucherCards">
+                     <form id="search_business" action="{{url('search')}}" method="post">
+                        {{ csrf_field() }}
+                        <input type="hidden" name="business_name" id="business_name" value="" />
+                        <a href="#" class="opt_button" data-value="{{$business->name}}" role="button" data-toggle="modal">
+                           <div class="hoverOver business-card">
+                              <img class="card-img-top" class="img-fluid" width="200" height="200" src="{{url('imgs/businesses/' . $business->image)}}" alt='{{$business->name}}' onerror="this.onerror=null;this.src='imgs/errors/no-image.png'">
+                        </a>
+                     </form>
+                     <div class="mb20"></div>
+                     </div>
+                  </div>
+               @endforeach 
+               @endif
+            </div>
+            <!-- Arrow Navigator -->
+            <div data-u="arrowleft" class="jssora073 jssor5-arrow-left" data-autocenter="2" data-scale="0.75" data-scale-left="0.75">
+               <img src="/imgs/arrows/left.png" height="50px" width="50px" alt="Arrow left">
+            </div>
+            <div data-u="arrowright" class="jssora073 jssor5-arrow-right" data-autocenter="2" data-scale="0.75" data-scale-right="0.75">
+               <img src="/imgs/arrows/right.png" height="50px" width="50px" alt="Arrow right">
+            </div>
+         </div>
+      </div>
+   </div>
+</section>
+<script>
+$(document).ready(function() {
+ $('.opt_button').on('click', function() {
+     $('#business_name').val($(this).attr('data-value'));
+     $('#search_business').submit();
+ });
+});
+</script>
 
 @if(!empty($all_home_vouchers)) 
 @foreach($all_home_vouchers as $voucher)
