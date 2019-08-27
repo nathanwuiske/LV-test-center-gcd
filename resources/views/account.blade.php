@@ -82,9 +82,9 @@ function checkToUpdate(id, name, phone_number) {
 			toast: true,
 			position: 'top',
 			showConfirmButton: false,
-			timer: 3000,
+         timer: 3000,
 			type: 'error',
-			title: 'No changes have been made'
+         title: 'No changes have been made'
 		})
 	}
 }

@@ -168,13 +168,22 @@ function startRedeem(voucherid, userid) {
 			})
 		},
 		error: function (response) {
+			if(response.responseJSON.errors.full_name){
+				var errorMSG = response.responseJSON.errors.full_name[0];
+			}
+			else if(response.responseJSON.errors.phone_number){
+				var errorMSG = response.responseJSON.errors.phone_number[0];
+			}
+			else {
+				var errorMSG = "The given information is invalid";
+			}
 			Swal.fire({
 				toast: true,
 				position: 'top',
 				showConfirmButton: false,
 				timer: 3500,
 				type: 'error',
-				title: 'The given information is invalid'
+				title: errorMSG
 			})
 		}
 	});
