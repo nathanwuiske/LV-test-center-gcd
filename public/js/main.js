@@ -35,6 +35,11 @@ function ajaxRedeem(voucher_id, user_id) {
 
 
 function addToFavourites(voucherid, userid) {
+	$.ajaxSetup({
+		headers: {
+			'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+		}
+	});
 	$.ajax({
 		type: 'post',
 		url: 'api/addfavourite',
