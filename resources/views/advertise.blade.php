@@ -11,7 +11,7 @@
                <div class="devider"><i class="fas fa-arrow-down fa-lg"></i></div>
             </div>
            
-            <div class="col-md-4 col-sm-6 col-xs-12 text-center wow fadeInUp animated" data-wow-duration="500ms" data-wow-delay="300ms">
+            <div class="col-md-4 col-sm-12 col-xs-12 text-center wow fadeInUp animated" data-wow-duration="500ms" data-wow-delay="300ms">
                <div class="fact-item">
                   <i class="fas fa-bolt fa-3x"></i>
                   <h2>Fast</h2>
