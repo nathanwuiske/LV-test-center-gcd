@@ -43,7 +43,7 @@
          <p class="text-center">Track all your orders with us here</p>
          <div class='main-settings-form' >
             <p class="text-center main-red-col">You currently have no orders</p>
-            <div style="margin-top:330px;"></div>
+            <div class="mt330"></div>
          </div>
       </div>
    </div>

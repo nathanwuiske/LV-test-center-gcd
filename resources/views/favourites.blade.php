@@ -18,32 +18,23 @@
 @endif
 
 @if(count($userFav) == 0)
-<a href="{{route('vouchers')}}" style="color:#AD1707"> <p class="text-center" style="margin-top:10px;">
-   You don't have any favourited vouchers. Click here to start!</p></a>
+<a href="{{route('vouchers')}}" class="fav-red"> <p class="text-center" >
+<br>You don't have any favourited vouchers. Click here to start!</p></a>
 @else
 <p class="text-center"> You've saved {{$favCount}} voucher(s) to your favourites</p> 
 @endif
 @if(!empty($userFav))
-
    @foreach($userFav as $favouriteVoucher)      
-   @if(count($userFav) == 1)
-
-   @endif
    <div class="col-md-4 col-sm-5 col-lg-3 col-xl-3">
       <div class="card alignVoucherCards">
          <a href="#voucher{{$favouriteVoucher->id}}" role="button" data-toggle="modal">
-            <div class="hoverOver" style="background-color: white; border: 1px solid #CCCCCC; text-align: center; ">
+            <div class="hoverOver voucher-style">
                <br>
-               <img class="card-img-top" class="img-fluid" width="220" height="270" src="{{url('imgs/vouchers/' . $favouriteVoucher->image)}}" alt='{{$favouriteVoucher->name}}' onerror="this.onerror=null;this.src='imgs/errors/no-voucher-image.png';">
-               <h2 style="color:#07AD4D; font-size: 20px; margin-bottom: 10px;margin-top: 10px;">{{ str_limit($favouriteVoucher->name, $limit = 15, $end='...') }}</h2>
-               <button class="btn btn-lg" style="background-color:#07AD4D;  width: 50%; height: 100%; margin-right: 10px;"><i class="fa fa-close"></i>View</button>
+               <img class="card-img-top" class="img-fluid" width="220" height="270" src="{{url('imgs/vouchers/' . $favouriteVoucher->image)}}" alt="{{$favouriteVoucher->name}}" onerror="this.onerror=null;this.src='imgs/errors/no-voucher-image.png';">
+               <h2 class="voucher-name">{{ str_limit($favouriteVoucher->name, $limit = 15, $end='...') }}</h2>
+               <button class="btn btn-lg voucher-view-btn"><i class="fa fa-close"></i>View</button>
          </a>
          <form action="/removefavourite" method="get" class="fav-hover" style="float:right; ">
-<style>
-   .delete-favourite:hover{
-      color:#AD1707;
-   }
-   </style>
          <button id="removefavourite" value="{{$favouriteVoucher->id}}" name="removefavourite"  class="btn btn-lg " style="background-color:#D9534F; color:white; position: relative; right: 65%;"><i class="fas fa-trash delete-favourite"></i></button>
          </form>
          <div style="margin-bottom: 20px;"></div>
@@ -81,11 +72,11 @@
                      <br><span class="header-modal">Voucher Expiry</span>
                      <br>
                      @if ($favouriteVoucher->expiry_days == 0)
-                  <p style="font-size: 14px;">Voucher will expire <strong>today</strong></p>
+                  <p class="voucher-expire-f">Voucher will expire <strong>today</strong></p>
                   @elseif ($favouriteVoucher->expiry_days == 1)
-                  <p style="font-size: 14px;">Voucher will expire <strong>tomorrow</strong></p>
+                  <p class="voucher-expire-f">Voucher will expire <strong>tomorrow</strong></p>
                   @else
-                  <p style="font-size: 14px;">Voucher will expire in <strong>{{$favouriteVoucher->expiry_days}}</strong> days</p>
+                  <p class="voucher-expire-f">Voucher will expire in <strong>{{$favouriteVoucher->expiry_days}}</strong> days</p>
                   @endif
                   </p>
                   @endif 
@@ -95,7 +86,7 @@
                   @endif
                   @if ($favouriteVoucher->isRedeemed)
                   <div class="redeem-overlay redeem-overlay-previous">
-                     <p style="text-align:center;color:#A61106;">You've already redeemed this voucher</p>
+                     <p class="redeem-overlay-p">You've already redeemed this voucher</p>
                      <p class="text-center">You can redeem again after <strong><span>{{$favouriteVoucher->redeemAvailable}}</span></strong></p>
                   </div>
                   @else
@@ -126,7 +117,6 @@
             </div>
          </div>
       </div>
-
       @component('modals.warning-modal')
       @slot('voucherid')
       {{$favouriteVoucher->id}}
@@ -135,11 +125,8 @@
       {{ Auth::user()->id }}
       @endslot
       @endcomponent
-
    @endforeach
-
 @endif
-
 </div>
 </div>
 <div class="text-center">

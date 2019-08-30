@@ -14,14 +14,14 @@
    <div class="parallax-overlay-app">
       <div class="container">
          <div class="row">
-            <div class=" text-center mb50">
-               <h2 class="advert" style="margin-bottom:15px; color:black">Download our app</h2>
-               <p style="color:black;"> Use all your favourite deals on your phone</p>
-               <div class="devider" style="margin-top:0; color:black"><i style=" color:black"class="fas fa-arrow-down fa-lg"></i></div>
+            <div class="text-center mb50">
+               <h2 class="advert download-header">Download our app</h2>
+               <p> Use all your favourite deals on your phone</p>
+               <div class="devider download-divider"><i style="color:black"class="fas fa-arrow-down fa-lg"></i></div>
             </div>
-            <div class=" text-center mb50 app-mobile">
-               <a href="#"><img src="/imgs/apple.jpg"></a>
-               <a href="#"><img src="/imgs/google.jpg"></a>
+            <div class="text-center mb50 app-mobile">
+               <a href="#"><img src="/imgs/download_app/apple.jpg"></a>
+               <a href="#"><img src="/imgs/download_app/google.jpg"></a>
             </div>
          </div>
       </div>

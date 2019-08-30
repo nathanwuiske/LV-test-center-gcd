@@ -520,6 +520,7 @@ cursor: default;
 /* =================================== */
 /*	Basic Style 
 /* =================================== */
+
 .page-position {
   margin-bottom: 0px;
 }
@@ -545,13 +546,17 @@ cursor: default;
   margin-bottom: 150px;
 }
 .mb300 {
-  margin-bottom: 300px
+  margin-bottom: 300px;
 }
 .mb80 {
-  margin-bottom: 80px
+  margin-bottom: 80px;
 }
 .mb70 {
-  margin-bottom: 70px
+  margin-bottom: 70px;
+}
+
+.mt330 {
+  margin-top: 330px;
 }
 /* Disable text area resizing */
 textarea {
@@ -1077,6 +1082,43 @@ Terms and conditions
   color: #fff;
   margin-top: 100px;
 }
+/* =================================== */
+/*	Favourites  
+/* =================================== */
+
+.fav-red {
+  color: #AD1707;
+}
+
+.delete-favourite:hover{
+  color:#AD1707;
+}
+
+.voucher-expire-f {
+  font-size: 14px;
+}
+
+
+
+/* =================================== */
+/*	Download App  
+/* =================================== */
+
+.download-header{
+  margin-bottom:15px; 
+  color:black
+}
+
+.download-divider{
+  margin-top:0;
+  color:black
+}
+
+
+/*=========================================
+	Misc
+==========================================*/
+
 @media only screen and (max-width: 767px) {
   .businessShow {
     display: none;
@@ -1113,4 +1155,11 @@ Terms and conditions
   padding-right: 20px;
   border-radius: 5px;
   border: 4px solid #07AD4D;
+}
+
+.redeem-overlay-p{
+  text-align:center;
+  color:#A61106;
+  font-weight:650;
+  font-size:18px;
 }

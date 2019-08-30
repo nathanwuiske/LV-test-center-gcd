@@ -99,7 +99,7 @@
               <div class="hoverOver voucher-style">
                   <br>
                   <img class="card-img-top" class="img-fluid" width="220" height="270" src="{{url('imgs/vouchers/' . $voucher->image)}}" alt="{{$voucher->name}}" onerror="this.onerror=null;this.src='imgs/errors/no-voucher-image.png';">
-                  <h2 class="voucher-name">{{ str_limit($voucher->name, $limit = 18, $end='...') }}</h2>
+                  <h2 class="voucher-name">{{ str_limit($voucher->name, $limit = 15, $end='...') }}</h2>
                   <button class="btn btn-lg voucher-view-btn"><i class="fa fa-close"></i>View</button>
             </a>
             <div class="favourite-btn-align">
@@ -162,7 +162,7 @@
                   <div class="hoverOver voucher-style">
                      <br>
                      <img class="card-img-top" class="img-fluid" width="220" height="270" src="{{url('imgs/vouchers/' . $voucher->image)}}" alt="{{$voucher->name}}" onerror="this.onerror=null;this.src='imgs/errors/no-voucher-image.png';">
-                     <h2 class="voucher-name">{{ str_limit($voucher->name, $limit = 18, $end='...') }}</h2>
+                     <h2 class="voucher-name">{{ str_limit($voucher->name, $limit = 15, $end='...') }}</h2>
                      <button class="btn btn-lg voucher-view-btn"><i class="fa fa-close"></i>View</button>
                </a>
                <div class="favourite-btn-align">
@@ -227,7 +227,7 @@
                    <div class="hoverOver voucher-style">
                         <br>
                         <img class="card-img-top" class="img-fluid" width="220" height="270" src="{{url('imgs/vouchers/' . $voucher->image)}}" alt="{{$voucher->name}}" onerror="this.onerror=null;this.src='imgs/errors/no-voucher-image.png';">
-                        <h2 class="voucher-name">{{ str_limit($voucher->name, $limit = 18, $end='...') }}</h2>
+                        <h2 class="voucher-name">{{ str_limit($voucher->name, $limit = 15, $end='...') }}</h2>
                         <button class="btn btn-lg voucher-view-btn"><i class="fa fa-close"></i>View</button>
                   </a>
                   <div class="favourite-btn-align">
@@ -368,7 +368,7 @@ $(document).ready(function() {
             @endif
             @if ($voucher->isRedeemed)
             <div class="redeem-overlay">
-               <p style="text-align:center;color:#A61106;font-weight:650;font-size:18px;">You've already redeemed this voucher</p>
+               <p class="redeem-overlay-p">You've already redeemed this voucher</p>
                <p class="text-center">You can redeem again after <strong><span>{{$voucher->redeemAvailable}}</span></strong></p>
             </div>
             @else

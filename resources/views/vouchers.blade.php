@@ -158,7 +158,7 @@
                @endif
                @if ($voucher->isRedeemed)
                <div class="redeem-overlay redeem-overlay-previous">
-                  <p style="text-align:center;color:#A61106;">You've already redeemed this voucher</p>
+                  <p class="redeem-overlay-p">You've already redeemed this voucher</p>
                   <p class="text-center">You can redeem again after <strong><span>{{$voucher->redeemAvailable}}</span></strong></p>
                </div>
                  @else
