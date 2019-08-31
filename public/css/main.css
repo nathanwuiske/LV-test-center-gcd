@@ -837,7 +837,7 @@ body > section,
   background-color: #eee;
   font-size: 20px;
   }
-  /* The "Sign Up" button */
+
   .button {
   background-color: #4CAF50;
   border: none;
@@ -846,6 +846,9 @@ body > section,
   text-align: center;
   text-decoration: none;
   font-size: 18px;
+  }
+  .button:hover{
+    background-color: #037835;
   }
   @media only screen and (max-width: 600px) {
   .columns {
@@ -1112,6 +1115,13 @@ Terms and conditions
 .download-divider{
   margin-top:0;
   color:black
+}
+
+@media only screen and (max-width: 1025px) {
+ .download-mobile{
+   width:100%;
+   height:100%;
+ }
 }
 
 

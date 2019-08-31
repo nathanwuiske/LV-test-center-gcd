@@ -9,7 +9,7 @@
       {{csrf_field()}}
       <div class="contact-main">
          @auth
-      <input type="text" placeholder="Your Name" class="input" name="name" value="{{Auth::user()->full_name}}">
+         <input type="text" placeholder="Your Name" class="input" name="name" value="{{Auth::user()->full_name}}">
          <input type="text" placeholder="Your Email Address" class="input" name="email" value="{{Auth::user()->email}}">
          @endauth
          @guest

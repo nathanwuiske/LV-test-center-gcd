@@ -198,12 +198,7 @@
                <li class="greyli"> <strong>OR</strong></li>
                <li>Pay via interest free payment</li>
                <li class="grey">$350 deposit and $9.90 / week</li>
-               @guest
-                  <li><a href="{{route('login')}}" class="button">Buy Now</a></li>
-               @endguest
-               @auth
-                   <li><a href="{{route('purchase')}}" class="button">Buy Now</a></li>
-               @endauth
+               <li><a href="{{route('contact')}}" class="button">Contact Us to Buy Now</a></li>
             </ul>
          </div>
          <div class="columns">
@@ -214,12 +209,7 @@
                <li class="greyli"> <strong>OR</strong></li>
                <li>Pay via interest free payment</li>
                <li class="grey">$750 deposit and $18.75 / week</li>
-               @guest
-                  <li><a href="{{route('login')}}" class="button">Buy Now</a></li>
-               @endguest
-               @auth
-                   <li><a href="{{route('purchase')}}" class="button">Buy Now</a></li>
-               @endauth
+               <li><a href="{{route('contact')}}" class="button">Contact us to Buy Now</a></li>
             </ul>
          </div>
       </div>

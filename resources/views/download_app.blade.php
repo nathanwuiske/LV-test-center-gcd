@@ -2,30 +2,38 @@
 @section('content')
 <style>
    body{
-   background-color: #F3F3F3;
-   background-attachment: fixed !important;
-   background-position: center center;
-   background-repeat: no-repeat;
-   background-size: cover;
-   padding: 0;
+      background-image: url(../imgs/download_app/background.jpg); 
+  background-size: cover;  
+  background-repeat: no-repeat; 
+  background-position: center center; 
+  background-attachment: fixed;
    }
 </style>
 <section class="advertiseFacts">
    <div class="parallax-overlay-app">
       <div class="container">
          <div class="row">
-            <div class="text-center mb50">
-               <h2 class="advert download-header">Download our app</h2>
-               <p> Use all your favourite deals on your phone</p>
-               <div class="devider download-divider"><i style="color:black"class="fas fa-arrow-down fa-lg"></i></div>
-            </div>
+          <img class="download-mobile" src="/imgs/download_app/phone.png">
             <div class="text-center mb50 app-mobile">
-               <a href="#"><img src="/imgs/download_app/apple.jpg"></a>
-               <a href="#"><img src="/imgs/download_app/google.jpg"></a>
+               <a onClick="message()"><img src="/imgs/download_app/apple.jpg"></a>
+               <a onClick="message()"><img src="/imgs/download_app/google.jpg"></a>
             </div>
          </div>
       </div>
    </div>
 </section>
-<div class="mb200"></div>
+<div class="mb400"></div>
+
+<script>
+function message() {
+		Swal.fire({
+			toast: true,
+			position: 'top',
+			showConfirmButton: false,
+         timer: 4000,
+			type: 'info',
+         title: 'Sorry! The GCD App has temporarily been removed.'
+		})
+}
+</script>
 @stop
