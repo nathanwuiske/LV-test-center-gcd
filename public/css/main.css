@@ -249,6 +249,10 @@ cursor: default;
   top: -15px;
   *overflow: hidden;
 }
+/* safari remember me input fix */
+.rememberinput:not(:root:root){ 
+  left:100px;
+}
 /* ipad  */
 @media only screen and (min-width: 768px) and (max-width: 991px) {
   .login {
