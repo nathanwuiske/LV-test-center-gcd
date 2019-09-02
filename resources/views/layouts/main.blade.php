@@ -1,7 +1,15 @@
 <!DOCTYPE html>
 <html lang="en" class="no-js">
    <head>
-     <title>Gold Coast Discounts</title>
+      <!-- Global site tag (gtag.js) - Google Analytics -->
+      <script async src="https://www.googletagmanager.com/gtag/js?id=UA-145592137-1"></script>
+      <script>
+         window.dataLayer = window.dataLayer || [];
+         function gtag(){dataLayer.push(arguments);}
+         gtag('js', new Date());
+         gtag('config', 'UA-145592137-1');
+      </script>
+      <title>Gold Coast Discounts</title>
       <!-- CSRF Token -->
       <meta name="csrf-token" content="{{ csrf_token() }}">
       <meta charset="utf-8">
@@ -9,12 +17,12 @@
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCC6emn13XOdxMhZAsbaGIgt2HcK3iKAoc"></script>
       <script src="/js/jquery-1.11.1.min.js"></script>
-      <link rel="stylesheet" href="/css/search.css">
+      <link rel="stylesheet" href="/css/search.min.css">
       <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
       <link rel="stylesheet" href="/css/bootstrap.min.css">
       <link rel="stylesheet" href="/css/animate.min.css">
       <link rel="stylesheet" href="/css/main.css">
-      <link rel="stylesheet" href="/css/media-queries.css">
+      <link rel="stylesheet" href="/css/media-queries.min.css">
       <script src="/js/modernizr-2.6.2.min.js"></script>
       <script src="js/main.js"></script>
    </head>
@@ -96,9 +104,9 @@
                   <div class="footer-single">
                      <h6>Follow Us</h6>
                      <ul>
-                        <li><a href="https://www.facebook.com/GoldCoastDiscounts/" target="_blank"><img src="/imgs/footer/facebook.png" width="20" height="20" alt="Facebook"> Facebook</a></li>
-                        <li><a href="https://twitter.com/DiscountsGold" target="_blank"><img src="/imgs/footer/twitter.png" width="20" height="20" alt="Twitter"> Twitter</a></li>
-                        <li><a href="https://www.instagram.com/gold_coast_discounts/" target="_blank"><img src="/imgs/footer/instagram.png" width="20" height="20" alt="Instagram"> Instagram</a></li>
+                        <li><a href="https://www.facebook.com/GoldCoastDiscounts/" rel="noopener" target="_blank"><img src="/imgs/footer/facebook.png" width="20" height="20" alt="Facebook"> Facebook</a></li>
+                        <li><a href="https://twitter.com/DiscountsGold" rel="noopener" target="_blank"><img src="/imgs/footer/twitter.png" width="20" height="20" alt="Twitter"> Twitter</a></li>
+                        <li><a href="https://www.instagram.com/gold_coast_discounts/" rel="noopener" target="_blank"><img src="/imgs/footer/instagram.png" width="20" height="20" alt="Instagram"> Instagram</a></li>
                      </ul>
                   </div>
                </div>
@@ -120,7 +128,6 @@
      <script src="/js/sweetalert2.all.min.js"></script>
      <link rel="stylesheet" href="/css/sweetalert2.min.css">
       <script src="/js/bootstrap.min.js"></script>
-      <script src="/js/jssor.slider.min.js"></script>
       <script src="/js/wow.min.js"></script>
       <script>
          var wow = new WOW ({

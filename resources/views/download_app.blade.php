@@ -32,7 +32,7 @@ function message() {
 			showConfirmButton: false,
          timer: 4000,
 			type: 'info',
-         title: 'Sorry! The GCD App has temporarily been removed.'
+         title: 'Sorry! The GCD App has been temporarily removed.'
 		})
 }
 </script>

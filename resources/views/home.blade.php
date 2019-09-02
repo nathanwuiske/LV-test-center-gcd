@@ -1,9 +1,9 @@
 @extends('layouts.main') @section('content')
 <!-- Load jssor slider and category select -->
 <script src="js/jssor.slider.min.js" type="text/javascript"></script>
-<script src="js/slider.js"></script>
-<script src="js/extention/choices.min.js"></script>
-<link rel="stylesheet" href="/css/slider.css">
+<script src="js/slider.min.js"></script>
+<script src="js/choices.min.js"></script>
+<link rel="stylesheet" href="/css/slider.min.css">
 
 <div class="page-position"></div>
 <!-- START jssor1 slider -->
@@ -67,7 +67,7 @@
 <div class="alert alert-danger text-center" style="color:black;font-size:15px;" role="alert">
    Hi there! 
       It looks like you're an existing user that hasn't updated their account information. <br>
-      Please click here to add a name to your account, you have the option to add a phone number but it is not required. <br>
+      Please click here to add a name to your account. You have the option to add a phone number but it is not required. <br>
       This message will disappear once a name is added to your account.  Thank you! 
 </div>
 </a>

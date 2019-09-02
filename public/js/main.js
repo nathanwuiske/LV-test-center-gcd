@@ -1,4 +1,4 @@
-   
+var dateResponse;
 function currentRedeem(voucher_id, response) {
 	$("#redeem-current-" + voucher_id).css("display", "inline");
 	$("#start_redeem_" + voucher_id).attr("disabled", "disabled");
@@ -25,7 +25,7 @@ function ajaxRedeem(voucher_id, user_id) {
 			'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
 		},
 		success: function (response) {
-			currentRedeem(voucher_id, response);
+			dateResponse = response; 
 		},
 		error: function (response) {
            //console.log(response);
@@ -132,7 +132,7 @@ function startTimer(duration, display, voucherid, userid) {
 
         if (diff <= 0) {
          display.textContent = ""; 
-		 ajaxRedeem(voucherid, userid);
+		 currentRedeem(voucherid, dateResponse);
 		 clearInterval(myTimer);
         }
         
@@ -144,6 +144,7 @@ function startTimer(duration, display, voucherid, userid) {
 function startRedeem(voucherid, userid) {
 	 warningRedeem(voucherid);
 	 $('#warningRedeem' + voucherid).modal('hide');
+	 ajaxRedeem(voucherid, userid);
 	 var fiveMinutes = 5 * 60;
 	 var display = document.querySelector('#time'+voucherid);
 	 startTimer(fiveMinutes, display, voucherid, userid);

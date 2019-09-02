@@ -23,7 +23,7 @@
             <label class='main-input-label'>Name:</label>
             <input id="getname" class='main-input' placeholder="e.g. John Doe" value='{{ Auth::user()->full_name}}' type='text'>
             <label class='main-input-label'>Phone Number:</label>
-            <input id="getnumber" class='main-input' placeholder="e.g. 0428529240" value='{{ Auth::user()->phone_number}}' type='text'>
+            <input id="getnumber" class='main-input' placeholder="e.g. 0499564998" value='{{ Auth::user()->phone_number}}' type='text'>
             <button class='btn main-save-button' onClick="checkToUpdate({{ Auth::user()->id }}, document.getElementById('getname').value, document.getElementById('getnumber').value)">Save</button>
             @if(count($errors))
             <ul class="alert alert-danger">
@@ -76,7 +76,7 @@ $("#getnumber").on("input", function () {
 
 function checkToUpdate(id, name, phone_number) {
 	if (hasChanged) {
-		updateAccount(id, name, phone_number);
+      updateAccount(id, name, phone_number);
 	} else {
 		Swal.fire({
 			toast: true,

@@ -17,7 +17,7 @@ class AccountController extends Controller
       $getUser = User::findOrFail($id);
       $this->validate($request,[
           'full_name' => 'required|string|max:50',
-          'phone_number' => 'nullable|numeric|digits:10'
+          'phone_number' => 'nullable|digits:10'
       ]);
       $getUser->update($request->all());
     }
