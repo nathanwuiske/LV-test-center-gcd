@@ -97,7 +97,8 @@ class HomeController extends Controller
    }
     }
     else {
-        $vouchers = Voucher::where(function ($query) use ($terms) {
+      
+        $vouchers = Voucher::with('gettags')->where(function ($query) use ($terms) {
             foreach ($terms as $term) {
                 $query->orWhere('name', 'like', '%' . $term . '%');
             }
@@ -105,7 +106,12 @@ class HomeController extends Controller
             foreach ($terms as $term) {
                 $query->orWhere('description', 'like', '%' . $term . '%');
             }
-        })->paginate($vouchersPerPage);
+        })->orWhereHas('gettags', function($q) use ($terms){
+          foreach ($terms as $term) {
+            $q->where('tag_title', 'like', '%' . $term . '%');
+        }
+       })->paginate($vouchersPerPage);
+    
         $now = Carbon::now();
         foreach($vouchers as $voucher){
               $end = Carbon::parse($voucher->expiry_date);

@@ -353,7 +353,7 @@
                      showConfirmButton: false,
                      timer: 3500,
                      type: 'success',
-                     title: 'Tag successfully assgined to voucher'
+                     title: 'Tag successfully assigned to voucher'
 						})
 					})
 					.catch(() => {
