@@ -1096,6 +1096,9 @@ Terms and conditions
 .fav-red {
   color: #AD1707;
 }
+.fav-red:hover {
+  color: black;
+}
 
 .delete-favourite:hover{
   color:#AD1707;

@@ -8,7 +8,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 // Register resourceful routes with post, get, patch and delete requests
 Route::apiResource('voucher', 'API\VoucherController');
-Route::apiResource('users', 'API\UserController');
 Route::put('users/{id}', 'API\UserController@update');
 Route::apiResource('tag', 'API\TagController');
 Route::apiResource('vouchertag', 'API\VoucherTagController');
@@ -20,11 +19,15 @@ Route::apiResource('location', 'API\LocationController');
 Route::apiResource('issue', 'API\IssueController');
 Route::apiResource('message', 'API\MessageController');
 
+Route::group(['middleware' => 'auth:api'], function() {
+    Route::apiResource('users', 'API\UserController');
+});
+
 /* Get all the tags and categories in a single endpoint */
 Route::get('categoryall', 'API\CategoryController@categoryall');
 Route::get('tagall', 'API\TagController@tagall');
 Route::get('voucherall', 'API\VoucherController@voucherall');
-Route::get('usersall', 'API\UserController@returnall');
+
 
 Route::post('redeem', 'API\RedeemController@store');
 
