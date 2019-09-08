@@ -133,7 +133,13 @@
                 this.loadBrowserChart(this.metric_data);
                 this.loadVisitorChart(this.metric_data);
                 this.isLoading = false;
-            });
+            }).catch(error => {
+						swal.fire({
+						title: 'Dashboard retrieval error',
+						text: error,
+						type: 'error'
+					})
+			});
             },
             loadPageViewsChart(metric_data){
                var ctx = document.getElementById('myChart').getContext('2d');

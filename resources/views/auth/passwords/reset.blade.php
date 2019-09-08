@@ -2,14 +2,14 @@
 @section('content')
 <style>
 body { 
-  background-image: url(../imgs/login/coast-bay-large.jpg);
+  background-image: url(../../imgs/login/coast-bay-large.jpg);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center; 
 }
 @media only screen and (max-width: 1024px) {
  body{
-   background-image: url(../imgs/login/coast-bay-small.jpg); 
+   background-image: url(../../imgs/login/coast-bay-small.jpg); 
  }
 }
 .login {

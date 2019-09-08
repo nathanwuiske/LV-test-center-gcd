@@ -41,7 +41,6 @@ class HomeController extends Controller
         $DeferenceInDays = $end->startOfDay()->diffInDays($now->startOfDay());
         $voucher->expiry_days = $DeferenceInDays;
       }
-
     if($user){
       foreach($all_home_vouchers as $voucher){
         $favourite = $user->getfavourites()->where([
@@ -79,7 +78,11 @@ class HomeController extends Controller
 
     public function search(Request $request)
     {
-
+      if(\Auth::check()){
+        $user = \Auth::user();
+       } else {
+        $user = false;
+      }
     $vouchersPerPage = 8;
     $categories = Category::orderBy('id')->get();
     
@@ -95,6 +98,29 @@ class HomeController extends Controller
         $DeferenceInDays = $end->startOfDay()->diffInDays($now->startOfDay());
         $voucher->expiry_days = $DeferenceInDays;
    }
+ if($user){
+    foreach($vouchers as $voucher){
+      $favourite = $user->getfavourites()->where([
+        ['user_id', '=', Auth::user()->id],
+        ['voucher_id', '=', $voucher->id]
+        ])->first();
+
+        if ($favourite){
+          $voucher->isFavourited = true;
+        } 
+
+        $redemption = $user->redeems()->where([
+          ['created_at', '>=', Carbon::now()->subHours($voucher->timeout)],
+          ['voucher_id', '=', $voucher->id]
+          ])->first();
+
+          if ($redemption){
+              $voucher->isRedeemed = true;
+              $voucher->redeemedAt = $redemption->created_at->toDayDateTimeString();
+              $voucher->redeemAvailable = $redemption->created_at->addHours($voucher->timeout)->toDayDateTimeString();  
+          }
+    }
+  }
     }
     else {
       
@@ -119,6 +145,29 @@ class HomeController extends Controller
               $voucher->expiry_days = $DeferenceInDays;
          }
         $vouchers->appends(['search' => $request->get('search'), 'per_page' => "8"]);
+       if($user){
+          foreach($vouchers as $voucher){
+            $favourite = $user->getfavourites()->where([
+              ['user_id', '=', Auth::user()->id],
+              ['voucher_id', '=', $voucher->id]
+              ])->first();
+    
+              if ($favourite){
+                $voucher->isFavourited = true;
+              } 
+    
+              $redemption = $user->redeems()->where([
+                ['created_at', '>=', Carbon::now()->subHours($voucher->timeout)],
+                ['voucher_id', '=', $voucher->id]
+                ])->first();
+    
+                if ($redemption){
+                    $voucher->isRedeemed = true;
+                    $voucher->redeemedAt = $redemption->created_at->toDayDateTimeString();
+                    $voucher->redeemAvailable = $redemption->created_at->addHours($voucher->timeout)->toDayDateTimeString();  
+                }
+          }
+        }
   }
       return view('vouchers')->with('vouchers', $vouchers)->with('categories', $categories)->with('searchname', $request->get('search'));
 
@@ -126,7 +175,11 @@ class HomeController extends Controller
 
 
     public function filter(Request $request){
-    
+      if(\Auth::check()){
+        $user = \Auth::user();
+       } else {
+        $user = false;
+      }
       $categories = Category::orderBy('id')->get();
       $vouchers = Voucher::whereHas('getCategories', function($q) use ($request) {
         $selectValue = $request->get('slct');
@@ -147,7 +200,29 @@ class HomeController extends Controller
        }  
       }
      
-      
+      if($user){
+        foreach($vouchers as $voucher){
+          $favourite = $user->getfavourites()->where([
+            ['user_id', '=', Auth::user()->id],
+            ['voucher_id', '=', $voucher->id]
+            ])->first();
+  
+            if ($favourite){
+              $voucher->isFavourited = true;
+            } 
+  
+            $redemption = $user->redeems()->where([
+              ['created_at', '>=', Carbon::now()->subHours($voucher->timeout)],
+              ['voucher_id', '=', $voucher->id]
+              ])->first();
+  
+              if ($redemption){
+                  $voucher->isRedeemed = true;
+                  $voucher->redeemedAt = $redemption->created_at->toDayDateTimeString();
+                  $voucher->redeemAvailable = $redemption->created_at->addHours($voucher->timeout)->toDayDateTimeString();  
+              }
+        }
+      }
       return view('vouchers')->with('vouchers', $vouchers)->with('categories', $categories)->with('categoryname', $categoryname);
   }
 }
