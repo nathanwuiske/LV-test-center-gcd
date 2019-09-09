@@ -23,11 +23,17 @@
       <div class="msg">
          <textarea  class="area" placeholder="Leave a Message" name="message"  >{{ old('message') }}</textarea>
       </div>
-      <button class='btn main-save-button'>Send message</button>
+      <div class="captcha">
+      {!! NoCaptcha::renderJs() !!}
+      {!! NoCaptcha::display() !!}
+      </div>
+      <button class='btn main-save-button' style="margin-top:20px;">Send message</button>
    </form>
 </div>
-<h2 class="text-center contact-or contact-sep">OR</h2>
+
+<h2 class="text-center contact-or contact-sep" >OR</h2>
 <p class="text-center contact-call">Give us a call on <a href="tel:+61425638428" class="contact-phone contact-call-on">0425 638 428</a></p>
+
 <div class="container-message">
    @if (Session::has('success_message'))
    <p class="alert alert-success">Message successfully sent</p>
@@ -40,5 +46,5 @@
    </ul>
    @endif
 </div>
-<div class="mb70"></div>
+<div class="mb150"></div>
 @stop

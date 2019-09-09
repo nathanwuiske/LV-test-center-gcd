@@ -18,7 +18,8 @@ class ContactController extends Controller
         'name' => 'required',
         'email' => 'required|email',
         'subject' => 'required',
-        'message' => 'required'
+        'message' => 'required',
+        'g-recaptcha-response' => 'required|captcha'
      ]);  
 
         Mail::send('email-contact',[ 

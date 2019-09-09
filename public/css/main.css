@@ -934,6 +934,7 @@ body > section,
 }
 .contact-sep {
   color:white;
+  margin-top:120px;
 }
 .contact-call {
   margin-top:20px;
@@ -1007,6 +1008,11 @@ body > section,
   cursor: pointer;
   color:white;
 }
+.captcha{
+  position:relative;
+  left:200px;
+}
+
 @media only screen and (max-width: 767px) {
   .contact-main .input{
  width: 100%;
@@ -1024,12 +1030,22 @@ body > section,
 .contact-phone{
   display: block;
   position:relative;
-  top:20px;
+  top:10px;
 }
 .contact-or{
-  margin-top:110px;
+  margin-top:210px;
+}
+.captcha{
+  left:0;
 }
 }
+@media only screen and (max-width: 320px) {
+  .captcha{
+    margin-left:-30px;
+  }
+}
+
+
 /*=========================================
 Privacy Policy
 ==========================================*/

@@ -52,7 +52,11 @@
                   </button>
                </div>
                <div class="modal-body text-center">
-                  <img id="modal_image_{{$favouriteVoucher->id}}" src="{{url('imgs/vouchers/' . $favouriteVoucher->image)}}" class="img-fluid img-center modal-image" alt='{{$favouriteVoucher->name}}' onerror="this.onerror=null;this.src='imgs/errors/no-voucher-image.png';">
+                  <img id="modal_image_{{$favouriteVoucher->id}}" src="{{url('imgs/vouchers/' . $favouriteVoucher->image)}}" 
+                  @if ($voucher->isRedeemed)
+                     style="opacity:0.4;"
+                  @endif
+                  class="img-fluid img-center modal-image" alt='{{$favouriteVoucher->name}}' onerror="this.onerror=null;this.src='imgs/errors/no-voucher-image.png';">
                   <p style="font-size: 18px;">
                      <br><span class="header-modal">About Deal</span>
                      <br>
