@@ -44,17 +44,17 @@
          <p class="fontSize17" style="color:black"> (ABP 117) is an Australian Business Projects 10 year project study of Gold Coast community, 
                consumer and business. This is not a project about advertising or discount companies, 
                <strong>this is a project about community, consumer and business engagement.</strong> It is highly successful; 
-               it is free for the community and IT SUPPORTS LOCAL BUSINESSES.
+               it is free for the community and <strong>it supports local businesses.</strong>
             </p>
-            <div style="background-color:#1B4151; padding:10px 10px 5px 15px; margin-bottom:15px;">
-               <p class="fontSize17" style="color:white">This project has been responsible
+            <div style=" margin-bottom:15px;">
+               <p class="fontSize17" style="color:black">This project has been responsible
                   for millions of $$$ in turnover for Gold Coast Business. It is direct contact with the largest 
                   customer and consumer networks on the Gold Coast and it powerfully promotes Gold Coast business.
                </p>
             </div>
             <p class="fontSize17" style="color:black">
-               This project saves businesses thousands of dollars on advertising <strong>and delivers</strong>
-               YEAR ROUND CONSUMER RESULTS.
+               This project saves businesses thousands of dollars on advertising <strong>and delivers
+               year round consumer results.</strong>
             </p>
             <div style="background-color:#1B4151; padding:10px 10px 10px 15px;margin-top:15px;margin-bottom:40px;">
                <p class="fontSize17" style="color:white;">The following medias service a Gold Coast <strong>consumer network of over 500,000</strong> Locals, Residents, Families, Seniors, AND Visitors to the Coast.</p>
@@ -73,7 +73,7 @@
                         Don’t be mistaken. This is not a project about advertising and discounts... 
                         you’re already offering a VALUE every day just to attract customers. This is a project of 
                         study and development of multiple and countless business platforms that have been engineered
-                        for community, consumer and business engagement.<br><br> Can you engage your business with 100’s of
+                        for community, consumer and business engagement.<br><br> Can you engage your business with hundreds of
                         thousands of consumers more effectively for better pricing and YEAR ROUND business results? 
                         <br><br>It’s not possible!
                      </p>
@@ -104,8 +104,8 @@
       <div class="row">
          <h2 class="text-center mb10"  style="color:black">Package 1</h2>
          <p class="text-center fontSize17 mb20"  style="color:black">12 months Gold Coast advertising, affordable for ALL local businesses.
-          <span class="advert-red"> Free artwork and formating into all above medias</span> ($150 per ad) save $450!
-         <br> If you can't afford or see this value in this package, you really need to question your qualifications!
+          <br><span class="advert-red"> Free artwork and formating into all above medias</span> ($150 per ad) save <strong>$450!</strong>
+         
          </p>
          <p class="text-center fontSize17 mb20"  style="color:black">This includes</p>
 
@@ -145,7 +145,7 @@
                </div>
                <div class="service-desc">
                   <h3><span class="advert-red">x(2)</span> Digital Ads</h3>
-                  <p>Advertising your business directly into Gold Coast customers mobiles phones.</p>
+                  <p>Advertising your business directly onto Gold Coast customers mobile phones.</p>
                </div>
             </div>
          </div>
@@ -174,7 +174,7 @@
    <div class="container">
       <div class="row">
          <h2 class="text-center mb10"  style="color:black">Package 2</h2>
-         <p class="text-center fontSize17 mb20"  style="color:black"><span class="advert-red">(4x) the value of package 1.</span>
+         <p class="text-center fontSize17 mb20"  style="color:black"><span class="advert-red">(4x) the value of package 1.</span><br>
          Promote your business to the MAX with 4 Powerful Ads and 1/4 Million (250,000) Brochure Ads.</p>
          <p class="text-center fontSize17 mb20"  style="color:black">This includes</p>
 
@@ -214,7 +214,7 @@
                </div>
                <div class="service-desc">
                   <h3><span class="advert-red">x(3)</span> Digital Ads</h3>
-                  <p>Advertising your business directly into Gold Coast customers mobile phones.</p>
+                  <p>Advertising your business directly onto Gold Coast customers mobile phones.</p>
                </div>
             </div>
          </div>

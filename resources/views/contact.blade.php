@@ -33,9 +33,9 @@
       <div class="contact-main">
             <select name="enquiry_type" class="select-enquiry">
                   <option selected="true" disabled>Select enquiry type</option>
-                  <option value="advertising">Advertising</option>
-                  <option value="general">General</option>
-                  <option value="voucher">Voucher</option>
+                  <option value="advertising" {{ old('enquiry_type') == "advertising" ? 'selected' : '' }}>Advertising</option>
+                  <option value="general" {{ old('enquiry_type') == "general" ? 'selected' : '' }}>General</option>
+                  <option value="voucher" {{ old('enquiry_type') == "voucher" ? 'selected' : '' }}>Voucher</option>
             </select>
             <input type="text" placeholder="Your Phone Number" class="input" name="phone_number" value="{{ old('phone_number') }}">
       </div>
