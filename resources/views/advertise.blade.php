@@ -102,12 +102,12 @@
             </div>
           
       <div class="row">
-         <h2 class="text-center mb10">Package 1</h2>
-         <p class="text-center fontSize17 mb20">12 months Gold Coast advertising, affordable for ALL local businesses.
+         <h2 class="text-center mb10"  style="color:black">Package 1</h2>
+         <p class="text-center fontSize17 mb20"  style="color:black">12 months Gold Coast advertising, affordable for ALL local businesses.
           <span class="advert-red"> Free artwork and formating into all above medias</span> ($150 per ad) save $450!
          <br> If you can't afford or see this value in this package, you really need to question your qualifications!
          </p>
-         <p class="text-center fontSize17 mb20">This includes</p>
+         <p class="text-center fontSize17 mb20"  style="color:black">This includes</p>
 
          <!-- Start info item -->
          <div class="col-md-3 wow fadeInLeft" data-wow-duration="500ms">
@@ -173,10 +173,10 @@
 <section id="features" class="features">
    <div class="container">
       <div class="row">
-         <h2 class="text-center mb10">Package 2</h2>
-         <p class="text-center fontSize17 mb20"><span class="advert-red">(4x) the value of package 1.</span>
+         <h2 class="text-center mb10"  style="color:black">Package 2</h2>
+         <p class="text-center fontSize17 mb20"  style="color:black"><span class="advert-red">(4x) the value of package 1.</span>
          Promote your business to the MAX with 4 Powerful Ads and 1/4 Million (250,000) Brochure Ads.</p>
-         <p class="text-center fontSize17 mb20">This includes</p>
+         <p class="text-center fontSize17 mb20"  style="color:black">This includes</p>
 
          <!-- Start info item -->
          <div class="col-md-3 wow fadeInUp" data-wow-duration="500ms">
@@ -239,8 +239,8 @@
 
          <!-- Pricing -->
          <div class="col-md-12" style="margin-top:80px;">
-            <h2 class="text-center" class="pt40"> Pricing </h2>
-            <p style="font-size:16px;" class="text-center">Free artwork and formatting for ALL medias with all orders proceeded online, 
+            <h2 class="text-center" class="pt40"  style="color:black"> Pricing </h2>
+            <p style="font-size:16px;color:black;" class="text-center" >Free artwork and formatting for ALL medias with all orders proceeded online, 
                saving you <strong>($450 - $600)</strong> straight up! <br> Choose your preferred package/deal</p>
          </div>
        
