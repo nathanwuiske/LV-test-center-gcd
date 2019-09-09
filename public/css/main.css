@@ -968,7 +968,7 @@ body > section,
 }
 .contact-sep {
   color:white;
-  margin-top:120px;
+  margin-top:210px;
 }
 .contact-call {
   margin-top:20px;
@@ -994,6 +994,21 @@ body > section,
   border-radius: 5px;
   outline: none;
   transform: all 0.5s ease;
+}
+.select-enquiry {
+  background-color:#F4F6F9;
+  width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+  margin-bottom: 25px;
+  border: 2px solid #e9eaea;
+  font-size: 14px;
+  border-radius: 5px;
+  outline: none;
+  transform: all 0.5s ease;
+  width: 48%;
+  float: left;
+  margin-right: 4%;
 }
 .contact-main .input{
   width: 48%;
@@ -1052,6 +1067,11 @@ body > section,
  width: 100%;
  margin-right: 4%;
 }
+.select-enquiry{
+  width: 100%;
+  margin-right: 4%;
+ }
+ 
 .container-form .btn {
   border: none;
   outline: none;
@@ -1067,7 +1087,7 @@ body > section,
   top:10px;
 }
 .contact-or{
-  margin-top:210px;
+  margin-top:390px;
 }
 .captcha{
   left:0;
@@ -1185,6 +1205,12 @@ Terms and conditions
 /*=========================================
 	Misc
 ==========================================*/
+
+@media only screen and (min-width: 767px) and (max-width: 991px) {
+  .display-brochure {
+    display: none !important;
+  }
+}
 
 @media only screen and (max-width: 767px) {
   .businessShow {

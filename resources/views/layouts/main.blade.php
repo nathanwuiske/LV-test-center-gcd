@@ -49,9 +49,8 @@
                   <li><a href="{{route('vouchers')}}">Vouchers</a></li> 
                   <li><a href="{{route('advertise')}}">Advertise With Us</a></li>
                   <li><a href="{{route('contact')}}">Contact Us</a></li>
-                  <li><a href="https://goldcoastdiscounts.com.au/LatestBrochure.pdf" target="_blank" rel="noopener">Latest Brochure</a></li>
+                  <li><a class="display-brochure" href="https://goldcoastdiscounts.com.au/LatestBrochure.pdf" target="_blank" rel="noopener">Latest Brochure</a></li>
                   <li><a href="http://gcbusinessnetwork.com.au/" target="_blank" rel="noopener">Business Network</a></li>
-                  
                   @if (Route::has('login'))
                   @auth
                   <li><a href="#"><i class="fas fa-user"></i> {{ str_limit(Auth::user()->full_name, $limit = 20, $end='...') }} <i class="fas fa-caret-down"></i></a>

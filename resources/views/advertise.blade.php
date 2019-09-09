@@ -234,11 +234,8 @@
          </div>
          <!-- end service item -->
 
-
-         <!-- end service item -->
-
          <!-- Pricing -->
-         <div class="col-md-12" style="margin-top:80px;">
+         <div class="col-md-12" style="margin-top:50px;">
             <h2 class="text-center" class="pt40"  style="color:black"> Pricing </h2>
             <p style="font-size:16px;color:black;" class="text-center" >Free artwork and formatting for ALL medias with all orders proceeded online, 
                saving you <strong>($450 - $600)</strong> straight up! <br> Choose your preferred package/deal</p>
