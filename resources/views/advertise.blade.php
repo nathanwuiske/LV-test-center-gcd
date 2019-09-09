@@ -53,7 +53,7 @@
                </p>
             </div>
             <p class="fontSize17" style="color:black">
-               This project savings businesses thousands of dollars on advertising <strong>and delivers</strong>
+               This project saves businesses thousands of dollars on advertising <strong>and delivers</strong>
                YEAR ROUND CONSUMER RESULTS.
             </p>
             <div style="background-color:#1B4151; padding:10px 10px 10px 15px;margin-top:15px;margin-bottom:40px;">
@@ -179,7 +179,7 @@
          <p class="text-center fontSize17 mb20"  style="color:black">This includes</p>
 
          <!-- Start info item -->
-         <div class="col-md-3 wow fadeInUp" data-wow-duration="500ms">
+         <div class="col-md-3 wow fadeInLeft" data-wow-duration="500ms">
             <div class="service-item">
                <div class="service-icon">
                   <i class="fas fa-ad fa-2x"></i>
@@ -193,7 +193,7 @@
          <!-- end service item -->
 
          <!-- Start info item -->
-         <div class="col-md-3 wow fadeInLeft" data-wow-duration="500ms" data-wow-delay="500ms">
+         <div class="col-md-3 wow fadeInUp" data-wow-duration="500ms" data-wow-delay="300ms">
             <div class="service-item">
                <div class="service-icon">
                   <i class="fas fa-newspaper fa-2x"></i>

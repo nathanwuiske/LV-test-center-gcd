@@ -25,7 +25,7 @@ function ajaxRedeem(voucher_id, user_id) {
 			'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
 		},
 		success: function (response) {
-			dateResponse = response; 
+			currentRedeem(voucher_id, response);
 		},
 		error: function (response) {
            //console.log(response);
@@ -115,39 +115,10 @@ function deleteFromFavourites(voucherid, userid) {
 	});
 }
 
-function startTimer(duration, display, voucherid, userid) {
-    var start = Date.now(),
-        diff,
-        minutes,
-        seconds;
-    function timer() {
-        diff = duration - (((Date.now() - start) / 1000) | 0);
-        minutes = (diff / 60) | 0;
-        seconds = (diff % 60) | 0;
-
-        minutes = minutes < 10 ?  minutes : minutes;
-        seconds = seconds < 10 ? "0" + seconds : seconds;
-
-        display.textContent = "Voucher will be redeemed in " + minutes + ":" + seconds; 
-
-        if (diff <= 0) {
-         display.textContent = ""; 
-		 currentRedeem(voucherid, dateResponse);
-		 clearInterval(myTimer);
-        }
-        
-    };
-    timer();
-    var myTimer = setInterval(timer, 1000);
-}
-
 function startRedeem(voucherid, userid) {
 	 warningRedeem(voucherid);
 	 $('#warningRedeem' + voucherid).modal('hide');
 	 ajaxRedeem(voucherid, userid);
-	 var fiveMinutes = 5 * 60;
-	 var display = document.querySelector('#time'+voucherid);
-	 startTimer(fiveMinutes, display, voucherid, userid);
  }
 
  function updateAccount(id, name, phone_number) {

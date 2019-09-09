@@ -53,7 +53,7 @@
                </div>
                <div class="modal-body text-center">
                   <img id="modal_image_{{$favouriteVoucher->id}}" src="{{url('imgs/vouchers/' . $favouriteVoucher->image)}}" 
-                  @if ($voucher->isRedeemed)
+                  @if ($favouriteVoucher->isRedeemed)
                      style="opacity:0.4;"
                   @endif
                   class="img-fluid img-center modal-image" alt='{{$favouriteVoucher->name}}' onerror="this.onerror=null;this.src='imgs/errors/no-voucher-image.png';">
@@ -69,7 +69,7 @@
                   @if (empty($favouriteVoucher->expiry_date))
                   <p>
                      <br><span class="header-modal">Voucher Expiry</span>
-                     <br><i>Expiry information not available</i>
+                     <br><i>Expiry information not available for this voucher</i>
                   </p>
                   @else
                   <p>
@@ -94,21 +94,26 @@
                      <p class="text-center">You can redeem again after <strong><span>{{$favouriteVoucher->redeemAvailable}}</span></strong></p>
                   </div>
                   @else
-                  <div id="redeem-current-{{$favouriteVoucher->id}}" class="redeem-overlay redeem-overlay-current" style="display:none">
-                     <p class="header-modal text-center"><span style="color:#07AD4D;"class="fas fa-check-circle check-circle"></span> Voucher Redeemed!</p>
-                     <p class="text-center">Voucher redeemed at <strong><span id="redeem-current-time-{{$favouriteVoucher->id}}"></span></strong></p>
-                     <p class="text-center" style="margin-bottom:0px;">Voucher next available at <strong><span id="redeem-next-time-{{$favouriteVoucher->id}}"></span></strong></p>
+                  <div id="redeem-current-{{$favouriteVoucher->id}}" class="" style="display:none">
+                        <p class="header-modal text-center"><span style="color:#07AD4D;"class="fas fa-check-circle check-circle"></span> Voucher Redeemed!</p>
+                        <p class="text-center">Voucher redeemed at <strong><span id="redeem-current-time-{{$favouriteVoucher->id}}"></span></strong></p>
+                        <p class="text-center" style="margin-bottom:20px;">Voucher next available at <strong><span id="redeem-next-time-{{$favouriteVoucher->id}}"></span></strong></p>
                   </div>
                   @endif     
                   @auth
-                  <p class="text-center"><span id="time{{$favouriteVoucher->id}}" style="color:#A61106; font-size:18px;"></span><br></p>
+                  <span class="header-modal"> Redeem voucher... easy as 1,2,3</span>
+                  <p style="font-size:15px;">
+                  1. Please ensure you are at the business or establishment.<br>
+                  2. Present voucher <strong>at point of sale</strong>, and <strong>press [Redeem Voucher]</strong>. <br>
+                  3. Business representative will then press <strong>[confirm]</strong>.</p>
+                  
                   <a id="redeem-a{{$favouriteVoucher->id}}" href="#warningRedeem{{$favouriteVoucher->id}}" role="button" data-toggle="modal"  @if ($favouriteVoucher->isRedeemed)
                   class="disabled-a"
                   @endif>
                   <button class="btn btn-lg" id="start_redeem_{{$favouriteVoucher->id}}" style="width: 100%; height: 100%; background-color: #07AD4D; color:white;"
                   @if ($favouriteVoucher->isRedeemed)
                   disabled
-                  @endif>Redeem</button></a>
+                  @endif>Redeem Voucher</button></a>
                   @endauth
                   @guest
                   <a href="{{route('login')}}"><p class="text-center"style="color:#A61106;">Must be logged in to redeem vouchers</p></a>

@@ -9,12 +9,17 @@
             </button>
          </div>
          <div class="modal-body" style="background-color: #F2F2F2">
-            Please ensure you are at the establishment before redeeming the voucher.<br>
-            Once redeemed, you will have 5 minutes to present the voucher at the counter before the voucher is disabled.<br><br>
+               <p style="font-size:15px;">
+                     1. Please ensure you are at the business or establishment.<br>
+                     2. Present voucher <strong>at point of sale</strong>, and <strong>press [Redeem Voucher]</strong>. <br>
+                     3. Business representative will then press <strong>[confirm]</strong>.</p>
+
+                     <button type="button" class="btn btn-success" onClick="startRedeem({{$voucherid}}, {{$userid }})" data-dismiss="modal">Confirm</button>
          </div>
+         
          <div class="modal-footer" style="background-color: #F2F2F2">
-            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-success" onClick="startRedeem({{$voucherid}}, {{$userid }})" data-dismiss="modal">Redeem</button>
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+            
          </div>
       </div>
    </div>
