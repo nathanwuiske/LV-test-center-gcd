@@ -634,7 +634,6 @@ body > section,
   color: white;
   font-size: 28px;
   font-weight: 500;
-  text-transform: uppercase;
 }
 .devider {
   margin-top: 30px;
@@ -776,6 +775,41 @@ body > section,
 /*=========================================
 	Advertise Page (advertise.blade.php)
 ==========================================*/
+
+.advert-list-item{
+  color:white;
+  font-size:17px;
+}
+.advert-clarif{
+  background-color:black; 
+  padding: 10px 0px 3px 10px;
+  display: table-cell;
+  width:650px;position:
+  relative;
+  left:40px;
+}
+.main-table{
+  display: table;
+  display: table-row
+}
+.main-table-phone{
+  display:none;
+}
+
+@media only screen and (max-width: 1200px) {
+.main-table{
+  display: none;
+}
+.main-table-phone{
+  display:block;
+}
+}
+
+
+.advert-red{
+  color:#D8011E;
+}
+
 .features {
   background-color: #f4f7f9;
 }
