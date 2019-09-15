@@ -9,6 +9,10 @@
             </button>
          </div>
          <div class="modal-body" style="background-color: #F2F2F2">
+         <div class="text-center">
+               <img id="modal_image_{{$voucherid}}" src="{{url('imgs/vouchers/' . $voucherimage)}}">
+         </div>
+              
                <p style="font-size:15px;">
                      1. Please ensure you are at the business or establishment.<br>
                      2. Present voucher <strong>at point of sale</strong>, and <strong>press [Redeem Voucher]</strong>. <br>

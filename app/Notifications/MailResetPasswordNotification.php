@@ -42,7 +42,7 @@ class MailResetPasswordNotification extends Notification
     {
         $link = url( "/password/reset/" . $this->token );
         return ( new MailMessage )
-        ->from('goldcoastdiscounts@gcd.com')
+        ->from('noreply@goldcoastdiscounts.com')
         ->subject( 'Reset your password' )
         ->line( "You've requested a password reset. To reset your password please click the link below")
         ->action( 'Reset Password', $link )

@@ -32,7 +32,7 @@ class ContactController extends Controller
             'email' => $request->email
         ], function ($mail) use ($request) {
             $mail->from($request->email, $request->name);
-            $mail->to('goldcoastdiscounts1@gmail.com')->subject($request->subject);
+            $mail->to('mcjasons01@gmail.com')->subject($request->subject);
         });
         return redirect()->back()->with('success_message', '');
     }

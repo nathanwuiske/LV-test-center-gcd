@@ -16,7 +16,7 @@
           <img class="download-mobile" src="/imgs/download_app/phone.png">
             <div class="text-center mb50 app-mobile">
                <a onClick="message()"><img src="/imgs/download_app/apple.jpg"></a>
-               <a onClick="message()"><img src="/imgs/download_app/google.jpg"></a>
+               <a href="https://play.google.com/store/apps/details?id=com.abp.GCD&hl=en"><img src="/imgs/download_app/google.jpg"></a>
             </div>
          </div>
       </div>

@@ -7,7 +7,7 @@
          <div class="row">
             <!--  <div class="sec-title text-center mb50 wow rubberBand animated" data-wow-duration="1000ms"> -->
             <div class=" text-center mb50">
-               <h2 class="advert">We are responsible for millions of $$$ in turnover for Gold Coast Business</h2>
+               <h2 class="advert">Australian Business Projects are responsible for millions of $$$$ in turnover for Gold Coast Business</h2>
                <div class="devider"><i class="fas fa-arrow-down fa-lg"></i></div>
             </div>
            
@@ -32,6 +32,11 @@
                   <p>Engage your business with thousands of customers</p>
                </div>
             </div>
+            <div class="col-md-12 col-sm-12 col-xs-12 text-center" style="top:70px;">
+            <a href="{{route('advertiser_about')}}" class="ad-linker">  <p> <i class="far fa-address-card"></i>
+                      Click here to find out more about us</p>   </a>
+            </div>
+
          </div>
       </div>
    </div>
@@ -40,67 +45,7 @@
 
 <!-- Start Package 1 section -->
 <section id="features" class="features">
-   <div class="container">
-         <p class="fontSize17" style="color:black"> (ABP 117) is an Australian Business Projects 10 year project study of Gold Coast community, 
-               consumer and business. This is not a project about advertising or discount companies, 
-               <strong>this is a project about community, consumer and business engagement.</strong> It is highly successful; 
-               it is free for the community and <strong>it supports local businesses.</strong>
-            </p>
-            <div style=" margin-bottom:15px;">
-               <p class="fontSize17" style="color:black">This project has been responsible
-                  for millions of $$$ in turnover for Gold Coast Business. It is direct contact with the largest 
-                  customer and consumer networks on the Gold Coast and it powerfully promotes Gold Coast business.
-               </p>
-            </div>
-            <p class="fontSize17" style="color:black">
-               This project saves businesses thousands of dollars on advertising <strong>and delivers
-               year round consumer results.</strong>
-            </p>
-            <div style="background-color:#1B4151; padding:10px 10px 10px 15px;margin-top:15px;margin-bottom:40px;">
-               <p class="fontSize17" style="color:white;">The following medias service a Gold Coast <strong>consumer network of over 500,000</strong> Locals, Residents, Families, Seniors, AND Visitors to the Coast.</p>
-               <div class="main-table">
-                  <div  style="display: table-cell; ">
-                     <li class="advert-list-item">Gold Coast Printed Brochures (Letterbox Deliveries)</li>
-                     <li class="advert-list-item">Gold Coast Digital Brochures</li>
-                     <li class="advert-list-item">GoldCoastDiscounts.com.au</li>
-                     <li class="advert-list-item">FreeMealDeals.com.au</li>
-                     <li class="advert-list-item">Facebook / GoldCoastDiscounts</li>
-                     <li class="advert-list-item">GCD Android / Google App</li>
-                     <li class="advert-list-item">GCD IOS / Apple App</li>
-                  </div>
-                  <div class="advert-clarif">
-                     <p class="fontSize17 text-center" style="color:white">
-                        Don’t be mistaken. This is not a project about advertising and discounts... 
-                        you’re already offering a VALUE every day just to attract customers. This is a project of 
-                        study and development of multiple and countless business platforms that have been engineered
-                        for community, consumer and business engagement.<br><br> Can you engage your business with hundreds of
-                        thousands of consumers more effectively for better pricing and YEAR ROUND business results? 
-                        <br><br>It’s not possible!
-                     </p>
-                  </div>
-               </div>
-
-               <div class="main-table-phone">
-                        <li class="advert-list-item">Gold Coast Printed Brochures (Letterbox Deliveries)</li>
-                        <li class="advert-list-item">Gold Coast Digital Brochures</li>
-                        <li class="advert-list-item">GoldCoastDiscounts.com.au</li>
-                        <li class="advert-list-item">FreeMealDeals.com.au</li>
-                        <li class="advert-list-item">Facebook / GoldCoastDiscounts</li>
-                        <li class="advert-list-item">GCD Android / Google App</li>
-                        <li class="advert-list-item">GCD IOS / Apple App</li>
-                     <div style="background-color:black; padding: 10px 10px 10px 10px;margin-top:30px;">
-                        <p class="fontSize17 text-center" style="color:white">
-                           Don’t be mistaken. This is not a project about advertising and discounts... 
-                           you’re already offering a VALUE every day just to attract customers. This is a project of 
-                           study and development of multiple and countless business platforms that have been engineered
-                           for community, consumer and business engagement.<br><br> Can you engage your business with 100’s of
-                           thousands of consumers more effectively for better pricing and YEAR ROUND business results? 
-                           <br><br>It’s not possible!
-                        </p>
-                     </div>
-                  </div>
-            </div>
-          
+   <div class="container">      
       <div class="row">
          <h2 class="text-center mb10"  style="color:black">Package 1</h2>
          <p class="text-center fontSize17 mb20"  style="color:black">12 months Gold Coast advertising, affordable for ALL local businesses.
@@ -246,12 +191,14 @@
                <li class="header">Package 1 - 50,000 Printed Ads x2 Digital</li>
                <li class="grey">2 easy payments of $350 + GST</li>
                <li>Pay $350 deposit NOW to start advertising<br> and $350 balance in 45 days.</li>
-               <li><a href="{{route('contact')}}" class="button">Buy Now</a></li>
+               <li><a style="cursor:pointer;" 
+                  id="checkout-button-sku_FmcZ9GjDHPAU6s" role="link" class="button">Buy Now</a></li>
                <li class="greyli"> <strong>OR</strong></li>
                <li>Pay in full and get an extra 3 months advertising <strong>FREE</strong> <br> Advertising you right through 2021,
                saving you <strong>$206.25</strong></li>
                <li class="grey">$750 / year + GST</li>
-               <li><a href="{{route('contact')}}" class="button">Buy Now</a></li>
+               <li><a style="cursor:pointer;" 
+                  id="checkout-button-sku_FmHiWAZZn5y1Fk" role="link" class="button">Buy Now</a></li>
             </ul>
          </div>
          <div class="columns">
@@ -259,15 +206,88 @@
                <li class="header">Package 2 - 250,000 Printed Ads x3 Digital</li>
                <li class="grey">3 easy payments of $500 + GST</li>
                <li>Pay $750 deposit NOW to start advertising <br> and $750 balance in 30 days.</li>
-               <li><a href="{{route('contact')}}" class="button">Buy Now</a></li>
+               <li><a style="cursor:pointer;" 
+                  id="checkout-button-sku_FmcgVy3ZmwBs3m" role="link" class="button">Buy Now</a></li>
                <li class="greyli"> <strong>OR</strong></li>
                <li>Pay in full and get an extra 3 months advertising <strong>FREE</strong> <br> Advertising you right through 2021,
                   saving you <strong>$412.50</strong></li>
                <li class="grey">$1500 / year + GST</li>
-               <li><a href="{{route('contact')}}" class="button">Buy Now</a></li>
-            </ul>
+               <li><a style="cursor:pointer;" 
+                  id="checkout-button-sku_Fmal6moKvciwrb" role="link" class="button">Buy Now</a></li>
+            </ul>     
+            <div id="error-message"></div>
          </div>
       </div>
    </div>
 </section>
+
+<script src="https://js.stripe.com/v3"></script>
+
+<script>
+  var stripe = Stripe('pk_test_I9ejSFp1pfZElvobfVXIekBm00EPwsiZ7N');
+
+  var checkoutButton = document.getElementById('checkout-button-sku_Fmal6moKvciwrb');
+  checkoutButton.addEventListener('click', function () {
+    stripe.redirectToCheckout({
+      items: [{sku: 'sku_Fmal6moKvciwrb', quantity: 1}],
+      successUrl: 'http://127.0.0.1:8000/success',
+      cancelUrl: 'http://127.0.0.1:8000/advertise',
+      billingAddressCollection: 'required',
+    })
+    .then(function (result) {
+      if (result.error) {
+        var displayError = document.getElementById('error-message');
+        displayError.textContent = result.error.message;
+      }
+    });
+  });
+
+  var checkoutButton1 = document.getElementById('checkout-button-sku_FmHiWAZZn5y1Fk');
+  checkoutButton1.addEventListener('click', function () {
+    stripe.redirectToCheckout({
+      items: [{sku: 'sku_FmHiWAZZn5y1Fk', quantity: 1}],
+      successUrl: 'http://127.0.0.1:8000/success',
+      cancelUrl: 'http://127.0.0.1:8000/advertise',
+      billingAddressCollection: 'required',
+    })
+    .then(function (result) {
+      if (result.error) {
+        var displayError = document.getElementById('error-message');
+        displayError.textContent = result.error.message;
+      }
+    });
+  });
+
+  var checkoutButton2 = document.getElementById('checkout-button-sku_FmcZ9GjDHPAU6s');
+  checkoutButton2.addEventListener('click', function () {
+    stripe.redirectToCheckout({
+      items: [{sku: 'sku_FmcZ9GjDHPAU6s', quantity: 1}],
+      successUrl: 'http://127.0.0.1:8000/success',
+      cancelUrl: 'http://127.0.0.1:8000/advertise',
+      billingAddressCollection: 'required',
+    })
+    .then(function (result) {
+      if (result.error) {
+        var displayError = document.getElementById('error-message');
+        displayError.textContent = result.error.message;
+      }
+    });
+  });
+
+  var checkoutButton3 = document.getElementById('checkout-button-sku_FmcgVy3ZmwBs3m');
+  checkoutButton3.addEventListener('click', function () {
+    stripe.redirectToCheckout({
+      items: [{sku: 'sku_FmcgVy3ZmwBs3m', quantity: 1}],
+      successUrl: 'http://127.0.0.1:8000/success',
+      cancelUrl: 'http://127.0.0.1:8000/advertise',
+      billingAddressCollection: 'required',
+    })
+    .then(function (result) {
+      if (result.error) {
+        var displayError = document.getElementById('error-message');
+        displayError.textContent = result.error.message;
+      }
+    });
+  });
+</script>
 @stop

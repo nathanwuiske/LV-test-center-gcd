@@ -35,8 +35,19 @@
                <button class="btn btn-lg voucher-view-btn"><i class="fa fa-close"></i>View</button>
          </a>
          <form action="/removefavourite" method="get" class="fav-hover" style="float:right; ">
+   
          <button id="removefavourite" value="{{$favouriteVoucher->id}}" name="removefavourite"  class="btn btn-lg " style="background-color:#D9534F; color:white; position: relative; right: 65%;"><i class="fas fa-trash delete-favourite"></i></button>
-         </form>
+         <script type="text/javascript">
+            $(document).ready(function(){
+                 $("form").submit(function() {
+                        $(this).submit(function() {
+                            return false;
+                        });
+                        return true;
+                    }); 
+            }); 
+         </script>
+      </form>
          <div style="margin-bottom: 20px;"></div>
          </div>
       </div>
@@ -132,6 +143,9 @@
       @endslot
       @slot('userid')
       {{ Auth::user()->id }}
+      @endslot
+      @slot('voucherimage')
+      {{ $favouriteVoucher->image }}
       @endslot
       @endcomponent
    @endforeach

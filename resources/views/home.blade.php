@@ -413,6 +413,9 @@ $(document).ready(function() {
  @slot('userid')
  {{ Auth::user()->id }}
  @endslot
+ @slot('voucherimage')
+ {{ $voucher->image }}
+ @endslot
  @endcomponent
 
 @endauth

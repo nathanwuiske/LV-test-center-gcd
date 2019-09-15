@@ -776,6 +776,10 @@ body > section,
 	Advertise Page (advertise.blade.php)
 ==========================================*/
 
+.ad-linker:hover{
+  color:grey;
+}
+
 .advert-list-item{
   color:white;
   font-size:17px;
@@ -1009,6 +1013,7 @@ body > section,
   width: 48%;
   float: left;
   margin-right: 4%;
+  -webkit-appearance: none;
 }
 .contact-main .input{
   width: 48%;

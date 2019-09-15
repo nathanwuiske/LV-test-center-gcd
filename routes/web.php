@@ -38,3 +38,5 @@ Route::put('/updateaccount/{id}', 'AccountController@update');
 Route::group(['middleware' => isAdmin::class], function (){
     Route::get('/adminhome', 'AdminHomeController@index')->name('adminhome');
 });
+Route::view('/success', 'success')->name('success');
+Route::view('/advertiser_about', 'advertiser_about')->name('advertiser_about');
