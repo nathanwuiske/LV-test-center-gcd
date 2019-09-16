@@ -39,7 +39,7 @@
       <h3>Privacy Policy Complaints and Enquiries</h3>
       <p>If you have any queries or complaints about our Privacy Policy please contact us at:<br>
          PO Box 53, Miami, Queensland, 4220 <br>
-         office@freemealdeals.com.au<br>
+         jason@australianbusinessprojects.com.au<br>
          0425638428<br>
       </p>
    </div>

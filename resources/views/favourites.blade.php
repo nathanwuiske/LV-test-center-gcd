@@ -105,10 +105,13 @@
                      <p class="text-center">You can redeem again after <strong><span>{{$favouriteVoucher->redeemAvailable}}</span></strong></p>
                   </div>
                   @else
-                  <div id="redeem-current-{{$favouriteVoucher->id}}" class="" style="display:none">
-                        <p class="header-modal text-center"><span style="color:#07AD4D;"class="fas fa-check-circle check-circle"></span> Voucher Redeemed!</p>
+                  <div id="redeem-current-{{$favouriteVoucher->id}}" style="display:none">
+                     <div class="redeem-overlay">
+                        <p class="redeem-overlay-p" style="color:#07AD4D">Voucher Redeemed!</p>
                         <p class="text-center">Voucher redeemed at <strong><span id="redeem-current-time-{{$favouriteVoucher->id}}"></span></strong></p>
                         <p class="text-center" style="margin-bottom:20px;">Voucher next available at <strong><span id="redeem-next-time-{{$favouriteVoucher->id}}"></span></strong></p>
+                     </div>
+                     <p class="header-modal text-center"><span style="color:#07AD4D;"class="fas fa-check-circle check-circle"></span> Voucher Redeemed!</p>
                   </div>
                   @endif     
                   @auth
@@ -117,22 +120,25 @@
                   1. Please ensure you are at the business or establishment.<br>
                   2. Present voucher <strong>at point of sale</strong>, and <strong>press [Redeem Voucher]</strong>. <br>
                   3. Business representative will then press <strong>[confirm]</strong>.</p>
-                  
-                  <a id="redeem-a{{$favouriteVoucher->id}}" href="#warningRedeem{{$favouriteVoucher->id}}" role="button" data-toggle="modal"  @if ($favouriteVoucher->isRedeemed)
-                  class="disabled-a"
-                  @endif>
-                  <button class="btn btn-lg" id="start_redeem_{{$favouriteVoucher->id}}" style="width: 100%; height: 100%; background-color: #07AD4D; color:white;"
-                  @if ($favouriteVoucher->isRedeemed)
-                  disabled
-                  @endif>Redeem Voucher</button></a>
+      
                   @endauth
-                  @guest
-                  <a href="{{route('login')}}"><p class="text-center"style="color:#A61106;">Must be logged in to redeem vouchers</p></a>
-                  <button class="btn btn-lg" style="width: 100%; height: 100%; background-color: #07AD4D; color:white;" disabled>Redeem</button>
-                  @endguest
                </div>
                <div class="modal-footer" style="background-color: #F2F2F2">
-                  <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                  @guest
+               <a href="{{route('login')}}"><p class="text-center"style="color:#A61106;">You need to be logged in to redeem vouchers.</p></a>
+               <button class="btn btn-lg" style="float:left; background-color: #07AD4D; color:white;" disabled>Redeem</button>
+               @endguest
+               @auth
+               <a id="redeem-a{{$favouriteVoucher->id}}" href="#warningRedeem{{$favouriteVoucher->id}}" role="button" data-toggle="modal" 
+               @if ($favouriteVoucher->isRedeemed)
+               class="disabled-a"
+               @endif>
+               <button class="btn btn-lg" id="start_redeem_{{$favouriteVoucher->id}}" style="float:left;background-color: #07AD4D; color:white;"
+               @if ($favouriteVoucher->isRedeemed)
+               disabled
+               @endif>Redeem Voucher</button></a>
+               @endauth
+               <button type="button" class="btn btn-lg btn-danger" data-dismiss="modal">Close</button>
                </div>
             </div>
          </div>

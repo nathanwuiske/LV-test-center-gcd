@@ -488,6 +488,7 @@
 				this.editmode = true;
 				this.voucherForm.clear();
 				this.voucherForm.reset();
+				$("#imageUpload").val('');
 				$("#addNewVoucher").modal({
 					backdrop: 'static',
 					keyboard: false

@@ -15,9 +15,8 @@
               
                <p style="font-size:15px;">
                      1. Please ensure you are at the business or establishment.<br>
-                     2. Present voucher <strong>at point of sale</strong>, and <strong>press [Redeem Voucher]</strong>. <br>
+                     2. Present voucher <strong>at point of sale</strong>. <br>
                      3. Business representative will then press <strong>[confirm]</strong>.</p>
-
                      <button type="button" class="btn btn-success" onClick="startRedeem({{$voucherid}}, {{$userid }})" data-dismiss="modal">Confirm</button>
          </div>
          
