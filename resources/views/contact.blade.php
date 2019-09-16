@@ -26,15 +26,11 @@
       <div class="contact-main">
             <select name="enquiry_type" class="select-enquiry">
                   <option selected="true" disabled>Select enquiry type</option>
-                  <option value="advertising" {{ old('enquiry_type') == "advertising" ? 'selected' : '' }}>Advertising</option>
-                  <option value="general" {{ old('enquiry_type') == "general" ? 'selected' : '' }}>General</option>
-                  <option value="voucher" {{ old('enquiry_type') == "voucher" ? 'selected' : '' }}>Voucher</option>
+                  <option value="Advertising" {{ old('enquiry_type') == "Advertising" ? 'selected' : '' }}>Advertising</option>
+                  <option value="General" {{ old('enquiry_type') == "General" ? 'selected' : '' }}>General</option>
+                  <option value="Coucher" {{ old('enquiry_type') == "Coucher" ? 'selected' : '' }}>Voucher</option>
             </select>
             <input type="text" placeholder="Your Phone Number" class="input" name="phone_number" value="{{ old('phone_number') }}">
-      </div>
-     
-      <div class="subject">
-         <input type="text" placeholder="Subject" class="input" name="subject" value="{{ old('subject') }}">
       </div>
       <div class="msg">
          <textarea  class="area" placeholder="Leave a Message" name="message"  >{{ old('message') }}</textarea>
@@ -46,10 +42,7 @@
       <button class='btn main-save-button' style="margin-top:20px;">Send message</button>
    </form>
 </div>
-
 <h2 class="text-center contact-or contact-sep" >OR</h2>
 <p class="text-center contact-call">Give us a call on <a href="tel:+61425638428" class="contact-phone contact-call-on">0425 638 428</a></p>
-
-
 <div class="mb100"></div>
 @stop

@@ -17,7 +17,6 @@ class ContactController extends Controller
      $this->validate($request, [
         'name' => 'required',
         'email' => 'required|email',
-        'subject' => 'required',
         'message' => 'required',
         'phone_number' => 'required',
         'enquiry_type' => 'required',
@@ -32,7 +31,7 @@ class ContactController extends Controller
             'email' => $request->email
         ], function ($mail) use ($request) {
             $mail->from($request->email, $request->name);
-            $mail->to('mcjasons01@gmail.com')->subject($request->subject);
+            $mail->to('goldcoastdiscounts1@gmail.com')->subject("Gold Coast Discounts Enquiry: $request->enquiry_type" ); //mcjasons01@gmail.com
         });
         return redirect()->back()->with('success_message', '');
     }
