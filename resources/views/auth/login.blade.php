@@ -21,7 +21,7 @@ body {
       <form method="POST" action="{{ route('login') }}">
          @csrf
          <h1><span>GCD</span> Login</h1>
-         <input type="email" id="email-login" class="{{ $errors->has('email-login') ? ' is-invalid' : '' }}" name="email" placeholder="Enter your email" required autofocus> 
+         <input type="email" id="email-login" class="{{ $errors->has('email-login') ? ' is-invalid' : '' }}" name="email" placeholder="Enter your email" value="{{ old('email') }}" required autofocus> 
          <input type="password" id="password-login" class="{{ $errors->has('password-login') ? ' is-invalid' : '' }}" name="password" placeholder="Enter your password" required>
          <label class="rememberlabel"> Remember me </label>
          <input class="rememberinput" style="background-color:transparent;" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>

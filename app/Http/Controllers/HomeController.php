@@ -25,7 +25,7 @@ class HomeController extends Controller
       $popular = Voucher::where('popular_flag', '1')->limit(20)->get();
       $sorted_expiry = Voucher::orderBy('expiry_date')->limit(20)->get();
       $latest = Voucher::latest()->limit(20)->get();
-      $businesses = Business::latest()->limit(20)->get();
+      $businesses = Business::where('display', '=', '1')->latest()->limit(20)->get();
 
       $popular_latest_merge =  $popular->merge($latest);
       $all_home_vouchers = $popular_latest_merge->merge($sorted_expiry);

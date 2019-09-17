@@ -18,6 +18,7 @@ class BusinessController extends Controller
     {
         $this->validate($request,[
             'name' => 'required|string|max:150',
+            'display' => 'required',
             'image' => 'required'
         ]);
 
@@ -28,6 +29,7 @@ class BusinessController extends Controller
         }
         return Business::create([
             'name' => $request['name'],
+            'display' => $request['display'],
             'image' => $request['image'],
         ]);
     }
@@ -41,7 +43,8 @@ class BusinessController extends Controller
     {
         $business = Business::findOrFail($id);
         $this->validate($request,[
-            'name' => 'required|string|max:150'
+            'name' => 'required|string|max:150',
+            'display' => 'required',
         ]);
         $currentImage = $business->image;   
         if($request->image != $currentImage) {

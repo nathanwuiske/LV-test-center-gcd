@@ -53,6 +53,16 @@
                                  class="form-control" :class="{ 'is-invalid': businessForm.errors.has('name') }">
                               <has-error :form="businessForm" field="name"></has-error>
                            </div>
+                           <div class="form-group">
+                              <label>Display on Home Page?</label><span class="red">&#42;</span>
+                              <select name="display" v-model="businessForm.display" id="display" class="form-control" 
+                                 :class="{ 'is-invalid': businessForm.errors.has('display') }">
+                                 <option value="" disabled selected>Please select an option</option>
+                                 <option value="1">Yes</option>
+                                 <option value="0">No</option>
+                              </select>
+                              <has-error :form="businessForm" field="display"></has-error>
+                           </div>
                            <!-- business image input-->
                            <div class="form-group">
                               <label for="image" class="control-label">Image</label>
@@ -86,6 +96,16 @@
                               <input v-model="businessForm.name" type="text" name="name" placeholder="Enter a name for the business"
                                  class="form-control" :class="{ 'is-invalid': businessForm.errors.has('name') }">
                               <has-error :form="businessForm" field="name"></has-error>
+                           </div>
+                           <div class="form-group">
+                              <label>Display on Home Page?</label><span class="red">&#42;</span>
+                              <select name="display" v-model="businessForm.display" id="display" class="form-control" 
+                                 :class="{ 'is-invalid': businessForm.errors.has('display') }">
+                                 <option value="" disabled selected>Please select an option</option>
+                                 <option value="1">Yes</option>
+                                 <option value="0">No</option>
+                              </select>
+                              <has-error :form="businessForm" field="display"></has-error>
                            </div>
                            <!-- business image input-->
                            <div class="form-group">
@@ -131,6 +151,7 @@
                 businessForm: new Form({
                     id: '',
                     name: '',
+                    display: '',
                     image: ''
                 })
             }
