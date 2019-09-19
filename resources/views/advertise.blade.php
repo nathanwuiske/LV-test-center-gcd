@@ -198,7 +198,7 @@
                saving you <strong>$206.25</strong></li>
                <li class="grey">$750 / year + GST</li>
                <li><a style="cursor:pointer;" 
-                  id="checkout-button-sku_FmHiWAZZn5y1Fk" role="link" class="button">Buy Now</a></li>
+                  id="checkout-button-sku_FpWnbvDwN6vqjx" role="link" class="button">Buy Now</a></li>
             </ul>
          </div>
          <div class="columns">
@@ -224,14 +224,14 @@
 <script src="https://js.stripe.com/v3"></script>
 
 <script>
-  var stripe = Stripe('pk_test_I9ejSFp1pfZElvobfVXIekBm00EPwsiZ7N');
+    var stripe = Stripe('pk_live_F5Iryw4XwWpZVg0rXhNk4M7x');
 
-  var checkoutButton = document.getElementById('checkout-button-sku_Fmal6moKvciwrb');
-  checkoutButton.addEventListener('click', function () {
+    var checkoutButton = document.getElementById('checkout-button-sku_FpWnbvDwN6vqjx');
+    checkoutButton.addEventListener('click', function () {
     stripe.redirectToCheckout({
-      items: [{sku: 'sku_Fmal6moKvciwrb', quantity: 1}],
-      successUrl: 'http://127.0.0.1:8000/success',
-      cancelUrl: 'http://127.0.0.1:8000/advertise',
+      items: [{sku: 'sku_FpWnbvDwN6vqjx', quantity: 1}],
+      successUrl: 'https://localdiscounts.com.au/success',
+      cancelUrl: 'https://localdiscounts.com.au/advertise',
       billingAddressCollection: 'required',
     })
     .then(function (result) {
@@ -241,6 +241,7 @@
       }
     });
   });
+
 
   var checkoutButton1 = document.getElementById('checkout-button-sku_FmHiWAZZn5y1Fk');
   checkoutButton1.addEventListener('click', function () {

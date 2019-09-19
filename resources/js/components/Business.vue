@@ -15,12 +15,16 @@
                         <tr>
                            <th>ID</th>
                            <th>Name</th>
+                           <th>Website Link</th>
+                           <th>Display On Home?</th>
                            <th>Image</th>
-                           <th style="width: 25%">Modify</th>
+                           <th style="width: 12%">Modify</th>
                         </tr>
                         <tr v-for="business in businesses.data" :key="business.created_at">
                            <td>{{business.id}}</td>
                            <td>{{business.name}}</td>
+                           <td>{{business.website_link}}</td>
+                           <td>{{business.display | isResolved}}</td>
                            <td><a href="#" @click="getImage(business.image)">Show</a></td>
                            <td>
                               <a class="cursor-pointer" @click="editBusinessModal(business)"> <i class="far fas fa-pencil-alt"  style="color: #FFC107;"></i></a>
@@ -62,6 +66,14 @@
                                  <option value="0">No</option>
                               </select>
                               <has-error :form="businessForm" field="display"></has-error>
+                           </div>
+                           <!-- Website Link form input -->
+                           <div class="form-group">
+                              <label>Website Link</label>
+                              <input v-model="businessForm.website_link" type="text" name="website_link" placeholder="Enter a link to the businesses website"
+                                 class="form-control" :class="{ 'is-invalid': businessForm.errors.has('website_link') }">
+                              <has-error :form="businessForm" field="website_link"></has-error>
+                              <p>Make sure you have <strong>https://www.</strong> at the start of website links!</p>
                            </div>
                            <!-- business image input-->
                            <div class="form-group">
@@ -107,9 +119,17 @@
                               </select>
                               <has-error :form="businessForm" field="display"></has-error>
                            </div>
+                            <!-- Website Link form input -->
+                           <div class="form-group">
+                              <label>Website Link</label>
+                              <input v-model="businessForm.website_link" type="text" name="website_link" placeholder="Enter a link to the businesses website"
+                                 class="form-control" :class="{ 'is-invalid': businessForm.errors.has('website_link') }">
+                              <has-error :form="businessForm" field="website_link"></has-error>
+                              <p>Make sure you have <strong>https://www.</strong> at the start of website links!</p>
+                           </div>
                            <!-- business image input-->
                            <div class="form-group">
-                              <label for="image" class="control-label">Image (OPTIONAL)</label>
+                              <label for="image" class="control-label">Image</label>
                               <div class="col-sm-12">
                                  <input type="file" @change="insertImage" name="image" id="imageUpload" class="form-control" :class="{ 'is-invalid': businessForm.errors.has('image') }">
                                  <has-error :form="businessForm" field="image"></has-error>
@@ -152,6 +172,7 @@
                     id: '',
                     name: '',
                     display: '',
+                    website_link: '',
                     image: ''
                 })
             }
@@ -171,6 +192,7 @@
             addNewBusinessModal() {
                 this.businessForm.clear();
                 this.businessForm.reset();
+                $("#imageUpload").val('');
                 $("#addNewBusiness").modal({
                     backdrop: 'static',
                     keyboard: false
@@ -256,6 +278,7 @@
             editBusinessModal(business) {
                 this.businessForm.clear();
                 this.businessForm.reset();
+                $("#imageUpload").val('');
                 $('#editBusinessModal').modal('show');
                 this.businessForm.fill(business);
             },

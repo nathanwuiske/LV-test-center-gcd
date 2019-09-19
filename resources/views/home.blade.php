@@ -284,14 +284,10 @@
                   @if(!empty($businesses)) 
                   @foreach($businesses as $business)
                   <div class="card alignVoucherCards">
-                     <form id="search_business" action="{{url('search')}}" method="post">
-                        {{ csrf_field() }}
-                        <input type="hidden" name="business_name" id="business_name" value="" />
-                        <a href="#" class="opt_button" data-value="{{$business->name}}" role="button" data-toggle="modal">
+                        <a href="{{$business->website_link}}" target="_blank" class="opt_button" role="button" data-toggle="modal">
                            <div class="hoverOver business-card">
                               <img class="card-img-top" class="img-fluid" width="200" height="200" src="{{url('imgs/businesses/' . $business->image)}}" alt='{{$business->name}}' onerror="this.onerror=null;this.src='imgs/errors/no-image.png'">
                         </a>
-                     </form>
                      <div class="mb20"></div>
                      </div>
                   </div>
@@ -309,6 +305,7 @@
       </div>
    </div>
 </section>
+<!--
 <script>
 $(document).ready(function() {
  $('.opt_button').on('click', function() {
@@ -317,6 +314,7 @@ $(document).ready(function() {
  });
 });
 </script>
+-->
 
 @if(!empty($all_home_vouchers)) 
 @foreach($all_home_vouchers as $voucher)

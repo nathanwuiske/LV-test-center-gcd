@@ -1,4 +1,11 @@
-
+<style>
+   @media only screen and (max-width: 767px) {
+      .warning-img{
+         width:100%;
+         height:100%;
+         }
+   }
+</style>
  <div class="modal fade" id="warningRedeem{{$voucherid}}" tabindex="-1" role="dialog">
    <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -10,7 +17,7 @@
          </div>
          <div class="modal-body" style="background-color: #F2F2F2">
          <div class="text-center">
-               <img id="modal_image_{{$voucherid}}" src="{{url('imgs/vouchers/' . $voucherimage)}}">
+               <img id="modal_image_{{$voucherid}}" class="warning-img" src="{{url('imgs/vouchers/' . $voucherimage)}}">
          </div>
               
                <p style="font-size:15px;">

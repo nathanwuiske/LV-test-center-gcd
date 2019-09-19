@@ -33,7 +33,7 @@ class IssueController extends Controller
         ]);
 
         return response()->json([
-            'message' => ' Thank you. Your report has was successfully sent.'
+            'message' => ' Thank you. Your report was successfully sent.'
         ], 201);
     }
 

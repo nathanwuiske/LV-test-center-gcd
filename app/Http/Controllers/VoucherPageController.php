@@ -12,8 +12,7 @@ class VoucherPageController extends Controller
 {
     public function index()
     {
-        $vouchersPerPage = 8;
-        $vouchers = Voucher::latest()->paginate($vouchersPerPage);
+        $vouchers = Voucher::latest()->paginate(8);
         $categories = Category::orderBy('id')->get();
         if(\Auth::check()){
             $user = \Auth::user();
