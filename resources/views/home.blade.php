@@ -17,10 +17,10 @@
          <a href="{{route('download_app')}}"><img data-u="image" alt="Home_1" src="/imgs/homeSlider/web_banner_1.jpg"/></a>
          </div>
          <div>
-            <img data-u="image" alt="Home_2" src="/imgs/homeSlider/web_banner_2.jpg" />
+            <img data-u="image" alt="Home_2" src="/imgs/homeSlider/web_banner_3.jpg" />
          </div>
          <div>
-            <img data-u="image" alt="Home_3" src="/imgs/homeSlider/web_banner_3.jpg" />
+            <img data-u="image" alt="Home_3" src="/imgs/homeSlider/web_banner_2.jpg" />
          </div>
       </div>
       <!-- Bullet Navigator -->
@@ -286,7 +286,7 @@
                   <div class="card alignVoucherCards">
                         <a href="{{$business->website_link}}" target="_blank" class="opt_button" role="button" data-toggle="modal">
                            <div class="hoverOver business-card">
-                              <img class="card-img-top" class="img-fluid" width="200" height="200" src="{{url('imgs/businesses/' . $business->image)}}" alt='{{$business->name}}' onerror="this.onerror=null;this.src='imgs/errors/no-image.png'">
+                              <img class="card-img-top" class="img-fluid" width="220" height="270" src="{{url('imgs/businesses/' . $business->image)}}" alt='{{$business->name}}' onerror="this.onerror=null;this.src='imgs/errors/no-image.png'">
                         </a>
                      <div class="mb20"></div>
                      </div>

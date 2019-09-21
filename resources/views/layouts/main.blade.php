@@ -44,13 +44,47 @@
             </div>
             <!-- Main navigation -->
             <nav class="collapse navbar-collapse navbar-right" role="navigation" id="topNav">
-               <ul id="nav" class="nav navbar-nav">
+               <ul id="nav" class="nav navbar-nav display-nav-higher">
                   <li><a href="{{route('home')}}">Home</a></li> 
-                  <li><a href="{{route('vouchers')}}">Vouchers</a></li> 
-                  <li><a href="{{route('advertise')}}">Advertise With Us</a></li>
-                  <li><a href="{{route('contact')}}">Contact Us</a></li>
-                  <li><a class="display-brochure" href="Spring-Brochure-2019-1st-Edition.pdf" target="_blank" rel="noopener">Latest Brochure</a></li>
-                  <li><a href="http://gcbusinessnetwork.com.au/" target="_blank" rel="noopener">FREE Business Network</a></li>
+               
+
+                  <li><a href="{{route('vouchers')}}"> Vouchers</a>
+                     <ul>
+                        <li><a href="https://www.facebook.com/GoldCoastDiscounts/" target="_blank">Facebook</a></li>
+                        <li><a class="display-brochure" href="Spring-Brochure-2019-1st-Edition.pdf" target="_blank" rel="noopener">GC Letterbox Brochure</a></li>
+                        <!--<li><a href="#">GC Digital Brochure</a></li>-->
+                        <!-- <li><a href="https://www.freemealdeals.com.au" target="_blank">FreeMealDeals.com.au</a></li>-->
+                        <li><a href="https://play.google.com/store/apps/details?id=com.abp.GCD&hl=en"  target="_blank">App - Google Play</a></li>
+                        <!-- <li><a href="#">App - Apple Store</a></li>-->
+                     </ul>
+                  </li>
+
+                  <li><a href="{{route('advertise')}}">Advertise With Us</a>
+                     <ul>
+                        <li><a href="{{route('advertiser_about')}}">About Advertising</a></li>
+                        <!--<li><a href="#">Media Kit</a></li> -->
+                     </ul>
+                  </li>
+
+                  <li><a href="#">Gold Coast Business</a>
+                     <ul>
+                        <li><a href="http://gcbusinessnetwork.com.au/" target="_blank">Free Business Network</a></li>
+                        <li><a href="http://gcbusinessnetwork.com.au/gc-business-sales/"  target="_blank">GC Business Sales</a></li>
+                     </ul>
+                  </li>
+                  
+                  <li><a href="#">About Us</a>
+                     <ul>
+                        <!--<li><a href="#">About this app</a></li> -->
+                        <li><a href="http://australianbusinessprojects.com.au/">Australian Business Projects</a></li>
+                     </ul>
+                  </li>
+               
+   
+                  <li><a href="{{route('contact')}}">Contact</a></li>
+
+            
+
                   @if (Route::has('login'))
                   @auth
                   <li><a href="#"><i class="fas fa-user"></i> {{ str_limit(Auth::user()->full_name, $limit = 20, $end='...') }} <i class="fas fa-caret-down"></i></a>
@@ -77,6 +111,41 @@
             </ul>
             </nav>
             <!-- End Main navigation -->
+
+            <nav class="collapse navbar-collapse navbar-right" role="navigation" id="topNav2">
+                  <ul id="nav2" class="nav navbar-nav display-nav-phone">
+                     <li><a href="{{route('home')}}">Home</a></li> 
+                     <li><a href="{{route('vouchers')}}">Vouchers</a></li> 
+                     <li><a href="{{route('advertise')}}">Advertise With Us</a></li>
+                     <li><a href="{{route('contact')}}">Contact Us</a></li>
+                     <li><a class="display-brochure" href="Spring-Brochure-2019-1st-Edition.pdf" target="_blank" rel="noopener">Latest Brochure</a></li>
+                     <li><a href="http://gcbusinessnetwork.com.au/" target="_blank" rel="noopener">FREE Business Network</a></li>
+                     @if (Route::has('login'))
+                     @auth
+                     <li><a href="#"><i class="fas fa-user"></i> {{ str_limit(Auth::user()->full_name, $limit = 20, $end='...') }} <i class="fas fa-caret-down"></i></a>
+                 
+                     <li><a href="{{route('account')}}"><i class="fas fa-cog"></i> Account</a></li>
+                     <li><a href="{{route('favourites')}}"><i class="fas fa-star"></i> Favourites</a></li>
+                     @if (Auth::user()->isAdmin())
+                     <li><a href="{{route('adminhome')}}"><i class="fas fa-user-shield"></i> Admin</a></li>
+                     @endif
+                     <li><a href="{{ route('logout') }}"
+                        onclick="event.preventDefault();
+                        document.getElementById('logout-form').submit();">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                        </a>
+                     </li>
+                     <form id="logout-form2" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        @csrf
+                     </form>
+                     @else
+                     <li><a href="{{ route('login') }}"><strong>Login / Register</strong></a> </li>
+                     @endauth
+                     @endif
+                 
+               </ul>
+               </nav>
+
          </div>
       </header>
 	  <!--End Navigation -->

@@ -128,10 +128,6 @@ class HomeController extends Controller
             foreach ($terms as $term) {
                 $query->orWhere('name', 'like', '%' . $term . '%');
             }
-        })->orWhere(function ($query) use ($terms) {
-            foreach ($terms as $term) {
-                $query->orWhere('description', 'like', '%' . $term . '%');
-            }
         })->orWhereHas('gettags', function($q) use ($terms){
           foreach ($terms as $term) {
             $q->where('tag_title', 'like', '%' . $term . '%');

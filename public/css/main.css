@@ -745,26 +745,26 @@ body > section,
   /* Display the dropdown */
   .nav li > ul {
     display: block; 
-    position: absolute;
-  }
-  .nav li li {
-      float: none;
-  }
-  .nav li:hover li a:hover {
-    background: #07ba53;
-  }
-  .main-navigation li ul li {
-    border-top: 0;
-  }
-  /* Simple clearfix */
-  .nav ul:before,
-  .nav ul:after {
-      content: " "; /* 1 */
-      display: table; /* 2 */
-  }
-  .nav ul:after {
-      clear: both;
-  }
+     position: absolute;
+   }
+   .nav li li {
+       float: none;
+   }
+   .nav li:hover li a:hover {
+     background: #07ba53;
+   }
+   .main-navigation li ul li {
+     border-top: 0;
+   }
+   /* Simple clearfix */
+   .nav ul:before,
+   .nav ul:after {
+       content: " "; /* 1 */
+       display: table; /* 2 */
+   }
+   .nav ul:after {
+       clear: both;
+   }
 }
 /*=========================================
 	Slider
@@ -1227,7 +1227,7 @@ Terms and conditions
 }
 .navbar-collapse.collapse.in {
   max-height: none;
-  height: 100vh;
+  
 }
 @media only screen and (max-width: 320px) {
   #topNav
@@ -1261,3 +1261,20 @@ Terms and conditions
   font-weight:650;
   font-size:18px;
 }
+@media only screen and (min-width: 760px) {
+  .display-nav-higher{
+    display:block  !important;
+  }
+  .display-nav-phone{
+    display:none  !important;
+  }
+  }
+  @media only screen and (max-width: 759px) {
+    .display-nav-higher{
+      display:none !important;
+      }
+    .display-nav-phone{
+      display:block !important;
+    }
+
+  }
