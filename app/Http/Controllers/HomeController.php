@@ -83,7 +83,6 @@ class HomeController extends Controller
        } else {
         $user = false;
       }
-    $vouchersPerPage = 8;
     $categories = Category::orderBy('id')->get();
     
     // Seperate search terms by splitting on whitespace and ignoring it
@@ -92,7 +91,7 @@ class HomeController extends Controller
     if(empty($terms)){
       $now = Carbon::now();
   
-      $vouchers = Voucher::orderBy('id')->paginate($vouchersPerPage);
+      $vouchers = Voucher::orderBy('id')->paginate(12);
       foreach($vouchers as $voucher){
         $end = Carbon::parse($voucher->expiry_date);
         $DeferenceInDays = $end->startOfDay()->diffInDays($now->startOfDay());
@@ -132,7 +131,7 @@ class HomeController extends Controller
           foreach ($terms as $term) {
             $q->where('tag_title', 'like', '%' . $term . '%');
         }
-       })->paginate($vouchersPerPage);
+       })->paginate(12);
     
         $now = Carbon::now();
         foreach($vouchers as $voucher){
@@ -180,7 +179,7 @@ class HomeController extends Controller
       $vouchers = Voucher::whereHas('getCategories', function($q) use ($request) {
         $selectValue = $request->get('slct');
         $q->where('category_id', '=', $selectValue);
-     })->paginate(8);
+     })->paginate(12);
      $vouchers->appends(['slct' => $request->get('slct'), 'per_page' => "8"]);
      $now = Carbon::now();
      foreach($vouchers as $voucher){

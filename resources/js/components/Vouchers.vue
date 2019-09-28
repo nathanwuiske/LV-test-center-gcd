@@ -9,10 +9,10 @@
                   <i class="fas fa-plus pr-1"></i>Add New Voucher
                   </button>
                   <div class="card-tools">
-                     <div class="input-group input-group-sm mt-5" style="width: 170px;">
+                     <div class="input-group input-group-sm mt-5" style="width: 270px;">
 						
 						  <a @click.prevent="resetSearch"> <i class="fas fa-window-close" style="position:relative; right:10px; top:5px;font-size:20px; cursor:pointer;"></i></a>
-                        <input type="text" name="voucher_table_search" v-model="search" @keyup="searchTerm" class="form-control" placeholder="Search">
+                        <input type="text" name="voucher_table_search" v-model="search" @keyup="searchTerm" class="form-control" placeholder="Search for Name or Description">
                         <div class="input-group-append">
                            <button class="btn btn-default" @click.prevent="searchTerm"><i class="fa fa-search"></i></button>
                         </div>

@@ -61,7 +61,7 @@
 
                   <li><a href="{{route('advertise')}}">Advertise With Us</a>
                      <ul>
-                        <li><a href="{{route('advertiser_about')}}">About Advertising</a></li>
+                        <li><a href="{{route('advertiser_about')}}">ABP Advertising</a></li>
                         <!--<li><a href="#">Media Kit</a></li> -->
                      </ul>
                   </li>

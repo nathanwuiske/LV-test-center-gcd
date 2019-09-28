@@ -106,7 +106,7 @@ class VoucherController extends Controller
         if ($search = \Request::get('q')) {
             $vouchers = Voucher::where(function($query) use ($search) {
                 $query->where('name','LIKE',"%$search%")->orWhere('description','LIKE',"%$search%");
-            })->with('gettags')->with('getCategories')->latest()->paginate(50);
+            })->with('gettags')->with('getCategories')->latest()->paginate(100);
         } 
         else {
             $vouchers = Voucher::with('gettags')->with('getCategories')->latest()->paginate(10);

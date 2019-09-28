@@ -38,6 +38,15 @@
             <div class="card">
                <div class="card-header">
                   <h3 class="card-title">Assign tags to vouchers</h3>
+                  <div class="card-tools">
+                     <div class="input-group input-group-sm mt-3" style="width: 200px;">
+                         <a @click.prevent="resetSearch"> <i class="fas fa-window-close" style="position:relative; right:10px; top:5px;font-size:20px; cursor:pointer;"></i></a>
+                        <input type="text" name="voucher_table_search" v-model="search" @keyup="searchTerm" class="form-control" placeholder="Search">
+                        <div class="input-group-append">
+                           <button class="btn btn-default" @click.prevent="searchTerm"><i class="fa fa-search"></i></button>
+                        </div>
+                     </div>
+                  </div>
                </div>
                <div class="card-body table-responsive p-0">
                   <table class="table table-hover">
@@ -190,6 +199,7 @@
 	export default {
 		data() {
 			return {
+            search: '',
             tags: {},
             currentPage: '',
             tagsall: {},
@@ -212,6 +222,16 @@
 			}
 		},
 		methods: {
+         resetSearch(){
+				this.search='';
+				Fire.$emit('searching');
+			},
+         searchTerm: function() {
+         if (this.timeout) clearTimeout(this.timeout); 
+         this.timeout = setTimeout(() => {
+            Fire.$emit('searching');
+         }, 500);
+			},
 			getTagResults(page = 1) {
 				axios.get('api/tag?page=' + page)
 					.then(response => {
@@ -356,10 +376,10 @@
                      title: 'Tag successfully assigned to voucher'
 						})
 					})
-					.catch(() => {
+					.catch((error) => {
 						swal.fire({
 							title: 'Error',
-							text: "Failed to add tag.",
+							text: error,
 							type: 'error'
 						})
 					})
@@ -380,15 +400,41 @@
 				axios.get('api/voucher').then(({
 					data
 				}) => (this.vouchers = data));
-			}
+         },
+         getVoucherSearch(){
+            let query = this.search;
+				axios.get('api/findVoucher?q=' + query)
+				.then((data) => {
+					this.vouchers = data.data;
+				})
+				.catch(error => {
+               console.log(error);
+				})
+         }
 		},
 		mounted() {
+         Fire.$on('searching', () => {
+				let query = this.search;
+				axios.get('api/findVoucher?q=' + query)
+				.then((data) => {
+					this.vouchers = data.data;
+				})
+				.catch(error => {
+               console.log(error);
+				})
+         });
 			Fire.$on('RefreshVouchersAndTags', () => {
             this.getAllTags();
-            axios.get('api/voucher?page=' + this.currentPage)
-            .then(response => {
-               this.vouchers = response.data;
-            });
+            if(this.search == ''){
+               axios.get('api/voucher?page=' + this.currentPage)
+               .then(response => {
+                  this.vouchers = response.data;
+               });
+				}
+				else {
+					this.getVoucherSearch();
+            }
+           
             this.getTags();
          });
          this.getAllTags();

@@ -29,6 +29,12 @@
                         <p class="white">User Issues</p>
                      </router-link>
                   </li>
+                  <li class="nav-item">
+                     <router-link to="/app" class="nav-link">
+                        <i class="nav-icon fas fa-mobile-alt"></i>
+                        <p class="white"><span class="right badge badge-danger">Not completed</span>App Version</p>
+                     </router-link>
+                  </li>
                   <li class="nav-header" style="color: white">Voucher Management</li>
                   <li class="nav-item">
                      <router-link to="/vouchers" class="nav-link">

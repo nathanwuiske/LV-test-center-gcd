@@ -66,6 +66,10 @@
     <strong>Sorry!</strong> We couldn't find what you were looking for.<br>
     <a class="errorReturn" href="{{route('vouchers')}}">Click here to return to vouchers</a>
  </div>
+ @if($searchname === "Food" || $searchname === "food")
+ <h2 style="font-size: 20px; text-align:center; padding:10px;">If you're looking for food, try searching through our Categories for FREE meal deals!
+   <br>It's next to the searchbox!</h2>
+ @endif
  <div class="mb350"></div>
  @endif
        @if(!empty($vouchers))

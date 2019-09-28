@@ -38,8 +38,9 @@
             <div class="card">
                <div class="card-header">
                   <h3 class="card-title">Assign categories to vouchers</h3>
-                      <div class="card-tools">
-                     <div class="input-group input-group-sm mt-3" style="width: 170px;">
+                  <div class="card-tools">
+                     <div class="input-group input-group-sm mt-3" style="width: 200px;">
+                          <a @click.prevent="resetSearch"> <i class="fas fa-window-close" style="position:relative; right:10px; top:5px;font-size:20px; cursor:pointer;"></i></a>
                         <input type="text" name="voucher_table_search" v-model="search" @keyup="searchTerm" class="form-control" placeholder="Search">
                         <div class="input-group-append">
                            <button class="btn btn-default" @click.prevent="searchTerm"><i class="fa fa-search"></i></button>
@@ -221,6 +222,10 @@
 			}
 		},
 		methods: {
+          resetSearch(){
+				this.search='';
+				Fire.$emit('searching');
+			},
          searchTerm: function() {
          if (this.timeout) clearTimeout(this.timeout); 
          this.timeout = setTimeout(() => {

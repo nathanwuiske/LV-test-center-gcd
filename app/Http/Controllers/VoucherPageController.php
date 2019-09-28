@@ -12,7 +12,7 @@ class VoucherPageController extends Controller
 {
     public function index()
     {
-        $vouchers = Voucher::latest()->paginate(8);
+        $vouchers = Voucher::latest()->paginate(12);
         $categories = Category::orderBy('id')->get();
         if(\Auth::check()){
             $user = \Auth::user();
@@ -51,7 +51,7 @@ class VoucherPageController extends Controller
     }
     public function newest_all()
     {
-        $vouchers = Voucher::latest()->paginate(8);
+        $vouchers = Voucher::latest()->paginate(12);
         $categories = Category::orderBy('id')->get();
         $newestall = 1;
         if(\Auth::check()){
@@ -98,7 +98,7 @@ class VoucherPageController extends Controller
            } else {
             $user = false;
           }
-        $vouchers = Voucher::latest()->where('popular_flag', '=', '1')->paginate(8);
+        $vouchers = Voucher::latest()->where('popular_flag', '=', '1')->paginate(12);
         $categories = Category::orderBy('id')->get();
         $popularall = 1;
         $now = Carbon::now();
@@ -141,7 +141,7 @@ class VoucherPageController extends Controller
            } else {
             $user = false;
           }
-        $vouchers = Voucher::orderBy('expiry_date')->paginate(8);
+        $vouchers = Voucher::orderBy('expiry_date')->paginate(12);
         $categories = Category::orderBy('id')->get();
         $expiryall = 1;
         $now = Carbon::now();
@@ -190,7 +190,7 @@ class VoucherPageController extends Controller
                     $query->orWhere('name', 'like', '%' . $searchTerm . '%');
             })->orWhere(function ($query) use ($searchTerm) {
                     $query->orWhere('description', 'like', '%' . $searchTerm . '%');
-            })->paginate(8);
+            })->paginate(12);
             $now = Carbon::now();
             foreach($vouchers as $voucher){
                   $end = Carbon::parse($voucher->expiry_date);
