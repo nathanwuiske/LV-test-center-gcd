@@ -42,6 +42,7 @@ class ArchiveExpiredVouchers extends Command
     public function handle()
     {
 
+        
         $vouchers = Voucher::where('expiry_date', '<', Carbon::now()->addDays(7))
         ->where('expiry_date', '>', Carbon::now()->addDays(6))->get();
 
@@ -53,13 +54,13 @@ class ArchiveExpiredVouchers extends Command
                 'expiry' => $voucher->expiry_date
             ], function ($mail) {
                 $mail->from("automated@goldcoastdiscounts.com", "GCD-Robot");
-                $mail->to('goldcoastdiscounts1@gmail.com')->subject("Voucher Due to Expiry");
+                $mail->to('mcjasons01@gmail.com')->subject("Voucher Due to Expiry");
             });
         }
 
-    
-        $vouchers2 = Voucher::where('expiry_date', '<', Carbon::now())->get();
-        foreach($vouchers2 as $voucher) {
+        
+        $vouchers = Voucher::where('expiry_date', '<', Carbon::now())->get();
+        foreach($vouchers as $voucher) {
             $voucher->delete(); //soft delete (archive)
             Mail::send('email-archived',[ 
                 'id' => $voucher->id,
@@ -67,7 +68,7 @@ class ArchiveExpiredVouchers extends Command
                 'expiry' => $voucher->expiry_date
             ], function ($mail) {
                 $mail->from("automated@goldcoastdiscounts.com", "GCD-Robot");
-                $mail->to('goldcoastdiscounts1@gmail.com')->subject("Archived Voucher");
+                $mail->to('mcjasons01@gmail.com')->subject("Archived Voucher");
             });
         }
         

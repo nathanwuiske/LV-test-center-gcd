@@ -27,19 +27,19 @@ Route::group(['middleware' => 'auth:api'], function() {
 Route::get('categoryall', 'API\CategoryController@categoryall');
 Route::get('tagall', 'API\TagController@tagall');
 Route::get('voucherall', 'API\VoucherController@voucherall');
+
+
+Route::post('redeem', 'API\RedeemController@store');
+
 Route::get('findVoucher', 'API\VoucherController@search');
 Route::get('findUser', 'API\UserController@search');
 
 Route::group(['middleware' => 'auth:api'], function() {
     Route::get('metrics', 'MetricsController@metrics');
-    Route::put('app_version/{id}', 'AppVersionController@update');
 });
  
  Route::post('redeem', 'API\RedeemController@store');
  Route::get('redeem', 'API\RedeemController@index');
-
- Route::get('app_version', 'AppVersionController@index');
-
  
  Route::post('addfavourite', 'API\FavouriteController@store');
  Route::post('deletefavourite/{id}', 'API\FavouriteController@destroy');

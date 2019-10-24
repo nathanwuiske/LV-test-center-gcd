@@ -20,7 +20,7 @@
    </div>
    <div class="alert alert-success text-center">
       <p class="text-center">Your payment was successfully completed.</p>
-      <p class="text-center">We've emailed you a copy of your receipt and will be in contact with you in the next 24 hours. </p>
+      <p class="text-center">We've emailed you a copy of your receipt. </p>
   </div>
   
   

@@ -23,8 +23,9 @@
          <input type="text" placeholder="Your Name" class="input" name="name" value="{{ old('name') }}">
          <input type="text" placeholder="Your Email Address" class="input" name="email" value="{{ old('email') }}">
       </div>
+   <span id="advertise_warning" style="display:none;color:#e8786b;">Have an enquiry about Advertising? We recommend reading through <a href="{{route('advertise')}}" style="color:#15A8CD; font-size:15px;"> Advertise With Us</a> before submitting an enquiry</span>
       <div class="contact-main">
-            <select name="enquiry_type" class="select-enquiry">
+            <select id="enquiry_type" name="enquiry_type" class="select-enquiry" onchange="getResponse()">
                   <option selected="true" disabled>Select enquiry type</option>
                   <option value="Advertising" {{ old('enquiry_type') == "Advertising" ? 'selected' : '' }}>Advertising</option>
                   <option value="General" {{ old('enquiry_type') == "General" ? 'selected' : '' }}>General</option>
@@ -42,6 +43,18 @@
       <button class='btn main-save-button' style="margin-top:20px;">Send message</button>
    </form>
 </div>
+<script>
+function getResponse(drop_value){
+   var e = document.getElementById("enquiry_type");
+   var warn = document.getElementById("advertise_warning");
+  var strUser = e.options[e.selectedIndex].value;
+  if (strUser == 'Advertising') {
+   warn.style.display = "inline";
+  } else {
+    warn.style.display = "none";
+  }
+}
+</script>
 <h2 class="text-center contact-or contact-sep" >OR</h2>
 <p class="text-center contact-call">Give us a call on <a href="tel:+61425638428" class="contact-phone contact-call-on">0425 638 428</a></p>
 <div class="mb100"></div>

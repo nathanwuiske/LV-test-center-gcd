@@ -47,36 +47,47 @@
                <ul id="nav" class="nav navbar-nav display-nav-higher">
                   <li><a href="{{route('home')}}">Home</a></li> 
                
-
-                  <li><a href="{{route('vouchers')}}"> Vouchers</a>
+                <li><a href="#"> Digital Medias</a>
+                
                      <ul>
+                           <li><a href="{{route('vouchers')}}"> Vouchers</a>
                         <li><a href="https://www.facebook.com/GoldCoastDiscounts/" target="_blank">Facebook</a></li>
-                        <li><a class="display-brochure" href="Spring-Brochure-2019-1st-Edition.pdf" target="_blank" rel="noopener">GC Letterbox Brochure</a></li>
+                                 <li><a href="https://www.instagram.com/goldcoastdiscounts/" target="_blank">Instagram</a></li>
+                                          <li><a href="https://twitter.com/CoastDiscounts" target="_blank">Twitter</a></li>
+                                            <li><a href="http://freemealdeals.com.au/" target="_blank">Free Meal Deals</a></li>
+                                          
+                        <li><a class="display-brochure" href="https://docs.google.com/viewer?url=https://goldcoastdiscounts.com.au/Digtal_Brochure.pdf" target="_blank" rel="noopener">Digital Brochures</a></li>
+                          <li><a href="https://docs.google.com/viewer?url=https://goldcoastdiscounts.com.au/Spring-Brochure-2019-1st-Edition.pdf"  target="_blank">Letterbox Brochures</a></li>
                         <!--<li><a href="#">GC Digital Brochure</a></li>-->
                         <!-- <li><a href="https://www.freemealdeals.com.au" target="_blank">FreeMealDeals.com.au</a></li>-->
                         <li><a href="https://play.google.com/store/apps/details?id=com.abp.GCD&hl=en"  target="_blank">App - Google Play</a></li>
-                        <!-- <li><a href="#">App - Apple Store</a></li>-->
+                        <li><a href="https://apps.apple.com/us/app/gold-coast-discounts/id1481178823?ls=1">App - Apple Store</a></li>
                      </ul>
                   </li>
-
-                  <li><a href="{{route('advertise')}}">Advertise With Us</a>
+         <li><a href="https://gcb.wuiske.com/jobs"  target="_blank">GC Jobs</a></li>
+                  <li><a href="#">GC Advertising</a>
                      <ul>
-                        <li><a href="{{route('advertiser_about')}}">ABP Advertising</a></li>
+                         <li><a href="{{route('advertise')}}">Project Prices</a>
+                       <li><a href="{{route('about')}}">About</a></li>
                         <!--<li><a href="#">Media Kit</a></li> -->
                      </ul>
                   </li>
-
-                  <li><a href="#">Gold Coast Business</a>
+ 
+                  <li><a href="#">GC Business Network</a>
                      <ul>
-                        <li><a href="http://gcbusinessnetwork.com.au/" target="_blank">Free Business Network</a></li>
-                        <li><a href="http://gcbusinessnetwork.com.au/gc-business-sales/"  target="_blank">GC Business Sales</a></li>
+                        <li><a href="https://gcb.wuiske.com/" target="_blank">Discounted Network Rates</a>
+                       <li><a href="https://gcb.wuiske.com/jobs"  target="_blank">FREE Staff Advertising</a></li>
+                        <li><a href="https://gcb.wuiske.com/sales"  target="_blank">GC Business Sales</a></li>
                      </ul>
                   </li>
                   
-                  <li><a href="#">About Us</a>
+                  <li><a href="{{route('advertiser_about')}}">About</a>
                      <ul>
-                        <!--<li><a href="#">About this app</a></li> -->
-                        <li><a href="http://australianbusinessprojects.com.au/">Australian Business Projects</a></li>
+                        <li><a href="http://www.australianbusinessprojects.com.au/">Australian Business Projects</a></li> 
+                        <li><a href="http://facebook/AustralianBusinessProjects">Facebook/AustralianBusinessProjects</a></li>
+                         <li><a href="http://facebook/GoldCoastDiscounts">Facebook/GoldCoastDiscounts</a></li>
+                          <li><a href="http://facebook/GCBusinessNetwork">Facebook/GCBusinessNetwork</a></li> 
+                           <li><a href="http://facebook/GC Business Sales">Facebook/GC Business Sales</a></li> 
                      </ul>
                   </li>
                
@@ -93,6 +104,9 @@
                   <li><a href="{{route('favourites')}}"><i class="fas fa-star"></i> Favourites</a></li>
                   @if (Auth::user()->isAdmin())
                   <li><a href="{{route('adminhome')}}"><i class="fas fa-user-shield"></i> Admin</a></li>
+                  @endif
+                  @if (Auth::user()->isAdmin())
+                  <li><a href="{{route('business_email')}}"><i class="fas fa-envelope"></i> Email</a></li>
                   @endif
                   <li><a href="{{ route('logout') }}"
                      onclick="event.preventDefault();
@@ -116,10 +130,12 @@
                   <ul id="nav2" class="nav navbar-nav display-nav-phone">
                      <li><a href="{{route('home')}}">Home</a></li> 
                      <li><a href="{{route('vouchers')}}">Vouchers</a></li> 
-                     <li><a href="{{route('advertise')}}">Advertise With Us</a></li>
-                     <li><a href="{{route('contact')}}">Contact Us</a></li>
-                     <li><a class="display-brochure" href="Spring-Brochure-2019-1st-Edition.pdf" target="_blank" rel="noopener">Latest Brochure</a></li>
-                     <li><a href="http://gcbusinessnetwork.com.au/" target="_blank" rel="noopener">FREE Business Network</a></li>
+                     <li><a href="{{route('advertise')}}">Advertising</a></li>
+                    
+                     <li><a class="display-brochure" href="https://docs.google.com/viewer?url=https://goldcoastdiscounts.com.au/Spring-Brochure-2019-1st-Edition.pdf" rel="noopener">Letterbox Brochures</a></li>
+                     <li><a href="https://gcb.wuiske.com/" target="_blank" rel="noopener">GC Business Network</a></li>
+                      <li><a href="{{route('about')}}">About</a></li>
+                       <li><a href="{{route('contact')}}">Contact</a></li>
                      @if (Route::has('login'))
                      @auth
                      <li><a href="#"><i class="fas fa-user"></i> {{ str_limit(Auth::user()->full_name, $limit = 20, $end='...') }} <i class="fas fa-caret-down"></i></a>
@@ -128,6 +144,9 @@
                      <li><a href="{{route('favourites')}}"><i class="fas fa-star"></i> Favourites</a></li>
                      @if (Auth::user()->isAdmin())
                      <li><a href="{{route('adminhome')}}"><i class="fas fa-user-shield"></i> Admin</a></li>
+                     @endif
+                     @if (Auth::user()->isAdmin())
+                     <li><a href="{{route('business_email')}}"><i class="fas fa-envelope"></i> Email</a></li>
                      @endif
                      <li><a href="{{ route('logout') }}"
                         onclick="event.preventDefault();
@@ -173,8 +192,8 @@
                      <h6>Follow Us</h6>
                      <ul>
                         <li><a href="https://www.facebook.com/GoldCoastDiscounts/" rel="noopener" target="_blank"><img src="/imgs/footer/facebook.png" width="20" height="20" alt="Facebook"> Facebook</a></li>
-                        <li><a href="https://twitter.com/DiscountsGold" rel="noopener" target="_blank"><img src="/imgs/footer/twitter.png" width="20" height="20" alt="Twitter"> Twitter</a></li>
-                        <li><a href="https://www.instagram.com/gold_coast_discounts/" rel="noopener" target="_blank"><img src="/imgs/footer/instagram.png" width="20" height="20" alt="Instagram"> Instagram</a></li>
+                        <li><a href="https://twitter.com/CoastDiscounts" rel="noopener" target="_blank"><img src="/imgs/footer/twitter.png" width="20" height="20" alt="Twitter"> Twitter</a></li>
+                        <li><a href="https://www.instagram.com/goldcoastdiscounts/" rel="noopener" target="_blank"><img src="/imgs/footer/instagram.png" width="20" height="20" alt="Instagram"> Instagram</a></li>
                      </ul>
                   </div>
                </div>

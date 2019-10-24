@@ -37,6 +37,13 @@ Route::put('/updateaccount/{id}', 'AccountController@update');
 /* Admin */
 Route::group(['middleware' => isAdmin::class], function (){
     Route::get('/adminhome', 'AdminHomeController@index')->name('adminhome');
+    Route::get('/business_email', 'BusinessEmailController@index')->name('business_email');
+    Route::post('/business_email', 'BusinessEmailController@store')->name('business.store');
 });
 Route::view('/success', 'success')->name('success');
 Route::view('/advertiser_about', 'advertiser_about')->name('advertiser_about');
+Route::view('/for_locals', 'for_locals')->name('for_locals');
+Route::view('/for_business', 'for_business')->name('for_business');
+Route::view('/for_businessnetwork', 'for_businessnetwork')->name('for_businessnetwork');
+Route::view('/for_casestudy', 'for_casestudy')->name('for_casestudy');
+Route::view('/about', 'about')->name('about');

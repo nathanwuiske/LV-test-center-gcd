@@ -31,7 +31,7 @@ class ContactController extends Controller
             'email' => $request->email
         ], function ($mail) use ($request) {
             $mail->from($request->email, $request->name);
-            $mail->to('mcjasons01@gmail.com')->subject("Gold Coast Discounts Enquiry: $request->enquiry_type" ); 
+            $mail->to('mcjasons01@gmail.com')->subject("Gold Coast Discounts Enquiry: $request->enquiry_type" );
         });
         return redirect()->back()->with('success_message', '');
     }

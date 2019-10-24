@@ -79,9 +79,9 @@
 <section id="popular" class="content-background-grey">
    <div class="container">
    <div class="row">
-   <h2 class="home-header-pop">Popular Vouchers</h2>
+   <h2 class="home-header-pop phone-main-text">For Gold Coast locals and visitors to the coast</h2>
    <a href="{{action('VoucherPageController@popular_all')}}">
-      <h1 class="view-all">View all </h1>
+      <h1 class="view-all phone-main-text" >View all </h1>
    </a>
    <div id="jssor_2" class="jssor2-main">
       <div data-u="loading" class="jssorl-009-spin jssor2-load">
@@ -139,6 +139,42 @@
    </div>
 </section>
 
+ <section id="businesses" class="content-background-white">
+   <div class="container">
+      <div class="row">
+         <h2 class="home-header-pop">Gold Coast Business</h2>
+         <div id="jssor_5" class="jssor5-main">
+            <!-- Loading Icon -->
+            <div data-u="loading" class="jssorl-009-spin jssor5-load">
+               <img class="jssor5-img" src="../svg/slider/spin.svg" />
+            </div>
+            <!-- Slides -->
+            <div data-u="slides" class="jssor5-d-sliders">
+                  @if(!empty($businesses)) 
+                  @foreach($businesses as $business)
+                  <div class="card alignVoucherCards">
+                        <a href="{{$business->website_link}}" target="_blank" class="opt_button" role="button" data-toggle="modal">
+                           <div class="hoverOver business-card">
+                              <img class="card-img-top" class="img-fluid" width="220" height="270" src="{{url('imgs/businesses/' . $business->image)}}" alt='{{$business->name}}' onerror="this.onerror=null;this.src='imgs/errors/no-image.png'">
+                        </a>
+                     <div class="mb20"></div>
+                     </div>
+                  </div>
+               @endforeach 
+               @endif
+            </div>
+            <!-- Arrow Navigator -->
+            <div data-u="arrowleft" class="jssora073 jssor5-arrow-left" data-autocenter="2" data-scale="0.75" data-scale-left="0.75">
+               <img src="/imgs/arrows/left.png" height="50px" width="50px" alt="Arrow left">
+            </div>
+            <div data-u="arrowright" class="jssora073 jssor5-arrow-right" data-autocenter="2" data-scale="0.75" data-scale-right="0.75">
+               <img src="/imgs/arrows/right.png" height="50px" width="50px" alt="Arrow right">
+            </div>
+         </div>
+      </div>
+   </div>
+</section>
+<!--
 <section id="newest" class="content-background-white">
     <div class="container">
     <div class="row">
@@ -202,8 +238,9 @@
        </div>
     </div>
  </section>
+-->
 
-
+<!--
 <section id="other" class="content-background-grey">
     <div class="container">
        <div class="row">
@@ -269,42 +306,7 @@
        </div>
     </div>
  </section>
-
- <section id="businesses" class="content-background-white businessShow">
-   <div class="container">
-      <div class="row">
-         <h2 class="home-header-pop">Businesses</h2>
-         <div id="jssor_5" class="jssor5-main">
-            <!-- Loading Icon -->
-            <div data-u="loading" class="jssorl-009-spin jssor5-load">
-               <img class="jssor5-img" src="../svg/slider/spin.svg" />
-            </div>
-            <!-- Slides -->
-            <div data-u="slides" class="jssor5-d-sliders">
-                  @if(!empty($businesses)) 
-                  @foreach($businesses as $business)
-                  <div class="card alignVoucherCards">
-                        <a href="{{$business->website_link}}" target="_blank" class="opt_button" role="button" data-toggle="modal">
-                           <div class="hoverOver business-card">
-                              <img class="card-img-top" class="img-fluid" width="220" height="270" src="{{url('imgs/businesses/' . $business->image)}}" alt='{{$business->name}}' onerror="this.onerror=null;this.src='imgs/errors/no-image.png'">
-                        </a>
-                     <div class="mb20"></div>
-                     </div>
-                  </div>
-               @endforeach 
-               @endif
-            </div>
-            <!-- Arrow Navigator -->
-            <div data-u="arrowleft" class="jssora073 jssor5-arrow-left" data-autocenter="2" data-scale="0.75" data-scale-left="0.75">
-               <img src="/imgs/arrows/left.png" height="50px" width="50px" alt="Arrow left">
-            </div>
-            <div data-u="arrowright" class="jssora073 jssor5-arrow-right" data-autocenter="2" data-scale="0.75" data-scale-right="0.75">
-               <img src="/imgs/arrows/right.png" height="50px" width="50px" alt="Arrow right">
-            </div>
-         </div>
-      </div>
-   </div>
-</section>
+-->
 <!--
 <script>
 $(document).ready(function() {
@@ -444,8 +446,8 @@ function showModalAndLoadMap(voucherid, voucher_latitude, voucher_longitude) {
 /* Initalize jssor sliders */
     jssor_1_slider_init();
     jssor_2_slider_init();
-    jssor_3_slider_init();
-    jssor_4_slider_init();
+   // jssor_3_slider_init();
+   // jssor_4_slider_init();
     jssor_5_slider_init();
 </script>
 

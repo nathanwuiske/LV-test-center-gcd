@@ -15,7 +15,6 @@ let routes = [
     { path: '/archived', component: require('./components/Archived.vue').default },
     { path: '/issues', component: require('./components/Issues.vue').default },
     { path: '/messages', component: require('./components/Messages.vue').default },
-    { path: '/app', component: require('./components/App.vue').default },
     { path: '/business', component: require('./components/Business.vue').default }
    // { path: '*', component: require('./components/NotFound.vue').default }
   ];
